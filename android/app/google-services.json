@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "961628958004",
+    "project_id": "ritualapp-5c7c7",
+    "storage_bucket": "ritualapp-5c7c7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:961628958004:android:866bedd06ead6a9dfac961",
+        "android_client_info": {
+          "package_name": "com.example.ritual_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBpqiHw4HC283g0G4Dd3WLj-6SBSlKUgOo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
