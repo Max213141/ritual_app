@@ -30,7 +30,6 @@ class DBUserData {
   }
 
   factory DBUserData.fromJson(Map<String, dynamic> json) {
-    //TODO remove it in change to firestore handling
     return DBUserData(
       email: json['email'] as String,
       name: json['name'] as String,
