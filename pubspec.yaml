@@ -61,9 +61,9 @@ dev_dependencies:
 #   # background_color_ios: "#9BCD8F"
 
 # # to run this use dart run flutter_native_splash:create
-flutter_native_splash:
-  image: assets/splash/splash500.png
-  color: "#FFFFFF"
+# flutter_native_splash:
+#   image: assets/splash/splash500.png
+#   color: "#FFFFFF"
 
 flutter:
   uses-material-design: true
