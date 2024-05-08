@@ -23,7 +23,7 @@ dependencies:
   intro_slider: ^4.2.0
   hive: ^2.2.3
   hive_flutter: ^1.1.0
-  # google_fonts: ^6.1.0
+  google_fonts: ^6.2.1
   flutter_svg: ^2.0.5
   bottom_sheet: ^4.0.0
   intl: ^0.18.1
@@ -71,7 +71,17 @@ flutter:
    # Enables generation from arb files
   generate: true
 
-  # assets:
-    # - assets/icons/   
-    # - assets/fonts/Dosis/static/Dosis-Regular.ttf
+  assets:
+    - assets/icons/
+    - assets/backgrounds/
+    - assets/images/
+    - assets/intro/
+    - assets/socials/
+    - assets/menu_icons/
+    - assets/fonts/Dosis/static/Dosis-Regular.ttf
+    - assets/fonts/Poppins/Poppins-Regular.ttf
+    - assets/fonts/Sansita/Sansita-Regular.ttf
+    - assets/fonts/Signika/static/Signika-Regular.ttf
+    - assets/fonts/Signika/static/Signika-Medium.ttf
+    - assets/fonts/MedievalSharp/MedievalSharp-Regular.ttf
 

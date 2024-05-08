@@ -18,7 +18,7 @@ class BottomNavBar extends StatelessWidget {
       ),
       activeIcon: RitualAppSvgPicture(
         picture: 'assets/icons/home.svg',
-        color: AppColor.primaryBackgroundColor,
+        //color: AppColor.primaryBackgroundColor,
       ),
       label: "",
     ),
@@ -29,40 +29,40 @@ class BottomNavBar extends StatelessWidget {
       ),
       activeIcon: RitualAppSvgPicture(
         picture: 'assets/icons/habits.svg',
-        color: AppColor.primaryBackgroundColor,
+        //color: AppColor.primaryBackgroundColor,
       ),
       label: "",
     ),
-    const BottomNavigationBarItem(
-      icon: RitualAppSvgPicture(
-        picture: 'assets/icons/emotions.svg',
-        color: Colors.black,
-      ),
-      activeIcon: RitualAppSvgPicture(
-        picture: 'assets/icons/emotions.svg',
-        color: AppColor.primaryBackgroundColor,
-      ),
-      label: "",
-    ),
-    const BottomNavigationBarItem(
-      icon: RitualAppSvgPicture(
-        picture: 'assets/icons/wall.svg',
-        color: Colors.black,
-      ),
-      activeIcon: RitualAppSvgPicture(
-        picture: 'assets/icons/wall.svg',
-        color: AppColor.primaryBackgroundColor,
-      ),
-      label: "",
-    ),
+    // const BottomNavigationBarItem(
+    //   icon: RitualAppSvgPicture(
+    //     picture: 'assets/icons/emotions.svg',
+    //     color: Colors.black,
+    //   ),
+    //   activeIcon: RitualAppSvgPicture(
+    //     picture: 'assets/icons/emotions.svg',
+    //     //color: AppColor.primaryBackgroundColor,
+    //   ),
+    //   label: "",
+    // ),
+    // const BottomNavigationBarItem(
+    //   icon: RitualAppSvgPicture(
+    //     picture: 'assets/icons/wall.svg',
+    //     color: Colors.black,
+    //   ),
+    //   activeIcon: RitualAppSvgPicture(
+    //     picture: 'assets/icons/wall.svg',
+    //     //color: AppColor.primaryBackgroundColor,
+    //   ),
+    //   label: "",
+    // ),
   ];
 
   @override
   Widget build(BuildContext context) {
     return DecoratedBox(
       decoration: const BoxDecoration(
-        color: AppColor.primaryColor,
-      ),
+          //color: AppColor.primaryColor,
+          ),
       child: ClipRRect(
         borderRadius: const BorderRadius.only(
           topRight: Radius.circular(20),
@@ -71,11 +71,12 @@ class BottomNavBar extends StatelessWidget {
         child: BottomNavigationBar(
           elevation: 0,
           type: BottomNavigationBarType.fixed,
-          backgroundColor: AppColor.primaryBackgroundColor.withOpacity(0.2),
+          //backgroundColor: AppColor.primaryBackgroundColor.withOpacity(0.2),
           // iconSize: 50,
           showSelectedLabels: false,
           selectedIconTheme: const IconThemeData(
-              color: AppColor.primaryBackgroundColor, size: 30),
+              //color: AppColor.primaryBackgroundColor, size: 30,
+              ),
           unselectedIconTheme:
               const IconThemeData(color: Colors.black, size: 30),
           showUnselectedLabels: false,

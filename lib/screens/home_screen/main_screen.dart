@@ -43,7 +43,9 @@ class _MainScreenState extends State<MainScreen> {
                 TextSpan(
                   text: l10n.mainScreenGoodDay,
                   style: MentalHealthTextStyles.text.signikaPrimaryFontF28
-                      .copyWith(color: AppColor.oneMoreDarkColor),
+                      .copyWith(
+                          //color: //AppColor.oneMoreDarkColor,
+                          ),
                 ),
                 TextSpan(
                   text: username,
@@ -54,33 +56,33 @@ class _MainScreenState extends State<MainScreen> {
           ),
         );
 
-      case 1:
-        return Align(
-          alignment: Alignment.centerLeft,
-          child: Text(
-            l10n.mainScreenHabits,
-            style: MentalHealthTextStyles.text.signikaPrimaryFontF28
-                .copyWith(color: Colors.black),
-          ),
-        );
-      case 2:
-        return Align(
-          alignment: Alignment.centerLeft,
-          child: Text(
-            l10n.mainScreenMoodStatistic,
-            style: MentalHealthTextStyles.text.signikaPrimaryFontF28
-                .copyWith(color: Colors.black),
-          ),
-        );
-      case 3:
-        return Align(
-          alignment: Alignment.centerLeft,
-          child: Text(
-            l10n.mainScreenSharedStories,
-            style: MentalHealthTextStyles.text.signikaPrimaryFontF28
-                .copyWith(color: Colors.black),
-          ),
-        );
+      // case 1:
+      //   return Align(
+      //     alignment: Alignment.centerLeft,
+      //     child: Text(
+      //       l10n.mainScreenHabits,
+      //       style: MentalHealthTextStyles.text.signikaPrimaryFontF28
+      //           .copyWith(color: Colors.black),
+      //     ),
+      //   );
+      // case 2:
+      //   return Align(
+      //     alignment: Alignment.centerLeft,
+      //     child: Text(
+      //       l10n.mainScreenMoodStatistic,
+      //       style: MentalHealthTextStyles.text.signikaPrimaryFontF28
+      //           .copyWith(color: Colors.black),
+      //     ),
+      //   );
+      // case 3:
+      //   return Align(
+      //     alignment: Alignment.centerLeft,
+      //     child: Text(
+      //       l10n.mainScreenSharedStories,
+      //       style: MentalHealthTextStyles.text.signikaPrimaryFontF28
+      //           .copyWith(color: Colors.black),
+      //     ),
+      //   );
     }
   }
 
@@ -106,7 +108,7 @@ class _MainScreenState extends State<MainScreen> {
       },
       child: Scaffold(
         endDrawer: const DrawerWidget(),
-        backgroundColor: AppColor.primaryColor,
+        //backgroundColor: //AppColor.primaryColor,
         appBar: CustomAppBar(
           isHomeScreen: _selectedIndex == 0,
           title: getAppBarTitle(l10n),

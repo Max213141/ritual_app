@@ -18,13 +18,15 @@ class HomeScreen extends StatelessWidget {
               SizedBox(
                 width: MediaQuery.of(context).size.width,
                 child: DecoratedBox(
-                  decoration: const BoxDecoration(color: AppColor.primaryColor),
+                  decoration: const BoxDecoration(
+                      //color: //AppColor.primaryColor,
+                      ),
                   child: SizedBox(
                     height: 30,
                     // MediaQuery.of(context).size.height / 6,
                     child: DecoratedBox(
                       decoration: const BoxDecoration(
-                        color: AppColor.primaryBackgroundColor,
+                        //color: //AppColor.primaryBackgroundColor,
                         borderRadius: BorderRadius.only(
                           bottomLeft: Radius.circular(40),
                         ),

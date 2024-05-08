@@ -26,7 +26,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       title: title,
       titleTextStyle: MentalHealthTextStyles.text.signikaSecondaryFontF16,
       elevation: 0,
-      backgroundColor: AppColor.primaryBackgroundColor,
+      //backgroundColor: AppColor.primaryBackgroundColor,
       automaticallyImplyLeading: false,
       actions: [
         IconButton(

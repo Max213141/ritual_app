@@ -13,7 +13,7 @@ class AuthScreen extends StatelessWidget {
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: AppColor.primaryColor,
+      //backgroundColor: AppColor.primaryColor,
       body: SizedBox(
         height: MediaQuery.of(context).size.height,
         child: Column(
@@ -29,7 +29,7 @@ class AuthScreen extends StatelessWidget {
                     borderRadius: BorderRadius.only(
                       bottomLeft: Radius.circular(140),
                     ),
-                    color: AppColor.primaryBackgroundColor,
+                    // color: AppColor.primaryBackgroundColor,
                   ),
                 ),
               ),
@@ -45,7 +45,7 @@ class AuthScreen extends StatelessWidget {
                     borderRadius: BorderRadius.only(
                       topRight: Radius.circular(140),
                     ),
-                    color: AppColor.primaryBackgroundColor,
+                    //  color:AppColor.primaryBackgroundColor,
                   ),
                 ),
               ),

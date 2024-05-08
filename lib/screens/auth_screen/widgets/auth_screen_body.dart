@@ -17,11 +17,12 @@ class AuthScreenBody extends StatelessWidget {
         //     (mediaQuery.viewPadding.top) -
         //     (mediaQuery.viewPadding.bottom + 70),
         child: DecoratedBox(
-          decoration:
-              const BoxDecoration(color: AppColor.primaryBackgroundColor),
+          decoration: const BoxDecoration(
+              //color: AppColor.primaryBackgroundColor,
+              ),
           child: DecoratedBox(
             decoration: const BoxDecoration(
-              color: AppColor.primaryColor,
+              // color: //AppColor.primaryColor,
               borderRadius: BorderRadius.only(
                 bottomLeft: Radius.circular(60),
                 topRight: Radius.circular(60),
@@ -46,7 +47,9 @@ class AuthScreenBody extends StatelessWidget {
                           text: l10n.appTitle,
                           style: MentalHealthTextStyles
                               .text.signikaPrimaryFontF28
-                              .copyWith(color: AppColor.primaryBackgroundColor),
+                              .copyWith(
+                                  //color: //AppColor.primaryBackgroundColor,
+                                  ),
                         ),
                       ],
                     ),
@@ -70,7 +73,9 @@ class AuthScreenBody extends StatelessWidget {
                           text: l10n.authScreenTextPart3,
                           style: MentalHealthTextStyles
                               .text.popinsSecondaryFontF14
-                              .copyWith(color: AppColor.primaryBackgroundColor),
+                              .copyWith(
+                                  // color: //AppColor.primaryBackgroundColor,
+                                  ),
                         ),
                       ],
                     ),
@@ -97,7 +102,7 @@ class AuthScreenBody extends StatelessWidget {
 
   void trigerAuth(BuildContext context) {
     showModalBottomSheet(
-      backgroundColor: AppColor.primaryColorDark,
+      //backgroundColor: //AppColor.primaryColorDark,
       useSafeArea: true,
       showDragHandle: true,
       isScrollControlled: true,

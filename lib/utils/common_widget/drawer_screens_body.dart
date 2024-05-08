@@ -14,7 +14,7 @@ class DrawerScreensBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColor.primaryColor,
+      //backgroundColor: AppColor.primaryColor,
       appBar: AppBar(
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
@@ -25,7 +25,7 @@ class DrawerScreensBody extends StatelessWidget {
           onTap: () => GoRouter.of(context).pop(),
           child: const Icon(
             Icons.arrow_back,
-            color: AppColor.mainDarkColor,
+            //color: AppColor.mainDarkColor,
             size: 24,
           ),
         ),
@@ -36,8 +36,9 @@ class DrawerScreensBody extends StatelessWidget {
           ),
         ),
         titleTextStyle: MentalHealthTextStyles.text.signikaPrimaryFontF28
-            .copyWith(color: AppColor.mainDarkColor),
-        backgroundColor: AppColor.primaryBackgroundColor,
+            .copyWith(//color: AppColor.mainDarkColor,
+                ),
+        //backgroundColor: AppColor.primaryBackgroundColor,
         elevation: 0,
       ),
       // bottomNavigationBar: const BottomNavBar(),
@@ -56,10 +57,11 @@ class DrawerScreensBody extends StatelessWidget {
                   maxHeight: 20,
                   child: const DecoratedBox(
                     decoration:
-                        BoxDecoration(color: AppColor.primaryBackgroundColor),
+                        BoxDecoration(//color: AppColor.primaryBackgroundColor,
+                            ),
                     child: DecoratedBox(
                       decoration: BoxDecoration(
-                        color: AppColor.primaryColor,
+                        //color: AppColor.primaryColor,
                         borderRadius: BorderRadius.only(
                           topRight: Radius.circular(40),
                         ),

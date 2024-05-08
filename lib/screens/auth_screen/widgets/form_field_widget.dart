@@ -27,17 +27,17 @@ class _FormFieldWidgetState extends State<FormFieldWidget> {
         labelStyle: MentalHealthTextStyles.text.popinsSecondaryFontF14Grey,
         errorStyle: MentalHealthTextStyles.text.popinsSecondaryFontF14Grey,
         filled: true,
-        fillColor: AppColor.authFieldsGray,
+        //fillColor: //AppColor.authFieldsGray,
         focusedBorder: OutlineInputBorder(
           borderRadius: MentalHealthDecorations.borders.radiusC10,
           borderSide: const BorderSide(
-            color: AppColor.primaryBackgroundColor,
-          ),
+              //color: //AppColor.primaryBackgroundColor,
+              ),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: MentalHealthDecorations.borders.radiusC10,
           borderSide: const BorderSide(
-            color: AppColor.authFieldsBordersGray,
+            //color: //AppColor.authFieldsBordersGray,
             width: 1,
             style: BorderStyle.solid,
           ),
@@ -53,7 +53,7 @@ class _FormFieldWidgetState extends State<FormFieldWidget> {
         focusedErrorBorder: OutlineInputBorder(
           borderRadius: MentalHealthDecorations.borders.radiusC10,
           borderSide: const BorderSide(
-            color: AppColor.primaryBackgroundColor,
+            //color: //AppColor.primaryBackgroundColor,
             width: 1,
             style: BorderStyle.solid,
           ),

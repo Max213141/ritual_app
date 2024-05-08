@@ -21,7 +21,7 @@ class ErrorDialogWidget extends StatelessWidget {
           children: [
             const Icon(
               Icons.error,
-              color: AppColor.primaryBackgroundColor,
+              //color: AppColor.primaryBackgroundColor,
               size: 50.0,
             ),
             const SizedBox(
@@ -42,7 +42,7 @@ class ErrorDialogWidget extends StatelessWidget {
                 Navigator.of(context).pop();
               },
               style: ElevatedButton.styleFrom(
-                backgroundColor: AppColor.primaryBackgroundColor,
+                //backgroundColor: AppColor.primaryBackgroundColor,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10.0),
                 ),

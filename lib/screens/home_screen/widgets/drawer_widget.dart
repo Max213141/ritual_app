@@ -51,8 +51,8 @@ class DrawerWidget extends StatelessWidget {
 
     return Drawer(
       elevation: 2,
-      backgroundColor: AppColor.drawerColor,
-      surfaceTintColor: AppColor.drawerColor,
+      //backgroundColor: //AppColor.drawerColor,
+      //surfaceTintColor: //AppColor.drawerColor,
       width: MediaQuery.of(context).size.width * 0.7,
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8.0),
@@ -84,8 +84,8 @@ class DrawerWidget extends StatelessWidget {
               ),
             ),
             Divider(
-              color: AppColor.drawerDividerColor.withOpacity(.2),
-            ),
+                //color: //AppColor.drawerDividerColor.withOpacity(.2),
+                ),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,

@@ -176,16 +176,16 @@ class _AuthScreenModalBodyState extends State<AuthScreenModalBody> {
                         text: _switchedToRegister
                             ? l10n.accountExists
                             : l10n.registerAccount,
-                        style:
-                            MentalHealthTextStyles.text.popinsSecondaryFontF14,
+                        // style:
+                        //     MentalHealthTextStyles.text.popinsSecondaryFontF14,
                       ),
                       TextSpan(
                         text: _switchedToRegister ? l10n.logIn : l10n.register,
-                        style: MentalHealthTextStyles
-                            .text.popinsSecondaryFontF14
-                            .copyWith(
-                          color: AppColor.primaryBackgroundColor,
-                        ),
+                        // style: MentalHealthTextStyles
+                        //     .text.popinsSecondaryFontF14
+                        //     .copyWith(
+                        //         // color: //AppColor.primaryBackgroundColor,
+                        //         ),
                       ),
                     ],
                   ),

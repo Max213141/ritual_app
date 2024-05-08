@@ -58,20 +58,20 @@ class Borders {
   Border get coloredSmall => const Border.fromBorderSide(
         BorderSide(
           width: 1,
-          color: AppColor.mainDarkColor,
+          //color: AppColor.mainDarkColor,
         ),
       );
 
   Border get chartBorder => const Border.fromBorderSide(
         BorderSide(
           width: 1,
-          color: AppColor.primaryBackgroundColor,
+          //color: AppColor.primaryBackgroundColor,
         ),
       );
   Border get calendarDayDefaultBorder => const Border.fromBorderSide(
         BorderSide(
           width: 1,
-          color: AppColor.habbitsTileBackground,
+          //color: AppColor.habbitsTileBackground,
         ),
       );
   // Border get newNoteButton => const Border.fromBorderSide(

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 // import 'package:ritual_app/blocs/blocs.dart';
 import 'package:ritual_app/utils/utils.dart';
@@ -15,7 +14,7 @@ class DevMenuWidget extends StatelessWidget {
       child: DecoratedBox(
         decoration: BoxDecoration(
           borderRadius: MentalHealthDecorations.borders.radiusC20,
-          color: AppColor.mainDarkColor,
+          //color: AppColor.mainDarkColor,
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

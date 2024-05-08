@@ -15,7 +15,7 @@ class TextTextStyle {
     height: 48 / 34,
     letterSpacing: -.5,
     fontWeight: FontWeight.w400,
-    color: AppColor.primaryColor,
+    // color: AppColor.primaryColor,,
   );
 
   final TextStyle signikaPrimaryFontF22N = const TextStyle(
@@ -23,7 +23,7 @@ class TextTextStyle {
     fontSize: 22,
     height: 22 / 20,
     letterSpacing: -.41,
-    color: AppColor.primaryColor,
+    // color: AppColor.primaryColor,,
     fontWeight: FontWeight.w800,
   );
   final TextStyle signikaPrimaryFontF22Black = const TextStyle(
@@ -40,7 +40,7 @@ class TextTextStyle {
     fontSize: 16,
     height: 16 / 14,
     letterSpacing: -.41,
-    color: AppColor.oneMoreDarkColor,
+    //color: AppColor.oneMoreDarkColor,
     fontWeight: FontWeight.w600,
   );
 
@@ -49,7 +49,7 @@ class TextTextStyle {
     fontSize: 16,
     height: 16 / 14,
     letterSpacing: -.41,
-    color: AppColor.oneMoreDarkColor,
+    //color: AppColor.oneMoreDarkColor,
     fontWeight: FontWeight.w300,
   );
   final TextStyle signikaFontF24 = const TextStyle(
@@ -57,7 +57,7 @@ class TextTextStyle {
     fontSize: 22,
     height: 22 / 16,
     letterSpacing: -.41,
-    color: AppColor.oneMoreDarkColor,
+    //color: AppColor.oneMoreDarkColor,
     fontWeight: FontWeight.w400,
   );
 
@@ -66,7 +66,7 @@ class TextTextStyle {
     fontSize: 22,
     height: 22 / 18,
     letterSpacing: -.41,
-    color: AppColor.oneMoreDarkColor,
+    //color: AppColor.oneMoreDarkColor,
     fontWeight: FontWeight.w400,
   );
   final TextStyle signikaFontF24Green = const TextStyle(
@@ -74,7 +74,7 @@ class TextTextStyle {
     fontSize: 24,
     height: 24 / 20,
     letterSpacing: -.41,
-    color: AppColor.primaryBackgroundColor,
+    //color: AppColor.primaryBackgroundColor,
     fontWeight: FontWeight.w400,
   );
 
@@ -83,7 +83,7 @@ class TextTextStyle {
     fontSize: 42,
     height: 42 / 36,
     // letterSpacing: -.41,
-    color: AppColor.oneMoreDarkColor,
+    //color: AppColor.oneMoreDarkColor,
     fontWeight: FontWeight.w400,
   );
 
@@ -92,7 +92,7 @@ class TextTextStyle {
     fontSize: 12,
     height: 12 / 10,
     letterSpacing: -.41,
-    color: AppColor.oneMoreDarkColor,
+    //color: AppColor.oneMoreDarkColor,
     fontWeight: FontWeight.w300,
   );
   final TextStyle popinsSecondaryFontF14 = const TextStyle(
@@ -100,7 +100,7 @@ class TextTextStyle {
     fontSize: 14,
     height: 14 / 12,
     letterSpacing: -.41,
-    color: AppColor.oneMoreDarkColor,
+    //color: AppColor.oneMoreDarkColor,
     fontWeight: FontWeight.w200,
   );
   final TextStyle popinsSecondaryFontF14Grey = const TextStyle(
@@ -108,7 +108,7 @@ class TextTextStyle {
     fontSize: 14,
     height: 14 / 12,
     letterSpacing: -.41,
-    color: AppColor.authFieldsTextGray,
+    //color: AppColor.authFieldsTextGray,
     fontWeight: FontWeight.w200,
   );
 
@@ -117,7 +117,7 @@ class TextTextStyle {
     fontSize: 16,
     height: 16 / 14,
     letterSpacing: -.41,
-    color: AppColor.oneMoreDarkColor,
+    //color: AppColor.oneMoreDarkColor,
     fontWeight: FontWeight.w600,
   );
   final TextStyle popinsSecondaryFontF16FW300 = const TextStyle(
@@ -125,7 +125,7 @@ class TextTextStyle {
     fontSize: 16,
     height: 16 / 14,
     letterSpacing: -.41,
-    color: AppColor.oneMoreDarkColor,
+    //color: AppColor.oneMoreDarkColor,
     fontWeight: FontWeight.w300,
   );
   final TextStyle userName = const TextStyle(
@@ -133,7 +133,7 @@ class TextTextStyle {
     fontSize: 28,
     height: 28 / 24,
     letterSpacing: -.5,
-    color: AppColor.primaryColor,
+    // color: AppColor.primaryColor,,
     fontWeight: FontWeight.w300,
   );
 
@@ -173,7 +173,7 @@ class TextTextStyle {
   final TextStyle mainTitleF24 = const TextStyle(
     fontFamily: 'Sansita-Regular',
     fontSize: 24,
-    color: AppColor.mainDarkColor,
+    //color: AppColor.mainDarkColor,
     height: 24 / 18,
     letterSpacing: -.51,
   );

@@ -32,16 +32,16 @@ class ActionButton extends StatelessWidget {
               // side: BorderSide(color: Colors.red)
             ),
           ),
-          backgroundColor: MaterialStateProperty.all<Color>(
-              buttonColor ?? AppColor.primaryBackgroundColor),
-          surfaceTintColor: MaterialStateProperty.all<Color>(
-              buttonColor ?? AppColor.primaryBackgroundColor),
+          // backgroundColor: MaterialStateProperty.all<Color>(
+          //   buttonColor ?? AppColor.primaryBackgroundColor,
+          // ),
+          // surfaceTintColor: MaterialStateProperty.all<Color>(
+          //   buttonColor ?? AppColor.primaryBackgroundColor,
+          // ),
           side: MaterialStateProperty.all<BorderSide>(
             BorderSide(
               width: 1,
-              color: buttonColor == AppColor.primaryColor
-                  ? AppColor.primaryBackgroundColor
-                  : AppColor.habbitsTileBackground,
+              // color: buttonColor == AppColor.primaryColor ? AppColor.primaryBackgroundColor : AppColor.habbitsTileBackground,
             ),
           ),
           elevation: MaterialStateProperty.all<double>(
