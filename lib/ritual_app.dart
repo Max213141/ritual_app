@@ -43,12 +43,12 @@ class RitualApp extends StatelessWidget {
     final router = GoRouter(
       observers: [MyNavigatorObserver()],
       routes: [
-        GoRoute(
-          path: '/',
-          builder: (BuildContext context, GoRouterState state) {
-            return IntroScreen();
-          },
-        ),
+        // GoRoute(
+        //   path: '/',
+        //   builder: (BuildContext context, GoRouterState state) {
+        //     return IntroScreen();
+        //   },
+        // ),
         GoRoute(
           name: 'initial_settings',
           path: '/',

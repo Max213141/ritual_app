@@ -7,3 +7,4 @@ export 'svg_picture.dart';
 export 'custom_text_form_field_widget.dart';
 export 'drawer_screens_body.dart';
 export 'social_button.dart';
+export 'permission_dialog.dart';

@@ -32,8 +32,8 @@ class _InitialHivePageState extends State<InitialHivePage> {
   Future<void> _firstLaunchHandler() async {
     final isFirstLaunchFromHive = HiveStore().getFirstLaunch();
 
-    // _log('is app fisrst launch: $isFirstLaunchFromHive');
-    // //_log('app preferences box is empty: ${appPreferencesBox.isEmpty}');
+    _log('is app fisrst launch: $isFirstLaunchFromHive');
+    //_log('app preferences box is empty: ${appPreferencesBox.isEmpty}');
 
     if (isFirstLaunchFromHive ?? true) {
       // _log('hive data about first launch: $isFirstLaunchFromHive');
@@ -57,11 +57,11 @@ class _InitialHivePageState extends State<InitialHivePage> {
     return FutureBuilder(
       future: _firstLaunchHandler(),
       builder: (context, snapshot) {
-        //_log('is ifrst launch before snapshot done- $isFirstLaunch');
+        _log('is ifrst launch before snapshot done- $isFirstLaunch');
         if (snapshot.connectionState == ConnectionState.done) {
-          //_log('is ifrst launch after snapshot done - $isFirstLaunch');
+          _log('is ifrst launch after snapshot done - $isFirstLaunch');
           if (isFirstLaunch) {
-            // return const IntroScreen();
+            return const IntroScreen();
           } else {
             if (widget.auth.currentUser != null) {
               return const MainScreen();

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:ritual_app/screens/auth_screen/widgets/widgets.dart';
-import 'package:ritual_app/utils/utils.dart';
 
 class AuthScreen extends StatelessWidget {
   const AuthScreen({

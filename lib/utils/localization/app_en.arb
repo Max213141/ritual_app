@@ -82,5 +82,7 @@
   "polishLanguage": "PL",
   "ok": "OK",
   "yes": "Yes",
-  "no":"No"
+  "no":"No",
+  "permissionTitle": "Photos Permission",
+  "permissionSubtitle": "Photos permission should Be granted to use this feature, would you like to go to app settings to give photos permission?"
 }
