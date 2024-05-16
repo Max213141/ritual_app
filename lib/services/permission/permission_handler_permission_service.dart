@@ -42,6 +42,7 @@ class PermissionHandlerPermissionService implements PermissionService {
   @override
   Future<bool> handlePhotosPermission(BuildContext context) async {
     PermissionStatus photosPermissionStatus = await requestPhotosPermission();
+    _log('cameraPermissionStatus: $photosPermissionStatus');
 
     if (photosPermissionStatus != PermissionStatus.granted) {
       final l10n = l10nOf(context);

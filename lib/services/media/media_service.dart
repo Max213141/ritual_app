@@ -8,19 +8,23 @@ import 'package:path_provider/path_provider.dart' as path_provider;
 import 'package:ritual_app/services/media/media_service_interface.dart';
 import 'package:ritual_app/services/permission/permission_service.dart';
 import 'package:ritual_app/services/service_locator.dart';
+import 'package:ritual_app/utils/utils.dart';
+
+void _log(dynamic message) => Logger.projectLog(message, name: 'media_service');
 
 class MediaService implements MediaServiceInterface {
   @override
   PermissionService get permissionService => getIt<PermissionService>();
 
   Future<bool> _handleImageUploadPermissions(
-      BuildContext context, AppImageSource? _imageSource) async {
-    if (_imageSource == null) {
+      BuildContext context, AppImageSource? imageSource) async {
+    _log('Image source-> $imageSource');
+    if (imageSource == null) {
       return false;
     }
-    if (_imageSource == AppImageSource.camera) {
+    if (imageSource == AppImageSource.camera) {
       return await permissionService.handleCameraPermission(context);
-    } else if (_imageSource == AppImageSource.gallery) {
+    } else if (imageSource == AppImageSource.gallery) {
       return await permissionService.handlePhotosPermission(context);
     } else {
       return false;
