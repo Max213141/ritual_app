@@ -1,14 +1,14 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 
 class AvatarContainer extends StatelessWidget {
   final Function onTap;
-  final XFile? imageFile;
+  final File? imageFile;
   final bool isLoading;
 
   const AvatarContainer({
+    super.key,
     required this.onTap,
     required this.imageFile,
     required this.isLoading,
@@ -28,7 +28,7 @@ class AvatarContainer extends StatelessWidget {
           image: imageFile == null
               ? null
               : DecorationImage(
-                  image: FileImage(File(imageFile!.path)),
+                  image: FileImage(imageFile!),
                   fit: BoxFit.cover,
                 ),
         ),

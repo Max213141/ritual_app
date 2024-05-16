@@ -1,5 +1,6 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
-import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:ritual_app/services/permission/permission_service.dart';
 
 enum AppImageSource {
@@ -10,11 +11,11 @@ enum AppImageSource {
 abstract class MediaServiceInterface {
   PermissionService get permissionService;
 
-  Future<XFile?> uploadImage(
+  Future<File?> uploadImage(
     BuildContext context,
     AppImageSource appImageSource, {
     bool shouldCompress = true,
   });
 
-  Future<XFile?> compressFile(XFile file, {int quality = 30});
+  Future<File?> compressFile(File file, {int quality = 30});
 }

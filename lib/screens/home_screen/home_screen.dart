@@ -1,6 +1,7 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:ritual_app/screens/home_screen/avatar_container.dart';
 import 'package:ritual_app/services/media/media_service_interface.dart';
 import 'package:ritual_app/services/service_locator.dart';
@@ -20,7 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
     final MediaServiceInterface _mediaService = getIt<MediaServiceInterface>();
 
-    XFile? imageFile;
+    File? imageFile;
     bool isLoadingGettingImage = false;
 
     Future getImage(AppImageSource appImageSource) async {
@@ -59,6 +60,13 @@ class _HomeScreenState extends State<HomeScreen> {
             title: 'Get Media',
             onPressed: () => getImage(AppImageSource.gallery),
           ),
+          imageFile == null
+              ? SizedBox.shrink()
+              : Image.file(
+                  imageFile!,
+                  height: 150,
+                  width: 150,
+                )
         ],
       ),
     );

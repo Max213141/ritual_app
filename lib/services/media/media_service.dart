@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -32,7 +33,7 @@ class MediaService implements MediaServiceInterface {
   }
 
   @override
-  Future<XFile?> uploadImage(
+  Future<File?> uploadImage(
     BuildContext context,
     AppImageSource appImageSource, {
     bool shouldCompress = true,
@@ -42,20 +43,22 @@ class MediaService implements MediaServiceInterface {
         await _handleImageUploadPermissions(context, appImageSource);
 
     if (canProceed) {
-      XFile? processedPickedImageFile;
+      File? processedPickedImageFile;
 
       // Convert our own AppImageSource into a format readable by the used package
       // In this case it's an ImageSource enum
-      ImageSource? _imageSource =
-          ImageSource.values.byName(appImageSource.name);
+      ImageSource? imageSource = ImageSource.values.byName(appImageSource.name);
 
       final imagePicker = ImagePicker();
       final rawPickedImageFile =
-          await imagePicker.pickImage(source: _imageSource, imageQuality: 50);
+          await imagePicker.pickImage(source: imageSource, imageQuality: 50);
+      final pickedImageConvertedToFile = File(rawPickedImageFile!.path);
+
+      _log('Picked image -> ${pickedImageConvertedToFile.path}');
 
       if (rawPickedImageFile != null) {
         //to convert from XFile type provided by the package to dart:io's File type
-        processedPickedImageFile = XFile(rawPickedImageFile.path);
+        processedPickedImageFile = File(rawPickedImageFile.path);
         if (shouldCompress) {
           processedPickedImageFile =
               await compressFile(processedPickedImageFile);
@@ -67,15 +70,16 @@ class MediaService implements MediaServiceInterface {
   }
 
   @override
-  Future<XFile?> compressFile(XFile file, {int quality = 30}) async {
+  Future<File?> compressFile(File file, {int quality = 30}) async {
     final dir = await path_provider.getTemporaryDirectory();
     final targetPath =
-        dir.absolute.path + '/${Random().nextInt(1000)}-temp.jpg';
+        '${dir.absolute.path}/${Random().nextInt(1000)}-temp.jpg';
 
-    return await FlutterImageCompress.compressAndGetFile(
+    final compressedImage = await FlutterImageCompress.compressAndGetFile(
       file.path,
       targetPath,
       quality: quality,
     );
+    return File(compressedImage!.path);
   }
 }
