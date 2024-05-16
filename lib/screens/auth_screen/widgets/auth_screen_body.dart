@@ -81,10 +81,10 @@ class AuthScreenBody extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 20),
-                  const RitualAppSvgPicture(
-                    picture: 'assets/images/auth_image.svg',
-                    fit: BoxFit.fill,
-                  ),
+                  // const RitualAppSvgPicture(
+                  //   picture: 'assets/images/auth_image.svg',
+                  //   fit: BoxFit.fill,
+                  // ),
                   const SizedBox(height: 20),
                   ActionButton(
                     title: l10n.authGetStartedActionButtonTitle.toUpperCase(),
