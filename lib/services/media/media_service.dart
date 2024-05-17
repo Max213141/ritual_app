@@ -52,9 +52,11 @@ class MediaService implements MediaServiceInterface {
       final imagePicker = ImagePicker();
       final rawPickedImageFile =
           await imagePicker.pickImage(source: imageSource, imageQuality: 50);
-      final pickedImageConvertedToFile = File(rawPickedImageFile!.path);
 
-      _log('Picked image -> ${pickedImageConvertedToFile.path}');
+      // final pickedImageConvertedToFile =
+      //     rawPickedImageFile != null ? File(rawPickedImageFile.path) : null;
+
+      // _log('Picked image -> ${pickedImageConvertedToFile.path}');
 
       if (rawPickedImageFile != null) {
         //to convert from XFile type provided by the package to dart:io's File type

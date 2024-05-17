@@ -17,11 +17,12 @@ class PermissionHandlerPermissionService implements PermissionService {
 
   @override
   Future<PermissionStatus> requestPhotosPermission() async {
-    AndroidDeviceInfo androidInfo = await DeviceInfoPlugin().androidInfo;
+    AndroidDeviceInfo? androidInfo;
+    if (Platform.isAndroid) androidInfo = await DeviceInfoPlugin().androidInfo;
     bool isIOS = Platform.isIOS;
-    int sdkInt = androidInfo.version.sdkInt;
+    int? sdkInt = androidInfo?.version.sdkInt;
 
-    if (!isIOS && sdkInt < 29) {
+    if (!isIOS && sdkInt! < 29) {
       _log('Android version is lower than Android 10 (API 29)');
       return await Permission.storage.request();
 
