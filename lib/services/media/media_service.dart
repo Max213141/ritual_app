@@ -56,9 +56,9 @@ class MediaService implements MediaServiceInterface {
       // final pickedImageConvertedToFile =
       //     rawPickedImageFile != null ? File(rawPickedImageFile.path) : null;
 
-      // _log('Picked image -> ${pickedImageConvertedToFile.path}');
-
       if (rawPickedImageFile != null) {
+        _log('Picked image -> ${rawPickedImageFile.path}');
+
         //to convert from XFile type provided by the package to dart:io's File type
         processedPickedImageFile = File(rawPickedImageFile.path);
         if (shouldCompress) {
@@ -66,6 +66,8 @@ class MediaService implements MediaServiceInterface {
               await compressFile(processedPickedImageFile);
         }
       }
+      _log('Proccessed Picked image -> ${processedPickedImageFile}');
+
       return processedPickedImageFile;
     }
     return null;
