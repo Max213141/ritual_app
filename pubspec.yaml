@@ -39,6 +39,7 @@ dependencies:
   device_info_plus: ^10.1.0
   video_player: ^2.8.6
   mime: ^1.0.5
+  mobile_scanner: ^5.1.1
   # welltested: ^0.0.1
 
   # firebase_messaging: ^14.6.0

@@ -3,7 +3,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:ritual_app/entities/db_entities/db_entities.dart';
 import 'package:ritual_app/entities/entities.dart';
 import 'package:ritual_app/entities/hive_entities/user_data.dart';
 import 'package:ritual_app/utils/loger.dart';

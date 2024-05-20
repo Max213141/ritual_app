@@ -49,6 +49,8 @@
 	</array>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Please give access to your library</string>
+	<key>NSCameraUsageDescription</key>
+	<string>This app needs camera access to scan QR codes</string>
 
 </dict>
 </plist>

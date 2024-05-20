@@ -131,6 +131,7 @@ class RitualApp extends StatelessWidget {
             providers: [
               BlocProvider<ThemeBloc>(create: (context) => ThemeBloc()),
               BlocProvider<LocaleBloc>(create: (context) => LocaleBloc()),
+              BlocProvider<QrCamBloc>(create: (context) => QrCamBloc()),
               BlocProvider<AuthBloc>(create: (context) => AuthBloc(auth: auth)),
             ],
             child: BlocBuilder<LocaleBloc, LocaleState>(

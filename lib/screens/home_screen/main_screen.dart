@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:ritual_app/blocs/blocs.dart';
 import 'package:ritual_app/entities/entities.dart';
 import 'package:ritual_app/screens/home_screen/home_screen.dart';
+import 'package:ritual_app/screens/home_screen/qr_scanner_screen/qr_scanner_screen.dart';
 import 'package:ritual_app/screens/home_screen/widgets/widgets.dart';
 import 'package:ritual_app/utils/utils.dart';
 
@@ -29,7 +30,7 @@ class _MainScreenState extends State<MainScreen> {
     const HomeScreen(
       title: 'Main screen',
     ),
-    // const HabitsScreen(),
+    const QrScanScreen(),
     // const MoodScreen(),
     // const SharedStoriesScreen(),
   ];
@@ -58,15 +59,15 @@ class _MainScreenState extends State<MainScreen> {
           ),
         );
 
-      // case 1:
-      //   return Align(
-      //     alignment: Alignment.centerLeft,
-      //     child: Text(
-      //       l10n.mainScreenHabits,
-      //       style: MentalHealthTextStyles.text.signikaPrimaryFontF28
-      //           .copyWith(color: Colors.black),
-      //     ),
-      //   );
+      case 1:
+        return Align(
+          alignment: Alignment.centerLeft,
+          child: Text(
+            l10n.mainScreenHabits,
+            style: MentalHealthTextStyles.text.signikaPrimaryFontF28
+                .copyWith(color: Colors.black),
+          ),
+        );
       // case 2:
       //   return Align(
       //     alignment: Alignment.centerLeft,
