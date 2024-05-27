@@ -5,14 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:ritual_app/screens/home_screen/widgets/preview_widget.dart';
 import 'package:ritual_app/screens/home_screen/widgets/widgets.dart';
-import 'package:ritual_app/services/media/media_service_interface.dart';
-import 'package:ritual_app/services/service_locator.dart';
 import 'package:ritual_app/utils/utils.dart';
 import 'package:video_player/video_player.dart';
-
-//TODO Move  function connected with button to the separate widget,
-// remove auto player,looks like  current code works
-// fine
 
 void _log(dynamic message) => Logger.projectLog(message, name: 'home_screen');
 
@@ -34,7 +28,6 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   List<XFile>? _mediaFileList;
-  final mediaServiceInterface = getIt<MediaServiceInterface>();
 
   void _setImageFileListFromFile(XFile? value) {
     _mediaFileList = value == null ? null : <XFile>[value];
@@ -73,75 +66,124 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
-  Future<int> getFileSize(XFile file) async {
-    final fileInfo = File(file.path);
-    return await fileInfo.length();
-  }
-
   Future<void> _onImageButtonPressed(
     ImageSource source, {
     required BuildContext context,
-    bool isMulti = false,
+    bool isMultiImage = false,
     bool isMedia = false,
   }) async {
     if (_controller != null) {
       await _controller!.setVolume(0.0);
     }
     if (context.mounted) {
-      await showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return ImagePickerDialog(
-            isMulti: true,
-            onPick: (
-              double? maxWidth,
-              double? maxHeight,
-              int? quality,
-              int? limit,
-            ) async {
-              try {
-                final List<XFile> compressedList = [];
-                final List<XFile> pickedFileList = isMedia
-                    ? await _picker.pickMultipleMedia(
-                        maxWidth: maxWidth,
-                        maxHeight: maxHeight,
-                        imageQuality: quality,
-                        limit: limit,
-                      )
-                    : await _picker.pickMultiImage(
-                        maxWidth: maxWidth,
-                        maxHeight: maxHeight,
-                        imageQuality: quality,
-                        limit: limit,
-                      );
-
-                if (pickedFileList.isNotEmpty) {
-                  for (var file in pickedFileList) {
-                    int sizeBefore = await getFileSize(file);
-
-                    _log('After compression: ${file.name} - $sizeBefore bytes');
-                    final compressedFile =
-                        await mediaServiceInterface.compressFile(file);
-                    compressedList.add(compressedFile);
-
-                    int sizeAfter = await getFileSize(compressedFile);
-                    _log(
-                        'After compression: ${compressedFile.name} - $sizeAfter bytes');
-                  }
-
+      if (isVideo) {
+        final XFile? file = await _picker.pickVideo(
+            source: source, maxDuration: const Duration(seconds: 10));
+        await _playVideo(file);
+      } else if (isMultiImage) {
+        await showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return ImagePickerDialog(
+              isMulti: true,
+              onPick: (
+                double? maxWidth,
+                double? maxHeight,
+                int? quality,
+                int? limit,
+              ) async {
+                try {
+                  final List<XFile> pickedFileList = isMedia
+                      ? await _picker.pickMultipleMedia(
+                          maxWidth: maxWidth,
+                          maxHeight: maxHeight,
+                          imageQuality: quality,
+                          limit: limit,
+                        )
+                      : await _picker.pickMultiImage(
+                          maxWidth: maxWidth,
+                          maxHeight: maxHeight,
+                          imageQuality: quality,
+                          limit: limit,
+                        );
                   setState(() {
-                    _mediaFileList = compressedList;
+                    _mediaFileList = pickedFileList;
+                  });
+                } catch (e) {
+                  setState(() {
+                    _pickImageError = e;
                   });
                 }
-              } catch (e) {
-                setState(() {
-                  _pickImageError = e;
-                });
-              }
-            },
-          );
-        },
-      );
+              },
+            );
+          },
+        );
+      } else if (isMedia) {
+        await showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return ImagePickerDialog(
+              isMulti: false,
+              onPick: (
+                double? maxWidth,
+                double? maxHeight,
+                int? quality,
+                int? limit,
+              ) async {
+                try {
+                  final List<XFile> pickedFileList = <XFile>[];
+                  final XFile? media = await _picker.pickMedia(
+                    maxWidth: maxWidth,
+                    maxHeight: maxHeight,
+                    imageQuality: quality,
+                  );
+                  if (media != null) {
+                    pickedFileList.add(media);
+                    setState(() {
+                      _mediaFileList = pickedFileList;
+                    });
+                  }
+                } catch (e) {
+                  setState(() {
+                    _pickImageError = e;
+                  });
+                }
+              },
+            );
+          },
+        );
+      } else {
+        await showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return ImagePickerDialog(
+              isMulti: false,
+              onPick: (
+                double? maxWidth,
+                double? maxHeight,
+                int? quality,
+                int? limit,
+              ) async {
+                try {
+                  final XFile? pickedFile = await _picker.pickImage(
+                    source: source,
+                    maxWidth: maxWidth,
+                    maxHeight: maxHeight,
+                    imageQuality: quality,
+                  );
+                  setState(() {
+                    _setImageFileListFromFile(pickedFile);
+                  });
+                } catch (e) {
+                  setState(() {
+                    _pickImageError = e;
+                  });
+                }
+              },
+            );
+          },
+        );
+      }
     }
   }
 
@@ -281,13 +323,25 @@ class _HomeScreenState extends State<HomeScreen> {
       floatingActionButton: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: <Widget>[
+          // Semantics(
+          //   label: 'image_picker_example_from_gallery',
+          //   child: FloatingActionButton(
+          //     onPressed: () {
+          //       isVideo = false;
+          //       _onImageButtonPressed(ImageSource.gallery, context: context);
+          //     },
+          //     heroTag: 'image0',
+          //     tooltip: 'Pick Image from gallery',
+          //     child: const Icon(Icons.payments),
+          //   ),
+          // ),
           UploaderButton(
             onPressed: () {
               isVideo = false;
               _onImageButtonPressed(
                 ImageSource.gallery,
                 context: context,
-                isMulti: true,
+                isMultiImage: true,
                 isMedia: true,
               );
             },
@@ -295,19 +349,63 @@ class _HomeScreenState extends State<HomeScreen> {
             tooltip: 'Pick Multiple Media from gallery',
             icon: Icons.photo_library,
           ),
+          // UploaderButton(
+          //   onPressed: () {
+          //     isVideo = false;
+          //     _onImageButtonPressed(
+          //       ImageSource.gallery,
+          //       context: context,
+          //       isMedia: false,
+          //     );
+          //   },
+          //   heroTag: 'media',
+          //   tooltip: 'Pick Single Media from gallery',
+          //   icon: Icons.photo_library,
+          // ),
           UploaderButton(
             onPressed: () {
               isVideo = false;
               _onImageButtonPressed(
                 ImageSource.gallery,
                 context: context,
-                isMulti: true,
+                isMultiImage: true,
               );
             },
             heroTag: 'MultiImage',
             tooltip: 'Pick Multiple Image from gallery',
             icon: Icons.photo_library,
           ),
+          // if (_picker.supportsImageSource(ImageSource.camera))
+          //   UploaderButton(
+          //     onPressed: () {
+          //       isVideo = false;
+          //       _onImageButtonPressed(ImageSource.camera, context: context);
+          //     },
+          //     heroTag: 'image2',
+          //     tooltip: 'Take a Photo',
+          //     icon: Icons.camera_alt,
+          // ),
+          // UploaderButton(
+          //   // backgroundColor: Colors.red,
+          //   onPressed: () {
+          //     isVideo = true;
+          //     _onImageButtonPressed(ImageSource.gallery, context: context);
+          //   },
+          //   heroTag: 'video0',
+          //   tooltip: 'Pick Video from gallery',
+          // icon: Icons.video_library,
+          // ),
+          // if (_picker.supportsImageSource(ImageSource.camera))
+          //   UploaderButton(
+          //     // backgroundColor: Colors.red,
+          //     onPressed: () {
+          //       isVideo = true;
+          //       _onImageButtonPressed(ImageSource.camera, context: context);
+          //     },
+          //     heroTag: 'video1',
+          //     tooltip: 'Take a Video',
+          //     icon: Icons.videocam,
+          //   ),
         ],
       ),
     );

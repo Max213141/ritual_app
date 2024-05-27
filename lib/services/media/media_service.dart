@@ -4,12 +4,13 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:path_provider/path_provider.dart' as path_provider;
+import 'package:path_provider/path_provider.dart';
 
 import 'package:ritual_app/services/media/media_service_interface.dart';
 import 'package:ritual_app/services/permission/permission_service.dart';
 import 'package:ritual_app/services/service_locator.dart';
 import 'package:ritual_app/utils/utils.dart';
+import 'package:video_compress/video_compress.dart';
 
 void _log(dynamic message) => Logger.projectLog(message, name: 'media_service');
 
@@ -62,8 +63,8 @@ class MediaService implements MediaServiceInterface {
         //to convert from XFile type provided by the package to dart:io's File type
         processedPickedImageFile = File(rawPickedImageFile.path);
         if (shouldCompress) {
-          processedPickedImageFile =
-              await compressFile(processedPickedImageFile);
+          // processedPickedImageFile =
+          //     await compressFile(processedPickedImageFile);
         }
       }
       _log('Proccessed Picked image -> ${processedPickedImageFile}');
@@ -74,16 +75,39 @@ class MediaService implements MediaServiceInterface {
   }
 
   @override
-  Future<File?> compressFile(File file, {int quality = 30}) async {
-    final dir = await path_provider.getTemporaryDirectory();
-    final targetPath =
-        '${dir.absolute.path}/${Random().nextInt(1000)}-temp.jpg';
+  Future<XFile> compressFile(XFile file, {int quality = 30}) async {
+    final dir = await getTemporaryDirectory();
+    final targetPath = '${dir.absolute.path}/${Random().nextInt(1000)}-temp';
+    //TODO use that file which size is lower after compression
 
-    final compressedImage = await FlutterImageCompress.compressAndGetFile(
-      file.path,
-      targetPath,
-      quality: quality,
-    );
-    return File(compressedImage!.path);
+    if (file.path.toLowerCase().endsWith('.mp4') ||
+        file.path.toLowerCase().endsWith('.mov')) {
+      // Compress video
+      final MediaInfo? compressedVideo = await VideoCompress.compressVideo(
+        file.path,
+        quality: VideoQuality.Res1920x1080Quality,
+        deleteOrigin: false, // Keep the original file
+        includeAudio: true,
+      );
+
+      if (compressedVideo != null && compressedVideo.file != null) {
+        return XFile(compressedVideo.file!.path);
+      }
+    } else {
+      // Compress image
+      final targetImagePath = '$targetPath.jpg';
+      final compressedImage = await FlutterImageCompress.compressAndGetFile(
+        file.path,
+        targetImagePath,
+        quality: quality,
+      );
+
+      if (compressedImage != null) {
+        return XFile(compressedImage.path);
+      }
+    }
+
+    // Return original file if compression fails
+    return file;
   }
 }
