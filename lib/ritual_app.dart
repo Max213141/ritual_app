@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -12,12 +13,14 @@ import 'package:ritual_app/utils/utils.dart';
 
 class RitualApp extends StatelessWidget {
   final FirebaseAuth auth;
+  final Reference media;
   final HiveStore hiveStore;
 
   const RitualApp({
     super.key,
     required this.auth,
     required this.hiveStore,
+    required this.media,
   });
 
   Future<void> _initHive() async {
@@ -133,6 +136,8 @@ class RitualApp extends StatelessWidget {
               BlocProvider<LocaleBloc>(create: (context) => LocaleBloc()),
               BlocProvider<QrCamBloc>(create: (context) => QrCamBloc()),
               BlocProvider<AuthBloc>(create: (context) => AuthBloc(auth: auth)),
+              BlocProvider<MediaBloc>(
+                  create: (context) => MediaBloc(media: media)),
             ],
             child: BlocBuilder<LocaleBloc, LocaleState>(
               builder: (context, state) {

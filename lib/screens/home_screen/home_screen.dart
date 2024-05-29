@@ -2,7 +2,9 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:ritual_app/blocs/blocs.dart';
 import 'package:ritual_app/screens/home_screen/widgets/preview_widget.dart';
 import 'package:ritual_app/screens/home_screen/widgets/widgets.dart';
 import 'package:ritual_app/services/media/media_service_interface.dart';
@@ -117,16 +119,27 @@ class _HomeScreenState extends State<HomeScreen> {
 
                 if (pickedFileList.isNotEmpty) {
                   for (var file in pickedFileList) {
-                    int sizeBefore = await getFileSize(file);
+                    // int sizeBefore = await getFileSize(file);
 
-                    _log('After compression: ${file.name} - $sizeBefore bytes');
+                    // _log('After compression: ${file.name} - $sizeBefore bytes');
                     final compressedFile =
                         await mediaServiceInterface.compressFile(file);
                     compressedList.add(compressedFile);
 
-                    int sizeAfter = await getFileSize(compressedFile);
-                    _log(
-                        'After compression: ${compressedFile.name} - $sizeAfter bytes');
+                    final fileName = isMedia
+                        ? 'media/${compressedFile.name}.jpg'
+                        : 'image/${compressedFile.name}.jpg';
+
+                    BlocProvider.of<MediaBloc>(context).add(
+                      UploadMedia(
+                        file: File(compressedFile.path),
+                        filePath: fileName,
+                      ),
+                    );
+
+                    // int sizeAfter = await getFileSize(compressedFile);
+                    // _log(
+                    //     'After compression: ${compressedFile.name} - $sizeAfter bytes');
                   }
 
                   setState(() {

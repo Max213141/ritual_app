@@ -23,7 +23,7 @@ void main() async {
   );
 
   FirebaseAuth auth = FirebaseAuth.instanceFor(app: app);
-  final storageRef = FirebaseStorage.instance.ref();
+  final Reference storageRef = FirebaseStorage.instance.ref();
   HiveStore hiveStore = HiveStore();
 
   ///TODO splash_icon package need to be configured for iOS
@@ -33,6 +33,7 @@ void main() async {
     RitualApp(
       auth: auth,
       hiveStore: hiveStore,
+      media: storageRef,
     ),
   );
 }
