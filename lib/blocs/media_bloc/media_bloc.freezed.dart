@@ -19,21 +19,27 @@ mixin _$MediaEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() getMedia,
-    required TResult Function(File file, String filePath) uploadMedia,
+    required TResult Function(File file, String filePath,
+            StreamController<double> progressController)
+        uploadMedia,
     required TResult Function() deleteMedia,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? getMedia,
-    TResult? Function(File file, String filePath)? uploadMedia,
+    TResult? Function(File file, String filePath,
+            StreamController<double> progressController)?
+        uploadMedia,
     TResult? Function()? deleteMedia,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? getMedia,
-    TResult Function(File file, String filePath)? uploadMedia,
+    TResult Function(File file, String filePath,
+            StreamController<double> progressController)?
+        uploadMedia,
     TResult Function()? deleteMedia,
     required TResult orElse(),
   }) =>
@@ -119,7 +125,9 @@ class _$GetMediaImpl implements GetMedia {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() getMedia,
-    required TResult Function(File file, String filePath) uploadMedia,
+    required TResult Function(File file, String filePath,
+            StreamController<double> progressController)
+        uploadMedia,
     required TResult Function() deleteMedia,
   }) {
     return getMedia();
@@ -129,7 +137,9 @@ class _$GetMediaImpl implements GetMedia {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? getMedia,
-    TResult? Function(File file, String filePath)? uploadMedia,
+    TResult? Function(File file, String filePath,
+            StreamController<double> progressController)?
+        uploadMedia,
     TResult? Function()? deleteMedia,
   }) {
     return getMedia?.call();
@@ -139,7 +149,9 @@ class _$GetMediaImpl implements GetMedia {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? getMedia,
-    TResult Function(File file, String filePath)? uploadMedia,
+    TResult Function(File file, String filePath,
+            StreamController<double> progressController)?
+        uploadMedia,
     TResult Function()? deleteMedia,
     required TResult orElse(),
   }) {
@@ -194,7 +206,10 @@ abstract class _$$UploadMediaImplCopyWith<$Res> {
           _$UploadMediaImpl value, $Res Function(_$UploadMediaImpl) then) =
       __$$UploadMediaImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({File file, String filePath});
+  $Res call(
+      {File file,
+      String filePath,
+      StreamController<double> progressController});
 }
 
 /// @nodoc
@@ -208,11 +223,12 @@ class __$$UploadMediaImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? file = freezed,
+    Object? file = null,
     Object? filePath = null,
+    Object? progressController = null,
   }) {
     return _then(_$UploadMediaImpl(
-      file: freezed == file
+      file: null == file
           ? _value.file
           : file // ignore: cast_nullable_to_non_nullable
               as File,
@@ -220,6 +236,10 @@ class __$$UploadMediaImplCopyWithImpl<$Res>
           ? _value.filePath
           : filePath // ignore: cast_nullable_to_non_nullable
               as String,
+      progressController: null == progressController
+          ? _value.progressController
+          : progressController // ignore: cast_nullable_to_non_nullable
+              as StreamController<double>,
     ));
   }
 }
@@ -227,16 +247,21 @@ class __$$UploadMediaImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$UploadMediaImpl implements UploadMedia {
-  const _$UploadMediaImpl({required this.file, required this.filePath});
+  const _$UploadMediaImpl(
+      {required this.file,
+      required this.filePath,
+      required this.progressController});
 
   @override
   final File file;
   @override
   final String filePath;
+  @override
+  final StreamController<double> progressController;
 
   @override
   String toString() {
-    return 'MediaEvent.uploadMedia(file: $file, filePath: $filePath)';
+    return 'MediaEvent.uploadMedia(file: $file, filePath: $filePath, progressController: $progressController)';
   }
 
   @override
@@ -244,14 +269,16 @@ class _$UploadMediaImpl implements UploadMedia {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$UploadMediaImpl &&
-            const DeepCollectionEquality().equals(other.file, file) &&
+            (identical(other.file, file) || other.file == file) &&
             (identical(other.filePath, filePath) ||
-                other.filePath == filePath));
+                other.filePath == filePath) &&
+            (identical(other.progressController, progressController) ||
+                other.progressController == progressController));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(file), filePath);
+  int get hashCode =>
+      Object.hash(runtimeType, file, filePath, progressController);
 
   @JsonKey(ignore: true)
   @override
@@ -263,32 +290,38 @@ class _$UploadMediaImpl implements UploadMedia {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() getMedia,
-    required TResult Function(File file, String filePath) uploadMedia,
+    required TResult Function(File file, String filePath,
+            StreamController<double> progressController)
+        uploadMedia,
     required TResult Function() deleteMedia,
   }) {
-    return uploadMedia(file, filePath);
+    return uploadMedia(file, filePath, progressController);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? getMedia,
-    TResult? Function(File file, String filePath)? uploadMedia,
+    TResult? Function(File file, String filePath,
+            StreamController<double> progressController)?
+        uploadMedia,
     TResult? Function()? deleteMedia,
   }) {
-    return uploadMedia?.call(file, filePath);
+    return uploadMedia?.call(file, filePath, progressController);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? getMedia,
-    TResult Function(File file, String filePath)? uploadMedia,
+    TResult Function(File file, String filePath,
+            StreamController<double> progressController)?
+        uploadMedia,
     TResult Function()? deleteMedia,
     required TResult orElse(),
   }) {
     if (uploadMedia != null) {
-      return uploadMedia(file, filePath);
+      return uploadMedia(file, filePath, progressController);
     }
     return orElse();
   }
@@ -330,11 +363,14 @@ class _$UploadMediaImpl implements UploadMedia {
 
 abstract class UploadMedia implements MediaEvent {
   const factory UploadMedia(
-      {required final File file,
-      required final String filePath}) = _$UploadMediaImpl;
+          {required final File file,
+          required final String filePath,
+          required final StreamController<double> progressController}) =
+      _$UploadMediaImpl;
 
   File get file;
   String get filePath;
+  StreamController<double> get progressController;
   @JsonKey(ignore: true)
   _$$UploadMediaImplCopyWith<_$UploadMediaImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -379,7 +415,9 @@ class _$DeleteMediaImpl implements DeleteMedia {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() getMedia,
-    required TResult Function(File file, String filePath) uploadMedia,
+    required TResult Function(File file, String filePath,
+            StreamController<double> progressController)
+        uploadMedia,
     required TResult Function() deleteMedia,
   }) {
     return deleteMedia();
@@ -389,7 +427,9 @@ class _$DeleteMediaImpl implements DeleteMedia {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? getMedia,
-    TResult? Function(File file, String filePath)? uploadMedia,
+    TResult? Function(File file, String filePath,
+            StreamController<double> progressController)?
+        uploadMedia,
     TResult? Function()? deleteMedia,
   }) {
     return deleteMedia?.call();
@@ -399,7 +439,9 @@ class _$DeleteMediaImpl implements DeleteMedia {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? getMedia,
-    TResult Function(File file, String filePath)? uploadMedia,
+    TResult Function(File file, String filePath,
+            StreamController<double> progressController)?
+        uploadMedia,
     TResult Function()? deleteMedia,
     required TResult orElse(),
   }) {

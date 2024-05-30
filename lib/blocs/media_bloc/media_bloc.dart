@@ -1,3 +1,5 @@
+import 'dart:async';
+import 'dart:ffi';
 import 'dart:io';
 
 import 'package:bloc/bloc.dart';
@@ -15,7 +17,7 @@ void _log(dynamic message) => Logger.projectLog(message, name: 'media_bloc');
 class MediaBloc extends Bloc<MediaEvent, MediaState> {
   final Reference media;
 
-  MediaBloc({required this.media}) : super(_Initial()) {
+  MediaBloc({required this.media}) : super(const _Initial()) {
     on<MediaEvent>(
       (events, emit) async {
         await events.map(
@@ -37,6 +39,7 @@ class MediaBloc extends Bloc<MediaEvent, MediaState> {
           .listen((firebase_storage.TaskSnapshot snapshot) {
         double progress =
             (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        event.progressController.add(progress); // Update progress
         _log('Progress: $progress%');
       });
 
