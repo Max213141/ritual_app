@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get_it/get_it.dart';
+import 'package:go_router/go_router.dart';
+// import 'package:get_it/get_it.dart';
 
 import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:ritual_app/blocs/blocs.dart';
-import 'package:ritual_app/screens/home_screen/qr_scanner_screen/widgets/widgets.dart';
+import 'package:ritual_app/screens/qr_scanner_screen/widgets/widgets.dart';
 import 'package:ritual_app/services/permission/permission_service.dart';
-import 'package:ritual_app/services/service_locator.dart';
+// import 'package:ritual_app/services/service_locator.dart';
 import 'package:ritual_app/utils/utils.dart';
 
 // void _log(dynamic message) =>
@@ -52,7 +53,7 @@ class _QrScanScreenState extends State<QrScanScreen> {
             extendBodyBehindAppBar: true,
             appBar: AppBar(
               leading: IconButton(
-                onPressed: () => Navigator.of(context).pop(),
+                onPressed: () => GoRouter.of(context).go('/home'),
                 icon: const RitualAppSvgPicture(
                   picture: 'assets/icons/close.svg',
                   fit: BoxFit.contain,

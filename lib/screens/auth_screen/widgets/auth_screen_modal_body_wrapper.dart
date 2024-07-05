@@ -27,7 +27,7 @@ class _AuthModalBodyWrapperState extends State<AuthModalBodyWrapper> {
             setState(() {
               _showLoader = false;
             });
-            GoRouter.of(context).go('/main');
+            GoRouter.of(context).go('/home');
           },
           authError: (errorText) {
             setState(() {

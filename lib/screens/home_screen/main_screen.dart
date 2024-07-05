@@ -4,8 +4,9 @@ import 'package:go_router/go_router.dart';
 import 'package:ritual_app/blocs/blocs.dart';
 import 'package:ritual_app/entities/entities.dart';
 import 'package:ritual_app/screens/home_screen/home_screen.dart';
-import 'package:ritual_app/screens/home_screen/qr_scanner_screen/qr_scanner_screen.dart';
 import 'package:ritual_app/screens/home_screen/widgets/widgets.dart';
+import 'package:ritual_app/screens/qr_scanner_screen/qr_scanner_screen.dart';
+import 'package:ritual_app/screens/memory_page_creation_screen/widgets/widgets.dart';
 import 'package:ritual_app/utils/utils.dart';
 
 void _log(dynamic message) => Logger.projectLog(message, name: 'main_screen');
@@ -28,14 +29,14 @@ class _MainScreenState extends State<MainScreen> {
 
   final List<Widget> _screens = [
     const HomeScreen(
-      title: 'Main screen',
-    ),
+        // title: 'Main screen',
+        ),
     const QrScanScreen(),
     // const MoodScreen(),
     // const SharedStoriesScreen(),
   ];
   getAppBarTitle(AppLocalizations l10n) {
-    final String? username = HiveStore().getUserName();
+    // final String? username = HiveStore().getUserName();
     switch (_selectedIndex) {
       case 0:
         return Align(
@@ -51,7 +52,7 @@ class _MainScreenState extends State<MainScreen> {
                           ),
                 ),
                 TextSpan(
-                  text: username,
+                  text: 'Название',
                   style: MentalHealthTextStyles.text.userName,
                 ),
               ],
@@ -126,14 +127,14 @@ class _MainScreenState extends State<MainScreen> {
         //   ),
         //   child: const Text('M'),
         // ),
-        bottomNavigationBar: LayoutBuilder(
-          builder: (BuildContext context, BoxConstraints constraints) {
-            return BottomNavBar(
-              selectedIndex: _selectedIndex,
-              onPressed: _onItemTapped,
-            );
-          },
-        ),
+        // bottomNavigationBar: LayoutBuilder(
+        //   builder: (BuildContext context, BoxConstraints constraints) {
+        //     return BottomNavBar(
+        //       selectedIndex: _selectedIndex,
+        //       onPressed: _onItemTapped,
+        //     );
+        //   },
+        // ),
         body: _screens.elementAt(_selectedIndex),
       ),
     );

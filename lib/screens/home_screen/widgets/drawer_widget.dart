@@ -3,8 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ritual_app/blocs/blocs.dart';
 import 'package:ritual_app/entities/entities.dart';
-import 'package:ritual_app/screens/home_screen/widgets/widgets.dart';
 import 'package:ritual_app/utils/utils.dart';
+
+import 'drawer_item_widget.dart';
 
 class DrawerWidget extends StatelessWidget {
   const DrawerWidget({super.key});
@@ -24,7 +25,7 @@ class DrawerWidget extends StatelessWidget {
       DrawerItem(
         title: l10n.drawerAboutUs,
         icon: 'assets/menu_icons/about_us.svg',
-        onTap: () => GoRouter.of(context).go('/main/about_us_screen'),
+        onTap: () => GoRouter.of(context).go('/home/about_us_screen'),
       ),
       // DrawerItem(
       //   title: 'Notifications',
@@ -33,12 +34,12 @@ class DrawerWidget extends StatelessWidget {
       DrawerItem(
         title: l10n.drawerSupport,
         icon: 'assets/menu_icons/support.svg',
-        onTap: () => GoRouter.of(context).go('/main/support_screen'),
+        onTap: () => GoRouter.of(context).go('/home/support_screen'),
       ),
       DrawerItem(
         title: l10n.drawerSettings,
         icon: 'assets/menu_icons/settings.svg',
-        onTap: () => GoRouter.of(context).go('/main/settings_screen'),
+        onTap: () => GoRouter.of(context).go('/home/settings_screen'),
       ),
       DrawerItem(
         title: l10n.drawerLogOut,
@@ -83,7 +84,7 @@ class DrawerWidget extends StatelessWidget {
                 ),
               ),
             ),
-            Divider(
+            const Divider(
                 //color: //AppColor.drawerDividerColor.withOpacity(.2),
                 ),
             Expanded(

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ritual_app/utils/utils.dart';
+// import 'package:ritual_app/utils/utils.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});

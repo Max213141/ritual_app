@@ -75,12 +75,28 @@ class RitualApp extends StatelessWidget {
           },
         ),
         GoRoute(
-          name: 'main',
-          path: '/main',
+          name: 'home',
+          path: '/home',
           builder: (BuildContext context, GoRouterState state) {
             return const MainScreen();
           },
           routes: <RouteBase>[
+            GoRoute(
+              name: 'mp_creation',
+              path: 'mp_creation',
+              builder: (BuildContext context, GoRouterState state) {
+                return const CreateMemoryPage();
+              },
+              // routes: <RouteBase>[
+              //   GoRoute(
+              //     name: 'profile_screen',
+              //     path: 'profile_screen',
+              //     builder: (BuildContext context, GoRouterState state) {
+              //       return const ProfileScreen();
+              //     },
+              //   ),
+              // ],
+            ),
             GoRoute(
               name: 'profile_screen',
               path: 'profile_screen',
@@ -111,6 +127,23 @@ class RitualApp extends StatelessWidget {
             ),
           ],
         ),
+        GoRoute(
+          name: 'qr_scan',
+          path: '/qr_scan',
+          builder: (BuildContext context, GoRouterState state) {
+            return const QrScanScreen();
+          },
+          // routes: <RouteBase>[
+          //   GoRoute(
+          //     name: 'profile_screen',
+          //     path: 'profile_screen',
+          //     builder: (BuildContext context, GoRouterState state) {
+          //       return const ProfileScreen();
+          //     },
+          //   ),
+          // ],
+        ),
+
         // GoRoute(
         //   path: '/auth',
         //   builder: (BuildContext context, GoRouterState state) {

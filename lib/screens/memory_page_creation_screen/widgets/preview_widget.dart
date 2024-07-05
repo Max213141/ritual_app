@@ -4,7 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mime/mime.dart';
-import 'package:ritual_app/screens/home_screen/widgets/widgets.dart';
+import 'package:ritual_app/screens/memory_page_creation_screen/widgets/widgets.dart';
 import 'package:video_player/video_player.dart';
 
 class PreviewWidget extends StatefulWidget {
