@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 typedef OnPickImageCallback = void Function(
-  double? maxWidth,
-  double? maxHeight,
-  int? quality,
+  // double? maxWidth,
+  // double? maxHeight,
+  // int? quality,
   int? limit,
 );
 
@@ -78,19 +78,19 @@ class _ImagePickerDialogState extends State<ImagePickerDialog> {
         TextButton(
           child: const Text('PICK'),
           onPressed: () {
-            final double? width = maxWidthController.text.isNotEmpty
-                ? double.parse(maxWidthController.text)
-                : null;
-            final double? height = maxHeightController.text.isNotEmpty
-                ? double.parse(maxHeightController.text)
-                : null;
-            final int? quality = qualityController.text.isNotEmpty
-                ? int.parse(qualityController.text)
-                : null;
+            // final double? width = maxWidthController.text.isNotEmpty
+            //     ? double.parse(maxWidthController.text)
+            //     : null;
+            // final double? height = maxHeightController.text.isNotEmpty
+            //     ? double.parse(maxHeightController.text)
+            //     : null;
+            // final int? quality = qualityController.text.isNotEmpty
+            //     ? int.parse(qualityController.text)
+            //     : null;
             final int? limit = limitController.text.isNotEmpty
                 ? int.parse(limitController.text)
                 : null;
-            widget.onPick(width, height, quality, limit);
+            widget.onPick(limit);
             Navigator.of(context).pop();
           },
         ),

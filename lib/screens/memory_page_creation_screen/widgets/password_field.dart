@@ -13,7 +13,7 @@ class PasswordFieldWidget extends StatelessWidget {
           const Text('Установите 4-значный пароль'),
           const SizedBox(height: 8),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: List.generate(4, (index) {
               return SizedBox(
                 width: 50,

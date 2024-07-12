@@ -85,17 +85,17 @@ class RitualApp extends StatelessWidget {
               name: 'mp_creation',
               path: 'mp_creation',
               builder: (BuildContext context, GoRouterState state) {
-                return const CreateMemoryPage();
+                return const MemoryPageCreationScreen();
               },
-              // routes: <RouteBase>[
-              //   GoRoute(
-              //     name: 'profile_screen',
-              //     path: 'profile_screen',
-              //     builder: (BuildContext context, GoRouterState state) {
-              //       return const ProfileScreen();
-              //     },
-              //   ),
-              // ],
+              routes: <RouteBase>[
+                GoRoute(
+                  name: 'mp_preview_screen',
+                  path: 'mp_preview_screen',
+                  builder: (BuildContext context, GoRouterState state) {
+                    return const MemoryPagePreviewScreen();
+                  },
+                ),
+              ],
             ),
             GoRoute(
               name: 'profile_screen',

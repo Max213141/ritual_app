@@ -1,17 +1,101 @@
-import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:ritual_app/screens/memory_page_creation_screen/widgets/widgets.dart';
+import 'dart:async';
+import 'dart:io';
 
-class CreateMemoryPage extends StatefulWidget {
-  const CreateMemoryPage({super.key});
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:ritual_app/blocs/blocs.dart';
+import 'package:ritual_app/screens/memory_page_creation_screen/widgets/widgets.dart';
+import 'package:ritual_app/services/media/media_service_interface.dart';
+import 'package:ritual_app/services/service_locator.dart';
+
+class MemoryPageCreationScreen extends StatefulWidget {
+  const MemoryPageCreationScreen({super.key});
 
   @override
-  _CreateMemoryPageState createState() => _CreateMemoryPageState();
+  _MemoryPageCreationScreenState createState() =>
+      _MemoryPageCreationScreenState();
 }
 
-class _CreateMemoryPageState extends State<CreateMemoryPage> {
+class _MemoryPageCreationScreenState extends State<MemoryPageCreationScreen> {
   bool _isPrivate = false;
   final _formKey = GlobalKey<FormState>();
+  final mediaServiceInterface = getIt<MediaServiceInterface>();
+  final StreamController<double> _progressController =
+      StreamController<double>();
+  late BuildContext _context;
+
+  bool isVideo = false;
+  dynamic _pickImageError;
+
+  final ImagePicker _picker = ImagePicker();
+
+  Future<int> getFileSize(XFile file) async {
+    final fileInfo = File(file.path);
+    return await fileInfo.length();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _context = context; // Save the context reference
+  }
+
+  Future<void> _onImageButtonPressed(
+    ImageSource source, {
+    bool isMulti = false,
+    bool isMedia = false,
+  }) async {
+    try {
+      final List<XFile> compressedList = [];
+      final List<XFile> pickedFileList = isMedia
+          ? await _picker.pickMultipleMedia(
+              // maxWidth: maxWidth,
+              // maxHeight: maxHeight,
+              // imageQuality: quality,
+              limit: 4,
+            )
+          : await _picker.pickMultiImage(
+              // maxWidth: maxWidth,
+              // maxHeight: maxHeight,
+              // imageQuality: quality,
+              limit: 4,
+            );
+
+      if (pickedFileList.isNotEmpty) {
+        for (var file in pickedFileList) {
+          final compressedFile = await mediaServiceInterface.compressFile(file);
+          compressedList.add(compressedFile);
+
+          final fileName = isMedia
+              ? 'media/${compressedFile.name}'
+              : 'image/${compressedFile.name}';
+
+          if (!mounted) return;
+
+          BlocProvider.of<MediaBloc>(_context).add(
+            UploadMedia(
+              file: File(compressedFile.path),
+              filePath: fileName,
+              progressController:
+                  _progressController, // Pass the progress controller
+            ),
+          );
+        }
+
+        if (!mounted) return;
+        // setState(() {
+        //   _mediaFileList = compressedList;
+        // });
+      }
+    } catch (e) {
+      if (!mounted) return;
+      setState(() {
+        _pickImageError = e;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -67,11 +151,25 @@ class _CreateMemoryPageState extends State<CreateMemoryPage> {
                 const SizedBox(height: 16),
                 const Text('Фото'),
                 const SizedBox(height: 8),
-                const MediaPickerButton(icon: Icons.camera_alt_outlined),
+                MediaPickerButton(
+                  icon: Icons.camera_alt_outlined,
+                  onPressed: () => _onImageButtonPressed(
+                    ImageSource.gallery,
+                    isMulti: true,
+                    isMedia: false,
+                  ),
+                ),
                 const SizedBox(height: 16),
                 const Text('Видео'),
                 const SizedBox(height: 8),
-                const MediaPickerButton(icon: Icons.video_call_outlined),
+                MediaPickerButton(
+                  icon: Icons.video_call_outlined,
+                  onPressed: () => _onImageButtonPressed(
+                    ImageSource.gallery,
+                    isMulti: true,
+                    isMedia: true,
+                  ),
+                ),
                 const SizedBox(height: 16),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -103,7 +201,8 @@ class _CreateMemoryPageState extends State<CreateMemoryPage> {
                 Center(
                   child: TextButton(
                     onPressed: () {
-                      // Implement preview logic
+                      GoRouter.of(context)
+                          .go('/home/mp_creation/mp_preview_screen');
                     },
                     child: const Text('Предварительный просмотр'),
                   ),
@@ -121,107 +220,10 @@ class _CreateMemoryPageState extends State<CreateMemoryPage> {
 
 
 
-// final mediaServiceInterface = getIt<MediaServiceInterface>();
-//   final StreamController<double> _progressController =
-//       StreamController<double>();
-//   late BuildContext _context;
-
-//   bool isVideo = false;
-
-//   final ImagePicker _picker = ImagePicker();
-
-//   Future<int> getFileSize(XFile file) async {
-//     final fileInfo = File(file.path);
-//     return await fileInfo.length();
-//   }
-
-//   @override
-//   void didChangeDependencies() {
-//     super.didChangeDependencies();
-//     _context = context; // Save the context reference
-//   }
-
-//   Future<void> _onImageButtonPressed(
-//     ImageSource source, {
-//     bool isMulti = false,
-//     bool isMedia = false,
-//   }) async {
-//     dynamic _pickImageError;
-
-//     if (mounted) {
-//       await showDialog(
-//         context: _context,
-//         builder: (BuildContext context) {
-//           return ImagePickerDialog(
-//             isMulti: true,
-//             onPick: (
-//               double? maxWidth,
-//               double? maxHeight,
-//               int? quality,
-//               int? limit,
-//             ) async {
-//               try {
-//                 final List<XFile> compressedList = [];
-//                 final List<XFile> pickedFileList = isMedia
-//                     ? await _picker.pickMultipleMedia(
-//                         maxWidth: maxWidth,
-//                         maxHeight: maxHeight,
-//                         imageQuality: quality,
-//                         limit: limit,
-//                       )
-//                     : await _picker.pickMultiImage(
-//                         maxWidth: maxWidth,
-//                         maxHeight: maxHeight,
-//                         imageQuality: quality,
-//                         limit: limit,
-//                       );
-
-//                 if (pickedFileList.isNotEmpty) {
-//                   for (var file in pickedFileList) {
-//                     final compressedFile =
-//                         await mediaServiceInterface.compressFile(file);
-//                     compressedList.add(compressedFile);
-
-//                     final fileName = isMedia
-//                         ? 'media/${compressedFile.name}'
-//                         : 'image/${compressedFile.name}';
-
-//                     if (!mounted) return;
-
-//                     BlocProvider.of<MediaBloc>(_context).add(
-//                       UploadMedia(
-//                         file: File(compressedFile.path),
-//                         filePath: fileName,
-//                         progressController:
-//                             _progressController, // Pass the progress controller
-//                       ),
-//                     );
-//                   }
-
-//                   if (!mounted) return;
-//                   // setState(() {
-//                   //   _mediaFileList = compressedList;
-//                   // });
-//                 }
-//               } catch (e) {
-//                 if (!mounted) return;
-//                 setState(() {
-//                   _pickImageError = e;
-//                 });
-//               }
-//             },
-//           );
-//         },
-//       );
-//     }
-//   }
 
 
-// _onImageButtonPressed(
-//                 ImageSource.gallery,
-//                 isMulti: true,
-//                 isMedia: true,
-//               );
+
+
 
 // Column(
 //         mainAxisAlignment: MainAxisAlignment.center,

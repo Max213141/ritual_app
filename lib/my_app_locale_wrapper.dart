@@ -22,9 +22,12 @@ class MyAppWrapper extends StatelessWidget {
     //TextTheme textTheme = Theme.of(context).textTheme;
 
     // Use with Google Fonts package to use downloadable fonts
-    TextTheme textTheme = createTextTheme(context, "Signika", "Poppins");
+
+    TextTheme textTheme =
+        createTextTheme(context, "Montserrat", "Montserrat Alternates");
 
     MaterialTheme theme = MaterialTheme(textTheme);
+
     return BlocBuilder<ThemeBloc, ThemeState>(
       builder: (context, state) {
         return MaterialApp.router(
@@ -37,7 +40,7 @@ class MyAppWrapper extends StatelessWidget {
 
           supportedLocales: AppConfig.supportedLocales,
           locale: locale,
-          title: 'LifeSync',
+          title: 'Memento',
           routerConfig: router,
           theme: brightness == Brightness.light ? theme.light() : theme.dark(),
           // state.isDarkTheme ? theme.light() : theme.dark(),

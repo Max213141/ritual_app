@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 
 class MediaPickerButton extends StatelessWidget {
   final IconData icon;
-  const MediaPickerButton({super.key, required this.icon});
+  final Future<void> Function() onPressed;
+  const MediaPickerButton(
+      {super.key, required this.icon, required this.onPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -15,8 +17,8 @@ class MediaPickerButton extends StatelessWidget {
       ),
       child: IconButton(
         icon: Icon(icon),
-        onPressed: () {
-          // Implement media upload logic
+        onPressed: () async {
+          await onPressed();
         },
       ),
     );

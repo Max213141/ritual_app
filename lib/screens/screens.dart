@@ -17,3 +17,4 @@ export 'package:ritual_app/screens/profile_screen/profile_screen.dart';
 export 'package:ritual_app/screens/support_screen/support_screen.dart';
 export 'package:ritual_app/screens/qr_scanner_screen/qr_scanner_screen.dart';
 export 'package:ritual_app/screens/memory_page_creation_screen/memory_page_creation_screen.dart';
+export 'package:ritual_app/screens/memory_page_preview_screen/memory_page_preview_screen.dart';
