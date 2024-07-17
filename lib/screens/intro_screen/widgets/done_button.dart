@@ -6,19 +6,10 @@ class DoneButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 40,
-      width: 65,
-      child: DecoratedBox(
-        decoration: BoxDecoration(
-          borderRadius: MentalHealthDecorations.borders.radiusC10,
-          //color: AppColor.primaryBackgroundColor,
-        ),
-        child: const Icon(
-          Icons.done,
-          color: Colors.black,
-        ),
-      ),
+    final l10n = l10nOf(context);
+
+    return Text(
+      l10n.introBeginButton,
     );
   }
 }

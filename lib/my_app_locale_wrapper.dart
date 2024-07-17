@@ -42,7 +42,7 @@ class MyAppWrapper extends StatelessWidget {
           locale: locale,
           title: 'Memento',
           routerConfig: router,
-          theme: brightness == Brightness.light ? theme.light() : theme.dark(),
+          theme: theme.dark(),
           // state.isDarkTheme ? theme.light() : theme.dark(),
           // state.isDarkTheme ? darkTheme : lightTheme,
         );

@@ -5,15 +5,13 @@ class CustomFormFieldWidget extends StatefulWidget {
   final String title;
   final TextEditingController controller;
   final String? Function(String?) validator;
-  final int? maxLines;
-  final int? maxLength;
+  final bool usepObscureText;
   const CustomFormFieldWidget({
     super.key,
     required this.title,
     required this.controller,
     required this.validator,
-    this.maxLines = 1,
-    this.maxLength,
+    required this.usepObscureText,
   });
 
   @override
@@ -21,29 +19,34 @@ class CustomFormFieldWidget extends StatefulWidget {
 }
 
 class _CustomFormFieldWidgetState extends State<CustomFormFieldWidget> {
+  late bool _obscurePassword;
+  @override
+  void initState() {
+    super.initState();
+    _obscurePassword = true;
+  }
+
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       controller: widget.controller,
       validator: (value) => widget.validator(value),
-      maxLines: widget.maxLines,
-      maxLength: widget.maxLength,
       decoration: InputDecoration(
         labelText: widget.title,
         labelStyle: MentalHealthTextStyles.text.popinsSecondaryFontF14Grey,
         errorStyle: MentalHealthTextStyles.text.popinsSecondaryFontF14Grey,
         filled: true,
-        //fillColor: AppColor.authFieldsGray,
+        //fillColor: //AppColor.authFieldsGray,
         focusedBorder: OutlineInputBorder(
           borderRadius: MentalHealthDecorations.borders.radiusC10,
           borderSide: const BorderSide(
-              //color: AppColor.primaryBackgroundColor,
+              //color: //AppColor.primaryBackgroundColor,
               ),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: MentalHealthDecorations.borders.radiusC10,
           borderSide: const BorderSide(
-            //color:AppColor.authFieldsBordersGray,
+            //color: //AppColor.authFieldsBordersGray,
             width: 1,
             style: BorderStyle.solid,
           ),
@@ -59,12 +62,24 @@ class _CustomFormFieldWidgetState extends State<CustomFormFieldWidget> {
         focusedErrorBorder: OutlineInputBorder(
           borderRadius: MentalHealthDecorations.borders.radiusC10,
           borderSide: const BorderSide(
-            //color: AppColor.primaryBackgroundColor,
+            //color: //AppColor.primaryBackgroundColor,
             width: 1,
             style: BorderStyle.solid,
           ),
         ),
+        suffixIcon: widget.usepObscureText
+            ? IconButton(
+                icon: Icon(
+                    _obscurePassword ? Icons.visibility : Icons.visibility_off),
+                onPressed: () {
+                  setState(() {
+                    _obscurePassword = !_obscurePassword;
+                  });
+                },
+              )
+            : null,
       ),
+      obscureText: widget.usepObscureText ? _obscurePassword : false,
     );
   }
 }

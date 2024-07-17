@@ -2,11 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ritual_app/blocs/blocs.dart';
-import 'package:ritual_app/entities/entities.dart';
 import 'package:ritual_app/screens/home_screen/home_screen.dart';
 import 'package:ritual_app/screens/home_screen/widgets/widgets.dart';
 import 'package:ritual_app/screens/qr_scanner_screen/qr_scanner_screen.dart';
-import 'package:ritual_app/screens/memory_page_creation_screen/widgets/widgets.dart';
 import 'package:ritual_app/utils/utils.dart';
 
 void _log(dynamic message) => Logger.projectLog(message, name: 'main_screen');

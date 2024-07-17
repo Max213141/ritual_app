@@ -54,8 +54,8 @@ class TextTextStyle {
   );
   final TextStyle signikaFontF24 = const TextStyle(
     fontFamily: 'Signika-Regular',
-    fontSize: 22,
-    height: 22 / 16,
+    fontSize: 18,
+    height: 18 / 12,
     letterSpacing: -.41,
     //color: AppColor.oneMoreDarkColor,
     fontWeight: FontWeight.w400,

@@ -6,22 +6,10 @@ class NextButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 40,
-      width: 65,
-      child: DecoratedBox(
-        decoration: BoxDecoration(
-          borderRadius: MentalHealthDecorations.borders.radiusC10,
-          //color: AppColor.primaryBackgroundColor,
-        ),
-        child: const RotatedBox(
-          quarterTurns: 2,
-          child: Icon(
-            Icons.arrow_back_rounded,
-            color: Colors.black,
-          ),
-        ),
-      ),
+    final l10n = l10nOf(context);
+
+    return Text(
+      l10n.introNextButton,
     );
   }
 }

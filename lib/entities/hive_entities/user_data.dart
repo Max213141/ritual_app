@@ -6,20 +6,17 @@ part 'user_data.g.dart';
 @HiveType(typeId: HiveIndex.userData)
 class UserData extends HiveObject {
   @HiveField(0)
-  String? userName;
-  @HiveField(1)
   String? uid;
-  @HiveField(2)
+  @HiveField(1)
   String? email;
-  @HiveField(3)
+  @HiveField(2)
   String? password;
 
   UserData({
-    this.userName,
     this.uid,
     this.email,
     this.password,
   });
 
-  UserData.initial() : userName = 'AppUser';
+  UserData.initial();
 }

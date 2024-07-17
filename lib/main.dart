@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:ritual_app/entities/entities.dart';
 import 'package:ritual_app/firebase_options.dart';
 import 'package:ritual_app/ritual_app.dart';
@@ -23,6 +24,8 @@ void main() async {
   );
 
   FirebaseAuth auth = FirebaseAuth.instanceFor(app: app);
+  final GoogleSignIn googleSignIn = GoogleSignIn();
+
   final Reference storageRef = FirebaseStorage.instance.ref();
   HiveStore hiveStore = HiveStore();
 
@@ -34,6 +37,7 @@ void main() async {
       auth: auth,
       hiveStore: hiveStore,
       media: storageRef,
+      googleSignIn: googleSignIn,
     ),
   );
 }

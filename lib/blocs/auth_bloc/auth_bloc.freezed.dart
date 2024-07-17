@@ -18,29 +18,32 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$AuthEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String email, String password, String username)
-        createUser,
+    required TResult Function(String email, String password) createUser,
     required TResult Function(String email, String password) logIn,
+    required TResult Function() signInWithGoogle,
     required TResult Function() deleteUser,
     required TResult Function() logOut,
+    required TResult Function(String email) resetPassword,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String email, String password, String username)?
-        createUser,
+    TResult? Function(String email, String password)? createUser,
     TResult? Function(String email, String password)? logIn,
+    TResult? Function()? signInWithGoogle,
     TResult? Function()? deleteUser,
     TResult? Function()? logOut,
+    TResult? Function(String email)? resetPassword,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String email, String password, String username)?
-        createUser,
+    TResult Function(String email, String password)? createUser,
     TResult Function(String email, String password)? logIn,
+    TResult Function()? signInWithGoogle,
     TResult Function()? deleteUser,
     TResult Function()? logOut,
+    TResult Function(String email)? resetPassword,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -48,24 +51,30 @@ mixin _$AuthEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(CreateUserEvent value) createUser,
     required TResult Function(LogInEvent value) logIn,
+    required TResult Function(SignInWithGoogle value) signInWithGoogle,
     required TResult Function(DeleteUserEvent value) deleteUser,
     required TResult Function(LogOutEvent value) logOut,
+    required TResult Function(ResetPasswordEvent value) resetPassword,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(CreateUserEvent value)? createUser,
     TResult? Function(LogInEvent value)? logIn,
+    TResult? Function(SignInWithGoogle value)? signInWithGoogle,
     TResult? Function(DeleteUserEvent value)? deleteUser,
     TResult? Function(LogOutEvent value)? logOut,
+    TResult? Function(ResetPasswordEvent value)? resetPassword,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(CreateUserEvent value)? createUser,
     TResult Function(LogInEvent value)? logIn,
+    TResult Function(SignInWithGoogle value)? signInWithGoogle,
     TResult Function(DeleteUserEvent value)? deleteUser,
     TResult Function(LogOutEvent value)? logOut,
+    TResult Function(ResetPasswordEvent value)? resetPassword,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -94,7 +103,7 @@ abstract class _$$CreateUserEventImplCopyWith<$Res> {
           $Res Function(_$CreateUserEventImpl) then) =
       __$$CreateUserEventImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({String email, String password, String username});
+  $Res call({String email, String password});
 }
 
 /// @nodoc
@@ -110,7 +119,6 @@ class __$$CreateUserEventImplCopyWithImpl<$Res>
   $Res call({
     Object? email = null,
     Object? password = null,
-    Object? username = null,
   }) {
     return _then(_$CreateUserEventImpl(
       email: null == email
@@ -121,10 +129,6 @@ class __$$CreateUserEventImplCopyWithImpl<$Res>
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
               as String,
-      username: null == username
-          ? _value.username
-          : username // ignore: cast_nullable_to_non_nullable
-              as String,
     ));
   }
 }
@@ -132,19 +136,16 @@ class __$$CreateUserEventImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$CreateUserEventImpl implements CreateUserEvent {
-  const _$CreateUserEventImpl(
-      {required this.email, required this.password, required this.username});
+  const _$CreateUserEventImpl({required this.email, required this.password});
 
   @override
   final String email;
   @override
   final String password;
-  @override
-  final String username;
 
   @override
   String toString() {
-    return 'AuthEvent.createUser(email: $email, password: $password, username: $username)';
+    return 'AuthEvent.createUser(email: $email, password: $password)';
   }
 
   @override
@@ -154,13 +155,11 @@ class _$CreateUserEventImpl implements CreateUserEvent {
             other is _$CreateUserEventImpl &&
             (identical(other.email, email) || other.email == email) &&
             (identical(other.password, password) ||
-                other.password == password) &&
-            (identical(other.username, username) ||
-                other.username == username));
+                other.password == password));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, email, password, username);
+  int get hashCode => Object.hash(runtimeType, email, password);
 
   @JsonKey(ignore: true)
   @override
@@ -172,39 +171,42 @@ class _$CreateUserEventImpl implements CreateUserEvent {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String email, String password, String username)
-        createUser,
+    required TResult Function(String email, String password) createUser,
     required TResult Function(String email, String password) logIn,
+    required TResult Function() signInWithGoogle,
     required TResult Function() deleteUser,
     required TResult Function() logOut,
+    required TResult Function(String email) resetPassword,
   }) {
-    return createUser(email, password, username);
+    return createUser(email, password);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String email, String password, String username)?
-        createUser,
+    TResult? Function(String email, String password)? createUser,
     TResult? Function(String email, String password)? logIn,
+    TResult? Function()? signInWithGoogle,
     TResult? Function()? deleteUser,
     TResult? Function()? logOut,
+    TResult? Function(String email)? resetPassword,
   }) {
-    return createUser?.call(email, password, username);
+    return createUser?.call(email, password);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String email, String password, String username)?
-        createUser,
+    TResult Function(String email, String password)? createUser,
     TResult Function(String email, String password)? logIn,
+    TResult Function()? signInWithGoogle,
     TResult Function()? deleteUser,
     TResult Function()? logOut,
+    TResult Function(String email)? resetPassword,
     required TResult orElse(),
   }) {
     if (createUser != null) {
-      return createUser(email, password, username);
+      return createUser(email, password);
     }
     return orElse();
   }
@@ -214,8 +216,10 @@ class _$CreateUserEventImpl implements CreateUserEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(CreateUserEvent value) createUser,
     required TResult Function(LogInEvent value) logIn,
+    required TResult Function(SignInWithGoogle value) signInWithGoogle,
     required TResult Function(DeleteUserEvent value) deleteUser,
     required TResult Function(LogOutEvent value) logOut,
+    required TResult Function(ResetPasswordEvent value) resetPassword,
   }) {
     return createUser(this);
   }
@@ -225,8 +229,10 @@ class _$CreateUserEventImpl implements CreateUserEvent {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(CreateUserEvent value)? createUser,
     TResult? Function(LogInEvent value)? logIn,
+    TResult? Function(SignInWithGoogle value)? signInWithGoogle,
     TResult? Function(DeleteUserEvent value)? deleteUser,
     TResult? Function(LogOutEvent value)? logOut,
+    TResult? Function(ResetPasswordEvent value)? resetPassword,
   }) {
     return createUser?.call(this);
   }
@@ -236,8 +242,10 @@ class _$CreateUserEventImpl implements CreateUserEvent {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(CreateUserEvent value)? createUser,
     TResult Function(LogInEvent value)? logIn,
+    TResult Function(SignInWithGoogle value)? signInWithGoogle,
     TResult Function(DeleteUserEvent value)? deleteUser,
     TResult Function(LogOutEvent value)? logOut,
+    TResult Function(ResetPasswordEvent value)? resetPassword,
     required TResult orElse(),
   }) {
     if (createUser != null) {
@@ -250,12 +258,10 @@ class _$CreateUserEventImpl implements CreateUserEvent {
 abstract class CreateUserEvent implements AuthEvent {
   const factory CreateUserEvent(
       {required final String email,
-      required final String password,
-      required final String username}) = _$CreateUserEventImpl;
+      required final String password}) = _$CreateUserEventImpl;
 
   String get email;
   String get password;
-  String get username;
   @JsonKey(ignore: true)
   _$$CreateUserEventImplCopyWith<_$CreateUserEventImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -334,11 +340,12 @@ class _$LogInEventImpl implements LogInEvent {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String email, String password, String username)
-        createUser,
+    required TResult Function(String email, String password) createUser,
     required TResult Function(String email, String password) logIn,
+    required TResult Function() signInWithGoogle,
     required TResult Function() deleteUser,
     required TResult Function() logOut,
+    required TResult Function(String email) resetPassword,
   }) {
     return logIn(email, password);
   }
@@ -346,11 +353,12 @@ class _$LogInEventImpl implements LogInEvent {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String email, String password, String username)?
-        createUser,
+    TResult? Function(String email, String password)? createUser,
     TResult? Function(String email, String password)? logIn,
+    TResult? Function()? signInWithGoogle,
     TResult? Function()? deleteUser,
     TResult? Function()? logOut,
+    TResult? Function(String email)? resetPassword,
   }) {
     return logIn?.call(email, password);
   }
@@ -358,11 +366,12 @@ class _$LogInEventImpl implements LogInEvent {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String email, String password, String username)?
-        createUser,
+    TResult Function(String email, String password)? createUser,
     TResult Function(String email, String password)? logIn,
+    TResult Function()? signInWithGoogle,
     TResult Function()? deleteUser,
     TResult Function()? logOut,
+    TResult Function(String email)? resetPassword,
     required TResult orElse(),
   }) {
     if (logIn != null) {
@@ -376,8 +385,10 @@ class _$LogInEventImpl implements LogInEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(CreateUserEvent value) createUser,
     required TResult Function(LogInEvent value) logIn,
+    required TResult Function(SignInWithGoogle value) signInWithGoogle,
     required TResult Function(DeleteUserEvent value) deleteUser,
     required TResult Function(LogOutEvent value) logOut,
+    required TResult Function(ResetPasswordEvent value) resetPassword,
   }) {
     return logIn(this);
   }
@@ -387,8 +398,10 @@ class _$LogInEventImpl implements LogInEvent {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(CreateUserEvent value)? createUser,
     TResult? Function(LogInEvent value)? logIn,
+    TResult? Function(SignInWithGoogle value)? signInWithGoogle,
     TResult? Function(DeleteUserEvent value)? deleteUser,
     TResult? Function(LogOutEvent value)? logOut,
+    TResult? Function(ResetPasswordEvent value)? resetPassword,
   }) {
     return logIn?.call(this);
   }
@@ -398,8 +411,10 @@ class _$LogInEventImpl implements LogInEvent {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(CreateUserEvent value)? createUser,
     TResult Function(LogInEvent value)? logIn,
+    TResult Function(SignInWithGoogle value)? signInWithGoogle,
     TResult Function(DeleteUserEvent value)? deleteUser,
     TResult Function(LogOutEvent value)? logOut,
+    TResult Function(ResetPasswordEvent value)? resetPassword,
     required TResult orElse(),
   }) {
     if (logIn != null) {
@@ -419,6 +434,132 @@ abstract class LogInEvent implements AuthEvent {
   @JsonKey(ignore: true)
   _$$LogInEventImplCopyWith<_$LogInEventImpl> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$SignInWithGoogleImplCopyWith<$Res> {
+  factory _$$SignInWithGoogleImplCopyWith(_$SignInWithGoogleImpl value,
+          $Res Function(_$SignInWithGoogleImpl) then) =
+      __$$SignInWithGoogleImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$SignInWithGoogleImplCopyWithImpl<$Res>
+    extends _$AuthEventCopyWithImpl<$Res, _$SignInWithGoogleImpl>
+    implements _$$SignInWithGoogleImplCopyWith<$Res> {
+  __$$SignInWithGoogleImplCopyWithImpl(_$SignInWithGoogleImpl _value,
+      $Res Function(_$SignInWithGoogleImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$SignInWithGoogleImpl implements SignInWithGoogle {
+  const _$SignInWithGoogleImpl();
+
+  @override
+  String toString() {
+    return 'AuthEvent.signInWithGoogle()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$SignInWithGoogleImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String email, String password) createUser,
+    required TResult Function(String email, String password) logIn,
+    required TResult Function() signInWithGoogle,
+    required TResult Function() deleteUser,
+    required TResult Function() logOut,
+    required TResult Function(String email) resetPassword,
+  }) {
+    return signInWithGoogle();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String email, String password)? createUser,
+    TResult? Function(String email, String password)? logIn,
+    TResult? Function()? signInWithGoogle,
+    TResult? Function()? deleteUser,
+    TResult? Function()? logOut,
+    TResult? Function(String email)? resetPassword,
+  }) {
+    return signInWithGoogle?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String email, String password)? createUser,
+    TResult Function(String email, String password)? logIn,
+    TResult Function()? signInWithGoogle,
+    TResult Function()? deleteUser,
+    TResult Function()? logOut,
+    TResult Function(String email)? resetPassword,
+    required TResult orElse(),
+  }) {
+    if (signInWithGoogle != null) {
+      return signInWithGoogle();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(CreateUserEvent value) createUser,
+    required TResult Function(LogInEvent value) logIn,
+    required TResult Function(SignInWithGoogle value) signInWithGoogle,
+    required TResult Function(DeleteUserEvent value) deleteUser,
+    required TResult Function(LogOutEvent value) logOut,
+    required TResult Function(ResetPasswordEvent value) resetPassword,
+  }) {
+    return signInWithGoogle(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(CreateUserEvent value)? createUser,
+    TResult? Function(LogInEvent value)? logIn,
+    TResult? Function(SignInWithGoogle value)? signInWithGoogle,
+    TResult? Function(DeleteUserEvent value)? deleteUser,
+    TResult? Function(LogOutEvent value)? logOut,
+    TResult? Function(ResetPasswordEvent value)? resetPassword,
+  }) {
+    return signInWithGoogle?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(CreateUserEvent value)? createUser,
+    TResult Function(LogInEvent value)? logIn,
+    TResult Function(SignInWithGoogle value)? signInWithGoogle,
+    TResult Function(DeleteUserEvent value)? deleteUser,
+    TResult Function(LogOutEvent value)? logOut,
+    TResult Function(ResetPasswordEvent value)? resetPassword,
+    required TResult orElse(),
+  }) {
+    if (signInWithGoogle != null) {
+      return signInWithGoogle(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class SignInWithGoogle implements AuthEvent {
+  const factory SignInWithGoogle() = _$SignInWithGoogleImpl;
 }
 
 /// @nodoc
@@ -459,11 +600,12 @@ class _$DeleteUserEventImpl implements DeleteUserEvent {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String email, String password, String username)
-        createUser,
+    required TResult Function(String email, String password) createUser,
     required TResult Function(String email, String password) logIn,
+    required TResult Function() signInWithGoogle,
     required TResult Function() deleteUser,
     required TResult Function() logOut,
+    required TResult Function(String email) resetPassword,
   }) {
     return deleteUser();
   }
@@ -471,11 +613,12 @@ class _$DeleteUserEventImpl implements DeleteUserEvent {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String email, String password, String username)?
-        createUser,
+    TResult? Function(String email, String password)? createUser,
     TResult? Function(String email, String password)? logIn,
+    TResult? Function()? signInWithGoogle,
     TResult? Function()? deleteUser,
     TResult? Function()? logOut,
+    TResult? Function(String email)? resetPassword,
   }) {
     return deleteUser?.call();
   }
@@ -483,11 +626,12 @@ class _$DeleteUserEventImpl implements DeleteUserEvent {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String email, String password, String username)?
-        createUser,
+    TResult Function(String email, String password)? createUser,
     TResult Function(String email, String password)? logIn,
+    TResult Function()? signInWithGoogle,
     TResult Function()? deleteUser,
     TResult Function()? logOut,
+    TResult Function(String email)? resetPassword,
     required TResult orElse(),
   }) {
     if (deleteUser != null) {
@@ -501,8 +645,10 @@ class _$DeleteUserEventImpl implements DeleteUserEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(CreateUserEvent value) createUser,
     required TResult Function(LogInEvent value) logIn,
+    required TResult Function(SignInWithGoogle value) signInWithGoogle,
     required TResult Function(DeleteUserEvent value) deleteUser,
     required TResult Function(LogOutEvent value) logOut,
+    required TResult Function(ResetPasswordEvent value) resetPassword,
   }) {
     return deleteUser(this);
   }
@@ -512,8 +658,10 @@ class _$DeleteUserEventImpl implements DeleteUserEvent {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(CreateUserEvent value)? createUser,
     TResult? Function(LogInEvent value)? logIn,
+    TResult? Function(SignInWithGoogle value)? signInWithGoogle,
     TResult? Function(DeleteUserEvent value)? deleteUser,
     TResult? Function(LogOutEvent value)? logOut,
+    TResult? Function(ResetPasswordEvent value)? resetPassword,
   }) {
     return deleteUser?.call(this);
   }
@@ -523,8 +671,10 @@ class _$DeleteUserEventImpl implements DeleteUserEvent {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(CreateUserEvent value)? createUser,
     TResult Function(LogInEvent value)? logIn,
+    TResult Function(SignInWithGoogle value)? signInWithGoogle,
     TResult Function(DeleteUserEvent value)? deleteUser,
     TResult Function(LogOutEvent value)? logOut,
+    TResult Function(ResetPasswordEvent value)? resetPassword,
     required TResult orElse(),
   }) {
     if (deleteUser != null) {
@@ -576,11 +726,12 @@ class _$LogOutEventImpl implements LogOutEvent {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String email, String password, String username)
-        createUser,
+    required TResult Function(String email, String password) createUser,
     required TResult Function(String email, String password) logIn,
+    required TResult Function() signInWithGoogle,
     required TResult Function() deleteUser,
     required TResult Function() logOut,
+    required TResult Function(String email) resetPassword,
   }) {
     return logOut();
   }
@@ -588,11 +739,12 @@ class _$LogOutEventImpl implements LogOutEvent {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String email, String password, String username)?
-        createUser,
+    TResult? Function(String email, String password)? createUser,
     TResult? Function(String email, String password)? logIn,
+    TResult? Function()? signInWithGoogle,
     TResult? Function()? deleteUser,
     TResult? Function()? logOut,
+    TResult? Function(String email)? resetPassword,
   }) {
     return logOut?.call();
   }
@@ -600,11 +752,12 @@ class _$LogOutEventImpl implements LogOutEvent {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String email, String password, String username)?
-        createUser,
+    TResult Function(String email, String password)? createUser,
     TResult Function(String email, String password)? logIn,
+    TResult Function()? signInWithGoogle,
     TResult Function()? deleteUser,
     TResult Function()? logOut,
+    TResult Function(String email)? resetPassword,
     required TResult orElse(),
   }) {
     if (logOut != null) {
@@ -618,8 +771,10 @@ class _$LogOutEventImpl implements LogOutEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(CreateUserEvent value) createUser,
     required TResult Function(LogInEvent value) logIn,
+    required TResult Function(SignInWithGoogle value) signInWithGoogle,
     required TResult Function(DeleteUserEvent value) deleteUser,
     required TResult Function(LogOutEvent value) logOut,
+    required TResult Function(ResetPasswordEvent value) resetPassword,
   }) {
     return logOut(this);
   }
@@ -629,8 +784,10 @@ class _$LogOutEventImpl implements LogOutEvent {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(CreateUserEvent value)? createUser,
     TResult? Function(LogInEvent value)? logIn,
+    TResult? Function(SignInWithGoogle value)? signInWithGoogle,
     TResult? Function(DeleteUserEvent value)? deleteUser,
     TResult? Function(LogOutEvent value)? logOut,
+    TResult? Function(ResetPasswordEvent value)? resetPassword,
   }) {
     return logOut?.call(this);
   }
@@ -640,8 +797,10 @@ class _$LogOutEventImpl implements LogOutEvent {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(CreateUserEvent value)? createUser,
     TResult Function(LogInEvent value)? logIn,
+    TResult Function(SignInWithGoogle value)? signInWithGoogle,
     TResult Function(DeleteUserEvent value)? deleteUser,
     TResult Function(LogOutEvent value)? logOut,
+    TResult Function(ResetPasswordEvent value)? resetPassword,
     required TResult orElse(),
   }) {
     if (logOut != null) {
@@ -656,14 +815,176 @@ abstract class LogOutEvent implements AuthEvent {
 }
 
 /// @nodoc
+abstract class _$$ResetPasswordEventImplCopyWith<$Res> {
+  factory _$$ResetPasswordEventImplCopyWith(_$ResetPasswordEventImpl value,
+          $Res Function(_$ResetPasswordEventImpl) then) =
+      __$$ResetPasswordEventImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String email});
+}
+
+/// @nodoc
+class __$$ResetPasswordEventImplCopyWithImpl<$Res>
+    extends _$AuthEventCopyWithImpl<$Res, _$ResetPasswordEventImpl>
+    implements _$$ResetPasswordEventImplCopyWith<$Res> {
+  __$$ResetPasswordEventImplCopyWithImpl(_$ResetPasswordEventImpl _value,
+      $Res Function(_$ResetPasswordEventImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? email = null,
+  }) {
+    return _then(_$ResetPasswordEventImpl(
+      email: null == email
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$ResetPasswordEventImpl implements ResetPasswordEvent {
+  const _$ResetPasswordEventImpl({required this.email});
+
+  @override
+  final String email;
+
+  @override
+  String toString() {
+    return 'AuthEvent.resetPassword(email: $email)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ResetPasswordEventImpl &&
+            (identical(other.email, email) || other.email == email));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, email);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ResetPasswordEventImplCopyWith<_$ResetPasswordEventImpl> get copyWith =>
+      __$$ResetPasswordEventImplCopyWithImpl<_$ResetPasswordEventImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String email, String password) createUser,
+    required TResult Function(String email, String password) logIn,
+    required TResult Function() signInWithGoogle,
+    required TResult Function() deleteUser,
+    required TResult Function() logOut,
+    required TResult Function(String email) resetPassword,
+  }) {
+    return resetPassword(email);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String email, String password)? createUser,
+    TResult? Function(String email, String password)? logIn,
+    TResult? Function()? signInWithGoogle,
+    TResult? Function()? deleteUser,
+    TResult? Function()? logOut,
+    TResult? Function(String email)? resetPassword,
+  }) {
+    return resetPassword?.call(email);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String email, String password)? createUser,
+    TResult Function(String email, String password)? logIn,
+    TResult Function()? signInWithGoogle,
+    TResult Function()? deleteUser,
+    TResult Function()? logOut,
+    TResult Function(String email)? resetPassword,
+    required TResult orElse(),
+  }) {
+    if (resetPassword != null) {
+      return resetPassword(email);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(CreateUserEvent value) createUser,
+    required TResult Function(LogInEvent value) logIn,
+    required TResult Function(SignInWithGoogle value) signInWithGoogle,
+    required TResult Function(DeleteUserEvent value) deleteUser,
+    required TResult Function(LogOutEvent value) logOut,
+    required TResult Function(ResetPasswordEvent value) resetPassword,
+  }) {
+    return resetPassword(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(CreateUserEvent value)? createUser,
+    TResult? Function(LogInEvent value)? logIn,
+    TResult? Function(SignInWithGoogle value)? signInWithGoogle,
+    TResult? Function(DeleteUserEvent value)? deleteUser,
+    TResult? Function(LogOutEvent value)? logOut,
+    TResult? Function(ResetPasswordEvent value)? resetPassword,
+  }) {
+    return resetPassword?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(CreateUserEvent value)? createUser,
+    TResult Function(LogInEvent value)? logIn,
+    TResult Function(SignInWithGoogle value)? signInWithGoogle,
+    TResult Function(DeleteUserEvent value)? deleteUser,
+    TResult Function(LogOutEvent value)? logOut,
+    TResult Function(ResetPasswordEvent value)? resetPassword,
+    required TResult orElse(),
+  }) {
+    if (resetPassword != null) {
+      return resetPassword(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class ResetPasswordEvent implements AuthEvent {
+  const factory ResetPasswordEvent({required final String email}) =
+      _$ResetPasswordEventImpl;
+
+  String get email;
+  @JsonKey(ignore: true)
+  _$$ResetPasswordEventImplCopyWith<_$ResetPasswordEventImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 mixin _$AuthState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
+    required TResult Function() sendingCode,
     required TResult Function(String email, String password) userCreated,
     required TResult Function(String email, String password) logInSuccess,
     required TResult Function() logOutSuccess,
+    required TResult Function(String email) resetCodeSentSuccesfully,
+    required TResult Function(String errorText) resetCodeError,
     required TResult Function(String errorText) authError,
   }) =>
       throw _privateConstructorUsedError;
@@ -671,9 +992,12 @@ mixin _$AuthState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
+    TResult? Function()? sendingCode,
     TResult? Function(String email, String password)? userCreated,
     TResult? Function(String email, String password)? logInSuccess,
     TResult? Function()? logOutSuccess,
+    TResult? Function(String email)? resetCodeSentSuccesfully,
+    TResult? Function(String errorText)? resetCodeError,
     TResult? Function(String errorText)? authError,
   }) =>
       throw _privateConstructorUsedError;
@@ -681,9 +1005,12 @@ mixin _$AuthState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function()? sendingCode,
     TResult Function(String email, String password)? userCreated,
     TResult Function(String email, String password)? logInSuccess,
     TResult Function()? logOutSuccess,
+    TResult Function(String email)? resetCodeSentSuccesfully,
+    TResult Function(String errorText)? resetCodeError,
     TResult Function(String errorText)? authError,
     required TResult orElse(),
   }) =>
@@ -692,9 +1019,13 @@ mixin _$AuthState {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(_AuthLoadingState value) loading,
+    required TResult Function(_AuthSendingCodeState value) sendingCode,
     required TResult Function(_AuthUserCreatedState value) userCreated,
     required TResult Function(_AuthLogInSuccessState value) logInSuccess,
     required TResult Function(_AuthLogOutSuccessState value) logOutSuccess,
+    required TResult Function(_AuthResetCodeSentSuccesfullyState value)
+        resetCodeSentSuccesfully,
+    required TResult Function(_AuthResetCodeErrorState value) resetCodeError,
     required TResult Function(_AuthErrorState value) authError,
   }) =>
       throw _privateConstructorUsedError;
@@ -702,9 +1033,13 @@ mixin _$AuthState {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(_AuthLoadingState value)? loading,
+    TResult? Function(_AuthSendingCodeState value)? sendingCode,
     TResult? Function(_AuthUserCreatedState value)? userCreated,
     TResult? Function(_AuthLogInSuccessState value)? logInSuccess,
     TResult? Function(_AuthLogOutSuccessState value)? logOutSuccess,
+    TResult? Function(_AuthResetCodeSentSuccesfullyState value)?
+        resetCodeSentSuccesfully,
+    TResult? Function(_AuthResetCodeErrorState value)? resetCodeError,
     TResult? Function(_AuthErrorState value)? authError,
   }) =>
       throw _privateConstructorUsedError;
@@ -712,9 +1047,13 @@ mixin _$AuthState {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(_AuthLoadingState value)? loading,
+    TResult Function(_AuthSendingCodeState value)? sendingCode,
     TResult Function(_AuthUserCreatedState value)? userCreated,
     TResult Function(_AuthLogInSuccessState value)? logInSuccess,
     TResult Function(_AuthLogOutSuccessState value)? logOutSuccess,
+    TResult Function(_AuthResetCodeSentSuccesfullyState value)?
+        resetCodeSentSuccesfully,
+    TResult Function(_AuthResetCodeErrorState value)? resetCodeError,
     TResult Function(_AuthErrorState value)? authError,
     required TResult orElse(),
   }) =>
@@ -778,9 +1117,12 @@ class _$InitialImpl implements _Initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
+    required TResult Function() sendingCode,
     required TResult Function(String email, String password) userCreated,
     required TResult Function(String email, String password) logInSuccess,
     required TResult Function() logOutSuccess,
+    required TResult Function(String email) resetCodeSentSuccesfully,
+    required TResult Function(String errorText) resetCodeError,
     required TResult Function(String errorText) authError,
   }) {
     return initial();
@@ -791,9 +1133,12 @@ class _$InitialImpl implements _Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
+    TResult? Function()? sendingCode,
     TResult? Function(String email, String password)? userCreated,
     TResult? Function(String email, String password)? logInSuccess,
     TResult? Function()? logOutSuccess,
+    TResult? Function(String email)? resetCodeSentSuccesfully,
+    TResult? Function(String errorText)? resetCodeError,
     TResult? Function(String errorText)? authError,
   }) {
     return initial?.call();
@@ -804,9 +1149,12 @@ class _$InitialImpl implements _Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function()? sendingCode,
     TResult Function(String email, String password)? userCreated,
     TResult Function(String email, String password)? logInSuccess,
     TResult Function()? logOutSuccess,
+    TResult Function(String email)? resetCodeSentSuccesfully,
+    TResult Function(String errorText)? resetCodeError,
     TResult Function(String errorText)? authError,
     required TResult orElse(),
   }) {
@@ -821,9 +1169,13 @@ class _$InitialImpl implements _Initial {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(_AuthLoadingState value) loading,
+    required TResult Function(_AuthSendingCodeState value) sendingCode,
     required TResult Function(_AuthUserCreatedState value) userCreated,
     required TResult Function(_AuthLogInSuccessState value) logInSuccess,
     required TResult Function(_AuthLogOutSuccessState value) logOutSuccess,
+    required TResult Function(_AuthResetCodeSentSuccesfullyState value)
+        resetCodeSentSuccesfully,
+    required TResult Function(_AuthResetCodeErrorState value) resetCodeError,
     required TResult Function(_AuthErrorState value) authError,
   }) {
     return initial(this);
@@ -834,9 +1186,13 @@ class _$InitialImpl implements _Initial {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(_AuthLoadingState value)? loading,
+    TResult? Function(_AuthSendingCodeState value)? sendingCode,
     TResult? Function(_AuthUserCreatedState value)? userCreated,
     TResult? Function(_AuthLogInSuccessState value)? logInSuccess,
     TResult? Function(_AuthLogOutSuccessState value)? logOutSuccess,
+    TResult? Function(_AuthResetCodeSentSuccesfullyState value)?
+        resetCodeSentSuccesfully,
+    TResult? Function(_AuthResetCodeErrorState value)? resetCodeError,
     TResult? Function(_AuthErrorState value)? authError,
   }) {
     return initial?.call(this);
@@ -847,9 +1203,13 @@ class _$InitialImpl implements _Initial {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(_AuthLoadingState value)? loading,
+    TResult Function(_AuthSendingCodeState value)? sendingCode,
     TResult Function(_AuthUserCreatedState value)? userCreated,
     TResult Function(_AuthLogInSuccessState value)? logInSuccess,
     TResult Function(_AuthLogOutSuccessState value)? logOutSuccess,
+    TResult Function(_AuthResetCodeSentSuccesfullyState value)?
+        resetCodeSentSuccesfully,
+    TResult Function(_AuthResetCodeErrorState value)? resetCodeError,
     TResult Function(_AuthErrorState value)? authError,
     required TResult orElse(),
   }) {
@@ -904,9 +1264,12 @@ class _$AuthLoadingStateImpl implements _AuthLoadingState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
+    required TResult Function() sendingCode,
     required TResult Function(String email, String password) userCreated,
     required TResult Function(String email, String password) logInSuccess,
     required TResult Function() logOutSuccess,
+    required TResult Function(String email) resetCodeSentSuccesfully,
+    required TResult Function(String errorText) resetCodeError,
     required TResult Function(String errorText) authError,
   }) {
     return loading();
@@ -917,9 +1280,12 @@ class _$AuthLoadingStateImpl implements _AuthLoadingState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
+    TResult? Function()? sendingCode,
     TResult? Function(String email, String password)? userCreated,
     TResult? Function(String email, String password)? logInSuccess,
     TResult? Function()? logOutSuccess,
+    TResult? Function(String email)? resetCodeSentSuccesfully,
+    TResult? Function(String errorText)? resetCodeError,
     TResult? Function(String errorText)? authError,
   }) {
     return loading?.call();
@@ -930,9 +1296,12 @@ class _$AuthLoadingStateImpl implements _AuthLoadingState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function()? sendingCode,
     TResult Function(String email, String password)? userCreated,
     TResult Function(String email, String password)? logInSuccess,
     TResult Function()? logOutSuccess,
+    TResult Function(String email)? resetCodeSentSuccesfully,
+    TResult Function(String errorText)? resetCodeError,
     TResult Function(String errorText)? authError,
     required TResult orElse(),
   }) {
@@ -947,9 +1316,13 @@ class _$AuthLoadingStateImpl implements _AuthLoadingState {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(_AuthLoadingState value) loading,
+    required TResult Function(_AuthSendingCodeState value) sendingCode,
     required TResult Function(_AuthUserCreatedState value) userCreated,
     required TResult Function(_AuthLogInSuccessState value) logInSuccess,
     required TResult Function(_AuthLogOutSuccessState value) logOutSuccess,
+    required TResult Function(_AuthResetCodeSentSuccesfullyState value)
+        resetCodeSentSuccesfully,
+    required TResult Function(_AuthResetCodeErrorState value) resetCodeError,
     required TResult Function(_AuthErrorState value) authError,
   }) {
     return loading(this);
@@ -960,9 +1333,13 @@ class _$AuthLoadingStateImpl implements _AuthLoadingState {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(_AuthLoadingState value)? loading,
+    TResult? Function(_AuthSendingCodeState value)? sendingCode,
     TResult? Function(_AuthUserCreatedState value)? userCreated,
     TResult? Function(_AuthLogInSuccessState value)? logInSuccess,
     TResult? Function(_AuthLogOutSuccessState value)? logOutSuccess,
+    TResult? Function(_AuthResetCodeSentSuccesfullyState value)?
+        resetCodeSentSuccesfully,
+    TResult? Function(_AuthResetCodeErrorState value)? resetCodeError,
     TResult? Function(_AuthErrorState value)? authError,
   }) {
     return loading?.call(this);
@@ -973,9 +1350,13 @@ class _$AuthLoadingStateImpl implements _AuthLoadingState {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(_AuthLoadingState value)? loading,
+    TResult Function(_AuthSendingCodeState value)? sendingCode,
     TResult Function(_AuthUserCreatedState value)? userCreated,
     TResult Function(_AuthLogInSuccessState value)? logInSuccess,
     TResult Function(_AuthLogOutSuccessState value)? logOutSuccess,
+    TResult Function(_AuthResetCodeSentSuccesfullyState value)?
+        resetCodeSentSuccesfully,
+    TResult Function(_AuthResetCodeErrorState value)? resetCodeError,
     TResult Function(_AuthErrorState value)? authError,
     required TResult orElse(),
   }) {
@@ -988,6 +1369,154 @@ class _$AuthLoadingStateImpl implements _AuthLoadingState {
 
 abstract class _AuthLoadingState implements AuthState {
   const factory _AuthLoadingState() = _$AuthLoadingStateImpl;
+}
+
+/// @nodoc
+abstract class _$$AuthSendingCodeStateImplCopyWith<$Res> {
+  factory _$$AuthSendingCodeStateImplCopyWith(_$AuthSendingCodeStateImpl value,
+          $Res Function(_$AuthSendingCodeStateImpl) then) =
+      __$$AuthSendingCodeStateImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$AuthSendingCodeStateImplCopyWithImpl<$Res>
+    extends _$AuthStateCopyWithImpl<$Res, _$AuthSendingCodeStateImpl>
+    implements _$$AuthSendingCodeStateImplCopyWith<$Res> {
+  __$$AuthSendingCodeStateImplCopyWithImpl(_$AuthSendingCodeStateImpl _value,
+      $Res Function(_$AuthSendingCodeStateImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$AuthSendingCodeStateImpl implements _AuthSendingCodeState {
+  const _$AuthSendingCodeStateImpl();
+
+  @override
+  String toString() {
+    return 'AuthState.sendingCode()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$AuthSendingCodeStateImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function() sendingCode,
+    required TResult Function(String email, String password) userCreated,
+    required TResult Function(String email, String password) logInSuccess,
+    required TResult Function() logOutSuccess,
+    required TResult Function(String email) resetCodeSentSuccesfully,
+    required TResult Function(String errorText) resetCodeError,
+    required TResult Function(String errorText) authError,
+  }) {
+    return sendingCode();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function()? sendingCode,
+    TResult? Function(String email, String password)? userCreated,
+    TResult? Function(String email, String password)? logInSuccess,
+    TResult? Function()? logOutSuccess,
+    TResult? Function(String email)? resetCodeSentSuccesfully,
+    TResult? Function(String errorText)? resetCodeError,
+    TResult? Function(String errorText)? authError,
+  }) {
+    return sendingCode?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function()? sendingCode,
+    TResult Function(String email, String password)? userCreated,
+    TResult Function(String email, String password)? logInSuccess,
+    TResult Function()? logOutSuccess,
+    TResult Function(String email)? resetCodeSentSuccesfully,
+    TResult Function(String errorText)? resetCodeError,
+    TResult Function(String errorText)? authError,
+    required TResult orElse(),
+  }) {
+    if (sendingCode != null) {
+      return sendingCode();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_AuthLoadingState value) loading,
+    required TResult Function(_AuthSendingCodeState value) sendingCode,
+    required TResult Function(_AuthUserCreatedState value) userCreated,
+    required TResult Function(_AuthLogInSuccessState value) logInSuccess,
+    required TResult Function(_AuthLogOutSuccessState value) logOutSuccess,
+    required TResult Function(_AuthResetCodeSentSuccesfullyState value)
+        resetCodeSentSuccesfully,
+    required TResult Function(_AuthResetCodeErrorState value) resetCodeError,
+    required TResult Function(_AuthErrorState value) authError,
+  }) {
+    return sendingCode(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_AuthLoadingState value)? loading,
+    TResult? Function(_AuthSendingCodeState value)? sendingCode,
+    TResult? Function(_AuthUserCreatedState value)? userCreated,
+    TResult? Function(_AuthLogInSuccessState value)? logInSuccess,
+    TResult? Function(_AuthLogOutSuccessState value)? logOutSuccess,
+    TResult? Function(_AuthResetCodeSentSuccesfullyState value)?
+        resetCodeSentSuccesfully,
+    TResult? Function(_AuthResetCodeErrorState value)? resetCodeError,
+    TResult? Function(_AuthErrorState value)? authError,
+  }) {
+    return sendingCode?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_AuthLoadingState value)? loading,
+    TResult Function(_AuthSendingCodeState value)? sendingCode,
+    TResult Function(_AuthUserCreatedState value)? userCreated,
+    TResult Function(_AuthLogInSuccessState value)? logInSuccess,
+    TResult Function(_AuthLogOutSuccessState value)? logOutSuccess,
+    TResult Function(_AuthResetCodeSentSuccesfullyState value)?
+        resetCodeSentSuccesfully,
+    TResult Function(_AuthResetCodeErrorState value)? resetCodeError,
+    TResult Function(_AuthErrorState value)? authError,
+    required TResult orElse(),
+  }) {
+    if (sendingCode != null) {
+      return sendingCode(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _AuthSendingCodeState implements AuthState {
+  const factory _AuthSendingCodeState() = _$AuthSendingCodeStateImpl;
 }
 
 /// @nodoc
@@ -1070,9 +1599,12 @@ class _$AuthUserCreatedStateImpl implements _AuthUserCreatedState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
+    required TResult Function() sendingCode,
     required TResult Function(String email, String password) userCreated,
     required TResult Function(String email, String password) logInSuccess,
     required TResult Function() logOutSuccess,
+    required TResult Function(String email) resetCodeSentSuccesfully,
+    required TResult Function(String errorText) resetCodeError,
     required TResult Function(String errorText) authError,
   }) {
     return userCreated(email, password);
@@ -1083,9 +1615,12 @@ class _$AuthUserCreatedStateImpl implements _AuthUserCreatedState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
+    TResult? Function()? sendingCode,
     TResult? Function(String email, String password)? userCreated,
     TResult? Function(String email, String password)? logInSuccess,
     TResult? Function()? logOutSuccess,
+    TResult? Function(String email)? resetCodeSentSuccesfully,
+    TResult? Function(String errorText)? resetCodeError,
     TResult? Function(String errorText)? authError,
   }) {
     return userCreated?.call(email, password);
@@ -1096,9 +1631,12 @@ class _$AuthUserCreatedStateImpl implements _AuthUserCreatedState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function()? sendingCode,
     TResult Function(String email, String password)? userCreated,
     TResult Function(String email, String password)? logInSuccess,
     TResult Function()? logOutSuccess,
+    TResult Function(String email)? resetCodeSentSuccesfully,
+    TResult Function(String errorText)? resetCodeError,
     TResult Function(String errorText)? authError,
     required TResult orElse(),
   }) {
@@ -1113,9 +1651,13 @@ class _$AuthUserCreatedStateImpl implements _AuthUserCreatedState {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(_AuthLoadingState value) loading,
+    required TResult Function(_AuthSendingCodeState value) sendingCode,
     required TResult Function(_AuthUserCreatedState value) userCreated,
     required TResult Function(_AuthLogInSuccessState value) logInSuccess,
     required TResult Function(_AuthLogOutSuccessState value) logOutSuccess,
+    required TResult Function(_AuthResetCodeSentSuccesfullyState value)
+        resetCodeSentSuccesfully,
+    required TResult Function(_AuthResetCodeErrorState value) resetCodeError,
     required TResult Function(_AuthErrorState value) authError,
   }) {
     return userCreated(this);
@@ -1126,9 +1668,13 @@ class _$AuthUserCreatedStateImpl implements _AuthUserCreatedState {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(_AuthLoadingState value)? loading,
+    TResult? Function(_AuthSendingCodeState value)? sendingCode,
     TResult? Function(_AuthUserCreatedState value)? userCreated,
     TResult? Function(_AuthLogInSuccessState value)? logInSuccess,
     TResult? Function(_AuthLogOutSuccessState value)? logOutSuccess,
+    TResult? Function(_AuthResetCodeSentSuccesfullyState value)?
+        resetCodeSentSuccesfully,
+    TResult? Function(_AuthResetCodeErrorState value)? resetCodeError,
     TResult? Function(_AuthErrorState value)? authError,
   }) {
     return userCreated?.call(this);
@@ -1139,9 +1685,13 @@ class _$AuthUserCreatedStateImpl implements _AuthUserCreatedState {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(_AuthLoadingState value)? loading,
+    TResult Function(_AuthSendingCodeState value)? sendingCode,
     TResult Function(_AuthUserCreatedState value)? userCreated,
     TResult Function(_AuthLogInSuccessState value)? logInSuccess,
     TResult Function(_AuthLogOutSuccessState value)? logOutSuccess,
+    TResult Function(_AuthResetCodeSentSuccesfullyState value)?
+        resetCodeSentSuccesfully,
+    TResult Function(_AuthResetCodeErrorState value)? resetCodeError,
     TResult Function(_AuthErrorState value)? authError,
     required TResult orElse(),
   }) {
@@ -1244,9 +1794,12 @@ class _$AuthLogInSuccessStateImpl implements _AuthLogInSuccessState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
+    required TResult Function() sendingCode,
     required TResult Function(String email, String password) userCreated,
     required TResult Function(String email, String password) logInSuccess,
     required TResult Function() logOutSuccess,
+    required TResult Function(String email) resetCodeSentSuccesfully,
+    required TResult Function(String errorText) resetCodeError,
     required TResult Function(String errorText) authError,
   }) {
     return logInSuccess(email, password);
@@ -1257,9 +1810,12 @@ class _$AuthLogInSuccessStateImpl implements _AuthLogInSuccessState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
+    TResult? Function()? sendingCode,
     TResult? Function(String email, String password)? userCreated,
     TResult? Function(String email, String password)? logInSuccess,
     TResult? Function()? logOutSuccess,
+    TResult? Function(String email)? resetCodeSentSuccesfully,
+    TResult? Function(String errorText)? resetCodeError,
     TResult? Function(String errorText)? authError,
   }) {
     return logInSuccess?.call(email, password);
@@ -1270,9 +1826,12 @@ class _$AuthLogInSuccessStateImpl implements _AuthLogInSuccessState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function()? sendingCode,
     TResult Function(String email, String password)? userCreated,
     TResult Function(String email, String password)? logInSuccess,
     TResult Function()? logOutSuccess,
+    TResult Function(String email)? resetCodeSentSuccesfully,
+    TResult Function(String errorText)? resetCodeError,
     TResult Function(String errorText)? authError,
     required TResult orElse(),
   }) {
@@ -1287,9 +1846,13 @@ class _$AuthLogInSuccessStateImpl implements _AuthLogInSuccessState {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(_AuthLoadingState value) loading,
+    required TResult Function(_AuthSendingCodeState value) sendingCode,
     required TResult Function(_AuthUserCreatedState value) userCreated,
     required TResult Function(_AuthLogInSuccessState value) logInSuccess,
     required TResult Function(_AuthLogOutSuccessState value) logOutSuccess,
+    required TResult Function(_AuthResetCodeSentSuccesfullyState value)
+        resetCodeSentSuccesfully,
+    required TResult Function(_AuthResetCodeErrorState value) resetCodeError,
     required TResult Function(_AuthErrorState value) authError,
   }) {
     return logInSuccess(this);
@@ -1300,9 +1863,13 @@ class _$AuthLogInSuccessStateImpl implements _AuthLogInSuccessState {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(_AuthLoadingState value)? loading,
+    TResult? Function(_AuthSendingCodeState value)? sendingCode,
     TResult? Function(_AuthUserCreatedState value)? userCreated,
     TResult? Function(_AuthLogInSuccessState value)? logInSuccess,
     TResult? Function(_AuthLogOutSuccessState value)? logOutSuccess,
+    TResult? Function(_AuthResetCodeSentSuccesfullyState value)?
+        resetCodeSentSuccesfully,
+    TResult? Function(_AuthResetCodeErrorState value)? resetCodeError,
     TResult? Function(_AuthErrorState value)? authError,
   }) {
     return logInSuccess?.call(this);
@@ -1313,9 +1880,13 @@ class _$AuthLogInSuccessStateImpl implements _AuthLogInSuccessState {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(_AuthLoadingState value)? loading,
+    TResult Function(_AuthSendingCodeState value)? sendingCode,
     TResult Function(_AuthUserCreatedState value)? userCreated,
     TResult Function(_AuthLogInSuccessState value)? logInSuccess,
     TResult Function(_AuthLogOutSuccessState value)? logOutSuccess,
+    TResult Function(_AuthResetCodeSentSuccesfullyState value)?
+        resetCodeSentSuccesfully,
+    TResult Function(_AuthResetCodeErrorState value)? resetCodeError,
     TResult Function(_AuthErrorState value)? authError,
     required TResult orElse(),
   }) {
@@ -1382,9 +1953,12 @@ class _$AuthLogOutSuccessStateImpl implements _AuthLogOutSuccessState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
+    required TResult Function() sendingCode,
     required TResult Function(String email, String password) userCreated,
     required TResult Function(String email, String password) logInSuccess,
     required TResult Function() logOutSuccess,
+    required TResult Function(String email) resetCodeSentSuccesfully,
+    required TResult Function(String errorText) resetCodeError,
     required TResult Function(String errorText) authError,
   }) {
     return logOutSuccess();
@@ -1395,9 +1969,12 @@ class _$AuthLogOutSuccessStateImpl implements _AuthLogOutSuccessState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
+    TResult? Function()? sendingCode,
     TResult? Function(String email, String password)? userCreated,
     TResult? Function(String email, String password)? logInSuccess,
     TResult? Function()? logOutSuccess,
+    TResult? Function(String email)? resetCodeSentSuccesfully,
+    TResult? Function(String errorText)? resetCodeError,
     TResult? Function(String errorText)? authError,
   }) {
     return logOutSuccess?.call();
@@ -1408,9 +1985,12 @@ class _$AuthLogOutSuccessStateImpl implements _AuthLogOutSuccessState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function()? sendingCode,
     TResult Function(String email, String password)? userCreated,
     TResult Function(String email, String password)? logInSuccess,
     TResult Function()? logOutSuccess,
+    TResult Function(String email)? resetCodeSentSuccesfully,
+    TResult Function(String errorText)? resetCodeError,
     TResult Function(String errorText)? authError,
     required TResult orElse(),
   }) {
@@ -1425,9 +2005,13 @@ class _$AuthLogOutSuccessStateImpl implements _AuthLogOutSuccessState {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(_AuthLoadingState value) loading,
+    required TResult Function(_AuthSendingCodeState value) sendingCode,
     required TResult Function(_AuthUserCreatedState value) userCreated,
     required TResult Function(_AuthLogInSuccessState value) logInSuccess,
     required TResult Function(_AuthLogOutSuccessState value) logOutSuccess,
+    required TResult Function(_AuthResetCodeSentSuccesfullyState value)
+        resetCodeSentSuccesfully,
+    required TResult Function(_AuthResetCodeErrorState value) resetCodeError,
     required TResult Function(_AuthErrorState value) authError,
   }) {
     return logOutSuccess(this);
@@ -1438,9 +2022,13 @@ class _$AuthLogOutSuccessStateImpl implements _AuthLogOutSuccessState {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(_AuthLoadingState value)? loading,
+    TResult? Function(_AuthSendingCodeState value)? sendingCode,
     TResult? Function(_AuthUserCreatedState value)? userCreated,
     TResult? Function(_AuthLogInSuccessState value)? logInSuccess,
     TResult? Function(_AuthLogOutSuccessState value)? logOutSuccess,
+    TResult? Function(_AuthResetCodeSentSuccesfullyState value)?
+        resetCodeSentSuccesfully,
+    TResult? Function(_AuthResetCodeErrorState value)? resetCodeError,
     TResult? Function(_AuthErrorState value)? authError,
   }) {
     return logOutSuccess?.call(this);
@@ -1451,9 +2039,13 @@ class _$AuthLogOutSuccessStateImpl implements _AuthLogOutSuccessState {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(_AuthLoadingState value)? loading,
+    TResult Function(_AuthSendingCodeState value)? sendingCode,
     TResult Function(_AuthUserCreatedState value)? userCreated,
     TResult Function(_AuthLogInSuccessState value)? logInSuccess,
     TResult Function(_AuthLogOutSuccessState value)? logOutSuccess,
+    TResult Function(_AuthResetCodeSentSuccesfullyState value)?
+        resetCodeSentSuccesfully,
+    TResult Function(_AuthResetCodeErrorState value)? resetCodeError,
     TResult Function(_AuthErrorState value)? authError,
     required TResult orElse(),
   }) {
@@ -1466,6 +2058,379 @@ class _$AuthLogOutSuccessStateImpl implements _AuthLogOutSuccessState {
 
 abstract class _AuthLogOutSuccessState implements AuthState {
   const factory _AuthLogOutSuccessState() = _$AuthLogOutSuccessStateImpl;
+}
+
+/// @nodoc
+abstract class _$$AuthResetCodeSentSuccesfullyStateImplCopyWith<$Res> {
+  factory _$$AuthResetCodeSentSuccesfullyStateImplCopyWith(
+          _$AuthResetCodeSentSuccesfullyStateImpl value,
+          $Res Function(_$AuthResetCodeSentSuccesfullyStateImpl) then) =
+      __$$AuthResetCodeSentSuccesfullyStateImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String email});
+}
+
+/// @nodoc
+class __$$AuthResetCodeSentSuccesfullyStateImplCopyWithImpl<$Res>
+    extends _$AuthStateCopyWithImpl<$Res,
+        _$AuthResetCodeSentSuccesfullyStateImpl>
+    implements _$$AuthResetCodeSentSuccesfullyStateImplCopyWith<$Res> {
+  __$$AuthResetCodeSentSuccesfullyStateImplCopyWithImpl(
+      _$AuthResetCodeSentSuccesfullyStateImpl _value,
+      $Res Function(_$AuthResetCodeSentSuccesfullyStateImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? email = null,
+  }) {
+    return _then(_$AuthResetCodeSentSuccesfullyStateImpl(
+      email: null == email
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$AuthResetCodeSentSuccesfullyStateImpl
+    implements _AuthResetCodeSentSuccesfullyState {
+  const _$AuthResetCodeSentSuccesfullyStateImpl({this.email = ''});
+
+  @override
+  @JsonKey()
+  final String email;
+
+  @override
+  String toString() {
+    return 'AuthState.resetCodeSentSuccesfully(email: $email)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$AuthResetCodeSentSuccesfullyStateImpl &&
+            (identical(other.email, email) || other.email == email));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, email);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$AuthResetCodeSentSuccesfullyStateImplCopyWith<
+          _$AuthResetCodeSentSuccesfullyStateImpl>
+      get copyWith => __$$AuthResetCodeSentSuccesfullyStateImplCopyWithImpl<
+          _$AuthResetCodeSentSuccesfullyStateImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function() sendingCode,
+    required TResult Function(String email, String password) userCreated,
+    required TResult Function(String email, String password) logInSuccess,
+    required TResult Function() logOutSuccess,
+    required TResult Function(String email) resetCodeSentSuccesfully,
+    required TResult Function(String errorText) resetCodeError,
+    required TResult Function(String errorText) authError,
+  }) {
+    return resetCodeSentSuccesfully(email);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function()? sendingCode,
+    TResult? Function(String email, String password)? userCreated,
+    TResult? Function(String email, String password)? logInSuccess,
+    TResult? Function()? logOutSuccess,
+    TResult? Function(String email)? resetCodeSentSuccesfully,
+    TResult? Function(String errorText)? resetCodeError,
+    TResult? Function(String errorText)? authError,
+  }) {
+    return resetCodeSentSuccesfully?.call(email);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function()? sendingCode,
+    TResult Function(String email, String password)? userCreated,
+    TResult Function(String email, String password)? logInSuccess,
+    TResult Function()? logOutSuccess,
+    TResult Function(String email)? resetCodeSentSuccesfully,
+    TResult Function(String errorText)? resetCodeError,
+    TResult Function(String errorText)? authError,
+    required TResult orElse(),
+  }) {
+    if (resetCodeSentSuccesfully != null) {
+      return resetCodeSentSuccesfully(email);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_AuthLoadingState value) loading,
+    required TResult Function(_AuthSendingCodeState value) sendingCode,
+    required TResult Function(_AuthUserCreatedState value) userCreated,
+    required TResult Function(_AuthLogInSuccessState value) logInSuccess,
+    required TResult Function(_AuthLogOutSuccessState value) logOutSuccess,
+    required TResult Function(_AuthResetCodeSentSuccesfullyState value)
+        resetCodeSentSuccesfully,
+    required TResult Function(_AuthResetCodeErrorState value) resetCodeError,
+    required TResult Function(_AuthErrorState value) authError,
+  }) {
+    return resetCodeSentSuccesfully(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_AuthLoadingState value)? loading,
+    TResult? Function(_AuthSendingCodeState value)? sendingCode,
+    TResult? Function(_AuthUserCreatedState value)? userCreated,
+    TResult? Function(_AuthLogInSuccessState value)? logInSuccess,
+    TResult? Function(_AuthLogOutSuccessState value)? logOutSuccess,
+    TResult? Function(_AuthResetCodeSentSuccesfullyState value)?
+        resetCodeSentSuccesfully,
+    TResult? Function(_AuthResetCodeErrorState value)? resetCodeError,
+    TResult? Function(_AuthErrorState value)? authError,
+  }) {
+    return resetCodeSentSuccesfully?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_AuthLoadingState value)? loading,
+    TResult Function(_AuthSendingCodeState value)? sendingCode,
+    TResult Function(_AuthUserCreatedState value)? userCreated,
+    TResult Function(_AuthLogInSuccessState value)? logInSuccess,
+    TResult Function(_AuthLogOutSuccessState value)? logOutSuccess,
+    TResult Function(_AuthResetCodeSentSuccesfullyState value)?
+        resetCodeSentSuccesfully,
+    TResult Function(_AuthResetCodeErrorState value)? resetCodeError,
+    TResult Function(_AuthErrorState value)? authError,
+    required TResult orElse(),
+  }) {
+    if (resetCodeSentSuccesfully != null) {
+      return resetCodeSentSuccesfully(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _AuthResetCodeSentSuccesfullyState implements AuthState {
+  const factory _AuthResetCodeSentSuccesfullyState({final String email}) =
+      _$AuthResetCodeSentSuccesfullyStateImpl;
+
+  String get email;
+  @JsonKey(ignore: true)
+  _$$AuthResetCodeSentSuccesfullyStateImplCopyWith<
+          _$AuthResetCodeSentSuccesfullyStateImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$AuthResetCodeErrorStateImplCopyWith<$Res> {
+  factory _$$AuthResetCodeErrorStateImplCopyWith(
+          _$AuthResetCodeErrorStateImpl value,
+          $Res Function(_$AuthResetCodeErrorStateImpl) then) =
+      __$$AuthResetCodeErrorStateImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String errorText});
+}
+
+/// @nodoc
+class __$$AuthResetCodeErrorStateImplCopyWithImpl<$Res>
+    extends _$AuthStateCopyWithImpl<$Res, _$AuthResetCodeErrorStateImpl>
+    implements _$$AuthResetCodeErrorStateImplCopyWith<$Res> {
+  __$$AuthResetCodeErrorStateImplCopyWithImpl(
+      _$AuthResetCodeErrorStateImpl _value,
+      $Res Function(_$AuthResetCodeErrorStateImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? errorText = null,
+  }) {
+    return _then(_$AuthResetCodeErrorStateImpl(
+      errorText: null == errorText
+          ? _value.errorText
+          : errorText // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$AuthResetCodeErrorStateImpl implements _AuthResetCodeErrorState {
+  const _$AuthResetCodeErrorStateImpl(
+      {this.errorText =
+          'Password reset link not sent \n Please try again later'});
+
+  @override
+  @JsonKey()
+  final String errorText;
+
+  @override
+  String toString() {
+    return 'AuthState.resetCodeError(errorText: $errorText)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$AuthResetCodeErrorStateImpl &&
+            (identical(other.errorText, errorText) ||
+                other.errorText == errorText));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, errorText);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$AuthResetCodeErrorStateImplCopyWith<_$AuthResetCodeErrorStateImpl>
+      get copyWith => __$$AuthResetCodeErrorStateImplCopyWithImpl<
+          _$AuthResetCodeErrorStateImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function() sendingCode,
+    required TResult Function(String email, String password) userCreated,
+    required TResult Function(String email, String password) logInSuccess,
+    required TResult Function() logOutSuccess,
+    required TResult Function(String email) resetCodeSentSuccesfully,
+    required TResult Function(String errorText) resetCodeError,
+    required TResult Function(String errorText) authError,
+  }) {
+    return resetCodeError(errorText);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function()? sendingCode,
+    TResult? Function(String email, String password)? userCreated,
+    TResult? Function(String email, String password)? logInSuccess,
+    TResult? Function()? logOutSuccess,
+    TResult? Function(String email)? resetCodeSentSuccesfully,
+    TResult? Function(String errorText)? resetCodeError,
+    TResult? Function(String errorText)? authError,
+  }) {
+    return resetCodeError?.call(errorText);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function()? sendingCode,
+    TResult Function(String email, String password)? userCreated,
+    TResult Function(String email, String password)? logInSuccess,
+    TResult Function()? logOutSuccess,
+    TResult Function(String email)? resetCodeSentSuccesfully,
+    TResult Function(String errorText)? resetCodeError,
+    TResult Function(String errorText)? authError,
+    required TResult orElse(),
+  }) {
+    if (resetCodeError != null) {
+      return resetCodeError(errorText);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_AuthLoadingState value) loading,
+    required TResult Function(_AuthSendingCodeState value) sendingCode,
+    required TResult Function(_AuthUserCreatedState value) userCreated,
+    required TResult Function(_AuthLogInSuccessState value) logInSuccess,
+    required TResult Function(_AuthLogOutSuccessState value) logOutSuccess,
+    required TResult Function(_AuthResetCodeSentSuccesfullyState value)
+        resetCodeSentSuccesfully,
+    required TResult Function(_AuthResetCodeErrorState value) resetCodeError,
+    required TResult Function(_AuthErrorState value) authError,
+  }) {
+    return resetCodeError(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_AuthLoadingState value)? loading,
+    TResult? Function(_AuthSendingCodeState value)? sendingCode,
+    TResult? Function(_AuthUserCreatedState value)? userCreated,
+    TResult? Function(_AuthLogInSuccessState value)? logInSuccess,
+    TResult? Function(_AuthLogOutSuccessState value)? logOutSuccess,
+    TResult? Function(_AuthResetCodeSentSuccesfullyState value)?
+        resetCodeSentSuccesfully,
+    TResult? Function(_AuthResetCodeErrorState value)? resetCodeError,
+    TResult? Function(_AuthErrorState value)? authError,
+  }) {
+    return resetCodeError?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_AuthLoadingState value)? loading,
+    TResult Function(_AuthSendingCodeState value)? sendingCode,
+    TResult Function(_AuthUserCreatedState value)? userCreated,
+    TResult Function(_AuthLogInSuccessState value)? logInSuccess,
+    TResult Function(_AuthLogOutSuccessState value)? logOutSuccess,
+    TResult Function(_AuthResetCodeSentSuccesfullyState value)?
+        resetCodeSentSuccesfully,
+    TResult Function(_AuthResetCodeErrorState value)? resetCodeError,
+    TResult Function(_AuthErrorState value)? authError,
+    required TResult orElse(),
+  }) {
+    if (resetCodeError != null) {
+      return resetCodeError(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _AuthResetCodeErrorState implements AuthState {
+  const factory _AuthResetCodeErrorState({final String errorText}) =
+      _$AuthResetCodeErrorStateImpl;
+
+  String get errorText;
+  @JsonKey(ignore: true)
+  _$$AuthResetCodeErrorStateImplCopyWith<_$AuthResetCodeErrorStateImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -1502,7 +2467,8 @@ class __$$AuthErrorStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$AuthErrorStateImpl implements _AuthErrorState {
-  const _$AuthErrorStateImpl({this.errorText = 'Ошибка авторизации'});
+  const _$AuthErrorStateImpl(
+      {this.errorText = 'Authication error \n Please try again'});
 
   @override
   @JsonKey()
@@ -1537,9 +2503,12 @@ class _$AuthErrorStateImpl implements _AuthErrorState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
+    required TResult Function() sendingCode,
     required TResult Function(String email, String password) userCreated,
     required TResult Function(String email, String password) logInSuccess,
     required TResult Function() logOutSuccess,
+    required TResult Function(String email) resetCodeSentSuccesfully,
+    required TResult Function(String errorText) resetCodeError,
     required TResult Function(String errorText) authError,
   }) {
     return authError(errorText);
@@ -1550,9 +2519,12 @@ class _$AuthErrorStateImpl implements _AuthErrorState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
+    TResult? Function()? sendingCode,
     TResult? Function(String email, String password)? userCreated,
     TResult? Function(String email, String password)? logInSuccess,
     TResult? Function()? logOutSuccess,
+    TResult? Function(String email)? resetCodeSentSuccesfully,
+    TResult? Function(String errorText)? resetCodeError,
     TResult? Function(String errorText)? authError,
   }) {
     return authError?.call(errorText);
@@ -1563,9 +2535,12 @@ class _$AuthErrorStateImpl implements _AuthErrorState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function()? sendingCode,
     TResult Function(String email, String password)? userCreated,
     TResult Function(String email, String password)? logInSuccess,
     TResult Function()? logOutSuccess,
+    TResult Function(String email)? resetCodeSentSuccesfully,
+    TResult Function(String errorText)? resetCodeError,
     TResult Function(String errorText)? authError,
     required TResult orElse(),
   }) {
@@ -1580,9 +2555,13 @@ class _$AuthErrorStateImpl implements _AuthErrorState {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(_AuthLoadingState value) loading,
+    required TResult Function(_AuthSendingCodeState value) sendingCode,
     required TResult Function(_AuthUserCreatedState value) userCreated,
     required TResult Function(_AuthLogInSuccessState value) logInSuccess,
     required TResult Function(_AuthLogOutSuccessState value) logOutSuccess,
+    required TResult Function(_AuthResetCodeSentSuccesfullyState value)
+        resetCodeSentSuccesfully,
+    required TResult Function(_AuthResetCodeErrorState value) resetCodeError,
     required TResult Function(_AuthErrorState value) authError,
   }) {
     return authError(this);
@@ -1593,9 +2572,13 @@ class _$AuthErrorStateImpl implements _AuthErrorState {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(_AuthLoadingState value)? loading,
+    TResult? Function(_AuthSendingCodeState value)? sendingCode,
     TResult? Function(_AuthUserCreatedState value)? userCreated,
     TResult? Function(_AuthLogInSuccessState value)? logInSuccess,
     TResult? Function(_AuthLogOutSuccessState value)? logOutSuccess,
+    TResult? Function(_AuthResetCodeSentSuccesfullyState value)?
+        resetCodeSentSuccesfully,
+    TResult? Function(_AuthResetCodeErrorState value)? resetCodeError,
     TResult? Function(_AuthErrorState value)? authError,
   }) {
     return authError?.call(this);
@@ -1606,9 +2589,13 @@ class _$AuthErrorStateImpl implements _AuthErrorState {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(_AuthLoadingState value)? loading,
+    TResult Function(_AuthSendingCodeState value)? sendingCode,
     TResult Function(_AuthUserCreatedState value)? userCreated,
     TResult Function(_AuthLogInSuccessState value)? logInSuccess,
     TResult Function(_AuthLogOutSuccessState value)? logOutSuccess,
+    TResult Function(_AuthResetCodeSentSuccesfullyState value)?
+        resetCodeSentSuccesfully,
+    TResult Function(_AuthResetCodeErrorState value)? resetCodeError,
     TResult Function(_AuthErrorState value)? authError,
     required TResult orElse(),
   }) {

@@ -1,7 +1,5 @@
 // ignore_for_file: avoid_void_async
 
-import 'dart:convert';
-
 import 'package:bloc/bloc.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';

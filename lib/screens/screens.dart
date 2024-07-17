@@ -18,3 +18,4 @@ export 'package:ritual_app/screens/support_screen/support_screen.dart';
 export 'package:ritual_app/screens/qr_scanner_screen/qr_scanner_screen.dart';
 export 'package:ritual_app/screens/memory_page_creation_screen/memory_page_creation_screen.dart';
 export 'package:ritual_app/screens/memory_page_preview_screen/memory_page_preview_screen.dart';
+export 'package:ritual_app/screens/auth_forgot_password_screen/auth_forgot_password_screen.dart';

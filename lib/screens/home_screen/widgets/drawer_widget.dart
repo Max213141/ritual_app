@@ -14,7 +14,7 @@ class DrawerWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = l10nOf(context);
 
-    final String? username = HiveStore().getUserName();
+    // final String? username = HiveStore().getUserName();
     final String? email = HiveStore().getUserEmail();
     final List<DrawerItem> drawerItemsList = [
       // DrawerItem(
@@ -65,22 +65,10 @@ class DrawerWidget extends StatelessWidget {
               child: DrawerHeader(
                 padding: const EdgeInsets.fromLTRB(4.0, 16.0, 4.0, 8.0),
                 margin: EdgeInsets.zero,
-                child: Column(
-                  // mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      username ?? 'Urename',
-                      style:
-                          MentalHealthTextStyles.text.signikaSecondaryFontF16,
-                    ),
-                    const SizedBox(height: 4),
-                    Text(
-                      email ?? 'Mail',
-                      style: MentalHealthTextStyles
-                          .text.popinsSecondaryFontF16FW300,
-                    ),
-                  ],
+                child: Text(
+                  email ?? 'Mail',
+                  style:
+                      MentalHealthTextStyles.text.popinsSecondaryFontF16FW300,
                 ),
               ),
             ),

@@ -1,11 +1,9 @@
 class DBUserData {
   final String email;
-  final String name;
   final String password;
 
   const DBUserData({
     required this.email,
-    required this.name,
     required this.password,
   });
 
@@ -16,7 +14,6 @@ class DBUserData {
     // final data = snapshot.data();
     return DBUserData(
       email: data['email'] as String,
-      name: data['name'] as String,
       password: data['password'] as String,
     );
   }
@@ -24,7 +21,6 @@ class DBUserData {
   Map<String, dynamic> toFirestore() {
     return {
       'email': email,
-      'name': name,
       'password': password,
     };
   }
@@ -32,7 +28,6 @@ class DBUserData {
   factory DBUserData.fromJson(Map<String, dynamic> json) {
     return DBUserData(
       email: json['email'] as String,
-      name: json['name'] as String,
       password: json['password'] as String,
     );
   }

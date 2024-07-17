@@ -3,6 +3,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:hive/hive.dart';
 import 'package:ritual_app/blocs/blocs.dart';
 import 'package:ritual_app/entities/entities.dart';
@@ -13,6 +14,7 @@ import 'package:ritual_app/utils/utils.dart';
 
 class RitualApp extends StatelessWidget {
   final FirebaseAuth auth;
+  final GoogleSignIn googleSignIn;
   final Reference media;
   final HiveStore hiveStore;
 
@@ -21,6 +23,7 @@ class RitualApp extends StatelessWidget {
     required this.auth,
     required this.hiveStore,
     required this.media,
+    required this.googleSignIn,
   });
 
   Future<void> _initHive() async {
@@ -73,6 +76,15 @@ class RitualApp extends StatelessWidget {
               auth: auth,
             );
           },
+          routes: <RouteBase>[
+            GoRoute(
+              name: 'auth_forgot_password',
+              path: 'auth_forgot_password',
+              builder: (BuildContext context, GoRouterState state) {
+                return AuthForgotPasswordScreen();
+              },
+            ),
+          ],
         ),
         GoRoute(
           name: 'home',
@@ -168,7 +180,12 @@ class RitualApp extends StatelessWidget {
               BlocProvider<ThemeBloc>(create: (context) => ThemeBloc()),
               BlocProvider<LocaleBloc>(create: (context) => LocaleBloc()),
               BlocProvider<QrCamBloc>(create: (context) => QrCamBloc()),
-              BlocProvider<AuthBloc>(create: (context) => AuthBloc(auth: auth)),
+              BlocProvider<AuthBloc>(
+                create: (context) => AuthBloc(
+                  auth: auth,
+                  googleSignIn: googleSignIn,
+                ),
+              ),
               BlocProvider<MediaBloc>(
                   create: (context) => MediaBloc(media: media)),
             ],

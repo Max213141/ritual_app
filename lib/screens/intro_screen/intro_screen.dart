@@ -36,26 +36,30 @@ class _IntroScreenState extends State<IntroScreen> {
         behavior: CustomBehavior(),
         child: IntroSlider(
           indicatorConfig: IndicatorConfig(
-            sizeIndicator: 24,
+            isShowIndicator: true,
+            sizeIndicator: 13,
             indicatorWidget: Container(
-              width: 24,
-              height: 8,
+              width: 13,
+              height: 13,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(5),
-                //color: AppColor.introButtonColor,
+                color: Theme.of(context).primaryColorDark,
+                shape: BoxShape.circle,
               ),
             ),
             activeIndicatorWidget: Container(
-              width: 24,
-              height: 8,
+              width: 26,
+              height: 13,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(5),
+                color: Theme.of(context).indicatorColor,
+
+                borderRadius: BorderRadius.circular(10),
                 //color: AppColor.primaryBackgroundColor,
               ),
             ),
-            spaceBetweenIndicator: 10,
+            spaceBetweenIndicator: 15,
             typeIndicatorAnimation: TypeIndicatorAnimation.sliding,
           ),
+
           listCustomTabs: slides,
           onDonePress: onDonePress,
           onSkipPress: onSkipPress,
@@ -63,10 +67,21 @@ class _IntroScreenState extends State<IntroScreen> {
               const ButtonStyle(splashFactory: NoSplash.splashFactory),
           nextButtonStyle:
               const ButtonStyle(splashFactory: NoSplash.splashFactory),
+          skipButtonStyle: ButtonStyle(
+            splashFactory: NoSplash.splashFactory,
+            // minimumSize: WidgetStateProperty.all<Size?>(
+            //   const Size(70, 50),
+            // ),
+            maximumSize: WidgetStateProperty.all<Size?>(
+              const Size(200, 70),
+            ),
+          ),
           renderNextBtn: const NextButton(),
           renderDoneBtn: const DoneButton(),
-          isShowSkipBtn: false,
+          renderSkipBtn: const SkipButton(),
+          isShowSkipBtn: true,
           isShowPrevBtn: false,
+
           // renderSkipBtn: this.renderSkipBtn(),
         ),
       ),
@@ -77,28 +92,27 @@ class _IntroScreenState extends State<IntroScreen> {
     slides.addAll(
       [
         IntroScreenPart(
-          useProvidedChild: true,
-          text: "Hell yeah!!!",
+          text: l10n.firstIntroSlide,
           image: 'assets/intro/first_slide.svg',
-          providedChild: RichText(
-              text: TextSpan(children: [
-            TextSpan(
-              text: '${l10n.welcome}, \n',
-              style: MentalHealthTextStyles.text.signikaFontF24,
-            ),
-            TextSpan(
-              text: '${l10n.appTitle} \n',
-              style: MentalHealthTextStyles.text.signikaFontF24Green,
-            ),
-            TextSpan(
-              text: '${l10n.firstIntroSlidePart1} \n',
-              style: MentalHealthTextStyles.text.signikaFontF24,
-            ),
-            TextSpan(
-              text: '${l10n.firstIntroSlidePart2}',
-              style: MentalHealthTextStyles.text.signikaFontF24,
-            ),
-          ])),
+          // providedChild: RichText(
+          //     text: TextSpan(children: [
+          //   TextSpan(
+          //     text: '${l10n.welcome}, \n',
+          //     style: MentalHealthTextStyles.text.signikaFontF24,
+          //   ),
+          //   TextSpan(
+          //     text: '${l10n.appTitle} \n',
+          //     style: MentalHealthTextStyles.text.signikaFontF24Green,
+          //   ),
+          //   TextSpan(
+          //     text: '${l10n.firstIntroSlidePart1} \n',
+          //     style: MentalHealthTextStyles.text.signikaFontF24,
+          //   ),
+          //   TextSpan(
+          //     text: '${l10n.firstIntroSlidePart2}',
+          //     style: MentalHealthTextStyles.text.signikaFontF24,
+          //   ),
+          // ])),
         ),
         IntroScreenPart(
           text: l10n.secondIntroSlide,
@@ -108,10 +122,10 @@ class _IntroScreenState extends State<IntroScreen> {
           text: l10n.thirdIntroSlide,
           image: 'assets/intro/third_slide.svg',
         ),
-        IntroScreenPart(
-          text: l10n.forthIntroSlide,
-          image: 'assets/intro/forth_slide.svg',
-        ),
+        // IntroScreenPart(
+        //   text: l10n.forthIntroSlide,
+        //   image: 'assets/intro/forth_slide.svg',
+        // ),
       ],
     );
   }

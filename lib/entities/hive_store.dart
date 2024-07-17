@@ -63,11 +63,11 @@ class HiveStore {
     return appPrefs?.locale;
   }
 
-  String? getUserName() {
-    Box<UserData> useDataBox = Hive.box<UserData>('user_data');
-    UserData? userData = useDataBox.get(0);
-    return userData?.userName;
-  }
+  // String? getUserName() {
+  //   Box<UserData> useDataBox = Hive.box<UserData>('user_data');
+  //   UserData? userData = useDataBox.get(0);
+  //   return userData?.userName;
+  // }
 
   String? getUserEmail() {
     Box<UserData> useDataBox = Hive.box<UserData>('user_data');

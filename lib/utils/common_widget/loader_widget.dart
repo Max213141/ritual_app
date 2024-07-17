@@ -11,7 +11,7 @@ class Loader extends StatelessWidget {
     super.key,
     this.size = 50,
     this.color = AppColor.primaryColor,
-    this.backgroundColor = AppColor.primaryBackgroundColor,
+    this.backgroundColor = AppColor.primaryColorLight,
     this.message = '',
   });
 
@@ -20,14 +20,14 @@ class Loader extends StatelessWidget {
     return DecoratedBox(
       decoration: BoxDecoration(
           borderRadius: MentalHealthDecorations.borders.radiusC10,
-          color: backgroundColor.withOpacity(.5)),
+          color: Theme.of(context).primaryColorLight.withOpacity(.9)),
       child: Padding(
         padding: const EdgeInsets.all(12.0),
         child: SizedBox(
           width: size,
           height: size,
           child: CircularProgressIndicator(
-            valueColor: AlwaysStoppedAnimation(color),
+            valueColor: AlwaysStoppedAnimation(Theme.of(context).primaryColor),
           ),
         ),
       ),

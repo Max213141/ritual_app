@@ -5,7 +5,7 @@ class AuthEvent with _$AuthEvent {
   const factory AuthEvent.createUser({
     required String email,
     required String password,
-    required String username,
+    // required String username,
   }) = CreateUserEvent;
 
   const factory AuthEvent.logIn({
@@ -13,7 +13,13 @@ class AuthEvent with _$AuthEvent {
     required String password,
   }) = LogInEvent;
 
+  const factory AuthEvent.signInWithGoogle() = SignInWithGoogle;
+
   const factory AuthEvent.deleteUser() = DeleteUserEvent;
 
   const factory AuthEvent.logOut() = LogOutEvent;
+
+  const factory AuthEvent.resetPassword({
+    required String email,
+  }) = ResetPasswordEvent;
 }
