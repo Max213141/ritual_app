@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 import 'package:ritual_app/blocs/blocs.dart';
 import 'package:ritual_app/screens/auth_forgot_password_screen/widgets/widgets.dart';
 import 'package:ritual_app/utils/utils.dart';
@@ -18,7 +17,6 @@ class _AuthForgotPasswordScreenState extends State<AuthForgotPasswordScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _showLoader = false;
   }

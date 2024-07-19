@@ -4,8 +4,6 @@ import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:ritual_app/blocs/blocs.dart';
 import 'package:ritual_app/utils/utils.dart';
 
-import 'widgets.dart';
-
 void _log(dynamic message) => Logger.projectLog(message, name: 'qr_cam');
 
 class QrCamWidget extends StatefulWidget {
@@ -90,30 +88,17 @@ class _QrCamWidgetState extends State<QrCamWidget> {
                   controller: widget.cameraController,
                   onDetect: _onDetect,
                 ),
-                Padding(
-                  padding: EdgeInsets.zero,
-                  child: Container(
-                    decoration: ShapeDecoration(
-                      shape: QrScannerOverlayShape(
-                          borderLength: 25,
-                          borderColor: const Color(0xff32C3A7),
-                          borderWidth: 8,
-                          cutOutSize: MediaQuery.of(context).size.width * 0.55
-                          // cutOutSize: 200
-                          ),
-                    ),
-                  ),
-                ),
-                SafeArea(
-                  child: Container(
-                    padding: const EdgeInsets.fromLTRB(16, 24, 16, 16),
-                    alignment: Alignment.topCenter,
-                    child: const Text(
-                      'Scan IT',
-                      style: TextStyle(color: Colors.white, fontSize: 22),
-                    ),
-                  ),
-                )
+
+                // SafeArea(
+                //   child: Container(
+                //     padding: const EdgeInsets.fromLTRB(16, 24, 16, 16),
+                //     alignment: Alignment.topCenter,
+                //     child: const Text(
+                //       'Scan IT',
+                //       style: TextStyle(color: Colors.white, fontSize: 22),
+                //     ),
+                //   ),
+                // )
               ],
             );
           }

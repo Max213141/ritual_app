@@ -11,16 +11,23 @@ class MemoryPageItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 2,
-      margin: const EdgeInsets.symmetric(vertical: 8),
-      child: ListTile(
-        leading: CircleAvatar(
-          backgroundColor: Colors.grey[300],
-          child: Icon(Icons.person, color: Colors.grey[600]),
+    return SizedBox(
+      height: 100,
+      child: Card(
+        // elevation: 2,
+        margin: const EdgeInsets.symmetric(
+          vertical: 8,
         ),
-        title: Text(memoryPage.name),
-        trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+        child: Center(
+          child: ListTile(
+            leading: CircleAvatar(
+              backgroundColor: Colors.grey[300],
+              child: Icon(Icons.person, color: Colors.grey[600]),
+            ),
+            title: Text(memoryPage.name),
+            trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+          ),
+        ),
       ),
     );
   }

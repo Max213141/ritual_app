@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:ritual_app/utils/utils.dart';
 
 class ActionButton extends StatelessWidget {
   final String title;
@@ -25,7 +24,6 @@ class ActionButton extends StatelessWidget {
       height: 50,
       child: ElevatedButton(
         onPressed: onPressed,
-
         style: ElevatedButton.styleFrom(
           padding: const EdgeInsets.symmetric(vertical: 16),
           shape: RoundedRectangleBorder(
@@ -33,28 +31,6 @@ class ActionButton extends StatelessWidget {
           ),
           backgroundColor: Theme.of(context).primaryColorLight,
         ),
-        // ButtonStyle(
-        //   shape: WidgetStateProperty.all<RoundedRectangleBorder>(
-        //     RoundedRectangleBorder(
-        //       borderRadius: MentalHealthDecorations.borders.radiusC20,
-        //       // side: BorderSide(color: Colors.red)
-        //     ),
-        //   ),
-        //   // backgroundColor: MaterialStateProperty.all<Color>(
-        //   //   buttonColor ?? AppColor.primaryBackgroundColor,
-        //   // ),
-        //   // surfaceTintColor: MaterialStateProperty.all<Color>(
-        //   //   buttonColor ?? AppColor.primaryBackgroundColor,
-        //   // ),
-        //   side: WidgetStateProperty.all<BorderSide>(
-        //     BorderSide(
-        //       width: 1,
-        //       // color: buttonColor == AppColor.primaryColor ? AppColor.primaryBackgroundColor : AppColor.habbitsTileBackground,
-        //     ),
-        //   ),
-        //   elevation: WidgetStateProperty.all<double>(
-        //       (buttonSelected ?? false) ? 10.0 : 2.0),
-        // ),
         child: FittedBox(
           child: Text(
             title,

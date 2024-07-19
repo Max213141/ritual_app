@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ritual_app/utils/styles/styles.dart';
+// import 'package:ritual_app/utils/styles/styles.dart';
 import 'package:ritual_app/utils/utils.dart';
 
 class IntroScreenPart extends StatelessWidget {
@@ -9,12 +9,12 @@ class IntroScreenPart extends StatelessWidget {
   final Widget? providedChild;
 
   const IntroScreenPart({
-    Key? key,
+    super.key,
     required this.text,
     required this.image,
     this.useProvidedChild = false,
     this.providedChild,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

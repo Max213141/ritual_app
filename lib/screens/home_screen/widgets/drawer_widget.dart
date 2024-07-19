@@ -15,7 +15,6 @@ class DrawerWidget extends StatelessWidget {
     final l10n = l10nOf(context);
 
     // final String? username = HiveStore().getUserName();
-    final String? email = HiveStore().getUserEmail();
     final List<DrawerItem> drawerItemsList = [
       // DrawerItem(
       //   title: l10n.drawerProfile,
@@ -63,18 +62,33 @@ class DrawerWidget extends StatelessWidget {
               height: MediaQuery.of(context).size.height * 0.13,
               width: MediaQuery.of(context).size.width * 0.7,
               child: DrawerHeader(
-                padding: const EdgeInsets.fromLTRB(4.0, 16.0, 4.0, 8.0),
-                margin: EdgeInsets.zero,
-                child: Text(
-                  email ?? 'Mail',
-                  style:
-                      MentalHealthTextStyles.text.popinsSecondaryFontF16FW300,
-                ),
-              ),
+                  padding: const EdgeInsets.fromLTRB(4.0, 16.0, 4.0, 8.0),
+                  margin: EdgeInsets.zero,
+                  decoration: BoxDecoration(
+                    border: Border(
+                      bottom: Divider.createBorderSide(
+                        context,
+                        color: Colors.transparent,
+                        width: 0,
+                      ),
+                    ),
+                  ),
+                  child: Row(
+                    children: [
+                      const Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 6.0),
+                        child: RitualAppSvgPicture(
+                          picture: 'assets/icons/logo_icon.svg',
+                          fit: BoxFit.contain,
+                        ),
+                      ),
+                      Text(
+                        l10n.appTitle,
+                        style: const TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                    ],
+                  )),
             ),
-            const Divider(
-                //color: //AppColor.drawerDividerColor.withOpacity(.2),
-                ),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
