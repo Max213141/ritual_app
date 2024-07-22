@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -72,16 +73,18 @@ class RitualApp extends StatelessWidget {
           path: '/initial_page',
           builder: (BuildContext context, GoRouterState state) {
             // return SplashScreen();
-            return InitialPage(
-              auth: auth,
-            );
+            return kIsWeb
+                ? MemoryPageViewScreen()
+                : InitialPage(
+                    auth: auth,
+                  );
           },
           routes: <RouteBase>[
             GoRoute(
               name: 'auth_forgot_password',
               path: 'auth_forgot_password',
               builder: (BuildContext context, GoRouterState state) {
-                return AuthForgotPasswordScreen();
+                return const AuthForgotPasswordScreen();
               },
             ),
           ],
@@ -94,20 +97,36 @@ class RitualApp extends StatelessWidget {
           },
           routes: <RouteBase>[
             GoRoute(
-              name: 'mp_creation',
-              path: 'mp_creation',
+              name: 'mp_plan_selection',
+              path: 'mp_plan_selection',
               builder: (BuildContext context, GoRouterState state) {
-                return const MemoryPageCreationScreen();
+                return const PlanSelectionScreen();
               },
-              routes: <RouteBase>[
+              routes: [
                 GoRoute(
-                  name: 'mp_preview_screen',
-                  path: 'mp_preview_screen',
+                  name: 'mp_creation',
+                  path: 'mp_creation',
                   builder: (BuildContext context, GoRouterState state) {
-                    return const MemoryPagePreviewScreen();
+                    return const MemoryPageCreationScreen();
                   },
+                  routes: <RouteBase>[
+                    GoRoute(
+                      name: 'mp_preview_screen',
+                      path: 'mp_preview_screen',
+                      builder: (BuildContext context, GoRouterState state) {
+                        return const MemoryPagePreviewScreen();
+                      },
+                    ),
+                  ],
                 ),
               ],
+            ),
+            GoRoute(
+              name: 'mp_view_screen',
+              path: 'mp_view_screen',
+              builder: (BuildContext context, GoRouterState state) {
+                return const MemoryPageViewScreen();
+              },
             ),
             GoRoute(
               name: 'profile_screen',
@@ -170,7 +189,7 @@ class RitualApp extends StatelessWidget {
     );
 
     return FutureBuilder(
-      future: _initHive(),
+      future: kIsWeb ? Future.delayed(Duration(seconds: 1)) : _initHive(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
           // locale = HiveStore().getLocale();

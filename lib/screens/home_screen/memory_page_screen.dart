@@ -13,12 +13,12 @@ class MemoryPageScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = l10nOf(context);
     final List<MemoryPage> memoryPages = [
-      MemoryPage(name: 'Романова Мария Александровна'),
-      MemoryPage(name: 'Кузнецов Михаил Павлович'),
-      MemoryPage(name: 'Соколова Екатерина Алексеевна'),
-      MemoryPage(name: 'Романова Мария Александровна'),
-      MemoryPage(name: 'Кузнецов Михаил Павлович'),
-      MemoryPage(name: 'Соколова Екатерина Алексеевна'),
+      // MemoryPage(name: 'Романова Мария Александровна'),
+      // MemoryPage(name: 'Кузнецов Михаил Павлович'),
+      // MemoryPage(name: 'Соколова Екатерина Алексеевна'),
+      // MemoryPage(name: 'Романова Мария Александровна'),
+      // MemoryPage(name: 'Кузнецов Михаил Павлович'),
+      // MemoryPage(name: 'Соколова Екатерина Алексеевна'),
     ];
     final deviceSize = MediaQuery.of(context).size;
 
@@ -74,7 +74,7 @@ class MemoryPageScreen extends StatelessWidget {
                     alignment: Alignment.bottomRight,
                     child: TextButton(
                       onPressed: () {
-                        GoRouter.of(context).go('/home/mp_creation');
+                        GoRouter.of(context).go('/home/mp_plan_selection');
                       },
                       child: Text(l10n.memoryPageScreenNew),
                     ),

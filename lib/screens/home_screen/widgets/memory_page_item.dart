@@ -24,7 +24,7 @@ class MemoryPageItem extends StatelessWidget {
               backgroundColor: Colors.grey[300],
               child: Icon(Icons.person, color: Colors.grey[600]),
             ),
-            title: Text(memoryPage.name),
+            title: Text(memoryPage.firstName),
             trailing: const Icon(Icons.arrow_forward_ios, size: 16),
           ),
         ),
