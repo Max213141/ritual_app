@@ -7,3 +7,4 @@ export 'mp_date_picker.dart';
 export 'media_picker_button.dart';
 export 'biography_tab_widget.dart';
 export 'media_tab_widget.dart';
+export 'tab_bar_widget.dart';

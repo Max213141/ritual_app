@@ -41,6 +41,7 @@ dependencies:
   mobile_scanner: ^5.1.1
   video_compress: ^3.1.2
   google_sign_in: ^6.2.1
+  tab_container: ^3.5.3
   # welltested: ^0.0.1
 
   # firebase_messaging: ^14.6.0

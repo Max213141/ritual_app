@@ -30,58 +30,73 @@ class _BiographyTabWidgetState extends State<BiographyTabWidget>
     super.build(context);
     return Form(
       key: widget.formKey,
-      child: SingleChildScrollView(
-          child: Column(
-        children: [
-          Center(
+      child: SafeArea(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(25.0),
             child: Column(
               children: [
-                CircleAvatar(
-                  radius: 50,
-                  backgroundColor: Colors.grey[300],
-                  child: Icon(Icons.file_upload_outlined,
-                      size: 40, color: Colors.grey[600]),
-                ),
-                const SizedBox(height: 8),
-                ElevatedButton(
-                  onPressed: () {
-                    // Implement photo upload logic
-                  },
-                  style: ElevatedButton.styleFrom(
-                    foregroundColor: Colors.black,
-                    backgroundColor: Colors.grey[300],
+                Center(
+                  child: Column(
+                    children: [
+                      CircleAvatar(
+                        radius: 50,
+                        backgroundColor: Colors.grey[300],
+                        child: Icon(Icons.file_upload_outlined,
+                            size: 40, color: Colors.grey[600]),
+                      ),
+                      const SizedBox(height: 8),
+                      ElevatedButton(
+                        onPressed: () {
+                          // Implement photo upload logic
+                        },
+                        style: ElevatedButton.styleFrom(
+                          foregroundColor: Colors.black,
+                          backgroundColor: Colors.grey[300],
+                        ),
+                        child: const Text('Загрузить фото'),
+                      ),
+                    ],
                   ),
-                  child: const Text('Загрузить фото'),
                 ),
+                const SizedBox(height: 16),
+                const MPTextField(label: 'Фамилия'),
+                const MPTextField(label: 'Имя'),
+                const MPTextField(label: 'Отчество'),
+                const Row(
+                  children: [
+                    Expanded(child: MPDatePicker(label: 'Дата рождения')),
+                    SizedBox(width: 8),
+                    Expanded(child: MPDatePicker(label: 'Дата смерти')),
+                  ],
+                ),
+                const SizedBox(
+                  height: 16,
+                ),
+                const MPTextField(
+                    label: 'Эпитафия', hintText: 'В сердце и в памяти'),
+                const MPTextField(label: 'Биография', maxLines: 4),
+                const SizedBox(height: 16),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text('Приватная страница'),
+                    Switch(
+                      value: _isPrivate,
+                      onChanged: (value) {
+                        setState(() {
+                          _isPrivate = value;
+                        });
+                      },
+                    ),
+                  ],
+                ),
+                if (_isPrivate) const PasswordFieldWidget(),
               ],
             ),
           ),
-          const SizedBox(height: 16),
-          const MPTextField(label: 'Фамилия'),
-          const MPTextField(label: 'Имя'),
-          const MPTextField(label: 'Отчество'),
-          const MPDatePicker(label: 'Дата рождения'),
-          const MPDatePicker(label: 'Дата смерти'),
-          const MPTextField(label: 'Эпитафия', hintText: 'В сердце и в памяти'),
-          const MPTextField(label: 'Биография', maxLines: 4),
-          const SizedBox(height: 16),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const Text('Приватная страница'),
-              Switch(
-                value: _isPrivate,
-                onChanged: (value) {
-                  setState(() {
-                    _isPrivate = value;
-                  });
-                },
-              ),
-            ],
-          ),
-          if (_isPrivate) const PasswordFieldWidget(),
-        ],
-      )),
+        ),
+      ),
     );
   }
 }

@@ -5,7 +5,6 @@ class PlanFeaturesWidget extends StatelessWidget {
   const PlanFeaturesWidget({
     super.key,
     required this.text,
-    required bool isSelected,
   });
 
   @override

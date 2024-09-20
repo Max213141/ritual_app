@@ -1,53 +1,78 @@
 import 'package:flutter/material.dart';
 import 'package:ritual_app/screens/plan_selection_screen/widgets/widgets.dart';
 
-class PlanCardWidget extends StatelessWidget {
+class PlanCardWidget extends StatefulWidget {
   final bool isSelected;
-
+  final VoidCallback onTap;
   const PlanCardWidget({
     super.key,
     required this.isSelected,
+    required this.onTap,
   });
 
   @override
+  State<PlanCardWidget> createState() => _PlanCardWidgetState();
+}
+
+class _PlanCardWidgetState extends State<PlanCardWidget> {
+  @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        border: Border.all(
-          color: isSelected ? Colors.grey : Colors.transparent,
-          width: 2,
+    final double cardHeight = (MediaQuery.of(context).size.height -
+            MediaQuery.of(context).viewPadding.top -
+            MediaQuery.of(context).viewPadding.bottom) /
+        3;
+
+    return GestureDetector(
+      onTap: widget.onTap,
+      child: Container(
+        padding: const EdgeInsets.all(20),
+        // height: cardHeight,
+        decoration: BoxDecoration(
+          color: Colors.grey[850],
+          borderRadius: BorderRadius.circular(20),
+          border: widget.isSelected
+              ? Border.all(
+                  color: Colors.white, // Change border color when selected
+                  width: 2,
+                )
+              : Border.all(
+                  color: Colors.transparent, // No border when not selected
+                ),
         ),
-        borderRadius: BorderRadius.circular(8),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        child: const Column(
+          // mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const Text(
+            Text(
               'Basic',
-              style: TextStyle(color: Colors.white, fontSize: 18),
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+              ),
             ),
-            const Text(
+            SizedBox(height: 5),
+            Text(
               '\$15',
               style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold),
+                color: Colors.white,
+                fontSize: 48,
+                fontWeight: FontWeight.bold,
+              ),
             ),
-            const Text(
+            SizedBox(height: 3),
+            Text(
               'One off payment',
-              style: TextStyle(color: Colors.grey),
+              style: TextStyle(
+                color: Colors.white70,
+                fontSize: 16,
+              ),
             ),
-            const SizedBox(height: 16),
-            PlanFeaturesWidget(
-              text: 'Full Access to all features',
-              isSelected: isSelected,
-            ),
-            PlanFeaturesWidget(
-              text: 'Unlimited photo & video uploads',
-              isSelected: isSelected,
-            ),
+            SizedBox(height: 10),
+            PlanFeaturesWidget(text: 'Full Access to all features'),
+            SizedBox(height: 5),
+            PlanFeaturesWidget(text: 'Unlimited photo & video uploads')
           ],
         ),
       ),
