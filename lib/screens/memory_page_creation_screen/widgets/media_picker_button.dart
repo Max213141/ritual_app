@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:ritual_app/utils/common_widget/widgets.dart';
 
-class MediaPickerButton extends StatelessWidget {
-  final IconData icon;
+class MediaPickerFrameWidget extends StatelessWidget {
+  final String icon;
   final Future<void> Function() onPressed;
-  const MediaPickerButton({
+  const MediaPickerFrameWidget({
     super.key,
     required this.icon,
     required this.onPressed,
@@ -11,19 +12,25 @@ class MediaPickerButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: 80,
-      height: 80,
-      child: DecoratedBox(
-        decoration: BoxDecoration(
-          border: Border.all(color: Colors.grey),
-          borderRadius: BorderRadius.circular(8),
-        ),
-        child: IconButton(
-          icon: Icon(icon),
-          onPressed: () async {
-            await onPressed();
-          },
+    final color = Theme.of(context).primaryColorLight;
+    return GestureDetector(
+      onTap: () async {
+        await onPressed();
+      },
+      child: SizedBox(
+        width: 115,
+        height: 145,
+        child: DecoratedBox(
+          decoration: BoxDecoration(
+            border: Border.all(color: color),
+            borderRadius: BorderRadius.circular(8),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(40.0),
+            child: Center(
+              child: RitualAppSvgPicture(picture: icon),
+            ),
+          ),
         ),
       ),
     );

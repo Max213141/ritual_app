@@ -42,6 +42,7 @@ class _MediaTabWidgetState extends State<MediaTabWidget>
 
   @override
   bool get wantKeepAlive => true;
+
   Future<int> getFileSize(XFile file) async {
     final fileInfo = File(file.path);
     return await fileInfo.length();
@@ -56,32 +57,74 @@ class _MediaTabWidgetState extends State<MediaTabWidget>
   @override
   Widget build(BuildContext context) {
     super.build(context);
+
+    final textTheme = Theme.of(context).textTheme.bodySmall;
     return SingleChildScrollView(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          const Text('Фото'),
-          const SizedBox(height: 8),
-          MediaPickerButton(
-            icon: Icons.camera_alt_outlined,
-            onPressed: () => _onImageButtonPressed(
-              ImageSource.gallery,
-              isMulti: true,
-              isMedia: false,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 30),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 25, horizontal: 10),
+              child: Flexible(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Text(
+                      'Фото',
+                      style: textTheme,
+                    ),
+                    Text(
+                      '3 из 5 загружено',
+                      style: textTheme,
+                    )
+                  ],
+                ),
+              ),
             ),
-          ),
-          const SizedBox(height: 16),
-          const Text('Видео'),
-          const SizedBox(height: 8),
-          MediaPickerButton(
-            icon: Icons.video_call_outlined,
-            onPressed: () => _onImageButtonPressed(
-              ImageSource.gallery,
-              isMulti: true,
-              isMedia: true,
+            const SizedBox(height: 8),
+            MediaPickerFrameWidget(
+              icon: 'assets/icons/add_photo.svg',
+              onPressed: () => _onImageButtonPressed(
+                ImageSource.gallery,
+                isMulti: true,
+                isMedia: false,
+              ),
             ),
-          ),
-        ],
+            const SizedBox(height: 16),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 25, horizontal: 10),
+              child: Flexible(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Text(
+                      'Видео',
+                      style: textTheme,
+                    ),
+                    Text(
+                      '3 из 5 загружено',
+                      style: textTheme,
+                    )
+                  ],
+                ),
+              ),
+            ),
+            const SizedBox(height: 8),
+            MediaPickerFrameWidget(
+              icon: 'assets/icons/add_video.svg',
+              onPressed: () => _onImageButtonPressed(
+                ImageSource.gallery,
+                isMulti: true,
+                isMedia: true,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
