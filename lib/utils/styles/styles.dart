@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 // import 'package:google_fonts/google_fonts.dart';
-import 'package:ritual_app/utils/app_colors.dart';
 
 part 'text.dart';
 

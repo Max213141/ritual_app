@@ -7,6 +7,8 @@ import 'package:mime/mime.dart';
 import 'package:ritual_app/screens/memory_page_creation_screen/widgets/widgets.dart';
 import 'package:video_player/video_player.dart';
 
+import 'video_player_widget.dart';
+
 class PreviewWidget extends StatefulWidget {
   final List<XFile>? mediaFileList;
 

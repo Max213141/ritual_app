@@ -15,6 +15,8 @@ class _MemoryPagePreviewScreenState extends State<MemoryPagePreviewScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+
     return Scaffold(
       appBar: AppBar(
           // ... (previous AppBar code)
@@ -22,37 +24,57 @@ class _MemoryPagePreviewScreenState extends State<MemoryPagePreviewScreen> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            CircleAvatar(
-              radius: 60,
-              backgroundColor: Colors.grey[300],
-              // Add photo here if available
+            Stack(
+              alignment: Alignment.center,
+              children: [
+                // CircleAvatar for the image
+                CircleAvatar(
+                  radius: 60, // Size of the image circle
+                  backgroundColor: Colors.grey[800],
+                ),
+                // Add CustomPaint as the arc below the avatar
+                Positioned(
+                  // Adjust position to ensure it's properly placed around the bottom
+                  bottom: -10,
+                  child: CustomPaint(
+                    // Size of the half-circle, half the size of the image
+                    size: const Size(120, 60),
+                    painter: HalfCirclePainter(),
+                  ),
+                ),
+              ],
             ),
             const SizedBox(height: 16),
-            const Text(
-              'Романова Мария\nАлександровна',
+            Text(
+              'Роматова Мария\nАлександровна',
               textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-              ),
+              style: textTheme.headlineMedium,
             ),
             const SizedBox(height: 8),
             Text(
               '01.05.1970 - 03.08.2022',
-              style: TextStyle(
-                fontSize: 16,
-                color: Colors.grey[600],
-              ),
+              style: textTheme.headlineSmall?.copyWith(color: Colors.grey[600]),
             ),
             const SizedBox(height: 16),
-            Text(
-              'Любим тебя, и в памяти\nНашей всегда ты жива',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 16,
-                fontStyle: FontStyle.italic,
-                color: Colors.grey[600],
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 8.0),
+              child: Divider(),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8.0),
+              child: Text(
+                'Любим тебя, и в памяти\nНашей всегда ты жива',
+                textAlign: TextAlign.center,
+                style: textTheme.bodySmall?.copyWith(
+                  fontSize: 16,
+                  color: Colors.grey[600],
+                  fontStyle: FontStyle.italic,
+                ),
               ),
+            ),
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 8.0),
+              child: Divider(),
             ),
             const SizedBox(height: 24),
             // ... (previous content above tabs)
