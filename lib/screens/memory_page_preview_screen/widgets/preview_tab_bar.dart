@@ -15,26 +15,28 @@ class PreviewTabBarWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        border: Border(
-          bottom: BorderSide(color: Colors.grey[300]!, width: 1),
-        ),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: List.generate(tabs.length, (index) {
-          bool isSelected = index == selectedIndex;
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: List.generate(tabs.length, (index) {
+        bool isSelected = index == selectedIndex;
 
-          return GestureDetector(
-            onTap: () => onTap(index),
+        return GestureDetector(
+          onTap: () => onTap(index),
+          child: DecoratedBox(
+            decoration: BoxDecoration(
+              border: Border(
+                bottom: isSelected
+                    ? BorderSide(color: Colors.grey[300]!, width: 1)
+                    : BorderSide.none,
+              ),
+            ),
             child: PreviewTabWidget(
               isActive: isSelected,
               text: tabs[index],
             ),
-          );
-        }),
-      ),
+          ),
+        );
+      }),
     );
   }
 }

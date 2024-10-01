@@ -24,25 +24,35 @@ class _MemoryPagePreviewScreenState extends State<MemoryPagePreviewScreen> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Stack(
-              alignment: Alignment.center,
-              children: [
-                // CircleAvatar for the image
-                CircleAvatar(
-                  radius: 60, // Size of the image circle
-                  backgroundColor: Colors.grey[800],
-                ),
-                // Add CustomPaint as the arc below the avatar
-                Positioned(
-                  // Adjust position to ensure it's properly placed around the bottom
-                  bottom: -10,
-                  child: CustomPaint(
-                    // Size of the half-circle, half the size of the image
-                    size: const Size(120, 60),
-                    painter: HalfCirclePainter(),
+            SizedBox(
+              width: 150,
+              height: 150,
+              child: Stack(
+                alignment: Alignment.center,
+                children: [
+                  Positioned(
+                    // Adjust position to ensure it's properly placed around the bottom
+                    // bottom: -10,
+                    child:
+                        // Container(width: 150, height: 150, color: Colors.red)
+                        CustomPaint(
+                      // Size of the half-circle, half the size of the image
+                      size: const Size(150, 150),
+                      painter: HalfCirclePainter(),
+                    ),
                   ),
-                ),
-              ],
+                  // CircleAvatar for the image
+                  Positioned(
+                    child: Center(
+                      child: CircleAvatar(
+                        radius: 60, // Size of the image circle
+                        backgroundColor: Colors.grey[800],
+                      ),
+                    ),
+                  ),
+                  // Add CustomPaint as the arc below the avatar
+                ],
+              ),
             ),
             const SizedBox(height: 16),
             Text(
@@ -67,7 +77,7 @@ class _MemoryPagePreviewScreenState extends State<MemoryPagePreviewScreen> {
                 textAlign: TextAlign.center,
                 style: textTheme.bodySmall?.copyWith(
                   fontSize: 16,
-                  color: Colors.grey[600],
+                  color: Colors.white,
                   fontStyle: FontStyle.italic,
                 ),
               ),
