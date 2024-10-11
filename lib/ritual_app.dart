@@ -189,7 +189,7 @@ class RitualApp extends StatelessWidget {
     );
 
     return FutureBuilder(
-      future: kIsWeb ? Future.delayed(Duration(seconds: 1)) : _initHive(),
+      future: kIsWeb ? Future.delayed(const Duration(seconds: 1)) : _initHive(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
           // locale = HiveStore().getLocale();
