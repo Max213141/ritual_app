@@ -12,13 +12,13 @@ dependencies:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
-  bloc: ^8.1.1
-  flutter_bloc: ^8.1.1
-  go_router: ^14.2.7
+  bloc: ^9.0.0
+  flutter_bloc: ^9.0.0
+  go_router: ^14.6.3
   freezed_annotation: ^2.2.0
   json_annotation: ^4.8.0
-  firebase_core: ^2.24.2
-  firebase_auth: ^4.5.0
+  firebase_core: ^3.10.1
+  firebase_auth: ^5.4.1
   intro_slider: ^4.2.0
   hive: ^2.2.3
   hive_flutter: ^1.1.0
@@ -27,18 +27,18 @@ dependencies:
   bottom_sheet: ^4.0.0
   intl: ^0.19.0
   http: ^1.2.0
-  cloud_firestore: ^4.14.0
+  cloud_firestore: ^5.6.2
   url_launcher: ^6.2.5
-  firebase_storage: ^11.7.5
-  get_it: ^7.7.0
+  firebase_storage: ^12.4.1
+  get_it: ^8.0.3
   flutter_image_compress: ^2.3.0
   image_picker: ^1.1.1
   permission_handler: ^11.3.1
   path_provider: ^2.1.3
-  device_info_plus: ^10.1.0
+  device_info_plus: ^11.2.1
   video_player: ^2.8.6
-  mime: ^1.0.5
-  mobile_scanner: ^5.1.1
+  mime: ^2.0.0
+  mobile_scanner: ^6.0.3
   video_compress: ^3.1.2
   google_sign_in: ^6.2.1
   tab_container: ^3.5.3
@@ -52,14 +52,13 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  flutter_lints: ^3.0.1
+  flutter_lints: ^5.0.0
   json_serializable: ^6.6.1
-  flutter_launcher_icons: ^0.13.1
+  flutter_launcher_icons: ^0.14.3
   flutter_native_splash: ^2.4.0
   build_runner: ^2.3.3
   freezed: ^2.3.3
   hive_generator: ^2.0.0
-  
 
 ### TODO Launch
 flutter_launcher_icons:
@@ -78,11 +77,10 @@ flutter_launcher_icons:
 flutter_native_splash:
   image: assets/splash/memento_splash.png
   color: "#000000"
-  
+
   android_12:
     color: "#000000"
     image: assets/splash/memento_splash.png
-
 
 flutter:
   uses-material-design:
