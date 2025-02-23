@@ -5,6 +5,6 @@ class PhotoTabWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(child: Text('Photo gallery goes here'));
+    return const Center(child: Text('Photo gallery goes here'));
   }
 }

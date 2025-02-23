@@ -47,7 +47,7 @@ class _MemoryPageWebBodyWidgetState extends State<MemoryPageWebBodyWidget> {
           Expanded(
             child: SingleChildScrollView(
               child: Padding(
-                padding: EdgeInsets.all(20),
+                padding: const EdgeInsets.all(20),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -58,7 +58,7 @@ class _MemoryPageWebBodyWidgetState extends State<MemoryPageWebBodyWidget> {
                     const Text('Биографический текст...'),
                     const SizedBox(height: 20),
                     const Text('Фото',
-                        style: const TextStyle(
+                        style: TextStyle(
                             fontSize: 24, fontWeight: FontWeight.bold)),
                     const SizedBox(height: 10),
                     GridView.builder(

@@ -18,7 +18,7 @@ class _MemoryPageCreationScreenState extends State<MemoryPageCreationScreen>
   late GlobalKey<FormState> _formKey;
   late TabController _tabController;
   late MemoryPage _profileData;
-  ValueNotifier<int> _selectedIndex = ValueNotifier<int>(0);
+  final ValueNotifier<int> _selectedIndex = ValueNotifier<int>(0);
 
   @override
   void initState() {

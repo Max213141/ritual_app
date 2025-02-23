@@ -22,7 +22,7 @@ class MPTextField extends StatelessWidget {
           hintText: hintText,
           filled: true,
           fillColor:
-              Color(0xFF303030).withOpacity(.8), // Light grey text for label
+              const Color(0xFF303030).withOpacity(.8), // Light grey text for label
 
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(12), // Rounded corners
@@ -33,11 +33,11 @@ class MPTextField extends StatelessWidget {
           ),
           floatingLabelBehavior:
               FloatingLabelBehavior.always, // Label always on top
-          contentPadding: EdgeInsets.symmetric(
+          contentPadding: const EdgeInsets.symmetric(
               horizontal: 16, vertical: 20), // Padding inside the field
         ),
         maxLines: maxLines,
-        style: TextStyle(color: Colors.white), // White text for input
+        style: const TextStyle(color: Colors.white), // White text for input
       ),
     );
   }

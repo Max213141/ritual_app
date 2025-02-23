@@ -67,7 +67,7 @@ class MediaService implements MediaServiceInterface {
           //     await compressFile(processedPickedImageFile);
         }
       }
-      _log('Proccessed Picked image -> ${processedPickedImageFile}');
+      _log('Proccessed Picked image -> $processedPickedImageFile');
 
       return processedPickedImageFile;
     }

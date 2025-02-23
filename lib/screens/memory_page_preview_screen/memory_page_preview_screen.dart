@@ -114,17 +114,17 @@ class _MemoryPagePreviewScreenState extends State<MemoryPagePreviewScreen> {
       case 2:
         return _buildVideoContent();
       default:
-        return SizedBox.shrink();
+        return const SizedBox.shrink();
     }
   }
 
   Widget _buildPhotoContent() {
     // Implement photo gallery here
-    return Center(child: Text('Photo gallery goes here'));
+    return const Center(child: Text('Photo gallery goes here'));
   }
 
   Widget _buildVideoContent() {
     // Implement video gallery here
-    return Center(child: Text('Video gallery goes here'));
+    return const Center(child: Text('Video gallery goes here'));
   }
 }

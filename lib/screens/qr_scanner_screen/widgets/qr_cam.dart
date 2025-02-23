@@ -67,7 +67,7 @@ class _QrCamWidgetState extends State<QrCamWidget> {
           if (state is QrCamPermissionPermamentlyDenied) {
             body = const SafeArea(
               child: Padding(
-                padding: const EdgeInsets.all(16),
+                padding: EdgeInsets.all(16),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [

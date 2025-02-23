@@ -5,6 +5,6 @@ class VideoTabWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(child: Text('Video gallery goes here'));
+    return const Center(child: Text('Video gallery goes here'));
   }
 }

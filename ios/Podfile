@@ -1,5 +1,5 @@
 # Uncomment this line to define a global platform for your project
-# platform :ios, '12.0'
+platform :ios, '13.0'
 
 # CocoaPods analytics sends network stats synchronously affecting flutter build latency.
 ENV['COCOAPODS_DISABLE_STATS'] = 'true'
@@ -31,7 +31,13 @@ target 'Runner' do
   use_frameworks!
   use_modular_headers!
 
+  pod 'Firebase/Analytics', :modular_headers => true
+  pod 'Firebase/Auth', :modular_headers => true
+  pod 'Firebase/Core', :modular_headers => true
+  pod 'Firebase/Firestore', :modular_headers => true
+
   flutter_install_all_ios_pods File.dirname(File.realpath(__FILE__))
+
   target 'RunnerTests' do
     inherit! :search_paths
   end
@@ -41,12 +47,42 @@ post_install do |installer|
   installer.pods_project.targets.each do |target|
     flutter_additional_ios_build_settings(target)
 
+    # Handle permissions
     target.build_configurations.each do |config|
+    config.build_settings['GCC_PREPROCESSOR_DEFINITIONS'] ||= [
+    '$(inherited)',
+    
+    # ## dart: PermissionGroup.camera
+    'PERMISSION_CAMERA=1',
+    
+    # ## dart: PermissionGroup.photos
+    'PERMISSION_PHOTOS=1',
+    
+    # ## dart: PermissionGroup.location
+    'PERMISSION_LOCATION=1',
+    # 'PERMISSION_LOCATION_WHENINUSE=0',
+    ]
+    end
+
+    if target.name == 'BoringSSL-GRPC'
+      target.source_build_phase.files.each do |file|
+        if file.settings && file.settings['COMPILER_FLAGS']
+          flags = file.settings['COMPILER_FLAGS'].split
+          flags.reject! { |flag| flag == '-GCC_WARN_INHIBIT_ALL_WARNINGS' }
+          file.settings['COMPILER_FLAGS'] = flags.join(' ')
+        end
+      end
+    end
+  end
+end
+
+
+
+
+
       # You can remove unused permissions here
       # for more information: https://github.com/BaseflowIT/flutter-permission-handler/blob/master/permission_handler/ios/Classes/PermissionHandlerEnums.h
       # e.g. when you don't need camera permission, just add 'PERMISSION_CAMERA=0'
-      config.build_settings['GCC_PREPROCESSOR_DEFINITIONS'] ||= [
-        '$(inherited)',
 
         # ## dart: PermissionGroup.calendar
         # 'PERMISSION_EVENTS=1',
@@ -61,7 +97,7 @@ post_install do |installer|
         # 'PERMISSION_CONTACTS=1',
 
         # ## dart: PermissionGroup.camera
-        'PERMISSION_CAMERA=1',
+        # 'PERMISSION_CAMERA=1',
 
         # ## dart: PermissionGroup.microphone
         # 'PERMISSION_MICROPHONE=1',
@@ -70,7 +106,7 @@ post_install do |installer|
         # 'PERMISSION_SPEECH_RECOGNIZER=1',
 
         # dart: PermissionGroup.photos
-        'PERMISSION_PHOTOS=1',
+        # 'PERMISSION_PHOTOS=1',
 
         # ## The 'PERMISSION_LOCATION' macro enables the `locationWhenInUse` and `locationAlways` permission. If
         # ## the application only requires `locationWhenInUse`, only specify the `PERMISSION_LOCATION_WHENINUSE`
@@ -100,8 +136,5 @@ post_install do |installer|
 
         # ## dart: PermissionGroup.criticalAlerts
         # 'PERMISSION_ASSISTANT=1',
-      ]
 
-    end
-  end
-end
+

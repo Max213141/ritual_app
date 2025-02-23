@@ -27,7 +27,7 @@ class _MPDatePickerState extends State<MPDatePicker> {
           borderRadius: BorderRadius.circular(12),
           borderSide: BorderSide.none,
         ),
-        hintStyle: TextStyle(fontSize: 12),
+        hintStyle: const TextStyle(fontSize: 12),
         labelStyle: TextStyle(
           color: Colors.grey[400],
         ),

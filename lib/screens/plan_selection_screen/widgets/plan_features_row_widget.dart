@@ -13,9 +13,9 @@ class PlanFeaturesWidget extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 4.0),
       child: Row(
         children: [
-          Icon(Icons.check_circle, color: Colors.white, size: 16),
-          SizedBox(width: 8),
-          Text(text, style: TextStyle(color: Colors.white)),
+          const Icon(Icons.check_circle, color: Colors.white, size: 16),
+          const SizedBox(width: 8),
+          Text(text, style: const TextStyle(color: Colors.white)),
         ],
       ),
     );

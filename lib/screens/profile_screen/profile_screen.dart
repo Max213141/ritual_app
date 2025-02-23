@@ -21,7 +21,7 @@ class ProfileScreen extends StatelessWidget {
             child: SizedBox(
               height: size.height - MediaQuery.viewPaddingOf(context).top - 45,
               width: size.width - 32,
-              child: Text(
+              child: const Text(
                   'Здесь наверное будет измененние имени пользователя, пароля, хз чего ещё'),
             ),
           ),

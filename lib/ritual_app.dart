@@ -74,7 +74,7 @@ class RitualApp extends StatelessWidget {
           builder: (BuildContext context, GoRouterState state) {
             // return SplashScreen();
             return kIsWeb
-                ? MemoryPageViewScreen()
+                ? const MemoryPageViewScreen()
                 : InitialPage(
                     auth: auth,
                   );
