@@ -84,6 +84,9 @@ class _$MediaEventCopyWithImpl<$Res, $Val extends MediaEvent>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of MediaEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -100,6 +103,9 @@ class __$$GetMediaImplCopyWithImpl<$Res>
   __$$GetMediaImplCopyWithImpl(
       _$GetMediaImpl _value, $Res Function(_$GetMediaImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of MediaEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -220,6 +226,8 @@ class __$$UploadMediaImplCopyWithImpl<$Res>
       _$UploadMediaImpl _value, $Res Function(_$UploadMediaImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of MediaEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -280,7 +288,9 @@ class _$UploadMediaImpl implements UploadMedia {
   int get hashCode =>
       Object.hash(runtimeType, file, filePath, progressController);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of MediaEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$UploadMediaImplCopyWith<_$UploadMediaImpl> get copyWith =>
@@ -371,7 +381,10 @@ abstract class UploadMedia implements MediaEvent {
   File get file;
   String get filePath;
   StreamController<double> get progressController;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of MediaEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$UploadMediaImplCopyWith<_$UploadMediaImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -390,6 +403,9 @@ class __$$DeleteMediaImplCopyWithImpl<$Res>
   __$$DeleteMediaImplCopyWithImpl(
       _$DeleteMediaImpl _value, $Res Function(_$DeleteMediaImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of MediaEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -554,6 +570,9 @@ class _$MediaStateCopyWithImpl<$Res, $Val extends MediaState>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of MediaState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -570,6 +589,9 @@ class __$$InitialImplCopyWithImpl<$Res>
   __$$InitialImplCopyWithImpl(
       _$InitialImpl _value, $Res Function(_$InitialImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of MediaState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -678,6 +700,9 @@ class __$$LoadingMediaImplCopyWithImpl<$Res>
   __$$LoadingMediaImplCopyWithImpl(
       _$LoadingMediaImpl _value, $Res Function(_$LoadingMediaImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of MediaState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -786,6 +811,9 @@ class __$$UploadingMediaImplCopyWithImpl<$Res>
   __$$UploadingMediaImplCopyWithImpl(
       _$UploadingMediaImpl _value, $Res Function(_$UploadingMediaImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of MediaState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc

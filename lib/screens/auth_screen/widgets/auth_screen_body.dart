@@ -144,9 +144,11 @@ class _AuthScreenBodyState extends State<AuthScreenBody> {
                                   _switchedToRegister
                                       ? BlocProvider.of<AuthBloc>(context).add(
                                           CreateUserEvent(
-                                            email: email,
-                                            password: password,
-                                          ),
+                                              email: email,
+                                              password: password,
+                                              username:
+                                                  ')))' //TODO implement username field
+                                              ),
                                         )
                                       : BlocProvider.of<AuthBloc>(context).add(
                                           LogInEvent(

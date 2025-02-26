@@ -10,12 +10,24 @@ class UserData extends HiveObject {
   @HiveField(1)
   String? email;
   @HiveField(2)
-  String? password;
+  String? displayName;
+  @HiveField(3)
+  String? profilePicUrl;
+  @HiveField(4)
+  String? authProvider; // "google" or "email"
+  @HiveField(5)
+  List<String>? linkedAccounts;
+  @HiveField(6)
+  List<String>? memoryDesks;
 
   UserData({
     this.uid,
     this.email,
-    this.password,
+    this.displayName,
+    this.profilePicUrl,
+    this.authProvider,
+    this.linkedAccounts,
+    this.memoryDesks,
   });
 
   UserData.initial();

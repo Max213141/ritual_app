@@ -18,7 +18,8 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$AuthEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String email, String password) createUser,
+    required TResult Function(String email, String password, String? username)
+        createUser,
     required TResult Function(String email, String password) logIn,
     required TResult Function() signInWithGoogle,
     required TResult Function() deleteUser,
@@ -28,7 +29,8 @@ mixin _$AuthEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String email, String password)? createUser,
+    TResult? Function(String email, String password, String? username)?
+        createUser,
     TResult? Function(String email, String password)? logIn,
     TResult? Function()? signInWithGoogle,
     TResult? Function()? deleteUser,
@@ -38,7 +40,8 @@ mixin _$AuthEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String email, String password)? createUser,
+    TResult Function(String email, String password, String? username)?
+        createUser,
     TResult Function(String email, String password)? logIn,
     TResult Function()? signInWithGoogle,
     TResult Function()? deleteUser,
@@ -95,6 +98,9 @@ class _$AuthEventCopyWithImpl<$Res, $Val extends AuthEvent>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of AuthEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -103,7 +109,7 @@ abstract class _$$CreateUserEventImplCopyWith<$Res> {
           $Res Function(_$CreateUserEventImpl) then) =
       __$$CreateUserEventImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({String email, String password});
+  $Res call({String email, String password, String? username});
 }
 
 /// @nodoc
@@ -114,11 +120,14 @@ class __$$CreateUserEventImplCopyWithImpl<$Res>
       _$CreateUserEventImpl _value, $Res Function(_$CreateUserEventImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of AuthEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? email = null,
     Object? password = null,
+    Object? username = freezed,
   }) {
     return _then(_$CreateUserEventImpl(
       email: null == email
@@ -129,6 +138,10 @@ class __$$CreateUserEventImplCopyWithImpl<$Res>
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
               as String,
+      username: freezed == username
+          ? _value.username
+          : username // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -136,16 +149,19 @@ class __$$CreateUserEventImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$CreateUserEventImpl implements CreateUserEvent {
-  const _$CreateUserEventImpl({required this.email, required this.password});
+  const _$CreateUserEventImpl(
+      {required this.email, required this.password, required this.username});
 
   @override
   final String email;
   @override
   final String password;
+  @override
+  final String? username;
 
   @override
   String toString() {
-    return 'AuthEvent.createUser(email: $email, password: $password)';
+    return 'AuthEvent.createUser(email: $email, password: $password, username: $username)';
   }
 
   @override
@@ -155,13 +171,17 @@ class _$CreateUserEventImpl implements CreateUserEvent {
             other is _$CreateUserEventImpl &&
             (identical(other.email, email) || other.email == email) &&
             (identical(other.password, password) ||
-                other.password == password));
+                other.password == password) &&
+            (identical(other.username, username) ||
+                other.username == username));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, email, password);
+  int get hashCode => Object.hash(runtimeType, email, password, username);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of AuthEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$CreateUserEventImplCopyWith<_$CreateUserEventImpl> get copyWith =>
@@ -171,33 +191,36 @@ class _$CreateUserEventImpl implements CreateUserEvent {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String email, String password) createUser,
+    required TResult Function(String email, String password, String? username)
+        createUser,
     required TResult Function(String email, String password) logIn,
     required TResult Function() signInWithGoogle,
     required TResult Function() deleteUser,
     required TResult Function() logOut,
     required TResult Function(String email) resetPassword,
   }) {
-    return createUser(email, password);
+    return createUser(email, password, username);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String email, String password)? createUser,
+    TResult? Function(String email, String password, String? username)?
+        createUser,
     TResult? Function(String email, String password)? logIn,
     TResult? Function()? signInWithGoogle,
     TResult? Function()? deleteUser,
     TResult? Function()? logOut,
     TResult? Function(String email)? resetPassword,
   }) {
-    return createUser?.call(email, password);
+    return createUser?.call(email, password, username);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String email, String password)? createUser,
+    TResult Function(String email, String password, String? username)?
+        createUser,
     TResult Function(String email, String password)? logIn,
     TResult Function()? signInWithGoogle,
     TResult Function()? deleteUser,
@@ -206,7 +229,7 @@ class _$CreateUserEventImpl implements CreateUserEvent {
     required TResult orElse(),
   }) {
     if (createUser != null) {
-      return createUser(email, password);
+      return createUser(email, password, username);
     }
     return orElse();
   }
@@ -258,11 +281,16 @@ class _$CreateUserEventImpl implements CreateUserEvent {
 abstract class CreateUserEvent implements AuthEvent {
   const factory CreateUserEvent(
       {required final String email,
-      required final String password}) = _$CreateUserEventImpl;
+      required final String password,
+      required final String? username}) = _$CreateUserEventImpl;
 
   String get email;
   String get password;
-  @JsonKey(ignore: true)
+  String? get username;
+
+  /// Create a copy of AuthEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$CreateUserEventImplCopyWith<_$CreateUserEventImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -284,6 +312,8 @@ class __$$LogInEventImplCopyWithImpl<$Res>
       _$LogInEventImpl _value, $Res Function(_$LogInEventImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of AuthEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -331,7 +361,9 @@ class _$LogInEventImpl implements LogInEvent {
   @override
   int get hashCode => Object.hash(runtimeType, email, password);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of AuthEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$LogInEventImplCopyWith<_$LogInEventImpl> get copyWith =>
@@ -340,7 +372,8 @@ class _$LogInEventImpl implements LogInEvent {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String email, String password) createUser,
+    required TResult Function(String email, String password, String? username)
+        createUser,
     required TResult Function(String email, String password) logIn,
     required TResult Function() signInWithGoogle,
     required TResult Function() deleteUser,
@@ -353,7 +386,8 @@ class _$LogInEventImpl implements LogInEvent {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String email, String password)? createUser,
+    TResult? Function(String email, String password, String? username)?
+        createUser,
     TResult? Function(String email, String password)? logIn,
     TResult? Function()? signInWithGoogle,
     TResult? Function()? deleteUser,
@@ -366,7 +400,8 @@ class _$LogInEventImpl implements LogInEvent {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String email, String password)? createUser,
+    TResult Function(String email, String password, String? username)?
+        createUser,
     TResult Function(String email, String password)? logIn,
     TResult Function()? signInWithGoogle,
     TResult Function()? deleteUser,
@@ -431,7 +466,10 @@ abstract class LogInEvent implements AuthEvent {
 
   String get email;
   String get password;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of AuthEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$LogInEventImplCopyWith<_$LogInEventImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -450,6 +488,9 @@ class __$$SignInWithGoogleImplCopyWithImpl<$Res>
   __$$SignInWithGoogleImplCopyWithImpl(_$SignInWithGoogleImpl _value,
       $Res Function(_$SignInWithGoogleImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of AuthEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -474,7 +515,8 @@ class _$SignInWithGoogleImpl implements SignInWithGoogle {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String email, String password) createUser,
+    required TResult Function(String email, String password, String? username)
+        createUser,
     required TResult Function(String email, String password) logIn,
     required TResult Function() signInWithGoogle,
     required TResult Function() deleteUser,
@@ -487,7 +529,8 @@ class _$SignInWithGoogleImpl implements SignInWithGoogle {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String email, String password)? createUser,
+    TResult? Function(String email, String password, String? username)?
+        createUser,
     TResult? Function(String email, String password)? logIn,
     TResult? Function()? signInWithGoogle,
     TResult? Function()? deleteUser,
@@ -500,7 +543,8 @@ class _$SignInWithGoogleImpl implements SignInWithGoogle {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String email, String password)? createUser,
+    TResult Function(String email, String password, String? username)?
+        createUser,
     TResult Function(String email, String password)? logIn,
     TResult Function()? signInWithGoogle,
     TResult Function()? deleteUser,
@@ -576,6 +620,9 @@ class __$$DeleteUserEventImplCopyWithImpl<$Res>
   __$$DeleteUserEventImplCopyWithImpl(
       _$DeleteUserEventImpl _value, $Res Function(_$DeleteUserEventImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of AuthEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -600,7 +647,8 @@ class _$DeleteUserEventImpl implements DeleteUserEvent {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String email, String password) createUser,
+    required TResult Function(String email, String password, String? username)
+        createUser,
     required TResult Function(String email, String password) logIn,
     required TResult Function() signInWithGoogle,
     required TResult Function() deleteUser,
@@ -613,7 +661,8 @@ class _$DeleteUserEventImpl implements DeleteUserEvent {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String email, String password)? createUser,
+    TResult? Function(String email, String password, String? username)?
+        createUser,
     TResult? Function(String email, String password)? logIn,
     TResult? Function()? signInWithGoogle,
     TResult? Function()? deleteUser,
@@ -626,7 +675,8 @@ class _$DeleteUserEventImpl implements DeleteUserEvent {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String email, String password)? createUser,
+    TResult Function(String email, String password, String? username)?
+        createUser,
     TResult Function(String email, String password)? logIn,
     TResult Function()? signInWithGoogle,
     TResult Function()? deleteUser,
@@ -702,6 +752,9 @@ class __$$LogOutEventImplCopyWithImpl<$Res>
   __$$LogOutEventImplCopyWithImpl(
       _$LogOutEventImpl _value, $Res Function(_$LogOutEventImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of AuthEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -726,7 +779,8 @@ class _$LogOutEventImpl implements LogOutEvent {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String email, String password) createUser,
+    required TResult Function(String email, String password, String? username)
+        createUser,
     required TResult Function(String email, String password) logIn,
     required TResult Function() signInWithGoogle,
     required TResult Function() deleteUser,
@@ -739,7 +793,8 @@ class _$LogOutEventImpl implements LogOutEvent {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String email, String password)? createUser,
+    TResult? Function(String email, String password, String? username)?
+        createUser,
     TResult? Function(String email, String password)? logIn,
     TResult? Function()? signInWithGoogle,
     TResult? Function()? deleteUser,
@@ -752,7 +807,8 @@ class _$LogOutEventImpl implements LogOutEvent {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String email, String password)? createUser,
+    TResult Function(String email, String password, String? username)?
+        createUser,
     TResult Function(String email, String password)? logIn,
     TResult Function()? signInWithGoogle,
     TResult Function()? deleteUser,
@@ -831,6 +887,8 @@ class __$$ResetPasswordEventImplCopyWithImpl<$Res>
       $Res Function(_$ResetPasswordEventImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of AuthEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -869,7 +927,9 @@ class _$ResetPasswordEventImpl implements ResetPasswordEvent {
   @override
   int get hashCode => Object.hash(runtimeType, email);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of AuthEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$ResetPasswordEventImplCopyWith<_$ResetPasswordEventImpl> get copyWith =>
@@ -879,7 +939,8 @@ class _$ResetPasswordEventImpl implements ResetPasswordEvent {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String email, String password) createUser,
+    required TResult Function(String email, String password, String? username)
+        createUser,
     required TResult Function(String email, String password) logIn,
     required TResult Function() signInWithGoogle,
     required TResult Function() deleteUser,
@@ -892,7 +953,8 @@ class _$ResetPasswordEventImpl implements ResetPasswordEvent {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String email, String password)? createUser,
+    TResult? Function(String email, String password, String? username)?
+        createUser,
     TResult? Function(String email, String password)? logIn,
     TResult? Function()? signInWithGoogle,
     TResult? Function()? deleteUser,
@@ -905,7 +967,8 @@ class _$ResetPasswordEventImpl implements ResetPasswordEvent {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String email, String password)? createUser,
+    TResult Function(String email, String password, String? username)?
+        createUser,
     TResult Function(String email, String password)? logIn,
     TResult Function()? signInWithGoogle,
     TResult Function()? deleteUser,
@@ -968,7 +1031,10 @@ abstract class ResetPasswordEvent implements AuthEvent {
       _$ResetPasswordEventImpl;
 
   String get email;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of AuthEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ResetPasswordEventImplCopyWith<_$ResetPasswordEventImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -1075,6 +1141,9 @@ class _$AuthStateCopyWithImpl<$Res, $Val extends AuthState>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of AuthState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -1091,6 +1160,9 @@ class __$$InitialImplCopyWithImpl<$Res>
   __$$InitialImplCopyWithImpl(
       _$InitialImpl _value, $Res Function(_$InitialImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of AuthState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -1238,6 +1310,9 @@ class __$$AuthLoadingStateImplCopyWithImpl<$Res>
   __$$AuthLoadingStateImplCopyWithImpl(_$AuthLoadingStateImpl _value,
       $Res Function(_$AuthLoadingStateImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of AuthState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -1385,6 +1460,9 @@ class __$$AuthSendingCodeStateImplCopyWithImpl<$Res>
   __$$AuthSendingCodeStateImplCopyWithImpl(_$AuthSendingCodeStateImpl _value,
       $Res Function(_$AuthSendingCodeStateImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of AuthState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -1536,6 +1614,8 @@ class __$$AuthUserCreatedStateImplCopyWithImpl<$Res>
       $Res Function(_$AuthUserCreatedStateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of AuthState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1586,7 +1666,9 @@ class _$AuthUserCreatedStateImpl implements _AuthUserCreatedState {
   @override
   int get hashCode => Object.hash(runtimeType, email, password);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of AuthState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$AuthUserCreatedStateImplCopyWith<_$AuthUserCreatedStateImpl>
@@ -1709,7 +1791,10 @@ abstract class _AuthUserCreatedState implements AuthState {
 // @Default(Playlist(name: '', tracks: [])) Playlist playlist,
   String get email;
   String get password;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of AuthState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$AuthUserCreatedStateImplCopyWith<_$AuthUserCreatedStateImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -1732,6 +1817,8 @@ class __$$AuthLogInSuccessStateImplCopyWithImpl<$Res>
       $Res Function(_$AuthLogInSuccessStateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of AuthState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1782,7 +1869,9 @@ class _$AuthLogInSuccessStateImpl implements _AuthLogInSuccessState {
   @override
   int get hashCode => Object.hash(runtimeType, email, password);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of AuthState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$AuthLogInSuccessStateImplCopyWith<_$AuthLogInSuccessStateImpl>
@@ -1905,7 +1994,10 @@ abstract class _AuthLogInSuccessState implements AuthState {
 // @Default(Playlist(name: '', tracks: [])) Playlist playlist,
   String get email;
   String get password;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of AuthState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$AuthLogInSuccessStateImplCopyWith<_$AuthLogInSuccessStateImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -1926,6 +2018,9 @@ class __$$AuthLogOutSuccessStateImplCopyWithImpl<$Res>
       _$AuthLogOutSuccessStateImpl _value,
       $Res Function(_$AuthLogOutSuccessStateImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of AuthState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -2080,6 +2175,8 @@ class __$$AuthResetCodeSentSuccesfullyStateImplCopyWithImpl<$Res>
       $Res Function(_$AuthResetCodeSentSuccesfullyStateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of AuthState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -2120,7 +2217,9 @@ class _$AuthResetCodeSentSuccesfullyStateImpl
   @override
   int get hashCode => Object.hash(runtimeType, email);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of AuthState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$AuthResetCodeSentSuccesfullyStateImplCopyWith<
@@ -2241,7 +2340,10 @@ abstract class _AuthResetCodeSentSuccesfullyState implements AuthState {
       _$AuthResetCodeSentSuccesfullyStateImpl;
 
   String get email;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of AuthState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$AuthResetCodeSentSuccesfullyStateImplCopyWith<
           _$AuthResetCodeSentSuccesfullyStateImpl>
       get copyWith => throw _privateConstructorUsedError;
@@ -2266,6 +2368,8 @@ class __$$AuthResetCodeErrorStateImplCopyWithImpl<$Res>
       $Res Function(_$AuthResetCodeErrorStateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of AuthState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -2308,7 +2412,9 @@ class _$AuthResetCodeErrorStateImpl implements _AuthResetCodeErrorState {
   @override
   int get hashCode => Object.hash(runtimeType, errorText);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of AuthState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$AuthResetCodeErrorStateImplCopyWith<_$AuthResetCodeErrorStateImpl>
@@ -2428,7 +2534,10 @@ abstract class _AuthResetCodeErrorState implements AuthState {
       _$AuthResetCodeErrorStateImpl;
 
   String get errorText;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of AuthState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$AuthResetCodeErrorStateImplCopyWith<_$AuthResetCodeErrorStateImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -2450,6 +2559,8 @@ class __$$AuthErrorStateImplCopyWithImpl<$Res>
       _$AuthErrorStateImpl _value, $Res Function(_$AuthErrorStateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of AuthState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -2491,7 +2602,9 @@ class _$AuthErrorStateImpl implements _AuthErrorState {
   @override
   int get hashCode => Object.hash(runtimeType, errorText);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of AuthState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$AuthErrorStateImplCopyWith<_$AuthErrorStateImpl> get copyWith =>
@@ -2611,7 +2724,10 @@ abstract class _AuthErrorState implements AuthState {
       _$AuthErrorStateImpl;
 
   String get errorText;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of AuthState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$AuthErrorStateImplCopyWith<_$AuthErrorStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

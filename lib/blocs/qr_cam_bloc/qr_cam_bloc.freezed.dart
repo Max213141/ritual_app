@@ -66,6 +66,9 @@ class _$QrCamEventCopyWithImpl<$Res, $Val extends QrCamEvent>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of QrCamEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -82,6 +85,9 @@ class __$$QrCamPermissionCheckImplCopyWithImpl<$Res>
   __$$QrCamPermissionCheckImplCopyWithImpl(_$QrCamPermissionCheckImpl _value,
       $Res Function(_$QrCamPermissionCheckImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of QrCamEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -261,6 +267,9 @@ class _$QrCamStateCopyWithImpl<$Res, $Val extends QrCamState>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of QrCamState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -277,6 +286,9 @@ class __$$InitialImplCopyWithImpl<$Res>
   __$$InitialImplCopyWithImpl(
       _$InitialImpl _value, $Res Function(_$InitialImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of QrCamState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -414,6 +426,9 @@ class __$$QrCamLoadingImplCopyWithImpl<$Res>
   __$$QrCamLoadingImplCopyWithImpl(
       _$QrCamLoadingImpl _value, $Res Function(_$QrCamLoadingImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of QrCamState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -552,6 +567,9 @@ class __$$QrCamPermissionDeniedImplCopyWithImpl<$Res>
   __$$QrCamPermissionDeniedImplCopyWithImpl(_$QrCamPermissionDeniedImpl _value,
       $Res Function(_$QrCamPermissionDeniedImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of QrCamState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -696,6 +714,9 @@ class __$$QrCamPermissionPermamentlyDeniedImplCopyWithImpl<$Res>
       _$QrCamPermissionPermamentlyDeniedImpl _value,
       $Res Function(_$QrCamPermissionPermamentlyDeniedImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of QrCamState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -840,6 +861,9 @@ class __$$QrCamPermissionGrantedImplCopyWithImpl<$Res>
       _$QrCamPermissionGrantedImpl _value,
       $Res Function(_$QrCamPermissionGrantedImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of QrCamState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -984,6 +1008,8 @@ class __$$QrCamErrorImplCopyWithImpl<$Res>
       _$QrCamErrorImpl _value, $Res Function(_$QrCamErrorImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of QrCamState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1039,7 +1065,9 @@ class _$QrCamErrorImpl with DiagnosticableTreeMixin implements QrCamError {
   int get hashCode => Object.hash(
       runtimeType, const DeepCollectionEquality().hash(error), needPop);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of QrCamState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$QrCamErrorImplCopyWith<_$QrCamErrorImpl> get copyWith =>
@@ -1143,7 +1171,10 @@ abstract class QrCamError implements QrCamState {
 
   Object? get error;
   bool? get needPop;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of QrCamState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$QrCamErrorImplCopyWith<_$QrCamErrorImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

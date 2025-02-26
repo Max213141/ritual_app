@@ -40,120 +40,160 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     emit(const AuthState.loading());
 
     try {
+      // 🔹 Check if a user with this email already exists
+      final signInMethods = await auth.fetchSignInMethodsForEmail(event.email);
+
+      if (signInMethods.contains('google.com')) {
+        // 🔴 User already registered with Google, prompt them to log in via Google
+        emit(AuthState.authError(
+            errorText:
+                'This email is already linked to a Google account. Please sign in with Google.'));
+        return;
+      }
+
+      // 🔹 If no existing Google account, create new user with email & password
+
+      // Create user in Firebase Authentication
       final userCredential = await auth.createUserWithEmailAndPassword(
         email: event.email,
         password: event.password,
       );
 
       final uid = userCredential.user?.uid;
-      _log('User ${userCredential.user?.uid ?? 'UID NOT found'} signed in');
+      if (uid == null) {
+        emit(
+          const AuthState.authError(
+            errorText: 'Ошибка создания пользователя',
+          ),
+        );
+        return;
+      }
 
-      await FirebaseFirestore.instance.collection('users').doc(uid).set(
-        {
-          'userData': {
-            'email': event.email,
-            'password': event.password,
-          },
-        },
+      _log('User $uid signed in');
+
+      // Create an AuthData object
+      final newUser = AuthData(
+        userId: uid,
+        email: event.email,
+        displayName: event.username ??
+            'User', //TODO create input field for user_name Default name if not provided
+        profilePicUrl: '', // Default empty profile picture
+        createdAt: DateTime.now(),
+        authProvider: 'email',
+        googleId: null,
+        linkedAccounts: ['email'],
+        memoryDesks: [],
       );
-      _log('create user done successfully');
+
+      // Save user data in Firestore
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(uid)
+          .set(newUser.toJson());
+
+      _log('User created and stored successfully');
+
+      // Automatically log in the user after registration
       add(LogInEvent(email: event.email, password: event.password));
-      // Зарегистрированный пользователь сохранен в объекте userCredential.user.
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
-        emit(
-          const AuthState.authError(
-            errorText: 'Пароль слишком слабый.',
-          ),
-        );
+        emit(const AuthState.authError(errorText: 'Пароль слишком слабый.'));
       } else if (e.code == 'email-already-in-use') {
-        emit(
-          const AuthState.authError(
-            errorText:
-                'Адрес электронной почты уже используется другим аккаунтом.',
-          ),
-        );
+        emit(const AuthState.authError(
+            errorText: 'Этот email уже используется.'));
       } else {
-        _log('USER CREATION AUTH EXEPTION: $e');
+        _log('USER CREATION AUTH EXCEPTION: $e');
+        emit(AuthState.authError(
+            errorText: 'Ошибка при создании пользователя.'));
       }
     } catch (e) {
       emit(AuthState.authError(errorText: 'Ошибка: $e'));
-      _log('UNHANDLED USER CREATION AUTH EXEPTION: $e');
+      _log('UNHANDLED USER CREATION AUTH EXCEPTION: $e');
     }
   }
 
   _signInWithGoogle(SignInWithGoogle event, Emitter<AuthState> emit) async {
     emit(const AuthState.loading());
+
     try {
-      // Trigger the authentication flow
+      // Trigger Google Sign-In
       final GoogleSignInAccount? googleUser = await googleSignIn.signIn();
 
       if (googleUser == null) {
-        // The user canceled the sign-in
         emit(const AuthState.authError(errorText: 'User canceled the sign-in'));
-        return null;
+        return;
       }
 
-      // Obtain the auth details from the request
+      // Get authentication credentials
       final GoogleSignInAuthentication googleAuth =
           await googleUser.authentication;
-
-      // Create a new credential
       final AuthCredential credential = GoogleAuthProvider.credential(
         accessToken: googleAuth.accessToken,
         idToken: googleAuth.idToken,
       );
 
-      // Once signed in, return the UserCredential
+      // Sign in with Firebase
       final UserCredential userCredential =
           await auth.signInWithCredential(credential);
       final String uid = userCredential.user!.uid;
-      final DocumentSnapshot userDoc =
-          await FirebaseFirestore.instance.collection('users').doc(uid).get();
+      final String email = googleUser.email;
+      final String displayName = googleUser.displayName ?? '';
+      final String profilePicUrl = googleUser.photoUrl ?? '';
 
-      userCredential.additionalUserInfo?.profile
-          ?.forEach((key, value) => _log('Value - $key: $value'));
+      // Check if user exists in Firestore
+      final userRef = FirebaseFirestore.instance.collection('users').doc(uid);
+      final userDoc = await userRef.get();
 
-      if (!userDoc.exists) {
-        // User doesn't exist, create a new document
-        await FirebaseFirestore.instance.collection('users').doc(uid).set({
-          'userData': {
-            'email': googleUser.email,
-            'password':
-                '12345678901', // As password is not required for Google Sign-In
-          },
+      if (userDoc.exists) {
+        // 🔹 User exists, update `linkedAccounts` if needed
+        final existingData = userDoc.data()!;
+        final List<String> linkedAccounts =
+            List<String>.from(existingData['linkedAccounts'] ?? []);
+        if (!linkedAccounts.contains('google')) {
+          linkedAccounts.add('google');
+        }
+
+        await userRef.update({
+          'linkedAccounts': linkedAccounts,
+          'googleId': uid, // Ensure Google ID is saved
+          'profilePicUrl': profilePicUrl, // Update if missing
         });
-        DocumentSnapshot docSnapShot =
-            await FirebaseFirestore.instance.collection('users').doc(uid).get();
-        final dbData = docSnapShot.get('userData');
-        DBUserData data = DBUserData.fromJson(dbData);
-        UserData? userData = HiveStore().getUserData();
-        if (userData != null) {
-          userData.uid = uid;
-          userData.email = data.email;
-          userData.password = data.password;
-          await Hive.box<UserData>('user_data').put(0, userData);
-        }
-        _log('New user created in Firestore with uid: $uid');
-      } else {
-        // User exists, handle data from doc
-        final dbData = userDoc.get('userData');
-        DBUserData data = DBUserData.fromJson(dbData);
-        UserData? userData = HiveStore().getUserData();
-        if (userData != null) {
-          userData.uid = uid;
-          userData.email = data.email;
-          userData.password = data.password;
-          await Hive.box<UserData>('user_data').put(0, userData);
-        }
-      }
-      emit(const AuthState.logInSuccess());
 
-      // return userCredential.user;
+        _log('Existing user logged in with Google.');
+      } else {
+        // 🔹 New user, create Firestore document
+        await userRef.set({
+          'userId': uid,
+          'email': email,
+          'displayName': displayName,
+          'profilePicUrl': profilePicUrl,
+          'createdAt': FieldValue.serverTimestamp(),
+          'authProvider': 'google',
+          'googleId': uid,
+          'linkedAccounts': ['google'],
+          'memoryDesks': [],
+        });
+
+        _log('New user registered with Google.');
+      }
+
+      // 🔹 Save user data in Hive (excluding password)
+      final hiveUserData = UserData(
+        uid: uid,
+        email: email,
+        displayName: displayName,
+        profilePicUrl: profilePicUrl,
+        authProvider: 'google',
+        linkedAccounts: ['google'],
+        memoryDesks: [],
+      );
+
+      await Hive.box<UserData>('user_data').put(0, hiveUserData);
+
+      emit(const AuthState.logInSuccess());
     } catch (e) {
       emit(AuthState.authError(errorText: 'Ошибка: $e'));
-      _log('UNHANDLED USER CREATION AUTH EXEPTION: $e');
-      return null;
+      _log('GOOGLE SIGN-IN ERROR: $e');
     }
   }
 
@@ -162,46 +202,89 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
     try {
       _log('User login: ${event.email.trim()}');
-      _log('User password: ${event.password.trim()}');
+
+      // Sign in user with Firebase Authentication
       final userCredential = await auth.signInWithEmailAndPassword(
         email: event.email.trim(),
         password: event.password.trim(),
       );
-      final uid = userCredential.user?.uid;
 
-      try {
-        //TODO impelement separated methods for db requests, simplify the code
-        DocumentSnapshot docSnapShot =
-            await FirebaseFirestore.instance.collection('users').doc(uid).get();
-        if (docSnapShot.exists) {
-          final dbData = docSnapShot.get('userData');
-          DBUserData data = DBUserData.fromJson(dbData);
-          UserData? userData = HiveStore().getUserData();
-          if (userData != null) {
-            userData.uid = uid;
-            userData.email = data.email;
-            userData.password = data.password;
-            await Hive.box<UserData>('user_data').put(0, userData);
-          }
-        } else {
-          _log('Smth went wrong with name'); //TODO implement error handling
-        }
-      } catch (error) {
-        emit(
-          const AuthState.authError(
-            errorText: 'Something went wrong. Please try again later.',
-          ),
-        );
-        _log('Error $error'); //TODO implement error handling
+      final uid = userCredential.user?.uid;
+      if (uid == null) {
+        emit(const AuthState.authError(
+            errorText: 'Ошибка входа: UID не найден.'));
+        return;
       }
+
+      // Fetch user data from Firestore
+      final docSnapshot =
+          await FirebaseFirestore.instance.collection('users').doc(uid).get();
+      if (!docSnapshot.exists) {
+        emit(const AuthState.authError(
+            errorText: 'Ошибка: Данные пользователя не найдены.'));
+        return;
+      }
+
+      final dbData = docSnapshot.data();
+      if (dbData == null) {
+        emit(const AuthState.authError(
+            errorText: 'Ошибка: Неверные данные пользователя.'));
+        return;
+      }
+
+      // Convert Firestore data to AuthData model
+      final authData = AuthData.fromJson(dbData);
+
+      // Save user data (excluding password) in Hive
+      final hiveUserData = UserData(
+        uid: authData.userId,
+        email: authData.email,
+        displayName: authData.displayName,
+        profilePicUrl: authData.profilePicUrl,
+        authProvider: authData.authProvider,
+        linkedAccounts: authData.linkedAccounts,
+        memoryDesks: authData.memoryDesks,
+      );
+
+      await Hive.box<UserData>('user_data').put(0, hiveUserData);
+
+      _log('User successfully logged in and saved in Hive.');
 
       emit(const AuthState.logInSuccess());
     } on FirebaseAuthException catch (e) {
-      emit(AuthState.authError(errorText: 'Ошибка: ${e.message}'));
-      _log('LOG IN AUTH EXEPTION: $e');
+      emit(AuthState.authError(errorText: 'Ошибка входа: ${e.message}'));
+      _log('LOGIN AUTH EXCEPTION: $e');
     } catch (e) {
-      emit(AuthState.authError(errorText: 'Ошибка: $e'));
-      _log('UNHANDLED AUTH ERROR: $e');
+      emit(AuthState.authError(errorText: 'Неизвестная ошибка входа: $e'));
+      _log('UNHANDLED LOGIN ERROR: $e');
+    }
+  }
+
+  Future<void> linkGoogleAccount() async {
+    //TODO implement it
+    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+    final GoogleSignInAuthentication googleAuth =
+        await googleUser!.authentication;
+
+    final googleCredential = GoogleAuthProvider.credential(
+      accessToken: googleAuth.accessToken,
+      idToken: googleAuth.idToken,
+    );
+
+    try {
+      await FirebaseAuth.instance.currentUser!
+          .linkWithCredential(googleCredential);
+
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(FirebaseAuth.instance.currentUser!.uid)
+          .update({
+        "authProvider": "google",
+        "googleId": googleUser.id,
+        "linkedAccounts": FieldValue.arrayUnion(["google"])
+      });
+    } catch (e) {
+      _log("Failed to link Google account: $e");
     }
   }
 
@@ -250,14 +333,14 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
     try {
       await FirebaseAuth.instance.sendPasswordResetEmail(email: event.email);
-      print('Password reset email sent');
+      _log('Password reset email sent');
       emit(AuthState.resetCodeSentSuccesfully(email: event.email));
 
       // Show success message to user
     } catch (e) {
       emit(const AuthState.resetCodeError());
 
-      print('Error sending password reset email: $e');
+      _log('Error sending password reset email: $e');
       // Show error message to user
     }
   }
