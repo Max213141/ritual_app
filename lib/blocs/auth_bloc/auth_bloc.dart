@@ -40,11 +40,11 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     emit(const AuthState.loading());
 
     try {
-      // 🔹 Check if a user with this email already exists
+      //  Check if a user with this email already exists
       final signInMethods = await auth.fetchSignInMethodsForEmail(event.email);
 
       if (signInMethods.contains('google.com')) {
-        // 🔴 User already registered with Google, prompt them to log in via Google
+        //  User already registered with Google, prompt them to log in via Google
         emit(AuthState.authError(
             errorText:
                 'This email is already linked to a Google account. Please sign in with Google.'));
@@ -83,6 +83,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         googleId: null,
         linkedAccounts: ['email'],
         memoryDesks: [],
+        subscriptionLevel: 'free',
+        photoLimit: ProjectConstants.getPhotoLimit('free'),
+        videoLimit: ProjectConstants.getVideoLimit('free'),
       );
 
       // Save user data in Firestore
@@ -139,6 +142,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       final String email = googleUser.email;
       final String displayName = googleUser.displayName ?? '';
       final String profilePicUrl = googleUser.photoUrl ?? '';
+      final String subscriptionLevel = 'free';
+      final int photoLimit = ProjectConstants.getPhotoLimit('free');
+      final int videoLimit = ProjectConstants.getVideoLimit('free');
 
       // Check if user exists in Firestore
       final userRef = FirebaseFirestore.instance.collection('users').doc(uid);
@@ -172,6 +178,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           'googleId': uid,
           'linkedAccounts': ['google'],
           'memoryDesks': [],
+          'subscriptionLevel': subscriptionLevel,
+          'photoLimit': photoLimit,
+          'videoLimit': videoLimit,
         });
 
         _log('New user registered with Google.');
@@ -186,6 +195,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         authProvider: 'google',
         linkedAccounts: ['google'],
         memoryDesks: [],
+        subscriptionLevel: subscriptionLevel,
+        photoLimit: photoLimit,
+        videoLimit: videoLimit,
       );
 
       await Hive.box<UserData>('user_data').put(0, hiveUserData);
@@ -244,6 +256,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         authProvider: authData.authProvider,
         linkedAccounts: authData.linkedAccounts,
         memoryDesks: authData.memoryDesks,
+        subscriptionLevel: authData.subscriptionLevel,
+        photoLimit: authData.photoLimit,
+        videoLimit: authData.videoLimit,
       );
 
       await Hive.box<UserData>('user_data').put(0, hiveUserData);

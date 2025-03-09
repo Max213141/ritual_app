@@ -20,6 +20,9 @@ AuthData _$AuthDataFromJson(Map<String, dynamic> json) => AuthData(
       memoryDesks: (json['memoryDesks'] as List<dynamic>)
           .map((e) => e as String)
           .toList(),
+      subscriptionLevel: json['subscriptionLevel'] as String,
+      photoLimit: (json['photoLimit'] as num).toInt(),
+      videoLimit: (json['videoLimit'] as num).toInt(),
     );
 
 Map<String, dynamic> _$AuthDataToJson(AuthData instance) => <String, dynamic>{
@@ -32,4 +35,7 @@ Map<String, dynamic> _$AuthDataToJson(AuthData instance) => <String, dynamic>{
       'googleId': instance.googleId,
       'linkedAccounts': instance.linkedAccounts,
       'memoryDesks': instance.memoryDesks,
+      'subscriptionLevel': instance.subscriptionLevel,
+      'photoLimit': instance.photoLimit,
+      'videoLimit': instance.videoLimit,
     };

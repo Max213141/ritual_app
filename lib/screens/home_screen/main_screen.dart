@@ -7,7 +7,7 @@ import 'package:ritual_app/screens/home_screen/widgets/widgets.dart';
 import 'package:ritual_app/screens/qr_scanner_screen/qr_scanner_screen.dart';
 import 'package:ritual_app/utils/utils.dart';
 
-void _log(dynamic message) => Logger.projectLog(message, name: 'main_screen');
+// void _log(dynamic message) => Logger.projectLog(message, name: 'main_screen');
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -17,76 +17,13 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-  int _selectedIndex = 0;
+  final int _selectedIndex = 0;
   double navBarHeight = 0;
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
 
   final List<Widget> _screens = [
-    const MemoryPageScreen(
-        // title: 'Main screen',
-        ),
+    const MemoryPageScreen(),
     const QrScanScreen(),
-    // const MoodScreen(),
-    // const SharedStoriesScreen(),
   ];
-  // getAppBarTitle(AppLocalizations l10n) {
-  //   // final String? username = HiveStore().getUserName();
-  //   switch (_selectedIndex) {
-  //     case 0:
-  //       return Align(
-  //         alignment: Alignment.centerLeft,
-  //         child: RichText(
-  //           text: TextSpan(
-  //             children: [
-  //               TextSpan(
-  //                 text: l10n.mainScreenGoodDay,
-  //                 style: MentalHealthTextStyles.text.signikaPrimaryFontF28
-  //                     .copyWith(
-  //                         //color: //AppColor.oneMoreDarkColor,
-  //                         ),
-  //               ),
-  //               TextSpan(
-  //                 text: 'Название',
-  //                 style: MentalHealthTextStyles.text.userName,
-  //               ),
-  //             ],
-  //           ),
-  //         ),
-  //       );
-
-  //     case 1:
-  //       return Align(
-  //         alignment: Alignment.centerLeft,
-  //         child: Text(
-  //           l10n.mainScreenHabits,
-  //           style: MentalHealthTextStyles.text.signikaPrimaryFontF28
-  //               .copyWith(color: Colors.black),
-  //         ),
-  //       );
-  //     case 2:
-  //       return Align(
-  //         alignment: Alignment.centerLeft,
-  //         child: Text(
-  //           l10n.mainScreenMoodStatistic,
-  //           style: MentalHealthTextStyles.text.signikaPrimaryFontF28
-  //               .copyWith(color: Colors.black),
-  //         ),
-  //       );
-  //     case 3:
-  //       return Align(
-  //         alignment: Alignment.centerLeft,
-  //         child: Text(
-  //           l10n.mainScreenSharedStories,
-  //           style: MentalHealthTextStyles.text.signikaPrimaryFontF28
-  //               .copyWith(color: Colors.black),
-  //         ),
-  //       );
-  //   }
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -139,23 +76,6 @@ class _MainScreenState extends State<MainScreen> {
           ],
         ),
         drawer: const DrawerWidget(),
-        // floatingActionButton: ElevatedButton(
-        //   onPressed: () => showDialog(
-        //     context: context,
-        //     builder: (context) {
-        //       return const Center(child: DevMenuWidget());
-        //     },
-        //   ),
-        //   child: const Text('M'),
-        // ),
-        // bottomNavigationBar: LayoutBuilder(
-        //   builder: (BuildContext context, BoxConstraints constraints) {
-        //     return BottomNavBar(
-        //       selectedIndex: _selectedIndex,
-        //       onPressed: _onItemTapped,
-        //     );
-        //   },
-        // ),
         body: _screens.elementAt(_selectedIndex),
       ),
     );

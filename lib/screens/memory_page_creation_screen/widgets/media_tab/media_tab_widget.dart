@@ -5,11 +5,11 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 // import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:ritual_app/entities/db_entities/memory_page/local_memory_page_media.dart';
 import 'package:ritual_app/utils/utils.dart';
 import 'package:video_thumbnail/video_thumbnail.dart';
 
 // import 'package:ritual_app/blocs/media_bloc/media_bloc.dart';
-import 'package:ritual_app/entities/entities.dart';
 import 'package:ritual_app/screens/memory_page_creation_screen/widgets/widgets.dart';
 import 'package:ritual_app/services/media/media_service_interface.dart';
 import 'package:ritual_app/services/service_locator.dart';
@@ -18,10 +18,13 @@ void _log(dynamic message) =>
     Logger.projectLog(message, name: 'media_tab_widget');
 
 class MediaTabWidget extends StatefulWidget {
-  final MemoryPage profileData;
+  final LocalMemoryPageMedia mediaData;
+  final ValueChanged<LocalMemoryPageMedia> onMediaDataChanged;
+
   const MediaTabWidget({
     super.key,
-    required this.profileData,
+    required this.mediaData,
+    required this.onMediaDataChanged,
   });
 
   @override
@@ -107,12 +110,32 @@ class _MediaTabWidgetState extends State<MediaTabWidget>
                 isMedia: true,
               ),
               pickerIcon: 'assets/icons/add_video.svg',
-              closeVideoCallback: (int index) => setState(
-                () {
-                  _selectedVideo.removeAt(index);
-                  _thumbnailList.removeAt(index);
-                },
-              ),
+              closePhotoCallback: (int index) {
+                setState(
+                  () {
+                    _selectedVideo.removeAt(index);
+                    _thumbnailList.removeAt(index);
+                  },
+                  // Notify parent widget
+                );
+                widget.onMediaDataChanged(LocalMemoryPageMedia(
+                  photos: _selectedPhotos,
+                  videos: _selectedVideo,
+                ));
+              },
+              closeVideoCallback: (int index) {
+                setState(
+                  () {
+                    _selectedVideo.removeAt(index);
+                    _thumbnailList.removeAt(index);
+                  },
+                  // Notify parent widget
+                );
+                widget.onMediaDataChanged(LocalMemoryPageMedia(
+                  photos: _selectedPhotos,
+                  videos: _selectedVideo,
+                ));
+              },
             ),
           ],
         ),
@@ -177,6 +200,12 @@ class _MediaTabWidgetState extends State<MediaTabWidget>
               }
             }
           },
+        );
+        widget.onMediaDataChanged(
+          LocalMemoryPageMedia(
+            photos: _selectedPhotos,
+            videos: _selectedVideo, // We will use _thumbnailList in UI
+          ),
         );
       }
     } catch (e) {

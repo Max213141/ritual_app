@@ -14,6 +14,10 @@ class AuthData {
   final List<String> linkedAccounts;
   final List<String> memoryDesks;
 
+  final String subscriptionLevel;
+  final int photoLimit;
+  final int videoLimit;
+
   AuthData({
     required this.userId,
     required this.email,
@@ -24,6 +28,9 @@ class AuthData {
     this.googleId,
     required this.linkedAccounts,
     required this.memoryDesks,
+    required this.subscriptionLevel,
+    required this.photoLimit,
+    required this.videoLimit,
   });
 
   /// Factory constructor for JSON deserialization

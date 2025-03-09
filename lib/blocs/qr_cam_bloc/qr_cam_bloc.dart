@@ -6,13 +6,13 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:ritual_app/services/permission/permission_service.dart';
 import 'package:ritual_app/services/service_locator.dart';
-import 'package:ritual_app/utils/utils.dart';
+// import 'package:ritual_app/utils/utils.dart';
 
 part 'qr_cam_event.dart';
 part 'qr_cam_state.dart';
 part 'qr_cam_bloc.freezed.dart';
 
-void _log(dynamic message) => Logger.projectLog(message, name: 'qr_cam_bloc');
+// void _log(dynamic message) => Logger.projectLog(message, name: 'qr_cam_bloc');
 
 class QrCamBloc extends Bloc<QrCamEvent, QrCamState> {
   final permissionService = getIt<PermissionService>();

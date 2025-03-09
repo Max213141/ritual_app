@@ -1,8 +1,25 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:ritual_app/entities/db_entities/memory_page/local_memory_page_media.dart';
+
+import 'package:ritual_app/entities/entities.dart';
 import 'package:ritual_app/screens/memory_page_preview_screen/widgets/widgets.dart';
+import 'package:ritual_app/utils/utils.dart';
+// import 'package:ritual_app/utils/loger.dart';
+
+// void _log(dynamic message) =>
+//     Logger.projectLog(message, name: 'memory_page_preview');
 
 class MemoryPagePreviewScreen extends StatefulWidget {
-  const MemoryPagePreviewScreen({super.key});
+  final MemoryPage memoryPageData;
+  final LocalMemoryPageMedia mediaData;
+  const MemoryPagePreviewScreen({
+    super.key,
+    required this.memoryPageData,
+    required this.mediaData,
+  });
 
   @override
   State<MemoryPagePreviewScreen> createState() =>
@@ -15,7 +32,20 @@ class _MemoryPagePreviewScreenState extends State<MemoryPagePreviewScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final memoryPageData = widget.memoryPageData;
+
+    final firstName = memoryPageData.firstName;
+    final middleName = memoryPageData.middleName;
+    final lastName = memoryPageData.lastName;
+    final dateOfBirth = memoryPageData.dateOfBirth;
+    final dateOfDeath = memoryPageData.dateOfDeath;
+    final epitaphy = memoryPageData.epitaphy;
+    final photoUrl = memoryPageData.photoUrl;
+
     final textTheme = Theme.of(context).textTheme;
+
+    // _log(
+    //     'firstName:$firstName; middleName:$middleName; lastName:$lastName; dateOfBirth:$dateOfBirth; dateOfDeath:$dateOfDeath; epitaphy:$epitaphy;');
 
     return Scaffold(
       appBar: AppBar(
@@ -45,8 +75,19 @@ class _MemoryPagePreviewScreenState extends State<MemoryPagePreviewScreen> {
                   Positioned(
                     child: Center(
                       child: CircleAvatar(
-                        radius: 60, // Size of the image circle
-                        backgroundColor: Colors.grey[800],
+                        radius: 54,
+                        backgroundColor: Colors.grey[300],
+                        backgroundImage: photoUrl != null
+                            ? FileImage(
+                                File(photoUrl)) // Display the selected image
+                            : null, // Show no image if none is selected
+                        child: photoUrl == null
+                            ? Icon(
+                                Icons.file_upload_outlined,
+                                size: 50,
+                                color: Theme.of(context).primaryColorDark,
+                              )
+                            : null, // Show the upload icon if no image is selected
                       ),
                     ),
                   ),
@@ -55,33 +96,41 @@ class _MemoryPagePreviewScreenState extends State<MemoryPagePreviewScreen> {
               ),
             ),
             const SizedBox(height: 16),
+            if (firstName.isEmpty && middleName.isEmpty && lastName.isEmpty)
+              Text(
+                'Fill in information',
+                textAlign: TextAlign.center,
+                style: textTheme.headlineMedium,
+              ),
             Text(
-              'Роматова Мария\nАлександровна',
+              '${firstName.isEmpty ? '' : firstName} ${middleName.isEmpty ? '' : middleName} ${lastName.isEmpty ? '' : lastName}',
               textAlign: TextAlign.center,
               style: textTheme.headlineMedium,
             ),
             const SizedBox(height: 8),
             Text(
-              '01.05.1970 - 03.08.2022',
+              '${dateOfBirth.isEmpty ? '?' : dateOfBirth} - ${dateOfDeath.isEmpty ? '?' : dateOfDeath}',
               style: textTheme.headlineSmall?.copyWith(color: Colors.grey[600]),
             ),
             const SizedBox(height: 16),
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 8.0),
-              child: Divider(),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 8.0),
-              child: Text(
-                'Любим тебя, и в памяти\nНашей всегда ты жива',
-                textAlign: TextAlign.center,
-                style: textTheme.bodySmall?.copyWith(
-                  fontSize: 16,
-                  color: Colors.white,
-                  fontStyle: FontStyle.italic,
+            if (epitaphy.isNotEmpty)
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 8.0),
+                child: Divider(),
+              ),
+            if (epitaphy.isNotEmpty)
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 8.0),
+                child: Text(
+                  epitaphy,
+                  textAlign: TextAlign.center,
+                  style: textTheme.bodySmall?.copyWith(
+                    fontSize: 16,
+                    color: Colors.white,
+                    fontStyle: FontStyle.italic,
+                  ),
                 ),
               ),
-            ),
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: 8.0),
               child: Divider(),
@@ -106,25 +155,24 @@ class _MemoryPagePreviewScreenState extends State<MemoryPagePreviewScreen> {
   }
 
   Widget _buildTabContent() {
+    final biography = widget.memoryPageData.biography;
+
     switch (_selectedTabIndex) {
       case 0:
-        return const PreviewBiographyWidget();
+        return PreviewBiographyWidget(
+            biography: biography.isEmpty ? 'Fill in biography' : biography);
       case 1:
-        return _buildPhotoContent();
+        return PickedMediaList(
+          mediaList: widget.mediaData.photos,
+          watchOnlyMode: true,
+        );
       case 2:
-        return _buildVideoContent();
+        return PickedMediaList(
+          mediaList: widget.mediaData.videos,
+          watchOnlyMode: true,
+        );
       default:
         return const SizedBox.shrink();
     }
-  }
-
-  Widget _buildPhotoContent() {
-    // Implement photo gallery here
-    return const Center(child: Text('Photo gallery goes here'));
-  }
-
-  Widget _buildVideoContent() {
-    // Implement video gallery here
-    return const Center(child: Text('Video gallery goes here'));
   }
 }

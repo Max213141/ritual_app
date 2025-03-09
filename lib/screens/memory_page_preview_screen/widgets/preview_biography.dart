@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
 
 class PreviewBiographyWidget extends StatelessWidget {
-  const PreviewBiographyWidget({super.key});
+  final String biography;
+  const PreviewBiographyWidget({super.key, required this.biography});
 
   @override
   Widget build(BuildContext context) {
-    return const Text(
-      'Всю свою жизнь Мария была честным, трудолюбивым и добрым человеком. Она пользовалась уважением на работе и в родном городе, всегда была готова прийти на помощь родным, друзьям и коллегам.\n\nУшла из жизни в возрасте 68 лет, оставив после себя добрую память о человеке, прожившем простую, но достойную жизнь.',
-      style: TextStyle(fontSize: 16),
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
+      child: Text(
+        biography,
+        style: TextStyle(fontSize: 16),
+      ),
     );
   }
 }

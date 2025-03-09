@@ -7,6 +7,7 @@ import 'package:go_router/go_router.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:hive/hive.dart';
 import 'package:ritual_app/blocs/blocs.dart';
+import 'package:ritual_app/entities/db_entities/memory_page/local_memory_page_media.dart';
 import 'package:ritual_app/entities/entities.dart';
 import 'package:ritual_app/entities/hive_entities/hive_entities.dart';
 import 'package:ritual_app/my_app_locale_wrapper.dart';
@@ -114,7 +115,21 @@ class RitualApp extends StatelessWidget {
                       name: 'mp_preview_screen',
                       path: 'mp_preview_screen',
                       builder: (BuildContext context, GoRouterState state) {
-                        return const MemoryPagePreviewScreen();
+                        final extra = state.extra
+                            as Map<String, dynamic>?; // Extract extra data
+
+                        if (extra == null ||
+                            !extra.containsKey('memoryPageData') ||
+                            !extra.containsKey('mediaData')) {
+                          return const Scaffold(
+                            body:
+                                Center(child: Text("Missing data for preview")),
+                          );
+                        }
+                        return MemoryPagePreviewScreen(
+                          memoryPageData: extra['memoryPageData'] as MemoryPage,
+                          mediaData: extra['mediaData'] as LocalMemoryPageMedia,
+                        );
                       },
                     ),
                   ],

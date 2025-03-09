@@ -17,10 +17,10 @@ class PlanCardWidget extends StatefulWidget {
 class _PlanCardWidgetState extends State<PlanCardWidget> {
   @override
   Widget build(BuildContext context) {
-    final double cardHeight = (MediaQuery.of(context).size.height -
-            MediaQuery.of(context).viewPadding.top -
-            MediaQuery.of(context).viewPadding.bottom) /
-        3;
+    // final double cardHeight = (MediaQuery.of(context).size.height -
+    //         MediaQuery.of(context).viewPadding.top -
+    //         MediaQuery.of(context).viewPadding.bottom) /
+    //     3;
 
     return GestureDetector(
       onTap: widget.onTap,

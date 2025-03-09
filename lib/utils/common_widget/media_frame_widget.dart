@@ -3,8 +3,8 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:ritual_app/utils/utils.dart';
 
-void _log(dynamic message) =>
-    Logger.projectLog(message, name: 'media_frame_widget');
+// void _log(dynamic message) =>
+//     Logger.projectLog(message, name: 'media_frame_widget');
 
 class MediaPickerFrameWidget extends StatelessWidget {
   final Uint8List? videoThumbnail;
@@ -80,7 +80,7 @@ class MediaPickerFrameWidget extends StatelessWidget {
             child: IconButton(
               icon: DecoratedBox(
                 decoration: BoxDecoration(
-                    color: Colors.black.withOpacity(.5),
+                    color: Colors.black.withValues(alpha: .5),
                     borderRadius: BorderRadius.circular(100)),
                 child: const Padding(
                   padding: EdgeInsets.all(2.0),

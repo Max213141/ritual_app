@@ -81,7 +81,9 @@ class _MemoryPageMobileBodyWidgetState
   Widget _buildTabContent() {
     switch (_selectedTabIndex) {
       case 0:
-        return const PreviewBiographyWidget();
+        return const PreviewBiographyWidget(
+          biography: 'Empty6 need to take from data',
+        );
       case 1:
         return const PhotoTabWidget();
       case 2:

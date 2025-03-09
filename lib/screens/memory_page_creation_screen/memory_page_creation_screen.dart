@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:ritual_app/entities/db_entities/memory_page/local_memory_page_media.dart';
 import 'package:ritual_app/entities/entities.dart';
 import 'package:ritual_app/screens/memory_page_creation_screen/widgets/widgets.dart';
 import 'package:ritual_app/utils/common_widget/widgets.dart';
@@ -9,7 +10,7 @@ class MemoryPageCreationScreen extends StatefulWidget {
   const MemoryPageCreationScreen({super.key});
 
   @override
-  _MemoryPageCreationScreenState createState() =>
+  State<MemoryPageCreationScreen> createState() =>
       _MemoryPageCreationScreenState();
 }
 
@@ -17,7 +18,8 @@ class _MemoryPageCreationScreenState extends State<MemoryPageCreationScreen>
     with SingleTickerProviderStateMixin {
   late GlobalKey<FormState> _formKey;
   late TabController _tabController;
-  late MemoryPage _profileData;
+  MemoryPage? _memoryPageData;
+  late LocalMemoryPageMedia _mediaData;
   final ValueNotifier<int> _selectedIndex = ValueNotifier<int>(0);
 
   @override
@@ -27,26 +29,42 @@ class _MemoryPageCreationScreenState extends State<MemoryPageCreationScreen>
     _tabController.addListener(() {
       _selectedIndex.value = _tabController.index;
     });
-    _profileData = MemoryPage(
+    _memoryPageData = MemoryPage(
       lastName: '',
       firstName: '',
       middleName: '',
-      dateOfBirth: DateTime.now(),
-      dateOfDeath: DateTime.now(),
+      dateOfBirth: '',
+      dateOfDeath: '',
       epitaphy: '',
       biography: '',
       photoUrl: '',
       isPrivate: false,
       password: '',
     );
+    _mediaData = LocalMemoryPageMedia(
+      photos: [],
+      videos: [],
+    );
     super.initState();
+  }
+
+  void _updateProfileData(MemoryPage updatedData) {
+    setState(() {
+      _memoryPageData = updatedData;
+    });
+  }
+
+  void _updateMediaData(LocalMemoryPageMedia updatedData) {
+    setState(() {
+      _mediaData = updatedData;
+    });
   }
 
   @override
   void dispose() {
     _tabController.dispose();
     _selectedIndex.dispose();
-    // TODO: implement dispose
+
     super.dispose();
   }
 
@@ -132,9 +150,13 @@ class _MemoryPageCreationScreenState extends State<MemoryPageCreationScreen>
                     children: [
                       BiographyTabWidget(
                         formKey: _formKey,
-                        profileData: _profileData,
+                        profileData: _memoryPageData!,
+                        onProfileDataChanged: _updateProfileData,
                       ),
-                      MediaTabWidget(profileData: _profileData),
+                      MediaTabWidget(
+                        mediaData: _mediaData,
+                        onMediaDataChanged: _updateMediaData,
+                      ),
                     ],
                   ),
                 ),
@@ -153,6 +175,10 @@ class _MemoryPageCreationScreenState extends State<MemoryPageCreationScreen>
                     onPressed: () {
                       GoRouter.of(context).go(
                         '/home/mp_plan_selection/mp_creation/mp_preview_screen',
+                        extra: {
+                          'memoryPageData': _memoryPageData,
+                          'mediaData': _mediaData,
+                        },
                       );
                     },
                     child: const Text('Предварительный просмотр'),

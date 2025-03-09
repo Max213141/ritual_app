@@ -24,13 +24,16 @@ class UserDataAdapter extends TypeAdapter<UserData> {
       authProvider: fields[4] as String?,
       linkedAccounts: (fields[5] as List?)?.cast<String>(),
       memoryDesks: (fields[6] as List?)?.cast<String>(),
+      subscriptionLevel: fields[7] as String?,
+      photoLimit: fields[8] as int?,
+      videoLimit: fields[9] as int?,
     );
   }
 
   @override
   void write(BinaryWriter writer, UserData obj) {
     writer
-      ..writeByte(7)
+      ..writeByte(10)
       ..writeByte(0)
       ..write(obj.uid)
       ..writeByte(1)
@@ -44,7 +47,13 @@ class UserDataAdapter extends TypeAdapter<UserData> {
       ..writeByte(5)
       ..write(obj.linkedAccounts)
       ..writeByte(6)
-      ..write(obj.memoryDesks);
+      ..write(obj.memoryDesks)
+      ..writeByte(7)
+      ..write(obj.subscriptionLevel)
+      ..writeByte(8)
+      ..write(obj.photoLimit)
+      ..writeByte(9)
+      ..write(obj.videoLimit);
   }
 
   @override

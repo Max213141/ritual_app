@@ -70,10 +70,12 @@ class _PasswordFieldWidgetState extends State<PasswordFieldWidget> {
                 keyboardType: TextInputType.number,
                 maxLength: 1,
                 obscureText: true,
-                buildCounter: (context,
-                        {required currentLength,
-                        required isFocused,
-                        maxLength}) =>
+                buildCounter: (
+                  context, {
+                  required currentLength,
+                  required isFocused,
+                  maxLength,
+                }) =>
                     null,
                 onChanged: (value) => _nextField(value, index),
               ),

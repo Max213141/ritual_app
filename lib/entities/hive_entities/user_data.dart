@@ -1,4 +1,6 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:hive_flutter/hive_flutter.dart';
+
 import 'package:ritual_app/entities/hive_index.dart';
 
 part 'user_data.g.dart';
@@ -19,6 +21,12 @@ class UserData extends HiveObject {
   List<String>? linkedAccounts;
   @HiveField(6)
   List<String>? memoryDesks;
+  @HiveField(7)
+  String? subscriptionLevel;
+  @HiveField(8)
+  int? photoLimit;
+  @HiveField(9)
+  int? videoLimit;
 
   UserData({
     this.uid,
@@ -28,6 +36,9 @@ class UserData extends HiveObject {
     this.authProvider,
     this.linkedAccounts,
     this.memoryDesks,
+    this.subscriptionLevel,
+    this.photoLimit,
+    this.videoLimit,
   });
 
   UserData.initial();
