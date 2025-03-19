@@ -168,15 +168,6 @@ class _MediaTabWidgetState extends State<MediaTabWidget>
           //  : 'image/${compressedFile.name}';
           if (!mounted) return;
           // Upload the file
-          // BlocProvider.of<MediaBloc>(_context).add(
-          //   UploadMedia(
-          //     file: File(compressedFile.path),
-          //     filePath: isMedia
-          //         ? 'media/${compressedFile.name}'
-          //         : 'image/${compressedFile.name}',
-          //     progressController: _progressController,
-          //   ),
-          // );
         }
 
         if (isMedia) {

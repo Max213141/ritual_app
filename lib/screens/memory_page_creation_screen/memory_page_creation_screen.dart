@@ -165,6 +165,15 @@ class _MemoryPageCreationScreenState extends State<MemoryPageCreationScreen>
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
                       // Implement page creation logic
+                      // BlocProvider.of<MediaBloc>(_context).add(
+                      //   UploadMedia(
+                      //     file: File(compressedFile.path),
+                      //     filePath: isMedia
+                      //         ? 'media/${compressedFile.name}'
+                      //         : 'image/${compressedFile.name}',
+                      //     progressController: _progressController,
+                      //   ),
+                      // );
                     }
                   },
                   title: 'Создать страницу',

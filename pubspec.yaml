@@ -43,6 +43,7 @@ dependencies:
   google_sign_in: ^6.2.1
   tab_container: ^3.5.3
   video_thumbnail: ^0.5.3
+  uuid: ^4.5.1
   # welltested: ^0.0.1
 
   # firebase_messaging: ^14.6.0

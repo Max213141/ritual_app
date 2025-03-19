@@ -28,28 +28,26 @@ class MediaBloc extends Bloc<MediaEvent, MediaState> {
     );
   }
 
-  _uploadMedia(UploadMedia event, Emitter<MediaState> emit) async {
+  Future<String> _uploadMedia(
+      UploadMedia event, Emitter<MediaState> emit) async {
     firebase_storage.Reference ref = media.child(event.filePath);
     firebase_storage.UploadTask uploadTask = ref.putFile(event.file);
-    // Error Handling
+
     try {
       // Progress Indicator
-      uploadTask.snapshotEvents
-          .listen((firebase_storage.TaskSnapshot snapshot) {
-        double progress =
-            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        event.progressController.add(progress); // Update progress
-        _log('Progress: $progress%');
-      });
-
-      // Wait until the file is uploaded
+      // uploadTask.snapshotEvents
+      //     .listen((firebase_storage.TaskSnapshot snapshot) {
+      //   double progress =
+      //       (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+      //   event.progressController.add(progress); // Update progress
+      //   _log('Progress: $progress%');
+      // });
       await uploadTask.whenComplete(() => null);
+      _log('File uploaded successfully! Download URL: ${ref.getDownloadURL()}');
 
-      // Get the download URL if needed
-      String downloadURL = await ref.getDownloadURL();
-      _log('File uploaded successfully! Download URL: $downloadURL');
+      return await ref.getDownloadURL();
     } catch (e) {
-      _log('Upload failed: $e');
+      throw Exception('Upload failed: $e');
     }
   }
 
