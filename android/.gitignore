@@ -1,13 +1,30 @@
-gradle-wrapper.jar
-/.gradle
-/captures/
+# Flutter/Gradle build artifacts
+/.gradle/
+/build/
+/app/build/
+/.cxx/
+
+# Gradle wrapper binaries
 /gradlew
 /gradlew.bat
+/gradle-wrapper.jar
+/gradle/wrapper/gradle-wrapper.properties
+
+# Captures (Android Studio screenshots etc.)
+/captures/
+
+# Local environment and config files
 /local.properties
+key.properties
+
+# Keystore files
+**/*.jks
+**/*.keystore
+
+# Flutter Generated files
 GeneratedPluginRegistrant.java
 
-# Remember to never publicly share your keystore.
-# See https://flutter.dev/docs/deployment/android#reference-the-keystore-from-the-app
-key.properties
-**/*.keystore
-**/*.jks
+# Temporary files
+*.iml
+.idea/
+*.log
