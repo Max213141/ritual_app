@@ -3,15 +3,13 @@ part of 'memory_desk_bloc.dart';
 @freezed
 class MemoryDeskEvent with _$MemoryDeskEvent {
   // Upload MemoryPage information
-  const factory MemoryDeskEvent.uploadMemoryPage({
+  const factory MemoryDeskEvent.uploadMemoryDesk({
     required MemoryPage memoryPage,
-    required MemoryPageMedia mediaData,
-    required String userId,
-  }) = UploadMemoryPage;
+    required LocalMemoryPageMedia mediaData,
+  }) = UploadMemoryDesk;
 
   // Retrieve MemoryPage from Firestore
-  const factory MemoryDeskEvent.getMemoryPage({required String memoryDeskId}) =
-      GetMemoryPage;
+  const factory MemoryDeskEvent.getMemoryDesk() = GetMemoryDesks;
 
   // Store Memory Desk ID in UserData
   const factory MemoryDeskEvent.addMemoryDeskToUser({

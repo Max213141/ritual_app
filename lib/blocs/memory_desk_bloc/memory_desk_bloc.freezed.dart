@@ -19,50 +19,48 @@ mixin _$MemoryDeskEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(
-            MemoryPage memoryPage, MemoryPageMedia mediaData, String userId)
-        uploadMemoryPage,
-    required TResult Function(String memoryDeskId) getMemoryPage,
+            MemoryPage memoryPage, LocalMemoryPageMedia mediaData)
+        uploadMemoryDesk,
+    required TResult Function() getMemoryDesk,
     required TResult Function(String userId, String memoryDeskId)
         addMemoryDeskToUser,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(
-            MemoryPage memoryPage, MemoryPageMedia mediaData, String userId)?
-        uploadMemoryPage,
-    TResult? Function(String memoryDeskId)? getMemoryPage,
+    TResult? Function(MemoryPage memoryPage, LocalMemoryPageMedia mediaData)?
+        uploadMemoryDesk,
+    TResult? Function()? getMemoryDesk,
     TResult? Function(String userId, String memoryDeskId)? addMemoryDeskToUser,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(
-            MemoryPage memoryPage, MemoryPageMedia mediaData, String userId)?
-        uploadMemoryPage,
-    TResult Function(String memoryDeskId)? getMemoryPage,
+    TResult Function(MemoryPage memoryPage, LocalMemoryPageMedia mediaData)?
+        uploadMemoryDesk,
+    TResult Function()? getMemoryDesk,
     TResult Function(String userId, String memoryDeskId)? addMemoryDeskToUser,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(UploadMemoryPage value) uploadMemoryPage,
-    required TResult Function(GetMemoryPage value) getMemoryPage,
+    required TResult Function(UploadMemoryDesk value) uploadMemoryDesk,
+    required TResult Function(GetMemoryDesks value) getMemoryDesk,
     required TResult Function(AddMemoryDeskToUser value) addMemoryDeskToUser,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(UploadMemoryPage value)? uploadMemoryPage,
-    TResult? Function(GetMemoryPage value)? getMemoryPage,
+    TResult? Function(UploadMemoryDesk value)? uploadMemoryDesk,
+    TResult? Function(GetMemoryDesks value)? getMemoryDesk,
     TResult? Function(AddMemoryDeskToUser value)? addMemoryDeskToUser,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(UploadMemoryPage value)? uploadMemoryPage,
-    TResult Function(GetMemoryPage value)? getMemoryPage,
+    TResult Function(UploadMemoryDesk value)? uploadMemoryDesk,
+    TResult Function(GetMemoryDesks value)? getMemoryDesk,
     TResult Function(AddMemoryDeskToUser value)? addMemoryDeskToUser,
     required TResult orElse(),
   }) =>
@@ -91,20 +89,20 @@ class _$MemoryDeskEventCopyWithImpl<$Res, $Val extends MemoryDeskEvent>
 }
 
 /// @nodoc
-abstract class _$$UploadMemoryPageImplCopyWith<$Res> {
-  factory _$$UploadMemoryPageImplCopyWith(_$UploadMemoryPageImpl value,
-          $Res Function(_$UploadMemoryPageImpl) then) =
-      __$$UploadMemoryPageImplCopyWithImpl<$Res>;
+abstract class _$$UploadMemoryDeskImplCopyWith<$Res> {
+  factory _$$UploadMemoryDeskImplCopyWith(_$UploadMemoryDeskImpl value,
+          $Res Function(_$UploadMemoryDeskImpl) then) =
+      __$$UploadMemoryDeskImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({MemoryPage memoryPage, MemoryPageMedia mediaData, String userId});
+  $Res call({MemoryPage memoryPage, LocalMemoryPageMedia mediaData});
 }
 
 /// @nodoc
-class __$$UploadMemoryPageImplCopyWithImpl<$Res>
-    extends _$MemoryDeskEventCopyWithImpl<$Res, _$UploadMemoryPageImpl>
-    implements _$$UploadMemoryPageImplCopyWith<$Res> {
-  __$$UploadMemoryPageImplCopyWithImpl(_$UploadMemoryPageImpl _value,
-      $Res Function(_$UploadMemoryPageImpl) _then)
+class __$$UploadMemoryDeskImplCopyWithImpl<$Res>
+    extends _$MemoryDeskEventCopyWithImpl<$Res, _$UploadMemoryDeskImpl>
+    implements _$$UploadMemoryDeskImplCopyWith<$Res> {
+  __$$UploadMemoryDeskImplCopyWithImpl(_$UploadMemoryDeskImpl _value,
+      $Res Function(_$UploadMemoryDeskImpl) _then)
       : super(_value, _then);
 
   /// Create a copy of MemoryDeskEvent
@@ -114,9 +112,8 @@ class __$$UploadMemoryPageImplCopyWithImpl<$Res>
   $Res call({
     Object? memoryPage = null,
     Object? mediaData = null,
-    Object? userId = null,
   }) {
-    return _then(_$UploadMemoryPageImpl(
+    return _then(_$UploadMemoryDeskImpl(
       memoryPage: null == memoryPage
           ? _value.memoryPage
           : memoryPage // ignore: cast_nullable_to_non_nullable
@@ -124,96 +121,85 @@ class __$$UploadMemoryPageImplCopyWithImpl<$Res>
       mediaData: null == mediaData
           ? _value.mediaData
           : mediaData // ignore: cast_nullable_to_non_nullable
-              as MemoryPageMedia,
-      userId: null == userId
-          ? _value.userId
-          : userId // ignore: cast_nullable_to_non_nullable
-              as String,
+              as LocalMemoryPageMedia,
     ));
   }
 }
 
 /// @nodoc
 
-class _$UploadMemoryPageImpl implements UploadMemoryPage {
-  const _$UploadMemoryPageImpl(
-      {required this.memoryPage,
-      required this.mediaData,
-      required this.userId});
+class _$UploadMemoryDeskImpl implements UploadMemoryDesk {
+  const _$UploadMemoryDeskImpl(
+      {required this.memoryPage, required this.mediaData});
 
   @override
   final MemoryPage memoryPage;
   @override
-  final MemoryPageMedia mediaData;
-  @override
-  final String userId;
+  final LocalMemoryPageMedia mediaData;
 
   @override
   String toString() {
-    return 'MemoryDeskEvent.uploadMemoryPage(memoryPage: $memoryPage, mediaData: $mediaData, userId: $userId)';
+    return 'MemoryDeskEvent.uploadMemoryDesk(memoryPage: $memoryPage, mediaData: $mediaData)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$UploadMemoryPageImpl &&
+            other is _$UploadMemoryDeskImpl &&
             (identical(other.memoryPage, memoryPage) ||
                 other.memoryPage == memoryPage) &&
             (identical(other.mediaData, mediaData) ||
-                other.mediaData == mediaData) &&
-            (identical(other.userId, userId) || other.userId == userId));
+                other.mediaData == mediaData));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, memoryPage, mediaData, userId);
+  int get hashCode => Object.hash(runtimeType, memoryPage, mediaData);
 
   /// Create a copy of MemoryDeskEvent
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$UploadMemoryPageImplCopyWith<_$UploadMemoryPageImpl> get copyWith =>
-      __$$UploadMemoryPageImplCopyWithImpl<_$UploadMemoryPageImpl>(
+  _$$UploadMemoryDeskImplCopyWith<_$UploadMemoryDeskImpl> get copyWith =>
+      __$$UploadMemoryDeskImplCopyWithImpl<_$UploadMemoryDeskImpl>(
           this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(
-            MemoryPage memoryPage, MemoryPageMedia mediaData, String userId)
-        uploadMemoryPage,
-    required TResult Function(String memoryDeskId) getMemoryPage,
+            MemoryPage memoryPage, LocalMemoryPageMedia mediaData)
+        uploadMemoryDesk,
+    required TResult Function() getMemoryDesk,
     required TResult Function(String userId, String memoryDeskId)
         addMemoryDeskToUser,
   }) {
-    return uploadMemoryPage(memoryPage, mediaData, userId);
+    return uploadMemoryDesk(memoryPage, mediaData);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(
-            MemoryPage memoryPage, MemoryPageMedia mediaData, String userId)?
-        uploadMemoryPage,
-    TResult? Function(String memoryDeskId)? getMemoryPage,
+    TResult? Function(MemoryPage memoryPage, LocalMemoryPageMedia mediaData)?
+        uploadMemoryDesk,
+    TResult? Function()? getMemoryDesk,
     TResult? Function(String userId, String memoryDeskId)? addMemoryDeskToUser,
   }) {
-    return uploadMemoryPage?.call(memoryPage, mediaData, userId);
+    return uploadMemoryDesk?.call(memoryPage, mediaData);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(
-            MemoryPage memoryPage, MemoryPageMedia mediaData, String userId)?
-        uploadMemoryPage,
-    TResult Function(String memoryDeskId)? getMemoryPage,
+    TResult Function(MemoryPage memoryPage, LocalMemoryPageMedia mediaData)?
+        uploadMemoryDesk,
+    TResult Function()? getMemoryDesk,
     TResult Function(String userId, String memoryDeskId)? addMemoryDeskToUser,
     required TResult orElse(),
   }) {
-    if (uploadMemoryPage != null) {
-      return uploadMemoryPage(memoryPage, mediaData, userId);
+    if (uploadMemoryDesk != null) {
+      return uploadMemoryDesk(memoryPage, mediaData);
     }
     return orElse();
   }
@@ -221,158 +207,126 @@ class _$UploadMemoryPageImpl implements UploadMemoryPage {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(UploadMemoryPage value) uploadMemoryPage,
-    required TResult Function(GetMemoryPage value) getMemoryPage,
+    required TResult Function(UploadMemoryDesk value) uploadMemoryDesk,
+    required TResult Function(GetMemoryDesks value) getMemoryDesk,
     required TResult Function(AddMemoryDeskToUser value) addMemoryDeskToUser,
   }) {
-    return uploadMemoryPage(this);
+    return uploadMemoryDesk(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(UploadMemoryPage value)? uploadMemoryPage,
-    TResult? Function(GetMemoryPage value)? getMemoryPage,
+    TResult? Function(UploadMemoryDesk value)? uploadMemoryDesk,
+    TResult? Function(GetMemoryDesks value)? getMemoryDesk,
     TResult? Function(AddMemoryDeskToUser value)? addMemoryDeskToUser,
   }) {
-    return uploadMemoryPage?.call(this);
+    return uploadMemoryDesk?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(UploadMemoryPage value)? uploadMemoryPage,
-    TResult Function(GetMemoryPage value)? getMemoryPage,
+    TResult Function(UploadMemoryDesk value)? uploadMemoryDesk,
+    TResult Function(GetMemoryDesks value)? getMemoryDesk,
     TResult Function(AddMemoryDeskToUser value)? addMemoryDeskToUser,
     required TResult orElse(),
   }) {
-    if (uploadMemoryPage != null) {
-      return uploadMemoryPage(this);
+    if (uploadMemoryDesk != null) {
+      return uploadMemoryDesk(this);
     }
     return orElse();
   }
 }
 
-abstract class UploadMemoryPage implements MemoryDeskEvent {
-  const factory UploadMemoryPage(
+abstract class UploadMemoryDesk implements MemoryDeskEvent {
+  const factory UploadMemoryDesk(
       {required final MemoryPage memoryPage,
-      required final MemoryPageMedia mediaData,
-      required final String userId}) = _$UploadMemoryPageImpl;
+      required final LocalMemoryPageMedia mediaData}) = _$UploadMemoryDeskImpl;
 
   MemoryPage get memoryPage;
-  MemoryPageMedia get mediaData;
-  String get userId;
+  LocalMemoryPageMedia get mediaData;
 
   /// Create a copy of MemoryDeskEvent
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$UploadMemoryPageImplCopyWith<_$UploadMemoryPageImpl> get copyWith =>
+  _$$UploadMemoryDeskImplCopyWith<_$UploadMemoryDeskImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$GetMemoryPageImplCopyWith<$Res> {
-  factory _$$GetMemoryPageImplCopyWith(
-          _$GetMemoryPageImpl value, $Res Function(_$GetMemoryPageImpl) then) =
-      __$$GetMemoryPageImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({String memoryDeskId});
+abstract class _$$GetMemoryDesksImplCopyWith<$Res> {
+  factory _$$GetMemoryDesksImplCopyWith(_$GetMemoryDesksImpl value,
+          $Res Function(_$GetMemoryDesksImpl) then) =
+      __$$GetMemoryDesksImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$GetMemoryPageImplCopyWithImpl<$Res>
-    extends _$MemoryDeskEventCopyWithImpl<$Res, _$GetMemoryPageImpl>
-    implements _$$GetMemoryPageImplCopyWith<$Res> {
-  __$$GetMemoryPageImplCopyWithImpl(
-      _$GetMemoryPageImpl _value, $Res Function(_$GetMemoryPageImpl) _then)
+class __$$GetMemoryDesksImplCopyWithImpl<$Res>
+    extends _$MemoryDeskEventCopyWithImpl<$Res, _$GetMemoryDesksImpl>
+    implements _$$GetMemoryDesksImplCopyWith<$Res> {
+  __$$GetMemoryDesksImplCopyWithImpl(
+      _$GetMemoryDesksImpl _value, $Res Function(_$GetMemoryDesksImpl) _then)
       : super(_value, _then);
 
   /// Create a copy of MemoryDeskEvent
   /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? memoryDeskId = null,
-  }) {
-    return _then(_$GetMemoryPageImpl(
-      memoryDeskId: null == memoryDeskId
-          ? _value.memoryDeskId
-          : memoryDeskId // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
 }
 
 /// @nodoc
 
-class _$GetMemoryPageImpl implements GetMemoryPage {
-  const _$GetMemoryPageImpl({required this.memoryDeskId});
-
-  @override
-  final String memoryDeskId;
+class _$GetMemoryDesksImpl implements GetMemoryDesks {
+  const _$GetMemoryDesksImpl();
 
   @override
   String toString() {
-    return 'MemoryDeskEvent.getMemoryPage(memoryDeskId: $memoryDeskId)';
+    return 'MemoryDeskEvent.getMemoryDesk()';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$GetMemoryPageImpl &&
-            (identical(other.memoryDeskId, memoryDeskId) ||
-                other.memoryDeskId == memoryDeskId));
+        (other.runtimeType == runtimeType && other is _$GetMemoryDesksImpl);
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, memoryDeskId);
-
-  /// Create a copy of MemoryDeskEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$GetMemoryPageImplCopyWith<_$GetMemoryPageImpl> get copyWith =>
-      __$$GetMemoryPageImplCopyWithImpl<_$GetMemoryPageImpl>(this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(
-            MemoryPage memoryPage, MemoryPageMedia mediaData, String userId)
-        uploadMemoryPage,
-    required TResult Function(String memoryDeskId) getMemoryPage,
+            MemoryPage memoryPage, LocalMemoryPageMedia mediaData)
+        uploadMemoryDesk,
+    required TResult Function() getMemoryDesk,
     required TResult Function(String userId, String memoryDeskId)
         addMemoryDeskToUser,
   }) {
-    return getMemoryPage(memoryDeskId);
+    return getMemoryDesk();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(
-            MemoryPage memoryPage, MemoryPageMedia mediaData, String userId)?
-        uploadMemoryPage,
-    TResult? Function(String memoryDeskId)? getMemoryPage,
+    TResult? Function(MemoryPage memoryPage, LocalMemoryPageMedia mediaData)?
+        uploadMemoryDesk,
+    TResult? Function()? getMemoryDesk,
     TResult? Function(String userId, String memoryDeskId)? addMemoryDeskToUser,
   }) {
-    return getMemoryPage?.call(memoryDeskId);
+    return getMemoryDesk?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(
-            MemoryPage memoryPage, MemoryPageMedia mediaData, String userId)?
-        uploadMemoryPage,
-    TResult Function(String memoryDeskId)? getMemoryPage,
+    TResult Function(MemoryPage memoryPage, LocalMemoryPageMedia mediaData)?
+        uploadMemoryDesk,
+    TResult Function()? getMemoryDesk,
     TResult Function(String userId, String memoryDeskId)? addMemoryDeskToUser,
     required TResult orElse(),
   }) {
-    if (getMemoryPage != null) {
-      return getMemoryPage(memoryDeskId);
+    if (getMemoryDesk != null) {
+      return getMemoryDesk();
     }
     return orElse();
   }
@@ -380,49 +334,40 @@ class _$GetMemoryPageImpl implements GetMemoryPage {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(UploadMemoryPage value) uploadMemoryPage,
-    required TResult Function(GetMemoryPage value) getMemoryPage,
+    required TResult Function(UploadMemoryDesk value) uploadMemoryDesk,
+    required TResult Function(GetMemoryDesks value) getMemoryDesk,
     required TResult Function(AddMemoryDeskToUser value) addMemoryDeskToUser,
   }) {
-    return getMemoryPage(this);
+    return getMemoryDesk(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(UploadMemoryPage value)? uploadMemoryPage,
-    TResult? Function(GetMemoryPage value)? getMemoryPage,
+    TResult? Function(UploadMemoryDesk value)? uploadMemoryDesk,
+    TResult? Function(GetMemoryDesks value)? getMemoryDesk,
     TResult? Function(AddMemoryDeskToUser value)? addMemoryDeskToUser,
   }) {
-    return getMemoryPage?.call(this);
+    return getMemoryDesk?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(UploadMemoryPage value)? uploadMemoryPage,
-    TResult Function(GetMemoryPage value)? getMemoryPage,
+    TResult Function(UploadMemoryDesk value)? uploadMemoryDesk,
+    TResult Function(GetMemoryDesks value)? getMemoryDesk,
     TResult Function(AddMemoryDeskToUser value)? addMemoryDeskToUser,
     required TResult orElse(),
   }) {
-    if (getMemoryPage != null) {
-      return getMemoryPage(this);
+    if (getMemoryDesk != null) {
+      return getMemoryDesk(this);
     }
     return orElse();
   }
 }
 
-abstract class GetMemoryPage implements MemoryDeskEvent {
-  const factory GetMemoryPage({required final String memoryDeskId}) =
-      _$GetMemoryPageImpl;
-
-  String get memoryDeskId;
-
-  /// Create a copy of MemoryDeskEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$GetMemoryPageImplCopyWith<_$GetMemoryPageImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+abstract class GetMemoryDesks implements MemoryDeskEvent {
+  const factory GetMemoryDesks() = _$GetMemoryDesksImpl;
 }
 
 /// @nodoc
@@ -505,9 +450,9 @@ class _$AddMemoryDeskToUserImpl implements AddMemoryDeskToUser {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(
-            MemoryPage memoryPage, MemoryPageMedia mediaData, String userId)
-        uploadMemoryPage,
-    required TResult Function(String memoryDeskId) getMemoryPage,
+            MemoryPage memoryPage, LocalMemoryPageMedia mediaData)
+        uploadMemoryDesk,
+    required TResult Function() getMemoryDesk,
     required TResult Function(String userId, String memoryDeskId)
         addMemoryDeskToUser,
   }) {
@@ -517,10 +462,9 @@ class _$AddMemoryDeskToUserImpl implements AddMemoryDeskToUser {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(
-            MemoryPage memoryPage, MemoryPageMedia mediaData, String userId)?
-        uploadMemoryPage,
-    TResult? Function(String memoryDeskId)? getMemoryPage,
+    TResult? Function(MemoryPage memoryPage, LocalMemoryPageMedia mediaData)?
+        uploadMemoryDesk,
+    TResult? Function()? getMemoryDesk,
     TResult? Function(String userId, String memoryDeskId)? addMemoryDeskToUser,
   }) {
     return addMemoryDeskToUser?.call(userId, memoryDeskId);
@@ -529,10 +473,9 @@ class _$AddMemoryDeskToUserImpl implements AddMemoryDeskToUser {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(
-            MemoryPage memoryPage, MemoryPageMedia mediaData, String userId)?
-        uploadMemoryPage,
-    TResult Function(String memoryDeskId)? getMemoryPage,
+    TResult Function(MemoryPage memoryPage, LocalMemoryPageMedia mediaData)?
+        uploadMemoryDesk,
+    TResult Function()? getMemoryDesk,
     TResult Function(String userId, String memoryDeskId)? addMemoryDeskToUser,
     required TResult orElse(),
   }) {
@@ -545,8 +488,8 @@ class _$AddMemoryDeskToUserImpl implements AddMemoryDeskToUser {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(UploadMemoryPage value) uploadMemoryPage,
-    required TResult Function(GetMemoryPage value) getMemoryPage,
+    required TResult Function(UploadMemoryDesk value) uploadMemoryDesk,
+    required TResult Function(GetMemoryDesks value) getMemoryDesk,
     required TResult Function(AddMemoryDeskToUser value) addMemoryDeskToUser,
   }) {
     return addMemoryDeskToUser(this);
@@ -555,8 +498,8 @@ class _$AddMemoryDeskToUserImpl implements AddMemoryDeskToUser {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(UploadMemoryPage value)? uploadMemoryPage,
-    TResult? Function(GetMemoryPage value)? getMemoryPage,
+    TResult? Function(UploadMemoryDesk value)? uploadMemoryDesk,
+    TResult? Function(GetMemoryDesks value)? getMemoryDesk,
     TResult? Function(AddMemoryDeskToUser value)? addMemoryDeskToUser,
   }) {
     return addMemoryDeskToUser?.call(this);
@@ -565,8 +508,8 @@ class _$AddMemoryDeskToUserImpl implements AddMemoryDeskToUser {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(UploadMemoryPage value)? uploadMemoryPage,
-    TResult Function(GetMemoryPage value)? getMemoryPage,
+    TResult Function(UploadMemoryDesk value)? uploadMemoryDesk,
+    TResult Function(GetMemoryDesks value)? getMemoryDesk,
     TResult Function(AddMemoryDeskToUser value)? addMemoryDeskToUser,
     required TResult orElse(),
   }) {
@@ -600,7 +543,9 @@ mixin _$MemoryDeskState {
     required TResult Function() loading,
     required TResult Function() success,
     required TResult Function(String error) failure,
-    required TResult Function(MemoryPage memoryPage) memoryPageLoaded,
+    required TResult Function(
+            List<MemoryPage> memoryPages, List<String> memoryDeskIds)
+        memoryPagesLoaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -609,7 +554,8 @@ mixin _$MemoryDeskState {
     TResult? Function()? loading,
     TResult? Function()? success,
     TResult? Function(String error)? failure,
-    TResult? Function(MemoryPage memoryPage)? memoryPageLoaded,
+    TResult? Function(List<MemoryPage> memoryPages, List<String> memoryDeskIds)?
+        memoryPagesLoaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -618,35 +564,36 @@ mixin _$MemoryDeskState {
     TResult Function()? loading,
     TResult Function()? success,
     TResult Function(String error)? failure,
-    TResult Function(MemoryPage memoryPage)? memoryPageLoaded,
+    TResult Function(List<MemoryPage> memoryPages, List<String> memoryDeskIds)?
+        memoryPagesLoaded,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
+    required TResult Function(Initial value) initial,
     required TResult Function(Loading value) loading,
     required TResult Function(Success value) success,
     required TResult Function(Failure value) failure,
-    required TResult Function(MemoryPageLoaded value) memoryPageLoaded,
+    required TResult Function(MemoryPagesLoaded value) memoryPagesLoaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
+    TResult? Function(Initial value)? initial,
     TResult? Function(Loading value)? loading,
     TResult? Function(Success value)? success,
     TResult? Function(Failure value)? failure,
-    TResult? Function(MemoryPageLoaded value)? memoryPageLoaded,
+    TResult? Function(MemoryPagesLoaded value)? memoryPagesLoaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
+    TResult Function(Initial value)? initial,
     TResult Function(Loading value)? loading,
     TResult Function(Success value)? success,
     TResult Function(Failure value)? failure,
-    TResult Function(MemoryPageLoaded value)? memoryPageLoaded,
+    TResult Function(MemoryPagesLoaded value)? memoryPagesLoaded,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -694,7 +641,7 @@ class __$$InitialImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$InitialImpl implements _Initial {
+class _$InitialImpl implements Initial {
   const _$InitialImpl();
 
   @override
@@ -718,7 +665,9 @@ class _$InitialImpl implements _Initial {
     required TResult Function() loading,
     required TResult Function() success,
     required TResult Function(String error) failure,
-    required TResult Function(MemoryPage memoryPage) memoryPageLoaded,
+    required TResult Function(
+            List<MemoryPage> memoryPages, List<String> memoryDeskIds)
+        memoryPagesLoaded,
   }) {
     return initial();
   }
@@ -730,7 +679,8 @@ class _$InitialImpl implements _Initial {
     TResult? Function()? loading,
     TResult? Function()? success,
     TResult? Function(String error)? failure,
-    TResult? Function(MemoryPage memoryPage)? memoryPageLoaded,
+    TResult? Function(List<MemoryPage> memoryPages, List<String> memoryDeskIds)?
+        memoryPagesLoaded,
   }) {
     return initial?.call();
   }
@@ -742,7 +692,8 @@ class _$InitialImpl implements _Initial {
     TResult Function()? loading,
     TResult Function()? success,
     TResult Function(String error)? failure,
-    TResult Function(MemoryPage memoryPage)? memoryPageLoaded,
+    TResult Function(List<MemoryPage> memoryPages, List<String> memoryDeskIds)?
+        memoryPagesLoaded,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -754,11 +705,11 @@ class _$InitialImpl implements _Initial {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
+    required TResult Function(Initial value) initial,
     required TResult Function(Loading value) loading,
     required TResult Function(Success value) success,
     required TResult Function(Failure value) failure,
-    required TResult Function(MemoryPageLoaded value) memoryPageLoaded,
+    required TResult Function(MemoryPagesLoaded value) memoryPagesLoaded,
   }) {
     return initial(this);
   }
@@ -766,11 +717,11 @@ class _$InitialImpl implements _Initial {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
+    TResult? Function(Initial value)? initial,
     TResult? Function(Loading value)? loading,
     TResult? Function(Success value)? success,
     TResult? Function(Failure value)? failure,
-    TResult? Function(MemoryPageLoaded value)? memoryPageLoaded,
+    TResult? Function(MemoryPagesLoaded value)? memoryPagesLoaded,
   }) {
     return initial?.call(this);
   }
@@ -778,11 +729,11 @@ class _$InitialImpl implements _Initial {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
+    TResult Function(Initial value)? initial,
     TResult Function(Loading value)? loading,
     TResult Function(Success value)? success,
     TResult Function(Failure value)? failure,
-    TResult Function(MemoryPageLoaded value)? memoryPageLoaded,
+    TResult Function(MemoryPagesLoaded value)? memoryPagesLoaded,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -792,8 +743,8 @@ class _$InitialImpl implements _Initial {
   }
 }
 
-abstract class _Initial implements MemoryDeskState {
-  const factory _Initial() = _$InitialImpl;
+abstract class Initial implements MemoryDeskState {
+  const factory Initial() = _$InitialImpl;
 }
 
 /// @nodoc
@@ -841,7 +792,9 @@ class _$LoadingImpl implements Loading {
     required TResult Function() loading,
     required TResult Function() success,
     required TResult Function(String error) failure,
-    required TResult Function(MemoryPage memoryPage) memoryPageLoaded,
+    required TResult Function(
+            List<MemoryPage> memoryPages, List<String> memoryDeskIds)
+        memoryPagesLoaded,
   }) {
     return loading();
   }
@@ -853,7 +806,8 @@ class _$LoadingImpl implements Loading {
     TResult? Function()? loading,
     TResult? Function()? success,
     TResult? Function(String error)? failure,
-    TResult? Function(MemoryPage memoryPage)? memoryPageLoaded,
+    TResult? Function(List<MemoryPage> memoryPages, List<String> memoryDeskIds)?
+        memoryPagesLoaded,
   }) {
     return loading?.call();
   }
@@ -865,7 +819,8 @@ class _$LoadingImpl implements Loading {
     TResult Function()? loading,
     TResult Function()? success,
     TResult Function(String error)? failure,
-    TResult Function(MemoryPage memoryPage)? memoryPageLoaded,
+    TResult Function(List<MemoryPage> memoryPages, List<String> memoryDeskIds)?
+        memoryPagesLoaded,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -877,11 +832,11 @@ class _$LoadingImpl implements Loading {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
+    required TResult Function(Initial value) initial,
     required TResult Function(Loading value) loading,
     required TResult Function(Success value) success,
     required TResult Function(Failure value) failure,
-    required TResult Function(MemoryPageLoaded value) memoryPageLoaded,
+    required TResult Function(MemoryPagesLoaded value) memoryPagesLoaded,
   }) {
     return loading(this);
   }
@@ -889,11 +844,11 @@ class _$LoadingImpl implements Loading {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
+    TResult? Function(Initial value)? initial,
     TResult? Function(Loading value)? loading,
     TResult? Function(Success value)? success,
     TResult? Function(Failure value)? failure,
-    TResult? Function(MemoryPageLoaded value)? memoryPageLoaded,
+    TResult? Function(MemoryPagesLoaded value)? memoryPagesLoaded,
   }) {
     return loading?.call(this);
   }
@@ -901,11 +856,11 @@ class _$LoadingImpl implements Loading {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
+    TResult Function(Initial value)? initial,
     TResult Function(Loading value)? loading,
     TResult Function(Success value)? success,
     TResult Function(Failure value)? failure,
-    TResult Function(MemoryPageLoaded value)? memoryPageLoaded,
+    TResult Function(MemoryPagesLoaded value)? memoryPagesLoaded,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -964,7 +919,9 @@ class _$SuccessImpl implements Success {
     required TResult Function() loading,
     required TResult Function() success,
     required TResult Function(String error) failure,
-    required TResult Function(MemoryPage memoryPage) memoryPageLoaded,
+    required TResult Function(
+            List<MemoryPage> memoryPages, List<String> memoryDeskIds)
+        memoryPagesLoaded,
   }) {
     return success();
   }
@@ -976,7 +933,8 @@ class _$SuccessImpl implements Success {
     TResult? Function()? loading,
     TResult? Function()? success,
     TResult? Function(String error)? failure,
-    TResult? Function(MemoryPage memoryPage)? memoryPageLoaded,
+    TResult? Function(List<MemoryPage> memoryPages, List<String> memoryDeskIds)?
+        memoryPagesLoaded,
   }) {
     return success?.call();
   }
@@ -988,7 +946,8 @@ class _$SuccessImpl implements Success {
     TResult Function()? loading,
     TResult Function()? success,
     TResult Function(String error)? failure,
-    TResult Function(MemoryPage memoryPage)? memoryPageLoaded,
+    TResult Function(List<MemoryPage> memoryPages, List<String> memoryDeskIds)?
+        memoryPagesLoaded,
     required TResult orElse(),
   }) {
     if (success != null) {
@@ -1000,11 +959,11 @@ class _$SuccessImpl implements Success {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
+    required TResult Function(Initial value) initial,
     required TResult Function(Loading value) loading,
     required TResult Function(Success value) success,
     required TResult Function(Failure value) failure,
-    required TResult Function(MemoryPageLoaded value) memoryPageLoaded,
+    required TResult Function(MemoryPagesLoaded value) memoryPagesLoaded,
   }) {
     return success(this);
   }
@@ -1012,11 +971,11 @@ class _$SuccessImpl implements Success {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
+    TResult? Function(Initial value)? initial,
     TResult? Function(Loading value)? loading,
     TResult? Function(Success value)? success,
     TResult? Function(Failure value)? failure,
-    TResult? Function(MemoryPageLoaded value)? memoryPageLoaded,
+    TResult? Function(MemoryPagesLoaded value)? memoryPagesLoaded,
   }) {
     return success?.call(this);
   }
@@ -1024,11 +983,11 @@ class _$SuccessImpl implements Success {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
+    TResult Function(Initial value)? initial,
     TResult Function(Loading value)? loading,
     TResult Function(Success value)? success,
     TResult Function(Failure value)? failure,
-    TResult Function(MemoryPageLoaded value)? memoryPageLoaded,
+    TResult Function(MemoryPagesLoaded value)? memoryPagesLoaded,
     required TResult orElse(),
   }) {
     if (success != null) {
@@ -1114,7 +1073,9 @@ class _$FailureImpl implements Failure {
     required TResult Function() loading,
     required TResult Function() success,
     required TResult Function(String error) failure,
-    required TResult Function(MemoryPage memoryPage) memoryPageLoaded,
+    required TResult Function(
+            List<MemoryPage> memoryPages, List<String> memoryDeskIds)
+        memoryPagesLoaded,
   }) {
     return failure(error);
   }
@@ -1126,7 +1087,8 @@ class _$FailureImpl implements Failure {
     TResult? Function()? loading,
     TResult? Function()? success,
     TResult? Function(String error)? failure,
-    TResult? Function(MemoryPage memoryPage)? memoryPageLoaded,
+    TResult? Function(List<MemoryPage> memoryPages, List<String> memoryDeskIds)?
+        memoryPagesLoaded,
   }) {
     return failure?.call(error);
   }
@@ -1138,7 +1100,8 @@ class _$FailureImpl implements Failure {
     TResult Function()? loading,
     TResult Function()? success,
     TResult Function(String error)? failure,
-    TResult Function(MemoryPage memoryPage)? memoryPageLoaded,
+    TResult Function(List<MemoryPage> memoryPages, List<String> memoryDeskIds)?
+        memoryPagesLoaded,
     required TResult orElse(),
   }) {
     if (failure != null) {
@@ -1150,11 +1113,11 @@ class _$FailureImpl implements Failure {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
+    required TResult Function(Initial value) initial,
     required TResult Function(Loading value) loading,
     required TResult Function(Success value) success,
     required TResult Function(Failure value) failure,
-    required TResult Function(MemoryPageLoaded value) memoryPageLoaded,
+    required TResult Function(MemoryPagesLoaded value) memoryPagesLoaded,
   }) {
     return failure(this);
   }
@@ -1162,11 +1125,11 @@ class _$FailureImpl implements Failure {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
+    TResult? Function(Initial value)? initial,
     TResult? Function(Loading value)? loading,
     TResult? Function(Success value)? success,
     TResult? Function(Failure value)? failure,
-    TResult? Function(MemoryPageLoaded value)? memoryPageLoaded,
+    TResult? Function(MemoryPagesLoaded value)? memoryPagesLoaded,
   }) {
     return failure?.call(this);
   }
@@ -1174,11 +1137,11 @@ class _$FailureImpl implements Failure {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
+    TResult Function(Initial value)? initial,
     TResult Function(Loading value)? loading,
     TResult Function(Success value)? success,
     TResult Function(Failure value)? failure,
-    TResult Function(MemoryPageLoaded value)? memoryPageLoaded,
+    TResult Function(MemoryPagesLoaded value)? memoryPagesLoaded,
     required TResult orElse(),
   }) {
     if (failure != null) {
@@ -1201,20 +1164,20 @@ abstract class Failure implements MemoryDeskState {
 }
 
 /// @nodoc
-abstract class _$$MemoryPageLoadedImplCopyWith<$Res> {
-  factory _$$MemoryPageLoadedImplCopyWith(_$MemoryPageLoadedImpl value,
-          $Res Function(_$MemoryPageLoadedImpl) then) =
-      __$$MemoryPageLoadedImplCopyWithImpl<$Res>;
+abstract class _$$MemoryPagesLoadedImplCopyWith<$Res> {
+  factory _$$MemoryPagesLoadedImplCopyWith(_$MemoryPagesLoadedImpl value,
+          $Res Function(_$MemoryPagesLoadedImpl) then) =
+      __$$MemoryPagesLoadedImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({MemoryPage memoryPage});
+  $Res call({List<MemoryPage> memoryPages, List<String> memoryDeskIds});
 }
 
 /// @nodoc
-class __$$MemoryPageLoadedImplCopyWithImpl<$Res>
-    extends _$MemoryDeskStateCopyWithImpl<$Res, _$MemoryPageLoadedImpl>
-    implements _$$MemoryPageLoadedImplCopyWith<$Res> {
-  __$$MemoryPageLoadedImplCopyWithImpl(_$MemoryPageLoadedImpl _value,
-      $Res Function(_$MemoryPageLoadedImpl) _then)
+class __$$MemoryPagesLoadedImplCopyWithImpl<$Res>
+    extends _$MemoryDeskStateCopyWithImpl<$Res, _$MemoryPagesLoadedImpl>
+    implements _$$MemoryPagesLoadedImplCopyWith<$Res> {
+  __$$MemoryPagesLoadedImplCopyWithImpl(_$MemoryPagesLoadedImpl _value,
+      $Res Function(_$MemoryPagesLoadedImpl) _then)
       : super(_value, _then);
 
   /// Create a copy of MemoryDeskState
@@ -1222,49 +1185,76 @@ class __$$MemoryPageLoadedImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? memoryPage = null,
+    Object? memoryPages = null,
+    Object? memoryDeskIds = null,
   }) {
-    return _then(_$MemoryPageLoadedImpl(
-      memoryPage: null == memoryPage
-          ? _value.memoryPage
-          : memoryPage // ignore: cast_nullable_to_non_nullable
-              as MemoryPage,
+    return _then(_$MemoryPagesLoadedImpl(
+      memoryPages: null == memoryPages
+          ? _value._memoryPages
+          : memoryPages // ignore: cast_nullable_to_non_nullable
+              as List<MemoryPage>,
+      memoryDeskIds: null == memoryDeskIds
+          ? _value._memoryDeskIds
+          : memoryDeskIds // ignore: cast_nullable_to_non_nullable
+              as List<String>,
     ));
   }
 }
 
 /// @nodoc
 
-class _$MemoryPageLoadedImpl implements MemoryPageLoaded {
-  const _$MemoryPageLoadedImpl({required this.memoryPage});
+class _$MemoryPagesLoadedImpl implements MemoryPagesLoaded {
+  const _$MemoryPagesLoadedImpl(
+      {required final List<MemoryPage> memoryPages,
+      required final List<String> memoryDeskIds})
+      : _memoryPages = memoryPages,
+        _memoryDeskIds = memoryDeskIds;
 
+  final List<MemoryPage> _memoryPages;
   @override
-  final MemoryPage memoryPage;
+  List<MemoryPage> get memoryPages {
+    if (_memoryPages is EqualUnmodifiableListView) return _memoryPages;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_memoryPages);
+  }
+
+  final List<String> _memoryDeskIds;
+  @override
+  List<String> get memoryDeskIds {
+    if (_memoryDeskIds is EqualUnmodifiableListView) return _memoryDeskIds;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_memoryDeskIds);
+  }
 
   @override
   String toString() {
-    return 'MemoryDeskState.memoryPageLoaded(memoryPage: $memoryPage)';
+    return 'MemoryDeskState.memoryPagesLoaded(memoryPages: $memoryPages, memoryDeskIds: $memoryDeskIds)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$MemoryPageLoadedImpl &&
-            (identical(other.memoryPage, memoryPage) ||
-                other.memoryPage == memoryPage));
+            other is _$MemoryPagesLoadedImpl &&
+            const DeepCollectionEquality()
+                .equals(other._memoryPages, _memoryPages) &&
+            const DeepCollectionEquality()
+                .equals(other._memoryDeskIds, _memoryDeskIds));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, memoryPage);
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(_memoryPages),
+      const DeepCollectionEquality().hash(_memoryDeskIds));
 
   /// Create a copy of MemoryDeskState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$MemoryPageLoadedImplCopyWith<_$MemoryPageLoadedImpl> get copyWith =>
-      __$$MemoryPageLoadedImplCopyWithImpl<_$MemoryPageLoadedImpl>(
+  _$$MemoryPagesLoadedImplCopyWith<_$MemoryPagesLoadedImpl> get copyWith =>
+      __$$MemoryPagesLoadedImplCopyWithImpl<_$MemoryPagesLoadedImpl>(
           this, _$identity);
 
   @override
@@ -1274,9 +1264,11 @@ class _$MemoryPageLoadedImpl implements MemoryPageLoaded {
     required TResult Function() loading,
     required TResult Function() success,
     required TResult Function(String error) failure,
-    required TResult Function(MemoryPage memoryPage) memoryPageLoaded,
+    required TResult Function(
+            List<MemoryPage> memoryPages, List<String> memoryDeskIds)
+        memoryPagesLoaded,
   }) {
-    return memoryPageLoaded(memoryPage);
+    return memoryPagesLoaded(memoryPages, memoryDeskIds);
   }
 
   @override
@@ -1286,9 +1278,10 @@ class _$MemoryPageLoadedImpl implements MemoryPageLoaded {
     TResult? Function()? loading,
     TResult? Function()? success,
     TResult? Function(String error)? failure,
-    TResult? Function(MemoryPage memoryPage)? memoryPageLoaded,
+    TResult? Function(List<MemoryPage> memoryPages, List<String> memoryDeskIds)?
+        memoryPagesLoaded,
   }) {
-    return memoryPageLoaded?.call(memoryPage);
+    return memoryPagesLoaded?.call(memoryPages, memoryDeskIds);
   }
 
   @override
@@ -1298,11 +1291,12 @@ class _$MemoryPageLoadedImpl implements MemoryPageLoaded {
     TResult Function()? loading,
     TResult Function()? success,
     TResult Function(String error)? failure,
-    TResult Function(MemoryPage memoryPage)? memoryPageLoaded,
+    TResult Function(List<MemoryPage> memoryPages, List<String> memoryDeskIds)?
+        memoryPagesLoaded,
     required TResult orElse(),
   }) {
-    if (memoryPageLoaded != null) {
-      return memoryPageLoaded(memoryPage);
+    if (memoryPagesLoaded != null) {
+      return memoryPagesLoaded(memoryPages, memoryDeskIds);
     }
     return orElse();
   }
@@ -1310,53 +1304,55 @@ class _$MemoryPageLoadedImpl implements MemoryPageLoaded {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
+    required TResult Function(Initial value) initial,
     required TResult Function(Loading value) loading,
     required TResult Function(Success value) success,
     required TResult Function(Failure value) failure,
-    required TResult Function(MemoryPageLoaded value) memoryPageLoaded,
+    required TResult Function(MemoryPagesLoaded value) memoryPagesLoaded,
   }) {
-    return memoryPageLoaded(this);
+    return memoryPagesLoaded(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
+    TResult? Function(Initial value)? initial,
     TResult? Function(Loading value)? loading,
     TResult? Function(Success value)? success,
     TResult? Function(Failure value)? failure,
-    TResult? Function(MemoryPageLoaded value)? memoryPageLoaded,
+    TResult? Function(MemoryPagesLoaded value)? memoryPagesLoaded,
   }) {
-    return memoryPageLoaded?.call(this);
+    return memoryPagesLoaded?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
+    TResult Function(Initial value)? initial,
     TResult Function(Loading value)? loading,
     TResult Function(Success value)? success,
     TResult Function(Failure value)? failure,
-    TResult Function(MemoryPageLoaded value)? memoryPageLoaded,
+    TResult Function(MemoryPagesLoaded value)? memoryPagesLoaded,
     required TResult orElse(),
   }) {
-    if (memoryPageLoaded != null) {
-      return memoryPageLoaded(this);
+    if (memoryPagesLoaded != null) {
+      return memoryPagesLoaded(this);
     }
     return orElse();
   }
 }
 
-abstract class MemoryPageLoaded implements MemoryDeskState {
-  const factory MemoryPageLoaded({required final MemoryPage memoryPage}) =
-      _$MemoryPageLoadedImpl;
+abstract class MemoryPagesLoaded implements MemoryDeskState {
+  const factory MemoryPagesLoaded(
+      {required final List<MemoryPage> memoryPages,
+      required final List<String> memoryDeskIds}) = _$MemoryPagesLoadedImpl;
 
-  MemoryPage get memoryPage;
+  List<MemoryPage> get memoryPages;
+  List<String> get memoryDeskIds;
 
   /// Create a copy of MemoryDeskState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$MemoryPageLoadedImplCopyWith<_$MemoryPageLoadedImpl> get copyWith =>
+  _$$MemoryPagesLoadedImplCopyWith<_$MemoryPagesLoadedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

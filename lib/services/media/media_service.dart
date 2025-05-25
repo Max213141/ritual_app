@@ -1,10 +1,16 @@
 import 'dart:io';
 import 'dart:math';
+import 'dart:ui' as ui;
 
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:permission_handler/permission_handler.dart';
+import 'package:pretty_qr_code/pretty_qr_code.dart';
+import 'package:ritual_app/entities/db_entities/db_entities.dart';
 
 import 'package:ritual_app/services/media/media_service_interface.dart';
 import 'package:ritual_app/services/permission/permission_service.dart';
@@ -17,6 +23,12 @@ void _log(dynamic message) => Logger.projectLog(message, name: 'media_service');
 class MediaService implements MediaServiceInterface {
   @override
   PermissionService get permissionService => getIt<PermissionService>();
+  @override
+  FirebaseStorage storage;
+
+  MediaService({
+    FirebaseStorage? storageInstance,
+  }) : storage = storageInstance ?? FirebaseStorage.instance;
 
   Future<bool> _handleImageUploadPermissions(
       BuildContext context, AppImageSource? imageSource) async {
@@ -105,9 +117,72 @@ class MediaService implements MediaServiceInterface {
       if (compressedImage != null) {
         return XFile(compressedImage.path);
       }
+      // if (targetImagePath != null) {
+      //   return XFile(targetImagePath);
+      // }
     }
 
     // Return original file if compression fails
     return file;
+  }
+
+  @override
+  Future<String?> uploadFileAndGetUrl({
+    required String filePath,
+    required File file,
+  }) async {
+    try {
+      final ref = storage.ref().child(filePath);
+      final uploadTask = ref.putFile(file);
+      await uploadTask;
+      final downloadUrl = await ref.getDownloadURL();
+      return downloadUrl;
+    } catch (e) {
+      Logger.projectLog('Upload failed: $e', name: 'MediaService');
+      return null;
+    }
+  }
+
+  @override
+  Future<LocalMemoryPageMedia> downloadMediaFile({
+    required List<String> photoUrls,
+    required List<String> videoUrls,
+  }) {
+    return Future.delayed(Durations.medium1, () {
+      return LocalMemoryPageMedia(photos: [], videos: []);
+    });
+  }
+
+  @override
+  Future<bool> saveQrImage({
+    required QrImage qrImage,
+    required PrettyQrDecoration decoration,
+    required int size,
+  }) async {
+    try {
+      final hasPermission = await Permission.storage.request();
+      if (!hasPermission.isGranted) return false;
+
+      final ByteData? byteData = await qrImage.toImageAsBytes(
+        size: size,
+        format: ui.ImageByteFormat.png,
+        decoration: decoration,
+      );
+
+      if (byteData == null) return false;
+
+      final Uint8List pngBytes = byteData.buffer.asUint8List();
+
+      final result = await LocalGallerySaver.saveImage(
+        pngBytes,
+        quality: 100,
+        name: 'qr_code_${DateTime.now().millisecondsSinceEpoch}',
+      );
+
+      return result['isSuccess'] == true;
+    } catch (e) {
+      _log('Error saving QR: $e');
+      return false;
+    }
   }
 }

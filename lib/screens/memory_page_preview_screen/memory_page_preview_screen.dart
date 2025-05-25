@@ -48,9 +48,6 @@ class _MemoryPagePreviewScreenState extends State<MemoryPagePreviewScreen> {
     //     'firstName:$firstName; middleName:$middleName; lastName:$lastName; dateOfBirth:$dateOfBirth; dateOfDeath:$dateOfDeath; epitaphy:$epitaphy;');
 
     return Scaffold(
-      appBar: AppBar(
-          // ... (previous AppBar code)
-          ),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -61,11 +58,7 @@ class _MemoryPagePreviewScreenState extends State<MemoryPagePreviewScreen> {
                 alignment: Alignment.center,
                 children: [
                   Positioned(
-                    // Adjust position to ensure it's properly placed around the bottom
-                    // bottom: -10,
-                    child:
-                        // Container(width: 150, height: 150, color: Colors.red)
-                        CustomPaint(
+                    child: CustomPaint(
                       // Size of the half-circle, half the size of the image
                       size: const Size(150, 150),
                       painter: HalfCirclePainter(),

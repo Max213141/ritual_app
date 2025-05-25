@@ -4,7 +4,7 @@ import 'package:ritual_app/entities/hive_entities/app_preferences.dart';
 import 'package:ritual_app/entities/hive_entities/user_data.dart';
 import 'package:ritual_app/utils/loger.dart';
 
-void _log(dynamic message) => Logger.projectLog(message, name: 'hice_store');
+void _log(dynamic message) => Logger.projectLog(message, name: 'hive_store');
 
 class HiveStore {
   Future<void> init() async {
@@ -32,8 +32,8 @@ class HiveStore {
   }
 
   UserData? getUserData() {
-    Box<UserData> useDataBox = Hive.box<UserData>('user_data');
-    return useDataBox.get(0);
+    Box<UserData> userDataBox = Hive.box<UserData>('user_data');
+    return userDataBox.get(0);
   }
 
   bool? getAppTheme() {
@@ -73,5 +73,11 @@ class HiveStore {
     Box<UserData> useDataBox = Hive.box<UserData>('user_data');
     UserData? userData = useDataBox.get(0);
     return userData?.email;
+  }
+
+  List<String>? getUserDesks() {
+    Box<UserData> useDataBox = Hive.box<UserData>('user_data');
+    UserData? userData = useDataBox.get(0);
+    return userData?.memoryDesks;
   }
 }

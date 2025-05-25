@@ -14,7 +14,7 @@ class QrScanScreen extends StatefulWidget {
   });
 
   @override
-  _QrScanScreenState createState() => _QrScanScreenState();
+  State<QrScanScreen> createState() => _QrScanScreenState();
 }
 
 class _QrScanScreenState extends State<QrScanScreen> {

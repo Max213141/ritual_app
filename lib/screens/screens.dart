@@ -1,4 +1,4 @@
-export 'package:ritual_app/screens/home_screen/main_screen.dart';
+export 'package:ritual_app/screens/home_screen/home_screen.dart';
 export 'package:ritual_app/screens/initial_hive_page.dart';
 export 'package:ritual_app/screens/initial_page.dart';
 // export 'package:ritual_app/screens/breathing_items_screen/breathing_items_screen.dart';
@@ -21,3 +21,5 @@ export 'package:ritual_app/screens/memory_page_preview_screen/memory_page_previe
 export 'package:ritual_app/screens/auth_forgot_password_screen/auth_forgot_password_screen.dart';
 export 'package:ritual_app/screens/memory_page_view_screen/memory_page_view_screen.dart';
 export 'package:ritual_app/screens/plan_selection_screen/plan_selection_screen.dart';
+export 'package:ritual_app/screens/memory_page_screen/memory_page_screen.dart';
+export 'package:ritual_app/screens/qr_preview_screen/qr_preview_screen.dart';

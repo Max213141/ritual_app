@@ -1,58 +1,63 @@
-import 'dart:io';
-
 import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:ritual_app/blocs/blocs.dart';
 import 'package:ritual_app/entities/db_entities/db_entities.dart';
+import 'package:ritual_app/services/extentions/memory_page_media_convertor.dart';
+import 'package:ritual_app/services/media/media_service_interface.dart';
+import 'package:ritual_app/utils/utils.dart';
 
 part 'memory_desk_event.dart';
 part 'memory_desk_state.dart';
 part 'memory_desk_bloc.freezed.dart';
 
+void _log(dynamic message) =>
+    Logger.projectLog(message, name: 'memory_desk_bloc_bloc');
+
 class MemoryDeskBloc extends Bloc<MemoryDeskEvent, MemoryDeskState> {
   final FirebaseFirestore firestore;
   final FirebaseAuth auth;
-  final MediaBloc mediaBloc;
+  final MediaServiceInterface mediaService;
 
   MemoryDeskBloc({
     required this.firestore,
     required this.auth,
-    required this.mediaBloc,
-  }) : super(const _Initial()) {
-    on<UploadMemoryPage>(_uploadMemoryPage);
-    on<GetMemoryPage>(_getMemoryPage);
+    required this.mediaService,
+  }) : super(const Initial()) {
+    on<UploadMemoryDesk>(_uploadMemoryPage);
+    on<GetMemoryDesks>(_getMemoryPage);
     on<AddMemoryDeskToUser>(_addMemoryDeskToUser);
   }
 
   Future<void> _uploadMemoryPage(
-    UploadMemoryPage event,
+    UploadMemoryDesk event,
     Emitter<MemoryDeskState> emit,
   ) async {
     emit(const MemoryDeskState.loading());
 
     try {
-      // Generate unique Memory Desk ID
       final memoryDeskId = firestore.collection('memory_desks').doc().id;
 
-      // Upload media first using MediaBloc
-      final mediaUrls = await _uploadMedia(event.mediaData, memoryDeskId);
-
-      // Create MemoryPage object with uploaded media URLs
-      final memoryPage = event.memoryPage.copyWith(
-        photoUrl: mediaUrls['photo'],
+      final mediaUrls = await event.mediaData.uploadAndConvert(
+        memoryDeskId: memoryDeskId,
+        mediaService: mediaService,
       );
 
-      // Save MemoryPage data to Firestore
+      final memoryPage = event.memoryPage.copyWith(
+        photoUrls: mediaUrls.photos,
+        videoUrls: mediaUrls.videos,
+        ownerId: auth.currentUser!.uid,
+      );
+
       await firestore
           .collection('memory_desks')
           .doc(memoryDeskId)
           .set(memoryPage.toJson());
 
-      // Add Memory Desk ID to user data
       add(AddMemoryDeskToUser(
-          userId: event.userId, memoryDeskId: memoryDeskId));
+        userId: auth.currentUser!.uid,
+        memoryDeskId: memoryDeskId,
+      ));
 
       emit(const MemoryDeskState.success());
     } catch (e) {
@@ -60,39 +65,59 @@ class MemoryDeskBloc extends Bloc<MemoryDeskEvent, MemoryDeskState> {
     }
   }
 
-  Future<Map<String, String?>> _uploadMedia(
-      MemoryPageMedia mediaData, String memoryDeskId) async {
-    final mediaUrls = <String, String?>{};
-
-    for (final photo in mediaData.photos) {
-      final uploadEvent = UploadMedia(
-          filePath:
-              "memory_desks/$memoryDeskId/photos/${photo.split('/').last}",
-          file: File(photo));
-      mediaBloc.add(uploadEvent);
-    }
-
-    return mediaUrls;
-  }
-
   Future<void> _getMemoryPage(
-    GetMemoryPage event,
+    GetMemoryDesks event,
     Emitter<MemoryDeskState> emit,
   ) async {
     emit(const MemoryDeskState.loading());
 
     try {
-      final doc = await firestore
-          .collection('memory_desks')
-          .doc(event.memoryDeskId)
-          .get();
-
-      if (doc.exists) {
-        final memoryPage = MemoryPage.fromJson(doc.data()!);
-        emit(MemoryDeskState.memoryPageLoaded(memoryPage: memoryPage));
-      } else {
-        emit(const MemoryDeskState.failure(error: "MemoryPage not found"));
+      final uid = auth.currentUser?.uid;
+      if (uid == null) {
+        emit(const MemoryDeskState.failure(error: 'User not authenticated'));
+        return;
       }
+
+      // 🔹 1. Get the list of memory desk IDs from the user document
+      final userDoc = await firestore.collection('users').doc(uid).get();
+      final userData = userDoc.data();
+
+      if (userData == null || !userData.containsKey('memoryDesks')) {
+        emit(
+          const MemoryDeskState.memoryPagesLoaded(
+            memoryPages: [],
+            memoryDeskIds: [],
+          ),
+        );
+        return;
+      }
+
+      final List<dynamic> deskIdsRaw = userData['memoryDesks'];
+      final List<String> memoryDeskIds =
+          deskIdsRaw.whereType<String>().toList();
+
+      if (memoryDeskIds.isEmpty) {
+        emit(MemoryDeskState.memoryPagesLoaded(
+          memoryPages: [],
+          memoryDeskIds: memoryDeskIds,
+        ));
+        return;
+      }
+
+      // 🔹 2. Fetch all memory desks by ID (in parallel)
+      final futures = memoryDeskIds.map(
+        (id) => firestore.collection('memory_desks').doc(id).get(),
+      );
+
+      final snapshots = await Future.wait(futures);
+
+      final memoryPages = snapshots
+          .where((doc) => doc.exists && doc.data() != null)
+          .map((doc) => MemoryPage.fromJson(doc.data()!))
+          .toList();
+
+      emit(MemoryDeskState.memoryPagesLoaded(
+          memoryPages: memoryPages, memoryDeskIds: memoryDeskIds));
     } catch (e) {
       emit(MemoryDeskState.failure(error: e.toString()));
     }

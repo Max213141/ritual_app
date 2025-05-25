@@ -15,10 +15,12 @@ part 'auth_bloc.freezed.dart';
 void _log(dynamic message) => Logger.projectLog(message, name: 'auth_bloc');
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
+  final FirebaseFirestore firestore;
   final FirebaseAuth auth;
   final GoogleSignIn googleSignIn;
 
   AuthBloc({
+    required this.firestore,
     required this.auth,
     required this.googleSignIn,
   }) : super(const _Initial()) {
@@ -89,10 +91,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       );
 
       // Save user data in Firestore
-      await FirebaseFirestore.instance
-          .collection('users')
-          .doc(uid)
-          .set(newUser.toJson());
+      await firestore.collection('users').doc(uid).set(newUser.toJson());
 
       _log('User created and stored successfully');
 
@@ -147,7 +146,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       final int videoLimit = ProjectConstants.getVideoLimit('free');
 
       // Check if user exists in Firestore
-      final userRef = FirebaseFirestore.instance.collection('users').doc(uid);
+      final userRef = firestore.collection('users').doc(uid);
       final userDoc = await userRef.get();
 
       if (userDoc.exists) {
@@ -229,8 +228,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       }
 
       // Fetch user data from Firestore
-      final docSnapshot =
-          await FirebaseFirestore.instance.collection('users').doc(uid).get();
+      final docSnapshot = await firestore.collection('users').doc(uid).get();
       if (!docSnapshot.exists) {
         emit(const AuthState.authError(
             errorText: 'Ошибка: Данные пользователя не найдены.'));
@@ -290,7 +288,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       await FirebaseAuth.instance.currentUser!
           .linkWithCredential(googleCredential);
 
-      await FirebaseFirestore.instance
+      await firestore
           .collection('users')
           .doc(FirebaseAuth.instance.currentUser!.uid)
           .update({
@@ -311,10 +309,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
     try {
       await auth.currentUser!.delete();
-      await FirebaseFirestore.instance
-          .collection('users')
-          .doc(userUID)
-          .delete();
+      await firestore.collection('users').doc(userUID).delete();
       emit(const AuthState.logOutSuccess());
     } on FirebaseAuthException catch (e) {
       emit(AuthState.authError(

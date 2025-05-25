@@ -1,18 +1,19 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:hive/hive.dart';
 import 'package:ritual_app/blocs/blocs.dart';
-import 'package:ritual_app/entities/db_entities/memory_page/local_memory_page_media.dart';
 import 'package:ritual_app/entities/entities.dart';
 import 'package:ritual_app/entities/hive_entities/hive_entities.dart';
 import 'package:ritual_app/my_app_locale_wrapper.dart';
-import 'package:ritual_app/screens/screens.dart';
-import 'package:ritual_app/utils/utils.dart';
+import 'package:ritual_app/services/router/app_router.dart';
+import 'package:ritual_app/services/service_locator.dart';
+
+import 'services/media/media_service_interface.dart';
 
 class RitualApp extends StatelessWidget {
   final FirebaseAuth auth;
@@ -48,160 +49,7 @@ class RitualApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final router = GoRouter(
-      observers: [MyNavigatorObserver()],
-      routes: [
-        // GoRoute(
-        //   path: '/',
-        //   builder: (BuildContext context, GoRouterState state) {
-        //     return IntroScreen();
-        //   },
-        // ),
-        GoRoute(
-          name: 'initial_settings',
-          path: '/',
-          builder: (BuildContext context, GoRouterState state) {
-            // return SplashScreen();
-
-            return InitialHivePage(
-              auth: auth,
-            );
-          },
-        ),
-
-        GoRoute(
-          name: 'initial_page',
-          path: '/initial_page',
-          builder: (BuildContext context, GoRouterState state) {
-            // return SplashScreen();
-            return kIsWeb
-                ? const MemoryPageViewScreen()
-                : InitialPage(
-                    auth: auth,
-                  );
-          },
-          routes: <RouteBase>[
-            GoRoute(
-              name: 'auth_forgot_password',
-              path: 'auth_forgot_password',
-              builder: (BuildContext context, GoRouterState state) {
-                return const AuthForgotPasswordScreen();
-              },
-            ),
-          ],
-        ),
-        GoRoute(
-          name: 'home',
-          path: '/home',
-          builder: (BuildContext context, GoRouterState state) {
-            return const MainScreen();
-          },
-          routes: <RouteBase>[
-            GoRoute(
-              name: 'mp_plan_selection',
-              path: 'mp_plan_selection',
-              builder: (BuildContext context, GoRouterState state) {
-                return const PlanSelectionScreen();
-              },
-              routes: [
-                GoRoute(
-                  name: 'mp_creation',
-                  path: 'mp_creation',
-                  builder: (BuildContext context, GoRouterState state) {
-                    return const MemoryPageCreationScreen();
-                  },
-                  routes: <RouteBase>[
-                    GoRoute(
-                      name: 'mp_preview_screen',
-                      path: 'mp_preview_screen',
-                      builder: (BuildContext context, GoRouterState state) {
-                        final extra = state.extra
-                            as Map<String, dynamic>?; // Extract extra data
-
-                        if (extra == null ||
-                            !extra.containsKey('memoryPageData') ||
-                            !extra.containsKey('mediaData')) {
-                          return const Scaffold(
-                            body:
-                                Center(child: Text("Missing data for preview")),
-                          );
-                        }
-                        return MemoryPagePreviewScreen(
-                          memoryPageData: extra['memoryPageData'] as MemoryPage,
-                          mediaData: extra['mediaData'] as LocalMemoryPageMedia,
-                        );
-                      },
-                    ),
-                  ],
-                ),
-              ],
-            ),
-            GoRoute(
-              name: 'mp_view_screen',
-              path: 'mp_view_screen',
-              builder: (BuildContext context, GoRouterState state) {
-                return const MemoryPageViewScreen();
-              },
-            ),
-            GoRoute(
-              name: 'profile_screen',
-              path: 'profile_screen',
-              builder: (BuildContext context, GoRouterState state) {
-                return const ProfileScreen();
-              },
-            ),
-            GoRoute(
-              name: 'about_us_screen',
-              path: 'about_us_screen',
-              builder: (BuildContext context, GoRouterState state) {
-                return const AboutUsScreen();
-              },
-            ),
-            GoRoute(
-              name: 'support_screen',
-              path: 'support_screen',
-              builder: (BuildContext context, GoRouterState state) {
-                return const SupportScreen();
-              },
-            ),
-            GoRoute(
-              name: 'settings_screen',
-              path: 'settings_screen',
-              builder: (BuildContext context, GoRouterState state) {
-                return const SettingsScreen();
-              },
-            ),
-          ],
-        ),
-        GoRoute(
-          name: 'qr_scan',
-          path: '/qr_scan',
-          builder: (BuildContext context, GoRouterState state) {
-            return const QrScanScreen();
-          },
-          // routes: <RouteBase>[
-          //   GoRoute(
-          //     name: 'profile_screen',
-          //     path: 'profile_screen',
-          //     builder: (BuildContext context, GoRouterState state) {
-          //       return const ProfileScreen();
-          //     },
-          //   ),
-          // ],
-        ),
-
-        // GoRoute(
-        //   path: '/auth',
-        //   builder: (BuildContext context, GoRouterState state) {
-        //     return AuthScreen(
-        //       auth: auth,
-        //     );
-        //   },
-        // ),
-      ],
-      errorBuilder: (context, state) => const ErrorScreen(),
-      debugLogDiagnostics: true,
-    );
+    final router = createAppRouter(auth);
 
     return FutureBuilder(
       future: kIsWeb ? Future.delayed(const Duration(seconds: 1)) : _initHive(),
@@ -216,10 +64,17 @@ class RitualApp extends StatelessWidget {
               BlocProvider<QrCamBloc>(create: (context) => QrCamBloc()),
               BlocProvider<AuthBloc>(
                 create: (context) => AuthBloc(
+                  firestore: getIt<FirebaseFirestore>(),
                   auth: auth,
                   googleSignIn: googleSignIn,
                 ),
               ),
+              BlocProvider<MemoryDeskBloc>(
+                  create: (context) => MemoryDeskBloc(
+                        firestore: getIt<FirebaseFirestore>(),
+                        auth: getIt<FirebaseAuth>(),
+                        mediaService: getIt<MediaServiceInterface>(),
+                      )),
               BlocProvider<MediaBloc>(
                   create: (context) => MediaBloc(media: media)),
             ],

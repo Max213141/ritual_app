@@ -15,14 +15,12 @@ class MediaTitleWidget extends StatelessWidget {
 
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
-      child: Flexible(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(title, style: textTheme),
-            Text('$overallNumber of 5', style: textTheme),
-          ],
-        ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(title, style: textTheme),
+          Text('$overallNumber of 5', style: textTheme),
+        ],
       ),
     );
   }

@@ -12,8 +12,12 @@ class MemoryPage {
   final String epitaphy;
   final String biography;
   final String? photoUrl;
+  final List<String> photoUrls;
+  final List<String> videoUrls;
   final bool isPrivate;
   final String password;
+
+  final String ownerId;
 
   MemoryPage({
     required this.lastName,
@@ -24,15 +28,16 @@ class MemoryPage {
     required this.epitaphy,
     required this.biography,
     required this.photoUrl,
+    required this.photoUrls,
+    required this.videoUrls,
     required this.isPrivate,
     required this.password,
+    required this.ownerId,
   });
 
-  /// Factory constructor for JSON deserialization
   factory MemoryPage.fromJson(Map<String, dynamic> json) =>
       _$MemoryPageFromJson(json);
 
-  /// Method for JSON serialization
   Map<String, dynamic> toJson() => _$MemoryPageToJson(this);
 
   MemoryPage copyWith({
@@ -44,8 +49,11 @@ class MemoryPage {
     String? epitaphy,
     String? biography,
     String? photoUrl,
+    List<String>? photoUrls,
+    List<String>? videoUrls,
     bool? isPrivate,
     String? password,
+    String? ownerId,
   }) {
     return MemoryPage(
       lastName: lastName ?? this.lastName,
@@ -56,8 +64,11 @@ class MemoryPage {
       epitaphy: epitaphy ?? this.epitaphy,
       biography: biography ?? this.biography,
       photoUrl: photoUrl ?? this.photoUrl,
+      photoUrls: photoUrls ?? this.photoUrls,
+      videoUrls: videoUrls ?? this.videoUrls,
       isPrivate: isPrivate ?? this.isPrivate,
       password: password ?? this.password,
+      ownerId: ownerId ?? this.ownerId,
     );
   }
 }

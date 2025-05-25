@@ -15,7 +15,7 @@ class InitialPage extends StatelessWidget {
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           //Uncomment for proper workflow
-          return const MainScreen();
+          return const HomeScreen();
         }
         return const AuthScreen();
       },

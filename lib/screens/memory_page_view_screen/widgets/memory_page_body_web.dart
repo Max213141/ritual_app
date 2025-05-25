@@ -78,9 +78,13 @@ class _MemoryPageWebBodyWidgetState extends State<MemoryPageWebBodyWidget> {
                       },
                     ),
                     const SizedBox(height: 20),
-                    const Text('Видео',
-                        style: TextStyle(
-                            fontSize: 24, fontWeight: FontWeight.bold)),
+                    const Text(
+                      'Видео',
+                      style: TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                   ],
                 ),
               ),

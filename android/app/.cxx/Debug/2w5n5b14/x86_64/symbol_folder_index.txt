@@ -1,0 +1,1 @@
+/Users/maksimkupcov/Projects/new_chance/ritual_app/android/app/property(org.gradle.api.file.Directory, fixed(class org.gradle.api.internal.file.DefaultFilePropertyFactory$FixedDirectory, /Users/maksimkupcov/Projects/new_chance/ritual_app/build))/app/intermediates/cxx/Debug/2w5n5b14/obj/x86_64

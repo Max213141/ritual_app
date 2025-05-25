@@ -1,6 +1,6 @@
-import 'dart:io';
+// import 'dart:io';
 
-import 'package:device_info_plus/device_info_plus.dart';
+// import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:ritual_app/services/permission/permission_service.dart';
@@ -17,21 +17,21 @@ class PermissionHandlerPermissionService implements PermissionService {
 
   @override
   Future<PermissionStatus> requestPhotosPermission() async {
-    AndroidDeviceInfo? androidInfo;
-    if (Platform.isAndroid) androidInfo = await DeviceInfoPlugin().androidInfo;
-    bool isIOS = Platform.isIOS;
-    int? sdkInt = androidInfo?.version.sdkInt;
+    // AndroidDeviceInfo? androidInfo;
+    // if (Platform.isAndroid) androidInfo = await DeviceInfoPlugin().androidInfo;
+    // bool isIOS = Platform.isIOS;
+    // int? sdkInt = androidInfo?.version.sdkInt;
 
-    if (!isIOS && sdkInt! < 29) {
-      _log('Android version is lower than Android 10 (API 29)');
-      return await Permission.storage.request();
+    // if (!isIOS && sdkInt! < 29) {
+    //   _log('Android version is lower than Android 10 (API 29)');
+    //   return await Permission.storage.request();
 
-      // Add your logic here for handling lower Android versions
-    } else {
-      _log('Android version is Android 10 (API 29) or higher');
-      // Add your logic here for handling Android 10 and higher versions
-      return await Permission.photos.request();
-    }
+    //   // Add your logic here for handling lower Android versions
+    // } else {
+    //   _log('Android version is Android 10 (API 29) or higher');
+    //   // Add your logic here for handling Android 10 and higher versions
+    return await Permission.photos.request();
+    // }
   }
 
   @override

@@ -64,7 +64,7 @@ class _InitialHivePageState extends State<InitialHivePage> {
             return const IntroScreen();
           } else {
             if (widget.auth.currentUser != null) {
-              return const MainScreen();
+              return const HomeScreen();
             } else {
               return const AuthScreen();
             }

@@ -16,3 +16,4 @@ export 'app_config.dart';
 export 'navigation_observer.dart';
 export './styles/theme/theme_creation.dart';
 export './styles/theme/theme.dart';
+export 'gallery_saver/local_gallery_saver.dart';
