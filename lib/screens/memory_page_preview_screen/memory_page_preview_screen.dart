@@ -2,7 +2,6 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:ritual_app/entities/db_entities/memory_page/local_memory_page_media.dart';
 
 import 'package:ritual_app/entities/entities.dart';
 import 'package:ritual_app/screens/memory_page_preview_screen/widgets/widgets.dart';
@@ -13,7 +12,7 @@ import 'package:ritual_app/utils/utils.dart';
 //     Logger.projectLog(message, name: 'memory_page_preview');
 
 class MemoryPagePreviewScreen extends StatefulWidget {
-  final MemoryPage memoryPageData;
+  final MemoryDesk memoryPageData;
   final LocalMemoryPageMedia mediaData;
   const MemoryPagePreviewScreen({
     super.key,

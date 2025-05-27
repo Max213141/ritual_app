@@ -35,56 +35,59 @@ class PickedMediaList extends StatelessWidget {
         padding: EdgeInsets.symmetric(vertical: 8),
         child: Center(
           child: Text(
-            'Add media',
+            'Loading...',
             style: TextStyle(fontSize: 16),
           ),
         ),
       );
     } else {
-      return GridView.builder(
-        shrinkWrap: true,
-        physics: const NeverScrollableScrollPhysics(),
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 3, // Number of columns in the grid
-          crossAxisSpacing: 10,
-          mainAxisSpacing: 10,
-          childAspectRatio: .75,
-        ),
-        itemCount: mediaList.length < 5
-            ? mediaList.length + 1 // Add the selection button
-            : mediaList.length, // Maximum 5 items (no button)
-        itemBuilder: (context, index) {
-          if (index < mediaList.length) {
-            // Use a variable to store the widget to return
-            Widget mediaItem;
+      return Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+        child: GridView.builder(
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 3, // Number of columns in the grid
+            crossAxisSpacing: 10,
+            mainAxisSpacing: 10,
+            childAspectRatio: .75,
+          ),
+          itemCount: mediaList.length < 5
+              ? mediaList.length + 1 // Add the selection button
+              : mediaList.length, // Maximum 5 items (no button)
+          itemBuilder: (context, index) {
+            if (index < mediaList.length) {
+              // Use a variable to store the widget to return
+              Widget mediaItem;
 
-            // Check for thumbnail or imagePath
-            if (thumbnailList != null && thumbnailList![index] != null) {
-              mediaItem = MediaPickerFrameWidget(
-                videoThumbnail: thumbnailList![index],
-                onClosedPressed:
-                    !watchOnlyMode ? () => closeVideoCallback!(index) : null,
+              // Check for thumbnail or imagePath
+              if (thumbnailList != null && thumbnailList![index] != null) {
+                mediaItem = MediaPickerFrameWidget(
+                  videoThumbnail: thumbnailList![index],
+                  onClosedPressed:
+                      !watchOnlyMode ? () => closeVideoCallback!(index) : null,
+                );
+              } else {
+                mediaItem = MediaPickerFrameWidget(
+                  imagePath: mediaList[index].path,
+                  onClosedPressed: !watchOnlyMode
+                      ? () {
+                          closePhotoCallback!(index);
+                        }
+                      : null,
+                );
+              }
+              return mediaItem; // Ensure a widget is always returned
+            } else if (!watchOnlyMode) {
+              return MediaPickerFrameWidget(
+                icon: pickerIcon,
+                onPressed: onPressPickMedia,
               );
             } else {
-              mediaItem = MediaPickerFrameWidget(
-                imagePath: mediaList[index].path,
-                onClosedPressed: !watchOnlyMode
-                    ? () {
-                        closePhotoCallback!(index);
-                      }
-                    : null,
-              );
+              return SizedBox.shrink();
             }
-            return mediaItem; // Ensure a widget is always returned
-          } else if (!watchOnlyMode) {
-            return MediaPickerFrameWidget(
-              icon: pickerIcon,
-              onPressed: onPressPickMedia,
-            );
-          } else {
-            return SizedBox.shrink();
-          }
-        },
+          },
+        ),
       );
     }
   }

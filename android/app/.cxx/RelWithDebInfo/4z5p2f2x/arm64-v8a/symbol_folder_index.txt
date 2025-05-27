@@ -1,0 +1,1 @@
+/Users/maksimkupcov/Projects/new_chance/ritual_app/build/app/intermediates/cxx/RelWithDebInfo/4z5p2f2x/obj/arm64-v8a

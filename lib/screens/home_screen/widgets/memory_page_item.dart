@@ -2,11 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ritual_app/entities/entities.dart';
 import 'package:ritual_app/screens/home_screen/widgets/widgets.dart';
-import 'package:ritual_app/services/media/media_service_interface.dart';
-import 'package:ritual_app/services/service_locator.dart';
 
 class MemoryPageItem extends StatefulWidget {
-  final MemoryPage memoryDesk;
+  final MemoryDesk memoryDesk;
   final String memoryDeskId;
 
   const MemoryPageItem({
@@ -102,17 +100,9 @@ class _MemoryPageItemState extends State<MemoryPageItem>
   }
 
   void openPreview(BuildContext context) async {
-    final mediaService = getIt<MediaServiceInterface>();
-    final mediaData = await mediaService.downloadMediaFile(
-      photoUrls: widget.memoryDesk.photoUrls,
-      videoUrls: widget.memoryDesk.videoUrls,
-    );
     GoRouter.of(context).go(
-      '/home/mp_plan_selection/mp_creation/mp_preview_screen',
-      extra: {
-        'memoryPageData': widget.memoryDesk,
-        'mediaData': mediaData,
-      },
+      '/home/mp_view_screen/${widget.memoryDeskId}',
+      extra: widget.memoryDesk,
     );
   }
 

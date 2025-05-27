@@ -6,7 +6,7 @@ part of 'memory_page_info.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-MemoryPage _$MemoryPageFromJson(Map<String, dynamic> json) => MemoryPage(
+MemoryDesk _$MemoryDeskFromJson(Map<String, dynamic> json) => MemoryDesk(
       lastName: json['lastName'] as String,
       firstName: json['firstName'] as String,
       middleName: json['middleName'] as String,
@@ -24,7 +24,7 @@ MemoryPage _$MemoryPageFromJson(Map<String, dynamic> json) => MemoryPage(
       ownerId: json['ownerId'] as String,
     );
 
-Map<String, dynamic> _$MemoryPageToJson(MemoryPage instance) =>
+Map<String, dynamic> _$MemoryDeskToJson(MemoryDesk instance) =>
     <String, dynamic>{
       'lastName': instance.lastName,
       'firstName': instance.firstName,

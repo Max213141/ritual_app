@@ -9,8 +9,8 @@ import 'package:ritual_app/screens/memory_page_creation_screen/widgets/widgets.d
 
 class BiographyTabWidget extends StatefulWidget {
   final GlobalKey<FormState> formKey;
-  final MemoryPage profileData;
-  final ValueChanged<MemoryPage> onProfileDataChanged;
+  final MemoryDesk profileData;
+  final ValueChanged<MemoryDesk> onProfileDataChanged;
 
   const BiographyTabWidget({
     super.key,

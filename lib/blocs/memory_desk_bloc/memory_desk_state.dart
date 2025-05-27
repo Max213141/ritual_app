@@ -9,7 +9,7 @@ class MemoryDeskState with _$MemoryDeskState {
     required String error,
   }) = Failure;
   const factory MemoryDeskState.memoryPagesLoaded({
-    required List<MemoryPage> memoryPages,
+    required List<MemoryDesk> memoryPages,
     required List<String> memoryDeskIds,
   }) = MemoryPagesLoaded;
 }

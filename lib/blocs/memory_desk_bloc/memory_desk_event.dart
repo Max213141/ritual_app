@@ -4,7 +4,7 @@ part of 'memory_desk_bloc.dart';
 class MemoryDeskEvent with _$MemoryDeskEvent {
   // Upload MemoryPage information
   const factory MemoryDeskEvent.uploadMemoryDesk({
-    required MemoryPage memoryPage,
+    required MemoryDesk memoryPage,
     required LocalMemoryPageMedia mediaData,
   }) = UploadMemoryDesk;
 

@@ -10,9 +10,9 @@ void _log(dynamic message) =>
     Logger.projectLog(message, name: 'biography_tab_widget');
 
 class CircleAvatarWidget extends StatefulWidget {
-  final MemoryPage profileData;
+  final MemoryDesk profileData;
 
-  final ValueChanged<MemoryPage> onProfileDataChanged;
+  final ValueChanged<MemoryDesk> onProfileDataChanged;
 
   const CircleAvatarWidget({
     super.key,

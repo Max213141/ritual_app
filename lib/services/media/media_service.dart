@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'dart:math';
 import 'dart:ui' as ui;
+import 'package:http/http.dart' as http;
 
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
@@ -147,10 +148,35 @@ class MediaService implements MediaServiceInterface {
   Future<LocalMemoryPageMedia> downloadMediaFile({
     required List<String> photoUrls,
     required List<String> videoUrls,
-  }) {
-    return Future.delayed(Durations.medium1, () {
-      return LocalMemoryPageMedia(photos: [], videos: []);
-    });
+  }) async {
+    final tempDir = await getTemporaryDirectory();
+    final photos = <XFile>[];
+    final videos = <XFile>[];
+
+    // helper to download & save
+    Future<XFile?> downloadAndSave(String url, String filename) async {
+      try {
+        final resp = await http.get(Uri.parse(url));
+        if (resp.statusCode == 200) {
+          final file = File('${tempDir.path}/$filename');
+          await file.writeAsBytes(resp.bodyBytes);
+          return XFile(file.path);
+        }
+      } catch (_) {}
+      return null;
+    }
+
+    for (var i = 0; i < photoUrls.length; i++) {
+      final xfile = await downloadAndSave(photoUrls[i], 'photo_$i.jpg');
+      if (xfile != null) photos.add(xfile);
+    }
+
+    for (var i = 0; i < videoUrls.length; i++) {
+      final xfile = await downloadAndSave(videoUrls[i], 'video_$i.mp4');
+      if (xfile != null) videos.add(xfile);
+    }
+
+    return LocalMemoryPageMedia(photos: photos, videos: videos);
   }
 
   @override
@@ -177,6 +203,7 @@ class MediaService implements MediaServiceInterface {
         pngBytes,
         quality: 100,
         name: 'qr_code_${DateTime.now().millisecondsSinceEpoch}',
+        isReturnImagePathOfIOS: Platform.isIOS,
       );
 
       return result['isSuccess'] == true;

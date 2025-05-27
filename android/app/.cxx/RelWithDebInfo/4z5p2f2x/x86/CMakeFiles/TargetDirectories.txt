@@ -1,0 +1,2 @@
+/Users/maksimkupcov/Projects/new_chance/ritual_app/android/app/.cxx/RelWithDebInfo/4z5p2f2x/x86/CMakeFiles/edit_cache.dir
+/Users/maksimkupcov/Projects/new_chance/ritual_app/android/app/.cxx/RelWithDebInfo/4z5p2f2x/x86/CMakeFiles/rebuild_cache.dir

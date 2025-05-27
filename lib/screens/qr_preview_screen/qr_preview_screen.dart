@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:pretty_qr_code/pretty_qr_code.dart';
 import 'package:ritual_app/services/media/media_service_interface.dart';
@@ -33,16 +35,19 @@ class _QrPreviewScreenState extends State<QrPreviewScreen> {
 
     _qrImage = QrImage(code);
 
-    _decoration = const PrettyQrDecoration(
+    _decoration = PrettyQrDecoration(
       background: Colors.white,
       quietZone: PrettyQrQuietZone.zero,
-      image: PrettyQrDecorationImage(
-        image: AssetImage(
-            'assets/icons/logo_icon_bl.png'), // make sure this path exists
-        position: PrettyQrDecorationImagePosition.embedded,
-        filterQuality: FilterQuality.high,
-        scale: .15,
-      ),
+      image: Platform.isIOS
+          ? const PrettyQrDecorationImage(
+              image: AssetImage(
+                'assets/icons/logo_icon_bl.png',
+              ), // make sure this path exists
+              position: PrettyQrDecorationImagePosition.embedded,
+              filterQuality: FilterQuality.high,
+              scale: .15,
+            )
+          : null,
     );
   }
 

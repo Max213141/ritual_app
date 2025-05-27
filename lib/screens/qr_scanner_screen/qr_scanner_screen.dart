@@ -39,27 +39,36 @@ class _QrScanScreenState extends State<QrScanScreen> {
   Widget build(BuildContext context) {
     final l10n = l10nOf(context);
     final color = Theme.of(context).primaryColorLight;
-    return BlocBuilder<QrCamBloc, QrCamState>(
-      builder: (context, state) {
-        return Scaffold(
-          backgroundColor: Colors.black,
-          extendBodyBehindAppBar: true,
-          appBar: AppBar(
-            automaticallyImplyLeading: false,
-            backgroundColor: Colors.transparent,
-            systemOverlayStyle: SystemUiOverlayStyle.light,
-            actions: [
-              IconButton(
-                onPressed: () => GoRouter.of(context).go('/home'),
-                icon: RitualAppSvgPicture(
-                  picture: 'assets/icons/close.svg',
-                  fit: BoxFit.contain,
-                  color: color,
-                ),
-              ),
-            ],
+
+    return Scaffold(
+      backgroundColor: Colors.black,
+      extendBodyBehindAppBar: true,
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        backgroundColor: Colors.transparent,
+        systemOverlayStyle: SystemUiOverlayStyle.light,
+        actions: [
+          IconButton(
+            onPressed: () => GoRouter.of(context).go('/home'),
+            icon: RitualAppSvgPicture(
+              picture: 'assets/icons/close.svg',
+              fit: BoxFit.contain,
+              color: color,
+            ),
           ),
-          body: Padding(
+        ],
+      ),
+      body: BlocConsumer<QrCamBloc, QrCamState>(
+        listener: (context, state) {
+          if (state is QrCamMemoryDeskLoaded) {
+            GoRouter.of(context).go(
+              '/home/mp_view_screen/${state.memoryDeskId}',
+              extra: state.memoryPage,
+            );
+          }
+        },
+        builder: (context, state) {
+          Widget body = Padding(
             padding: const EdgeInsets.only(left: 16.0, right: 16, top: 60),
             child: Column(
               children: [
@@ -90,15 +99,73 @@ class _QrScanScreenState extends State<QrScanScreen> {
                 ),
               ],
             ),
-          ),
-        );
-      },
+          );
+
+          if (state is QrCamPermissionPermamentlyDenied ||
+              state is QrCamPermissionDenied) {
+            body = Center(
+              child: Padding(
+                padding: const EdgeInsets.all(30.0),
+                child: Text(
+                    'Please grant your pemisson in your settings to use QR scanner'),
+              ),
+            );
+          }
+          if (state is QrCamError) {
+            body = Center(
+              child: Padding(
+                padding: const EdgeInsets.all(30.0),
+                child: Text('${state.error}'),
+              ),
+            );
+          }
+
+          return body;
+        },
+      ),
     );
   }
 
-  void _qrParse(String qrString) async {
+  // void _qrParse(String qrString, BuildContext context) async {
+  //   // stop the camera to avoid duplicate scans while loading
+  //   await _cameraController.stop();
+
+  //   // fire the event to load from Firestore
+  //   BlocProvider.of<QrCamBloc>(context).add(
+  //     QrCamLoadMemoryDesk(memoryDeskId: qrString),
+  //   );
+
+  //   // note: you don’t need to restart the camera here,
+  //   // the BlocListener’s navigation will take the user away.
+  //   // If you want to resume scanning on error, do that in your
+  //   // BlocConsumer listener or in the error state’s build.
+  // }
+
+  void _qrParse(String qrString, BuildContext context) async {
+    // stop to prevent double-scans while we load
     await _cameraController.stop();
-    try {} catch (e) {}
-    await _cameraController.start();
+
+    // extract the ID from the "displayValue: XYZ" part
+    final id = _extractDeskId(qrString);
+    if (id == null) {
+      // if we couldn’t find it, show an error or restart scanning
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Не удалось распознать QR-код')),
+      );
+      await _cameraController.start();
+      return;
+    }
+
+    // dispatch the load
+    BlocProvider.of<QrCamBloc>(context).add(
+      QrCamLoadMemoryDesk(memoryDeskId: id),
+    );
+  }
+
+// helper to grab that displayValue
+  String? _extractDeskId(String raw) {
+    final regex = RegExp(r'displayValue:\s*([^,\}]+)');
+    final match = regex.firstMatch(raw);
+    return match?.group(1)?.trim();
   }
 }

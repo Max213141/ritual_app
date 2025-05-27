@@ -113,7 +113,7 @@ class MemoryDeskBloc extends Bloc<MemoryDeskEvent, MemoryDeskState> {
 
       final memoryPages = snapshots
           .where((doc) => doc.exists && doc.data() != null)
-          .map((doc) => MemoryPage.fromJson(doc.data()!))
+          .map((doc) => MemoryDesk.fromJson(doc.data()!))
           .toList();
 
       emit(MemoryDeskState.memoryPagesLoaded(

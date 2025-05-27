@@ -19,18 +19,4 @@ class LocalGallerySaver {
     });
     return result;
   }
-
-  static Future<dynamic> saveFile(
-    String filePath, {
-    String? name,
-    bool isReturnPathOfIOS = false,
-  }) async {
-    final result =
-        await _channel.invokeMethod('saveFileToGallery', <String, dynamic>{
-      'file': filePath,
-      'name': name,
-      'isReturnPathOfIOS': isReturnPathOfIOS,
-    });
-    return result;
-  }
 }

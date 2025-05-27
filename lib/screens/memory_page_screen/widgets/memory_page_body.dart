@@ -4,11 +4,11 @@ import 'package:ritual_app/entities/db_entities/db_entities.dart';
 import 'package:ritual_app/screens/home_screen/widgets/widgets.dart';
 import 'package:ritual_app/utils/utils.dart';
 
-class MemoryPageBody extends StatelessWidget {
+class MemoryDesksListScreenBody extends StatelessWidget {
   final AppLocalizations l10n;
-  final List<MemoryPage> memoryDesks;
+  final List<MemoryDesk> memoryDesks;
   final List<String> memoryDeskIds;
-  const MemoryPageBody({
+  const MemoryDesksListScreenBody({
     super.key,
     required this.l10n,
     required this.memoryDesks,

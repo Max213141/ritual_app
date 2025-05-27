@@ -20,7 +20,7 @@ class _MemoryPageCreationScreenState extends State<MemoryPageCreationScreen>
     with SingleTickerProviderStateMixin {
   late GlobalKey<FormState> _formKey;
   late TabController _tabController;
-  MemoryPage? _memoryPageData;
+  MemoryDesk? _memoryPageData;
   late LocalMemoryPageMedia _mediaData;
   final ValueNotifier<int> _selectedIndex = ValueNotifier<int>(0);
 
@@ -31,7 +31,7 @@ class _MemoryPageCreationScreenState extends State<MemoryPageCreationScreen>
     _tabController.addListener(() {
       _selectedIndex.value = _tabController.index;
     });
-    _memoryPageData = MemoryPage(
+    _memoryPageData = MemoryDesk(
       lastName: '',
       firstName: '',
       middleName: '',
@@ -53,7 +53,7 @@ class _MemoryPageCreationScreenState extends State<MemoryPageCreationScreen>
     super.initState();
   }
 
-  void _updateProfileData(MemoryPage updatedData) {
+  void _updateProfileData(MemoryDesk updatedData) {
     setState(() {
       _memoryPageData = updatedData;
     });

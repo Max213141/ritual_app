@@ -91,7 +91,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
-        body: MemoryPageScreen(
+        body: MemoryDesksListScreen(
           l10n: l10n,
         ),
       ),

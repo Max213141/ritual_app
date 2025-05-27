@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:ritual_app/screens/memory_page_preview_screen/widgets/widgets.dart';
-import 'package:ritual_app/screens/memory_page_view_screen/widgets/widgets.dart';
+import 'package:ritual_app/entities/entities.dart';
+import 'package:ritual_app/services/media/media_service_interface.dart';
+import 'package:ritual_app/services/service_locator.dart';
+import 'package:ritual_app/utils/utils.dart';
 
 class MemoryPageMobileBodyWidget extends StatefulWidget {
-  const MemoryPageMobileBodyWidget({super.key});
+  final MemoryDesk memoryPageData;
+  const MemoryPageMobileBodyWidget({
+    super.key,
+    required this.memoryPageData,
+  });
 
   @override
   State<MemoryPageMobileBodyWidget> createState() =>
@@ -14,64 +20,105 @@ class MemoryPageMobileBodyWidget extends StatefulWidget {
 class _MemoryPageMobileBodyWidgetState
     extends State<MemoryPageMobileBodyWidget> {
   int _selectedTabIndex = 0;
-  final List<String> _tabs = ['Биография', 'Фото', 'Видео'];
+  final _tabs = ['Биография', 'Фото', 'Видео'];
+
+  LocalMemoryPageMedia? _localMedia;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadMedia();
+  }
+
+  Future<void> _loadMedia() async {
+    final mediaService = getIt<MediaServiceInterface>();
+
+    final media = await mediaService.downloadMediaFile(
+      photoUrls: widget.memoryPageData.photoUrls,
+      videoUrls: widget.memoryPageData.videoUrls,
+    );
+    setState(
+      () => _localMedia = media,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
+    final data = widget.memoryPageData;
+    final fullName = [data.firstName, data.middleName, data.lastName]
+        .where((s) => s.isNotEmpty)
+        .join(' ');
+    final dateRange = '${data.dateOfBirth.isEmpty ? '?' : data.dateOfBirth}'
+        ' – '
+        '${data.dateOfDeath.isEmpty ? '?' : data.dateOfDeath}';
+
     return Scaffold(
       appBar: AppBar(
-        leading: GestureDetector(
-          onTap: () => () => GoRouter.of(context).go('/home'),
-          child: Icon(Icons.arrow_back, color: Colors.grey[600]),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Colors.grey[600]),
+          onPressed: () => GoRouter.of(context).pop(),
         ),
       ),
       body: SingleChildScrollView(
         child: Column(
           children: [
+            const SizedBox(height: 16),
+            // Avatar
             CircleAvatar(
               radius: 60,
               backgroundColor: Colors.grey[300],
-              // Add photo here if available
+              backgroundImage:
+                  data.photoUrl != null ? NetworkImage(data.photoUrl!) : null,
+              child: data.photoUrl == null
+                  ? Icon(Icons.person, size: 60, color: Colors.grey[600])
+                  : null,
             ),
+
             const SizedBox(height: 16),
-            const Text(
-              'Романова Мария\nАлександровна',
+            // Name
+            Text(
+              fullName.isNotEmpty ? fullName : 'Без имени',
               textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-              ),
+              style: Theme.of(context).textTheme.headlineMedium,
             ),
+
             const SizedBox(height: 8),
+            // Dates
             Text(
-              '01.05.1970 - 03.08.2022',
-              style: TextStyle(
-                fontSize: 16,
-                color: Colors.grey[600],
-              ),
+              dateRange,
+              style: Theme.of(context)
+                  .textTheme
+                  .headlineSmall
+                  ?.copyWith(color: Colors.grey[600]),
             ),
-            const SizedBox(height: 16),
-            Text(
-              'Любим тебя, и в памяти\nНашей всегда ты жива',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 16,
-                fontStyle: FontStyle.italic,
-                color: Colors.grey[600],
+
+            if (data.epitaphy.isNotEmpty) ...[
+              const SizedBox(height: 12),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                child: Text(
+                  '"${data.epitaphy}"',
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                        fontStyle: FontStyle.italic,
+                      ),
+                ),
               ),
-            ),
+            ],
+
             const SizedBox(height: 24),
-            // ... (previous content above tabs)
+            // Tab bar
             PreviewTabBarWidget(
               tabs: _tabs,
               selectedIndex: _selectedTabIndex,
-              onTap: (index) {
-                setState(() {
-                  _selectedTabIndex = index;
-                });
-              },
+              onTap: (i) => setState(() => _selectedTabIndex = i),
             ),
-            // Content based on selected tab
-            _buildTabContent(),
+
+            // Tab content
+            AnimatedSwitcher(
+              duration: const Duration(milliseconds: 300),
+              child: _buildTabContent(),
+            ),
           ],
         ),
       ),
@@ -79,15 +126,22 @@ class _MemoryPageMobileBodyWidgetState
   }
 
   Widget _buildTabContent() {
+    final biography = widget.memoryPageData.biography;
+
     switch (_selectedTabIndex) {
       case 0:
-        return const PreviewBiographyWidget(
-          biography: 'Empty6 need to take from data',
-        );
+        return PreviewBiographyWidget(
+            biography: biography.isEmpty ? 'Fill in biography' : biography);
       case 1:
-        return const PhotoTabWidget();
+        return PickedMediaList(
+          mediaList: _localMedia?.photos ?? [],
+          watchOnlyMode: true,
+        );
       case 2:
-        return const VideoTabWidget();
+        return PickedMediaList(
+          mediaList: _localMedia?.videos ?? [],
+          watchOnlyMode: true,
+        );
       default:
         return const SizedBox.shrink();
     }

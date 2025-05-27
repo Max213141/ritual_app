@@ -4,9 +4,9 @@ import 'package:ritual_app/blocs/blocs.dart';
 import 'package:ritual_app/screens/memory_page_screen/widgets/widgets.dart';
 import 'package:ritual_app/utils/utils.dart';
 
-class MemoryPageScreen extends StatelessWidget {
+class MemoryDesksListScreen extends StatelessWidget {
   final AppLocalizations l10n;
-  const MemoryPageScreen({
+  const MemoryDesksListScreen({
     super.key,
     required this.l10n,
   });
@@ -21,7 +21,7 @@ class MemoryPageScreen extends StatelessWidget {
           if (state is MemoryPagesLoaded) {
             body = Padding(
               padding: const EdgeInsets.all(16.0),
-              child: MemoryPageBody(
+              child: MemoryDesksListScreenBody(
                 l10n: l10n,
                 memoryDesks: state.memoryPages,
                 memoryDeskIds: state.memoryDeskIds,

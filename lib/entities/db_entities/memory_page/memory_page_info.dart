@@ -3,7 +3,7 @@ import 'package:json_annotation/json_annotation.dart';
 part 'memory_page_info.g.dart';
 
 @JsonSerializable(explicitToJson: true)
-class MemoryPage {
+class MemoryDesk {
   final String lastName;
   final String firstName;
   final String middleName;
@@ -19,7 +19,7 @@ class MemoryPage {
 
   final String ownerId;
 
-  MemoryPage({
+  MemoryDesk({
     required this.lastName,
     required this.firstName,
     required this.middleName,
@@ -35,12 +35,12 @@ class MemoryPage {
     required this.ownerId,
   });
 
-  factory MemoryPage.fromJson(Map<String, dynamic> json) =>
-      _$MemoryPageFromJson(json);
+  factory MemoryDesk.fromJson(Map<String, dynamic> json) =>
+      _$MemoryDeskFromJson(json);
 
-  Map<String, dynamic> toJson() => _$MemoryPageToJson(this);
+  Map<String, dynamic> toJson() => _$MemoryDeskToJson(this);
 
-  MemoryPage copyWith({
+  MemoryDesk copyWith({
     String? lastName,
     String? firstName,
     String? middleName,
@@ -55,7 +55,7 @@ class MemoryPage {
     String? password,
     String? ownerId,
   }) {
-    return MemoryPage(
+    return MemoryDesk(
       lastName: lastName ?? this.lastName,
       firstName: firstName ?? this.firstName,
       middleName: middleName ?? this.middleName,

@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:ritual_app/entities/entities.dart';
 import 'package:ritual_app/screens/screens.dart';
 import 'package:ritual_app/utils/utils.dart';
 
@@ -20,7 +21,8 @@ GoRouter createAppRouter(FirebaseAuth auth) {
         name: 'initial_page',
         path: '/initial_page',
         builder: (context, state) =>
-            kIsWeb ? const MemoryPageViewScreen() : InitialPage(auth: auth),
+            // kIsWeb ? const MemoryPageViewScreen(memoryPage: page) : InitialPage(auth: auth), //TODO implement web page
+            InitialPage(auth: auth),
         routes: [
           GoRoute(
             name: 'auth_forgot_password',
@@ -67,9 +69,11 @@ GoRouter createAppRouter(FirebaseAuth auth) {
             ],
           ),
           GoRoute(
-            name: 'mp_view_screen',
-            path: 'mp_view_screen',
-            builder: (context, state) => const MemoryPageViewScreen(),
+            path: 'mp_view_screen/:id',
+            builder: (ctx, state) {
+              final page = state.extra as MemoryDesk;
+              return MemoryPageViewScreen(memoryPage: page);
+            },
           ),
           GoRoute(
             name: 'qr_preview',

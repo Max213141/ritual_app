@@ -8,7 +8,7 @@ void _log(dynamic message) => Logger.projectLog(message, name: 'qr_cam');
 
 class QrCamWidget extends StatefulWidget {
   final MobileScannerController cameraController;
-  final Function(String scanData) onScan;
+  final Function(String scanData, BuildContext context) onScan;
 
   const QrCamWidget({
     super.key,
@@ -106,10 +106,12 @@ class _QrCamWidgetState extends State<QrCamWidget> {
         },
       );
 
-  void _onDetect(BarcodeCapture barcode) {
+  void _onDetect(
+    BarcodeCapture barcode,
+  ) {
     _log('barCode - ${barcode.raw}');
     if (barcode.raw != null) {
-      widget.onScan(barcode.raw!.toString());
+      widget.onScan(barcode.raw!.toString(), context);
     }
   }
 }

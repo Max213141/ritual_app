@@ -19,32 +19,38 @@ mixin _$QrCamEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() qrCamPermissionCheck,
+    required TResult Function(String memoryDeskId) qrCamLoadMemoryDesk,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? qrCamPermissionCheck,
+    TResult? Function(String memoryDeskId)? qrCamLoadMemoryDesk,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? qrCamPermissionCheck,
+    TResult Function(String memoryDeskId)? qrCamLoadMemoryDesk,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(QrCamPermissionCheck value) qrCamPermissionCheck,
+    required TResult Function(QrCamLoadMemoryDesk value) qrCamLoadMemoryDesk,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(QrCamPermissionCheck value)? qrCamPermissionCheck,
+    TResult? Function(QrCamLoadMemoryDesk value)? qrCamLoadMemoryDesk,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(QrCamPermissionCheck value)? qrCamPermissionCheck,
+    TResult Function(QrCamLoadMemoryDesk value)? qrCamLoadMemoryDesk,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -123,6 +129,7 @@ class _$QrCamPermissionCheckImpl
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() qrCamPermissionCheck,
+    required TResult Function(String memoryDeskId) qrCamLoadMemoryDesk,
   }) {
     return qrCamPermissionCheck();
   }
@@ -131,6 +138,7 @@ class _$QrCamPermissionCheckImpl
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? qrCamPermissionCheck,
+    TResult? Function(String memoryDeskId)? qrCamLoadMemoryDesk,
   }) {
     return qrCamPermissionCheck?.call();
   }
@@ -139,6 +147,7 @@ class _$QrCamPermissionCheckImpl
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? qrCamPermissionCheck,
+    TResult Function(String memoryDeskId)? qrCamLoadMemoryDesk,
     required TResult orElse(),
   }) {
     if (qrCamPermissionCheck != null) {
@@ -151,6 +160,7 @@ class _$QrCamPermissionCheckImpl
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(QrCamPermissionCheck value) qrCamPermissionCheck,
+    required TResult Function(QrCamLoadMemoryDesk value) qrCamLoadMemoryDesk,
   }) {
     return qrCamPermissionCheck(this);
   }
@@ -159,6 +169,7 @@ class _$QrCamPermissionCheckImpl
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(QrCamPermissionCheck value)? qrCamPermissionCheck,
+    TResult? Function(QrCamLoadMemoryDesk value)? qrCamLoadMemoryDesk,
   }) {
     return qrCamPermissionCheck?.call(this);
   }
@@ -167,6 +178,7 @@ class _$QrCamPermissionCheckImpl
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(QrCamPermissionCheck value)? qrCamPermissionCheck,
+    TResult Function(QrCamLoadMemoryDesk value)? qrCamLoadMemoryDesk,
     required TResult orElse(),
   }) {
     if (qrCamPermissionCheck != null) {
@@ -181,6 +193,159 @@ abstract class QrCamPermissionCheck implements QrCamEvent {
 }
 
 /// @nodoc
+abstract class _$$QrCamLoadMemoryDeskImplCopyWith<$Res> {
+  factory _$$QrCamLoadMemoryDeskImplCopyWith(_$QrCamLoadMemoryDeskImpl value,
+          $Res Function(_$QrCamLoadMemoryDeskImpl) then) =
+      __$$QrCamLoadMemoryDeskImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String memoryDeskId});
+}
+
+/// @nodoc
+class __$$QrCamLoadMemoryDeskImplCopyWithImpl<$Res>
+    extends _$QrCamEventCopyWithImpl<$Res, _$QrCamLoadMemoryDeskImpl>
+    implements _$$QrCamLoadMemoryDeskImplCopyWith<$Res> {
+  __$$QrCamLoadMemoryDeskImplCopyWithImpl(_$QrCamLoadMemoryDeskImpl _value,
+      $Res Function(_$QrCamLoadMemoryDeskImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of QrCamEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? memoryDeskId = null,
+  }) {
+    return _then(_$QrCamLoadMemoryDeskImpl(
+      memoryDeskId: null == memoryDeskId
+          ? _value.memoryDeskId
+          : memoryDeskId // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$QrCamLoadMemoryDeskImpl
+    with DiagnosticableTreeMixin
+    implements QrCamLoadMemoryDesk {
+  const _$QrCamLoadMemoryDeskImpl({required this.memoryDeskId});
+
+  @override
+  final String memoryDeskId;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'QrCamEvent.qrCamLoadMemoryDesk(memoryDeskId: $memoryDeskId)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'QrCamEvent.qrCamLoadMemoryDesk'))
+      ..add(DiagnosticsProperty('memoryDeskId', memoryDeskId));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$QrCamLoadMemoryDeskImpl &&
+            (identical(other.memoryDeskId, memoryDeskId) ||
+                other.memoryDeskId == memoryDeskId));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, memoryDeskId);
+
+  /// Create a copy of QrCamEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$QrCamLoadMemoryDeskImplCopyWith<_$QrCamLoadMemoryDeskImpl> get copyWith =>
+      __$$QrCamLoadMemoryDeskImplCopyWithImpl<_$QrCamLoadMemoryDeskImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() qrCamPermissionCheck,
+    required TResult Function(String memoryDeskId) qrCamLoadMemoryDesk,
+  }) {
+    return qrCamLoadMemoryDesk(memoryDeskId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? qrCamPermissionCheck,
+    TResult? Function(String memoryDeskId)? qrCamLoadMemoryDesk,
+  }) {
+    return qrCamLoadMemoryDesk?.call(memoryDeskId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? qrCamPermissionCheck,
+    TResult Function(String memoryDeskId)? qrCamLoadMemoryDesk,
+    required TResult orElse(),
+  }) {
+    if (qrCamLoadMemoryDesk != null) {
+      return qrCamLoadMemoryDesk(memoryDeskId);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(QrCamPermissionCheck value) qrCamPermissionCheck,
+    required TResult Function(QrCamLoadMemoryDesk value) qrCamLoadMemoryDesk,
+  }) {
+    return qrCamLoadMemoryDesk(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(QrCamPermissionCheck value)? qrCamPermissionCheck,
+    TResult? Function(QrCamLoadMemoryDesk value)? qrCamLoadMemoryDesk,
+  }) {
+    return qrCamLoadMemoryDesk?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(QrCamPermissionCheck value)? qrCamPermissionCheck,
+    TResult Function(QrCamLoadMemoryDesk value)? qrCamLoadMemoryDesk,
+    required TResult orElse(),
+  }) {
+    if (qrCamLoadMemoryDesk != null) {
+      return qrCamLoadMemoryDesk(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class QrCamLoadMemoryDesk implements QrCamEvent {
+  const factory QrCamLoadMemoryDesk({required final String memoryDeskId}) =
+      _$QrCamLoadMemoryDeskImpl;
+
+  String get memoryDeskId;
+
+  /// Create a copy of QrCamEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$QrCamLoadMemoryDeskImplCopyWith<_$QrCamLoadMemoryDeskImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 mixin _$QrCamState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
@@ -189,6 +354,8 @@ mixin _$QrCamState {
     required TResult Function() qrCamPermissionDenied,
     required TResult Function() qrCamPermissionPermamentlyDenied,
     required TResult Function() qrCamPermissionGranted,
+    required TResult Function(MemoryDesk memoryPage, String memoryDeskId)
+        qrCamMemoryDeskLoaded,
     required TResult Function(Object? error, bool? needPop) qrCamError,
   }) =>
       throw _privateConstructorUsedError;
@@ -199,6 +366,8 @@ mixin _$QrCamState {
     TResult? Function()? qrCamPermissionDenied,
     TResult? Function()? qrCamPermissionPermamentlyDenied,
     TResult? Function()? qrCamPermissionGranted,
+    TResult? Function(MemoryDesk memoryPage, String memoryDeskId)?
+        qrCamMemoryDeskLoaded,
     TResult? Function(Object? error, bool? needPop)? qrCamError,
   }) =>
       throw _privateConstructorUsedError;
@@ -209,6 +378,8 @@ mixin _$QrCamState {
     TResult Function()? qrCamPermissionDenied,
     TResult Function()? qrCamPermissionPermamentlyDenied,
     TResult Function()? qrCamPermissionGranted,
+    TResult Function(MemoryDesk memoryPage, String memoryDeskId)?
+        qrCamMemoryDeskLoaded,
     TResult Function(Object? error, bool? needPop)? qrCamError,
     required TResult orElse(),
   }) =>
@@ -223,6 +394,8 @@ mixin _$QrCamState {
         qrCamPermissionPermamentlyDenied,
     required TResult Function(QrCamPermissionGranted value)
         qrCamPermissionGranted,
+    required TResult Function(QrCamMemoryDeskLoaded value)
+        qrCamMemoryDeskLoaded,
     required TResult Function(QrCamError value) qrCamError,
   }) =>
       throw _privateConstructorUsedError;
@@ -234,6 +407,7 @@ mixin _$QrCamState {
     TResult? Function(QrCamPermissionPermamentlyDenied value)?
         qrCamPermissionPermamentlyDenied,
     TResult? Function(QrCamPermissionGranted value)? qrCamPermissionGranted,
+    TResult? Function(QrCamMemoryDeskLoaded value)? qrCamMemoryDeskLoaded,
     TResult? Function(QrCamError value)? qrCamError,
   }) =>
       throw _privateConstructorUsedError;
@@ -245,6 +419,7 @@ mixin _$QrCamState {
     TResult Function(QrCamPermissionPermamentlyDenied value)?
         qrCamPermissionPermamentlyDenied,
     TResult Function(QrCamPermissionGranted value)? qrCamPermissionGranted,
+    TResult Function(QrCamMemoryDeskLoaded value)? qrCamMemoryDeskLoaded,
     TResult Function(QrCamError value)? qrCamError,
     required TResult orElse(),
   }) =>
@@ -324,6 +499,8 @@ class _$InitialImpl with DiagnosticableTreeMixin implements _Initial {
     required TResult Function() qrCamPermissionDenied,
     required TResult Function() qrCamPermissionPermamentlyDenied,
     required TResult Function() qrCamPermissionGranted,
+    required TResult Function(MemoryDesk memoryPage, String memoryDeskId)
+        qrCamMemoryDeskLoaded,
     required TResult Function(Object? error, bool? needPop) qrCamError,
   }) {
     return initial();
@@ -337,6 +514,8 @@ class _$InitialImpl with DiagnosticableTreeMixin implements _Initial {
     TResult? Function()? qrCamPermissionDenied,
     TResult? Function()? qrCamPermissionPermamentlyDenied,
     TResult? Function()? qrCamPermissionGranted,
+    TResult? Function(MemoryDesk memoryPage, String memoryDeskId)?
+        qrCamMemoryDeskLoaded,
     TResult? Function(Object? error, bool? needPop)? qrCamError,
   }) {
     return initial?.call();
@@ -350,6 +529,8 @@ class _$InitialImpl with DiagnosticableTreeMixin implements _Initial {
     TResult Function()? qrCamPermissionDenied,
     TResult Function()? qrCamPermissionPermamentlyDenied,
     TResult Function()? qrCamPermissionGranted,
+    TResult Function(MemoryDesk memoryPage, String memoryDeskId)?
+        qrCamMemoryDeskLoaded,
     TResult Function(Object? error, bool? needPop)? qrCamError,
     required TResult orElse(),
   }) {
@@ -370,6 +551,8 @@ class _$InitialImpl with DiagnosticableTreeMixin implements _Initial {
         qrCamPermissionPermamentlyDenied,
     required TResult Function(QrCamPermissionGranted value)
         qrCamPermissionGranted,
+    required TResult Function(QrCamMemoryDeskLoaded value)
+        qrCamMemoryDeskLoaded,
     required TResult Function(QrCamError value) qrCamError,
   }) {
     return initial(this);
@@ -384,6 +567,7 @@ class _$InitialImpl with DiagnosticableTreeMixin implements _Initial {
     TResult? Function(QrCamPermissionPermamentlyDenied value)?
         qrCamPermissionPermamentlyDenied,
     TResult? Function(QrCamPermissionGranted value)? qrCamPermissionGranted,
+    TResult? Function(QrCamMemoryDeskLoaded value)? qrCamMemoryDeskLoaded,
     TResult? Function(QrCamError value)? qrCamError,
   }) {
     return initial?.call(this);
@@ -398,6 +582,7 @@ class _$InitialImpl with DiagnosticableTreeMixin implements _Initial {
     TResult Function(QrCamPermissionPermamentlyDenied value)?
         qrCamPermissionPermamentlyDenied,
     TResult Function(QrCamPermissionGranted value)? qrCamPermissionGranted,
+    TResult Function(QrCamMemoryDeskLoaded value)? qrCamMemoryDeskLoaded,
     TResult Function(QrCamError value)? qrCamError,
     required TResult orElse(),
   }) {
@@ -464,6 +649,8 @@ class _$QrCamLoadingImpl with DiagnosticableTreeMixin implements QrCamLoading {
     required TResult Function() qrCamPermissionDenied,
     required TResult Function() qrCamPermissionPermamentlyDenied,
     required TResult Function() qrCamPermissionGranted,
+    required TResult Function(MemoryDesk memoryPage, String memoryDeskId)
+        qrCamMemoryDeskLoaded,
     required TResult Function(Object? error, bool? needPop) qrCamError,
   }) {
     return qrCamLoading();
@@ -477,6 +664,8 @@ class _$QrCamLoadingImpl with DiagnosticableTreeMixin implements QrCamLoading {
     TResult? Function()? qrCamPermissionDenied,
     TResult? Function()? qrCamPermissionPermamentlyDenied,
     TResult? Function()? qrCamPermissionGranted,
+    TResult? Function(MemoryDesk memoryPage, String memoryDeskId)?
+        qrCamMemoryDeskLoaded,
     TResult? Function(Object? error, bool? needPop)? qrCamError,
   }) {
     return qrCamLoading?.call();
@@ -490,6 +679,8 @@ class _$QrCamLoadingImpl with DiagnosticableTreeMixin implements QrCamLoading {
     TResult Function()? qrCamPermissionDenied,
     TResult Function()? qrCamPermissionPermamentlyDenied,
     TResult Function()? qrCamPermissionGranted,
+    TResult Function(MemoryDesk memoryPage, String memoryDeskId)?
+        qrCamMemoryDeskLoaded,
     TResult Function(Object? error, bool? needPop)? qrCamError,
     required TResult orElse(),
   }) {
@@ -510,6 +701,8 @@ class _$QrCamLoadingImpl with DiagnosticableTreeMixin implements QrCamLoading {
         qrCamPermissionPermamentlyDenied,
     required TResult Function(QrCamPermissionGranted value)
         qrCamPermissionGranted,
+    required TResult Function(QrCamMemoryDeskLoaded value)
+        qrCamMemoryDeskLoaded,
     required TResult Function(QrCamError value) qrCamError,
   }) {
     return qrCamLoading(this);
@@ -524,6 +717,7 @@ class _$QrCamLoadingImpl with DiagnosticableTreeMixin implements QrCamLoading {
     TResult? Function(QrCamPermissionPermamentlyDenied value)?
         qrCamPermissionPermamentlyDenied,
     TResult? Function(QrCamPermissionGranted value)? qrCamPermissionGranted,
+    TResult? Function(QrCamMemoryDeskLoaded value)? qrCamMemoryDeskLoaded,
     TResult? Function(QrCamError value)? qrCamError,
   }) {
     return qrCamLoading?.call(this);
@@ -538,6 +732,7 @@ class _$QrCamLoadingImpl with DiagnosticableTreeMixin implements QrCamLoading {
     TResult Function(QrCamPermissionPermamentlyDenied value)?
         qrCamPermissionPermamentlyDenied,
     TResult Function(QrCamPermissionGranted value)? qrCamPermissionGranted,
+    TResult Function(QrCamMemoryDeskLoaded value)? qrCamMemoryDeskLoaded,
     TResult Function(QrCamError value)? qrCamError,
     required TResult orElse(),
   }) {
@@ -609,6 +804,8 @@ class _$QrCamPermissionDeniedImpl
     required TResult Function() qrCamPermissionDenied,
     required TResult Function() qrCamPermissionPermamentlyDenied,
     required TResult Function() qrCamPermissionGranted,
+    required TResult Function(MemoryDesk memoryPage, String memoryDeskId)
+        qrCamMemoryDeskLoaded,
     required TResult Function(Object? error, bool? needPop) qrCamError,
   }) {
     return qrCamPermissionDenied();
@@ -622,6 +819,8 @@ class _$QrCamPermissionDeniedImpl
     TResult? Function()? qrCamPermissionDenied,
     TResult? Function()? qrCamPermissionPermamentlyDenied,
     TResult? Function()? qrCamPermissionGranted,
+    TResult? Function(MemoryDesk memoryPage, String memoryDeskId)?
+        qrCamMemoryDeskLoaded,
     TResult? Function(Object? error, bool? needPop)? qrCamError,
   }) {
     return qrCamPermissionDenied?.call();
@@ -635,6 +834,8 @@ class _$QrCamPermissionDeniedImpl
     TResult Function()? qrCamPermissionDenied,
     TResult Function()? qrCamPermissionPermamentlyDenied,
     TResult Function()? qrCamPermissionGranted,
+    TResult Function(MemoryDesk memoryPage, String memoryDeskId)?
+        qrCamMemoryDeskLoaded,
     TResult Function(Object? error, bool? needPop)? qrCamError,
     required TResult orElse(),
   }) {
@@ -655,6 +856,8 @@ class _$QrCamPermissionDeniedImpl
         qrCamPermissionPermamentlyDenied,
     required TResult Function(QrCamPermissionGranted value)
         qrCamPermissionGranted,
+    required TResult Function(QrCamMemoryDeskLoaded value)
+        qrCamMemoryDeskLoaded,
     required TResult Function(QrCamError value) qrCamError,
   }) {
     return qrCamPermissionDenied(this);
@@ -669,6 +872,7 @@ class _$QrCamPermissionDeniedImpl
     TResult? Function(QrCamPermissionPermamentlyDenied value)?
         qrCamPermissionPermamentlyDenied,
     TResult? Function(QrCamPermissionGranted value)? qrCamPermissionGranted,
+    TResult? Function(QrCamMemoryDeskLoaded value)? qrCamMemoryDeskLoaded,
     TResult? Function(QrCamError value)? qrCamError,
   }) {
     return qrCamPermissionDenied?.call(this);
@@ -683,6 +887,7 @@ class _$QrCamPermissionDeniedImpl
     TResult Function(QrCamPermissionPermamentlyDenied value)?
         qrCamPermissionPermamentlyDenied,
     TResult Function(QrCamPermissionGranted value)? qrCamPermissionGranted,
+    TResult Function(QrCamMemoryDeskLoaded value)? qrCamMemoryDeskLoaded,
     TResult Function(QrCamError value)? qrCamError,
     required TResult orElse(),
   }) {
@@ -756,6 +961,8 @@ class _$QrCamPermissionPermamentlyDeniedImpl
     required TResult Function() qrCamPermissionDenied,
     required TResult Function() qrCamPermissionPermamentlyDenied,
     required TResult Function() qrCamPermissionGranted,
+    required TResult Function(MemoryDesk memoryPage, String memoryDeskId)
+        qrCamMemoryDeskLoaded,
     required TResult Function(Object? error, bool? needPop) qrCamError,
   }) {
     return qrCamPermissionPermamentlyDenied();
@@ -769,6 +976,8 @@ class _$QrCamPermissionPermamentlyDeniedImpl
     TResult? Function()? qrCamPermissionDenied,
     TResult? Function()? qrCamPermissionPermamentlyDenied,
     TResult? Function()? qrCamPermissionGranted,
+    TResult? Function(MemoryDesk memoryPage, String memoryDeskId)?
+        qrCamMemoryDeskLoaded,
     TResult? Function(Object? error, bool? needPop)? qrCamError,
   }) {
     return qrCamPermissionPermamentlyDenied?.call();
@@ -782,6 +991,8 @@ class _$QrCamPermissionPermamentlyDeniedImpl
     TResult Function()? qrCamPermissionDenied,
     TResult Function()? qrCamPermissionPermamentlyDenied,
     TResult Function()? qrCamPermissionGranted,
+    TResult Function(MemoryDesk memoryPage, String memoryDeskId)?
+        qrCamMemoryDeskLoaded,
     TResult Function(Object? error, bool? needPop)? qrCamError,
     required TResult orElse(),
   }) {
@@ -802,6 +1013,8 @@ class _$QrCamPermissionPermamentlyDeniedImpl
         qrCamPermissionPermamentlyDenied,
     required TResult Function(QrCamPermissionGranted value)
         qrCamPermissionGranted,
+    required TResult Function(QrCamMemoryDeskLoaded value)
+        qrCamMemoryDeskLoaded,
     required TResult Function(QrCamError value) qrCamError,
   }) {
     return qrCamPermissionPermamentlyDenied(this);
@@ -816,6 +1029,7 @@ class _$QrCamPermissionPermamentlyDeniedImpl
     TResult? Function(QrCamPermissionPermamentlyDenied value)?
         qrCamPermissionPermamentlyDenied,
     TResult? Function(QrCamPermissionGranted value)? qrCamPermissionGranted,
+    TResult? Function(QrCamMemoryDeskLoaded value)? qrCamMemoryDeskLoaded,
     TResult? Function(QrCamError value)? qrCamError,
   }) {
     return qrCamPermissionPermamentlyDenied?.call(this);
@@ -830,6 +1044,7 @@ class _$QrCamPermissionPermamentlyDeniedImpl
     TResult Function(QrCamPermissionPermamentlyDenied value)?
         qrCamPermissionPermamentlyDenied,
     TResult Function(QrCamPermissionGranted value)? qrCamPermissionGranted,
+    TResult Function(QrCamMemoryDeskLoaded value)? qrCamMemoryDeskLoaded,
     TResult Function(QrCamError value)? qrCamError,
     required TResult orElse(),
   }) {
@@ -903,6 +1118,8 @@ class _$QrCamPermissionGrantedImpl
     required TResult Function() qrCamPermissionDenied,
     required TResult Function() qrCamPermissionPermamentlyDenied,
     required TResult Function() qrCamPermissionGranted,
+    required TResult Function(MemoryDesk memoryPage, String memoryDeskId)
+        qrCamMemoryDeskLoaded,
     required TResult Function(Object? error, bool? needPop) qrCamError,
   }) {
     return qrCamPermissionGranted();
@@ -916,6 +1133,8 @@ class _$QrCamPermissionGrantedImpl
     TResult? Function()? qrCamPermissionDenied,
     TResult? Function()? qrCamPermissionPermamentlyDenied,
     TResult? Function()? qrCamPermissionGranted,
+    TResult? Function(MemoryDesk memoryPage, String memoryDeskId)?
+        qrCamMemoryDeskLoaded,
     TResult? Function(Object? error, bool? needPop)? qrCamError,
   }) {
     return qrCamPermissionGranted?.call();
@@ -929,6 +1148,8 @@ class _$QrCamPermissionGrantedImpl
     TResult Function()? qrCamPermissionDenied,
     TResult Function()? qrCamPermissionPermamentlyDenied,
     TResult Function()? qrCamPermissionGranted,
+    TResult Function(MemoryDesk memoryPage, String memoryDeskId)?
+        qrCamMemoryDeskLoaded,
     TResult Function(Object? error, bool? needPop)? qrCamError,
     required TResult orElse(),
   }) {
@@ -949,6 +1170,8 @@ class _$QrCamPermissionGrantedImpl
         qrCamPermissionPermamentlyDenied,
     required TResult Function(QrCamPermissionGranted value)
         qrCamPermissionGranted,
+    required TResult Function(QrCamMemoryDeskLoaded value)
+        qrCamMemoryDeskLoaded,
     required TResult Function(QrCamError value) qrCamError,
   }) {
     return qrCamPermissionGranted(this);
@@ -963,6 +1186,7 @@ class _$QrCamPermissionGrantedImpl
     TResult? Function(QrCamPermissionPermamentlyDenied value)?
         qrCamPermissionPermamentlyDenied,
     TResult? Function(QrCamPermissionGranted value)? qrCamPermissionGranted,
+    TResult? Function(QrCamMemoryDeskLoaded value)? qrCamMemoryDeskLoaded,
     TResult? Function(QrCamError value)? qrCamError,
   }) {
     return qrCamPermissionGranted?.call(this);
@@ -977,6 +1201,7 @@ class _$QrCamPermissionGrantedImpl
     TResult Function(QrCamPermissionPermamentlyDenied value)?
         qrCamPermissionPermamentlyDenied,
     TResult Function(QrCamPermissionGranted value)? qrCamPermissionGranted,
+    TResult Function(QrCamMemoryDeskLoaded value)? qrCamMemoryDeskLoaded,
     TResult Function(QrCamError value)? qrCamError,
     required TResult orElse(),
   }) {
@@ -989,6 +1214,212 @@ class _$QrCamPermissionGrantedImpl
 
 abstract class QrCamPermissionGranted implements QrCamState {
   const factory QrCamPermissionGranted() = _$QrCamPermissionGrantedImpl;
+}
+
+/// @nodoc
+abstract class _$$QrCamMemoryDeskLoadedImplCopyWith<$Res> {
+  factory _$$QrCamMemoryDeskLoadedImplCopyWith(
+          _$QrCamMemoryDeskLoadedImpl value,
+          $Res Function(_$QrCamMemoryDeskLoadedImpl) then) =
+      __$$QrCamMemoryDeskLoadedImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({MemoryDesk memoryPage, String memoryDeskId});
+}
+
+/// @nodoc
+class __$$QrCamMemoryDeskLoadedImplCopyWithImpl<$Res>
+    extends _$QrCamStateCopyWithImpl<$Res, _$QrCamMemoryDeskLoadedImpl>
+    implements _$$QrCamMemoryDeskLoadedImplCopyWith<$Res> {
+  __$$QrCamMemoryDeskLoadedImplCopyWithImpl(_$QrCamMemoryDeskLoadedImpl _value,
+      $Res Function(_$QrCamMemoryDeskLoadedImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of QrCamState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? memoryPage = null,
+    Object? memoryDeskId = null,
+  }) {
+    return _then(_$QrCamMemoryDeskLoadedImpl(
+      memoryPage: null == memoryPage
+          ? _value.memoryPage
+          : memoryPage // ignore: cast_nullable_to_non_nullable
+              as MemoryDesk,
+      memoryDeskId: null == memoryDeskId
+          ? _value.memoryDeskId
+          : memoryDeskId // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$QrCamMemoryDeskLoadedImpl
+    with DiagnosticableTreeMixin
+    implements QrCamMemoryDeskLoaded {
+  const _$QrCamMemoryDeskLoadedImpl(
+      {required this.memoryPage, required this.memoryDeskId});
+
+  @override
+  final MemoryDesk memoryPage;
+  @override
+  final String memoryDeskId;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'QrCamState.qrCamMemoryDeskLoaded(memoryPage: $memoryPage, memoryDeskId: $memoryDeskId)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'QrCamState.qrCamMemoryDeskLoaded'))
+      ..add(DiagnosticsProperty('memoryPage', memoryPage))
+      ..add(DiagnosticsProperty('memoryDeskId', memoryDeskId));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$QrCamMemoryDeskLoadedImpl &&
+            (identical(other.memoryPage, memoryPage) ||
+                other.memoryPage == memoryPage) &&
+            (identical(other.memoryDeskId, memoryDeskId) ||
+                other.memoryDeskId == memoryDeskId));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, memoryPage, memoryDeskId);
+
+  /// Create a copy of QrCamState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$QrCamMemoryDeskLoadedImplCopyWith<_$QrCamMemoryDeskLoadedImpl>
+      get copyWith => __$$QrCamMemoryDeskLoadedImplCopyWithImpl<
+          _$QrCamMemoryDeskLoadedImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() qrCamLoading,
+    required TResult Function() qrCamPermissionDenied,
+    required TResult Function() qrCamPermissionPermamentlyDenied,
+    required TResult Function() qrCamPermissionGranted,
+    required TResult Function(MemoryDesk memoryPage, String memoryDeskId)
+        qrCamMemoryDeskLoaded,
+    required TResult Function(Object? error, bool? needPop) qrCamError,
+  }) {
+    return qrCamMemoryDeskLoaded(memoryPage, memoryDeskId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? qrCamLoading,
+    TResult? Function()? qrCamPermissionDenied,
+    TResult? Function()? qrCamPermissionPermamentlyDenied,
+    TResult? Function()? qrCamPermissionGranted,
+    TResult? Function(MemoryDesk memoryPage, String memoryDeskId)?
+        qrCamMemoryDeskLoaded,
+    TResult? Function(Object? error, bool? needPop)? qrCamError,
+  }) {
+    return qrCamMemoryDeskLoaded?.call(memoryPage, memoryDeskId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? qrCamLoading,
+    TResult Function()? qrCamPermissionDenied,
+    TResult Function()? qrCamPermissionPermamentlyDenied,
+    TResult Function()? qrCamPermissionGranted,
+    TResult Function(MemoryDesk memoryPage, String memoryDeskId)?
+        qrCamMemoryDeskLoaded,
+    TResult Function(Object? error, bool? needPop)? qrCamError,
+    required TResult orElse(),
+  }) {
+    if (qrCamMemoryDeskLoaded != null) {
+      return qrCamMemoryDeskLoaded(memoryPage, memoryDeskId);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(QrCamLoading value) qrCamLoading,
+    required TResult Function(QrCamPermissionDenied value)
+        qrCamPermissionDenied,
+    required TResult Function(QrCamPermissionPermamentlyDenied value)
+        qrCamPermissionPermamentlyDenied,
+    required TResult Function(QrCamPermissionGranted value)
+        qrCamPermissionGranted,
+    required TResult Function(QrCamMemoryDeskLoaded value)
+        qrCamMemoryDeskLoaded,
+    required TResult Function(QrCamError value) qrCamError,
+  }) {
+    return qrCamMemoryDeskLoaded(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(QrCamLoading value)? qrCamLoading,
+    TResult? Function(QrCamPermissionDenied value)? qrCamPermissionDenied,
+    TResult? Function(QrCamPermissionPermamentlyDenied value)?
+        qrCamPermissionPermamentlyDenied,
+    TResult? Function(QrCamPermissionGranted value)? qrCamPermissionGranted,
+    TResult? Function(QrCamMemoryDeskLoaded value)? qrCamMemoryDeskLoaded,
+    TResult? Function(QrCamError value)? qrCamError,
+  }) {
+    return qrCamMemoryDeskLoaded?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(QrCamLoading value)? qrCamLoading,
+    TResult Function(QrCamPermissionDenied value)? qrCamPermissionDenied,
+    TResult Function(QrCamPermissionPermamentlyDenied value)?
+        qrCamPermissionPermamentlyDenied,
+    TResult Function(QrCamPermissionGranted value)? qrCamPermissionGranted,
+    TResult Function(QrCamMemoryDeskLoaded value)? qrCamMemoryDeskLoaded,
+    TResult Function(QrCamError value)? qrCamError,
+    required TResult orElse(),
+  }) {
+    if (qrCamMemoryDeskLoaded != null) {
+      return qrCamMemoryDeskLoaded(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class QrCamMemoryDeskLoaded implements QrCamState {
+  const factory QrCamMemoryDeskLoaded(
+      {required final MemoryDesk memoryPage,
+      required final String memoryDeskId}) = _$QrCamMemoryDeskLoadedImpl;
+
+  MemoryDesk get memoryPage;
+  String get memoryDeskId;
+
+  /// Create a copy of QrCamState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$QrCamMemoryDeskLoadedImplCopyWith<_$QrCamMemoryDeskLoadedImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -1081,6 +1512,8 @@ class _$QrCamErrorImpl with DiagnosticableTreeMixin implements QrCamError {
     required TResult Function() qrCamPermissionDenied,
     required TResult Function() qrCamPermissionPermamentlyDenied,
     required TResult Function() qrCamPermissionGranted,
+    required TResult Function(MemoryDesk memoryPage, String memoryDeskId)
+        qrCamMemoryDeskLoaded,
     required TResult Function(Object? error, bool? needPop) qrCamError,
   }) {
     return qrCamError(error, needPop);
@@ -1094,6 +1527,8 @@ class _$QrCamErrorImpl with DiagnosticableTreeMixin implements QrCamError {
     TResult? Function()? qrCamPermissionDenied,
     TResult? Function()? qrCamPermissionPermamentlyDenied,
     TResult? Function()? qrCamPermissionGranted,
+    TResult? Function(MemoryDesk memoryPage, String memoryDeskId)?
+        qrCamMemoryDeskLoaded,
     TResult? Function(Object? error, bool? needPop)? qrCamError,
   }) {
     return qrCamError?.call(error, needPop);
@@ -1107,6 +1542,8 @@ class _$QrCamErrorImpl with DiagnosticableTreeMixin implements QrCamError {
     TResult Function()? qrCamPermissionDenied,
     TResult Function()? qrCamPermissionPermamentlyDenied,
     TResult Function()? qrCamPermissionGranted,
+    TResult Function(MemoryDesk memoryPage, String memoryDeskId)?
+        qrCamMemoryDeskLoaded,
     TResult Function(Object? error, bool? needPop)? qrCamError,
     required TResult orElse(),
   }) {
@@ -1127,6 +1564,8 @@ class _$QrCamErrorImpl with DiagnosticableTreeMixin implements QrCamError {
         qrCamPermissionPermamentlyDenied,
     required TResult Function(QrCamPermissionGranted value)
         qrCamPermissionGranted,
+    required TResult Function(QrCamMemoryDeskLoaded value)
+        qrCamMemoryDeskLoaded,
     required TResult Function(QrCamError value) qrCamError,
   }) {
     return qrCamError(this);
@@ -1141,6 +1580,7 @@ class _$QrCamErrorImpl with DiagnosticableTreeMixin implements QrCamError {
     TResult? Function(QrCamPermissionPermamentlyDenied value)?
         qrCamPermissionPermamentlyDenied,
     TResult? Function(QrCamPermissionGranted value)? qrCamPermissionGranted,
+    TResult? Function(QrCamMemoryDeskLoaded value)? qrCamMemoryDeskLoaded,
     TResult? Function(QrCamError value)? qrCamError,
   }) {
     return qrCamError?.call(this);
@@ -1155,6 +1595,7 @@ class _$QrCamErrorImpl with DiagnosticableTreeMixin implements QrCamError {
     TResult Function(QrCamPermissionPermamentlyDenied value)?
         qrCamPermissionPermamentlyDenied,
     TResult Function(QrCamPermissionGranted value)? qrCamPermissionGranted,
+    TResult Function(QrCamMemoryDeskLoaded value)? qrCamMemoryDeskLoaded,
     TResult Function(QrCamError value)? qrCamError,
     required TResult orElse(),
   }) {
