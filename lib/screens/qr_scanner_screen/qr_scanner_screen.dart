@@ -8,6 +8,9 @@ import 'package:ritual_app/screens/qr_scanner_screen/widgets/widgets.dart';
 import 'package:ritual_app/services/permission/permission_service.dart';
 import 'package:ritual_app/utils/utils.dart';
 
+void _log(dynamic message) =>
+    Logger.projectLog(message, name: 'qr_scanner_screen');
+
 class QrScanScreen extends StatefulWidget {
   const QrScanScreen({
     super.key,
@@ -62,8 +65,7 @@ class _QrScanScreenState extends State<QrScanScreen> {
         listener: (context, state) {
           if (state is QrCamMemoryDeskLoaded) {
             GoRouter.of(context).go(
-              '/home/mp_view_screen/${state.memoryDeskId}',
-              extra: state.memoryPage,
+              '/home/md_view_screen/${state.memoryDeskId}',
             );
           }
         },
@@ -142,13 +144,10 @@ class _QrScanScreenState extends State<QrScanScreen> {
   // }
 
   void _qrParse(String qrString, BuildContext context) async {
-    // stop to prevent double-scans while we load
     await _cameraController.stop();
 
-    // extract the ID from the "displayValue: XYZ" part
     final id = _extractDeskId(qrString);
-    if (id == null) {
-      // if we couldn’t find it, show an error or restart scanning
+    if (id == null || id.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Не удалось распознать QR-код')),
       );
@@ -156,16 +155,44 @@ class _QrScanScreenState extends State<QrScanScreen> {
       return;
     }
 
-    // dispatch the load
-    BlocProvider.of<QrCamBloc>(context).add(
-      QrCamLoadMemoryDesk(memoryDeskId: id),
-    );
+    BlocProvider.of<QrCamBloc>(context)
+        .add(QrCamLoadMemoryDesk(memoryDeskId: id));
   }
 
-// helper to grab that displayValue
+  /// Returns the memoryDeskId from either:
+  ///  • a full URL ending in /:id
+  ///  • a raw ID string
+  ///  • null on failure
   String? _extractDeskId(String raw) {
-    final regex = RegExp(r'displayValue:\s*([^,\}]+)');
-    final match = regex.firstMatch(raw);
-    return match?.group(1)?.trim();
+    raw = raw.trim();
+
+    _log('Raw value: $raw');
+    // 1) If it’s a full HTTP(S) URL, take the last non-empty path segment:
+    try {
+      final uri = Uri.parse(raw);
+      if (uri.hasScheme && (uri.scheme == 'http' || uri.scheme == 'https')) {
+        final segments = uri.pathSegments.where((s) => s.isNotEmpty).toList();
+        if (segments.isNotEmpty) {
+          _log('Last segment value: ${segments.last}');
+
+          return segments.last;
+        }
+      }
+    } catch (_) {
+      // not a valid URI, fall through
+    }
+
+    // 2) Otherwise, if it *looks like* an ID (e.g. alphanumeric, length > 5),
+    //    return it directly.
+    final idCandidate = raw;
+    _log('IdCandidate: ${idCandidate}');
+
+    final idRegex = RegExp(r'^[A-Za-z0-9_-]+$');
+    if (idRegex.hasMatch(idCandidate)) {
+      return idCandidate;
+    }
+
+    // 3) Nothing matched
+    return null;
   }
 }

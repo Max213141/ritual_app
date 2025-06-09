@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:ritual_app/utils/utils.dart';
-// import 'package:ritual_app/utils/utils.dart';
 
+// import 'package:ritual_app/utils/utils.dart';
+//TODO show it at least 1 sec
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
 
@@ -19,7 +20,7 @@ class SplashScreen extends StatelessWidget {
             color: Colors.white,
           ),
         ),
-      ),  
+      ),
     );
   }
 }

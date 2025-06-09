@@ -18,19 +18,19 @@ import 'services/media/media_service_interface.dart';
 class RitualApp extends StatelessWidget {
   final FirebaseAuth auth;
   final GoogleSignIn googleSignIn;
-  final Reference media;
+  final Reference storageRef;
   final HiveStore hiveStore;
 
   const RitualApp({
     super.key,
     required this.auth,
     required this.hiveStore,
-    required this.media,
+    required this.storageRef,
     required this.googleSignIn,
   });
 
   Future<void> _initHive() async {
-    WidgetsFlutterBinding.ensureInitialized();
+    // WidgetsFlutterBinding.ensureInitialized();
     await hiveStore.init();
     final appPreferencesBox =
         await Hive.openBox<AppPreferences>('app_preferences');
@@ -76,7 +76,7 @@ class RitualApp extends StatelessWidget {
                         mediaService: getIt<MediaServiceInterface>(),
                       )),
               BlocProvider<MediaBloc>(
-                  create: (context) => MediaBloc(media: media)),
+                  create: (context) => MediaBloc(media: storageRef)),
             ],
             child: BlocBuilder<LocaleBloc, LocaleState>(
               builder: (context, state) {

@@ -1,4 +1,4 @@
-package com.example.ritual_app
+package com.memento.ritual_app
 
 import android.content.ContentValues
 import android.content.Intent

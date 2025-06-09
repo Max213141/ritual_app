@@ -11,6 +11,8 @@ class MemoryDesk {
   final String dateOfDeath;
   final String epitaphy;
   final String biography;
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  final String? localPhotoPath;
   final String? photoUrl;
   final List<String> photoUrls;
   final List<String> videoUrls;
@@ -20,6 +22,7 @@ class MemoryDesk {
   final String ownerId;
 
   MemoryDesk({
+    this.localPhotoPath,
     required this.lastName,
     required this.firstName,
     required this.middleName,
@@ -41,6 +44,7 @@ class MemoryDesk {
   Map<String, dynamic> toJson() => _$MemoryDeskToJson(this);
 
   MemoryDesk copyWith({
+    String? localPhotoPath,
     String? lastName,
     String? firstName,
     String? middleName,
@@ -56,6 +60,7 @@ class MemoryDesk {
     String? ownerId,
   }) {
     return MemoryDesk(
+      localPhotoPath: localPhotoPath ?? this.localPhotoPath,
       lastName: lastName ?? this.lastName,
       firstName: firstName ?? this.firstName,
       middleName: middleName ?? this.middleName,

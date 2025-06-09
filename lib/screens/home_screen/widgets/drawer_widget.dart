@@ -53,14 +53,13 @@ class DrawerWidget extends StatelessWidget {
       elevation: 2,
       //backgroundColor: //AppColor.drawerColor,
       //surfaceTintColor: //AppColor.drawerColor,
-      width: MediaQuery.of(context).size.width * 0.7,
+      width: MediaQuery.of(context).size.width * 0.6,
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8.0),
         child: Column(
           children: <Widget>[
             SizedBox(
               height: MediaQuery.of(context).size.height * 0.13,
-              width: MediaQuery.of(context).size.width * 0.7,
               child: DrawerHeader(
                   padding: const EdgeInsets.fromLTRB(4.0, 16.0, 4.0, 8.0),
                   margin: EdgeInsets.zero,
@@ -84,7 +83,10 @@ class DrawerWidget extends StatelessWidget {
                       ),
                       Text(
                         l10n.appTitle,
-                        style: const TextStyle(fontWeight: FontWeight.bold),
+                        style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                              fontWeight: FontWeight.w900,
+                              fontSize: 24,
+                            ),
                       ),
                     ],
                   )),
@@ -94,7 +96,10 @@ class DrawerWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   ...drawerItemsList.getRange(0, 3).map(
-                        (drawerItem) => DrawerItemWidget(item: drawerItem),
+                        (drawerItem) => Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 15.0),
+                          child: DrawerItemWidget(item: drawerItem),
+                        ),
                       ),
                   const Spacer(),
                   DrawerItemWidget(item: drawerItemsList.last),

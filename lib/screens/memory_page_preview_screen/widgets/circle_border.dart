@@ -7,7 +7,7 @@ class HalfCirclePainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     Paint borderPaint = Paint()
       ..style = PaintingStyle.stroke
-      ..strokeWidth = 1.0
+      ..strokeWidth = 2.0
       ..color = Colors.white;
     Paint paint = Paint()
       ..style = PaintingStyle.stroke

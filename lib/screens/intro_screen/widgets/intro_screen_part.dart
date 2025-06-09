@@ -20,19 +20,25 @@ class IntroScreenPart extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 54.0, horizontal: 35),
+      padding: const EdgeInsets.symmetric(vertical: 54.0, horizontal: 24),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Expanded(
+          SizedBox(
+            width: size.height / 3,
+            height: size.height / 3,
             child: RitualAppSvgPicture(
               picture: image,
               fit: BoxFit.contain,
             ),
           ),
-          SizedBox(height: size.height * .1),
+          SizedBox(height: 120),
           Text(
             text,
+            style: Theme.of(context)
+                .textTheme
+                .bodyMedium!
+                .copyWith(fontWeight: FontWeight.bold, fontSize: 18),
           ),
         ],
       ),

@@ -5,6 +5,8 @@ class MemoryDeskState with _$MemoryDeskState {
   const factory MemoryDeskState.initial() = Initial;
   const factory MemoryDeskState.loading() = Loading;
   const factory MemoryDeskState.success() = Success;
+  const factory MemoryDeskState.deletionSuccess() = DeletionSuccess;
+
   const factory MemoryDeskState.failure({
     required String error,
   }) = Failure;

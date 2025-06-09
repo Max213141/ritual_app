@@ -1,10 +1,14 @@
+import 'dart:io';
+
 import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:ritual_app/entities/db_entities/db_entities.dart';
+import 'package:ritual_app/entities/entities.dart';
 import 'package:ritual_app/services/extentions/memory_page_media_convertor.dart';
 import 'package:ritual_app/services/media/media_service_interface.dart';
+import 'package:ritual_app/services/service_locator.dart';
 import 'package:ritual_app/utils/utils.dart';
 
 part 'memory_desk_event.dart';
@@ -27,6 +31,8 @@ class MemoryDeskBloc extends Bloc<MemoryDeskEvent, MemoryDeskState> {
     on<UploadMemoryDesk>(_uploadMemoryPage);
     on<GetMemoryDesks>(_getMemoryPage);
     on<AddMemoryDeskToUser>(_addMemoryDeskToUser);
+    on<UpdateMemoryDesk>(_updateMemoryPage);
+    on<DeleteMemoryDesk>(_deleteMemoryPage);
   }
 
   Future<void> _uploadMemoryPage(
@@ -37,6 +43,19 @@ class MemoryDeskBloc extends Bloc<MemoryDeskEvent, MemoryDeskState> {
 
     try {
       final memoryDeskId = firestore.collection('memory_desks').doc().id;
+      final mediaService = getIt<MediaServiceInterface>();
+      final String? finalPhotoUrl;
+
+      if (event.memoryPage.localPhotoPath != null &&
+          event.memoryPage.localPhotoPath!.isNotEmpty) {
+        final file = File(event.memoryPage.localPhotoPath!);
+        finalPhotoUrl = await mediaService.uploadFileAndGetUrl(
+          filePath: 'memory_desks/$memoryDeskId/avatar.jpg',
+          file: file,
+        );
+      } else {
+        finalPhotoUrl = '';
+      }
 
       final mediaUrls = await event.mediaData.uploadAndConvert(
         memoryDeskId: memoryDeskId,
@@ -46,6 +65,7 @@ class MemoryDeskBloc extends Bloc<MemoryDeskEvent, MemoryDeskState> {
       final memoryPage = event.memoryPage.copyWith(
         photoUrls: mediaUrls.photos,
         videoUrls: mediaUrls.videos,
+        photoUrl: finalPhotoUrl,
         ownerId: auth.currentUser!.uid,
       );
 
@@ -78,7 +98,7 @@ class MemoryDeskBloc extends Bloc<MemoryDeskEvent, MemoryDeskState> {
         return;
       }
 
-      // 🔹 1. Get the list of memory desk IDs from the user document
+      // Get the list of memory desk IDs from the user document
       final userDoc = await firestore.collection('users').doc(uid).get();
       final userData = userDoc.data();
 
@@ -104,7 +124,7 @@ class MemoryDeskBloc extends Bloc<MemoryDeskEvent, MemoryDeskState> {
         return;
       }
 
-      // 🔹 2. Fetch all memory desks by ID (in parallel)
+      //Fetch all memory desks by ID (in parallel)
       final futures = memoryDeskIds.map(
         (id) => firestore.collection('memory_desks').doc(id).get(),
       );
@@ -118,6 +138,143 @@ class MemoryDeskBloc extends Bloc<MemoryDeskEvent, MemoryDeskState> {
 
       emit(MemoryDeskState.memoryPagesLoaded(
           memoryPages: memoryPages, memoryDeskIds: memoryDeskIds));
+    } catch (e) {
+      emit(MemoryDeskState.failure(error: e.toString()));
+    }
+  }
+
+  Future<void> _updateMemoryPage(
+    UpdateMemoryDesk event,
+    Emitter<MemoryDeskState> emit,
+  ) async {
+    emit(const MemoryDeskState.loading());
+    try {
+      final mediaService = getIt<MediaServiceInterface>();
+      final storage = getIt<FirebaseStorage>();
+      final docRef = firestore.collection('memory_desks').doc(event.deskId);
+
+      // 1) Load existing document
+      final snap = await docRef.get();
+      if (!snap.exists) throw 'Memory desk not found';
+      final existing = MemoryDesk.fromJson(snap.data()!);
+
+      // 2) AVATAR (same as before) …
+      String? avatarUrl = existing.photoUrl;
+      if (event.memoryPage.localPhotoPath?.isNotEmpty == true) {
+        final newUrl = await mediaService.uploadFileAndGetUrl(
+          filePath: 'memory_desks/${event.deskId}/avatar.jpg',
+          file: File(event.memoryPage.localPhotoPath!),
+        );
+        if (newUrl != null) {
+          await storage.refFromURL(avatarUrl!).delete(); // delete old
+          avatarUrl = newUrl;
+        }
+      }
+
+      // 3) PHOTOS: delete removed, upload new, merge
+      final oldPhotos = existing.photoUrls.toSet();
+      final keepPhotos = event.newMedia.existingPhotoUrls.toSet();
+      final newPhotoFiles = event.newMedia.newPhotoFiles;
+
+      // delete URLs the user removed
+      for (var url in oldPhotos.difference(keepPhotos)) {
+        await storage.refFromURL(url).delete();
+      }
+
+      // upload only the newly picked XFiles
+      final uploadedPhotoUrls = <String>[];
+      for (var file in newPhotoFiles) {
+        final up = await mediaService.uploadFileAndGetUrl(
+          filePath:
+              'memory_desks/${event.deskId}/photos/${DateTime.now().millisecondsSinceEpoch}.jpg',
+          file: File(file.path),
+        );
+        if (up != null) uploadedPhotoUrls.add(up);
+      }
+
+      // final list = kept existing URLs + newly uploaded URLs
+      final finalPhotoUrls = keepPhotos.toList()..addAll(uploadedPhotoUrls);
+
+      // 4) VIDEOS: same pattern
+      final oldVideos = existing.videoUrls.toSet();
+      final keepVideos = event.newMedia.existingVideoUrls.toSet();
+      final newVideoFiles = event.newMedia.newVideoFiles;
+
+      for (var url in oldVideos.difference(keepVideos)) {
+        await storage.refFromURL(url).delete();
+      }
+
+      final uploadedVideoUrls = <String>[];
+      for (var file in newVideoFiles) {
+        final up = await mediaService.uploadFileAndGetUrl(
+          filePath:
+              'memory_desks/${event.deskId}/videos/${DateTime.now().millisecondsSinceEpoch}.mp4',
+          file: File(file.path),
+        );
+        if (up != null) uploadedVideoUrls.add(up);
+      }
+      final finalVideoUrls = keepVideos.toList()..addAll(uploadedVideoUrls);
+
+      // 5) Build updated MemoryDesk
+      final updated = existing.copyWith(
+        firstName: event.memoryPage.firstName,
+        lastName: event.memoryPage.lastName,
+        middleName: event.memoryPage.middleName,
+        dateOfBirth: event.memoryPage.dateOfBirth,
+        dateOfDeath: event.memoryPage.dateOfDeath,
+        epitaphy: event.memoryPage.epitaphy,
+        biography: event.memoryPage.biography,
+        isPrivate: event.memoryPage.isPrivate,
+        password: event.memoryPage.password,
+        photoUrl: avatarUrl,
+        photoUrls: finalPhotoUrls,
+        videoUrls: finalVideoUrls,
+      );
+
+      // 6) Write back to Firestore
+      await docRef.update(updated.toJson());
+      emit(const MemoryDeskState.success());
+    } catch (e) {
+      emit(MemoryDeskState.failure(error: e.toString()));
+    }
+  }
+
+  Future<void> _deleteMemoryPage(
+    DeleteMemoryDesk event,
+    Emitter<MemoryDeskState> emit,
+  ) async {
+    emit(const MemoryDeskState.loading());
+    final storage = getIt<FirebaseStorage>();
+
+    try {
+      if (event.avatarUrl != null && event.avatarUrl!.isNotEmpty) {
+        await storage.refFromURL(event.avatarUrl!).delete();
+      }
+
+      for (final url in event.photoUrls) {
+        try {
+          await storage.refFromURL(url).delete();
+        } catch (_) {
+          // ignore if it’s already gone or doesn’t exist
+        }
+      }
+
+      for (final url in event.videoUrls) {
+        try {
+          await storage.refFromURL(url).delete();
+        } catch (_) {
+          // ignore errors
+        }
+      }
+      await firestore.collection('memory_desks').doc(event.deskId).delete();
+
+      final currentUserId = auth.currentUser!.uid;
+
+      await firestore.collection('users').doc(currentUserId).update({
+        'memoryDesks': FieldValue.arrayRemove([event.deskId]),
+      });
+
+      emit(const MemoryDeskState.deletionSuccess());
     } catch (e) {
       emit(MemoryDeskState.failure(error: e.toString()));
     }

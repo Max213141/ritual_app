@@ -24,5 +24,5 @@ class AppPreferences extends HiveObject {
   AppPreferences.initial()
       : isFirstLaunch = true,
         isDarkTheme = false,
-        locale = 'ru';
+        locale = 'en';
 }

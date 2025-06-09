@@ -1,6 +1,5 @@
 export 'loader_widget.dart';
 export 'error_dialog.dart';
-export 'bottom_navigation_bar.dart';
 export 'action_button.dart';
 export 'custom_app_bar.dart';
 export 'svg_picture.dart';
@@ -13,3 +12,4 @@ export 'mp_picked_media_list.dart';
 export 'success_dialog.dart';
 export 'preview_tab_bar.dart';
 export 'preview_biography.dart';
+export 'loading_overlay.dart';

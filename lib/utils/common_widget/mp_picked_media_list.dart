@@ -32,7 +32,7 @@ class PickedMediaList extends StatelessWidget {
   Widget build(BuildContext context) {
     if (mediaList.isEmpty && watchOnlyMode) {
       return Padding(
-        padding: EdgeInsets.symmetric(vertical: 8),
+        padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
         child: Center(
           child: Text(
             'Loading...',
@@ -42,7 +42,7 @@ class PickedMediaList extends StatelessWidget {
       );
     } else {
       return Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+        padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
         child: GridView.builder(
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),

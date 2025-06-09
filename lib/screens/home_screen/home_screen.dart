@@ -56,13 +56,15 @@ class _HomeScreenState extends State<HomeScreen> {
           centerTitle: false,
           title: Text(
             l10n.appTitle,
-            style: const TextStyle(fontWeight: FontWeight.bold),
+            style: const TextStyle(fontWeight: FontWeight.w900, fontSize: 24),
           ),
           leading: const Padding(
-            padding: EdgeInsets.only(left: 16.0),
+            padding: EdgeInsets.only(
+              left: 16.0,
+            ),
             child: RitualAppSvgPicture(
               picture: 'assets/icons/logo_icon.svg',
-              fit: BoxFit.contain,
+              fit: BoxFit.fitWidth,
             ),
           ),
           actions: [
@@ -85,6 +87,7 @@ class _HomeScreenState extends State<HomeScreen> {
             onPressed: () {
               GoRouter.of(context).go('/qr_scan');
             },
+            elevation: 0,
             child: const RitualAppSvgPicture(
               picture: 'assets/icons/qr_scan_icon.svg',
             ),

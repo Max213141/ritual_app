@@ -31,7 +31,7 @@ class _PlanSelectionScreenState extends State<PlanSelectionScreen> {
           builder: (context, constraints) {
             return Center(
               child: Padding(
-                padding: const EdgeInsets.all(2.0),
+                padding: const EdgeInsets.symmetric(vertical: 6.0),
                 child: Column(
                   children: [
                     Expanded(
@@ -45,7 +45,7 @@ class _PlanSelectionScreenState extends State<PlanSelectionScreen> {
                               3,
                               (index) => Padding(
                                 padding:
-                                    const EdgeInsets.symmetric(vertical: 4.0),
+                                    const EdgeInsets.symmetric(vertical: 6.0),
                                 child: PlanCardWidget(
                                   isSelected: selectedIndex == index,
                                   onTap: () => selectPlan(index),
@@ -60,12 +60,11 @@ class _PlanSelectionScreenState extends State<PlanSelectionScreen> {
                     ActionButton(
                       onPressed: () {
                         selectedIndex != -1
-                            ? GoRouter.of(context)
-                                .go('/home/mp_plan_selection/mp_creation')
+                            ? GoRouter.of(context).go('/home/mp_creation')
                             : null;
                       },
                       title: 'Confirm',
-                      width: width - 32,
+                      width: width - 40,
                     ),
                   ],
                 ),

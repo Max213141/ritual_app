@@ -25,16 +25,24 @@ class DrawerItemWidget extends StatelessWidget {
           child: Row(
             children: [
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 3.0),
+                padding: const EdgeInsets.symmetric(horizontal: 6.0),
                 child: Text(
                   item.title,
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyLarge!
+                      .copyWith(fontSize: 22, fontWeight: FontWeight.w500),
                 ),
               ),
               item.icon != null
-                  ? RitualAppSvgPicture(
-                      picture: item.icon!,
-                      fit: BoxFit.fitHeight,
-                      color: Theme.of(context).primaryColorLight,
+                  ? SizedBox(
+                      width: 20,
+                      height: 20,
+                      child: RitualAppSvgPicture(
+                        picture: item.icon!,
+                        fit: BoxFit.fitHeight,
+                        color: Theme.of(context).primaryColorLight,
+                      ),
                     )
                   : const SizedBox.shrink(),
             ],

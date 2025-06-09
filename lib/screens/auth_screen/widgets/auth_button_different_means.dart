@@ -20,7 +20,12 @@ class AuthButtonByDifferentMeans extends StatelessWidget {
         height: 36,
         child: RitualAppSvgPicture(picture: image),
       ),
-      label: Text(authMean),
+      label: Text(
+        authMean,
+        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+              fontSize: 18,
+            ),
+      ),
       onPressed: onPressed,
       style: OutlinedButton.styleFrom(
         padding: const EdgeInsets.symmetric(vertical: 16),

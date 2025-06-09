@@ -8,7 +8,6 @@ abstract class AppConfig {
 
   static const supportedLocales = [
     Locale('en'),
-    Locale('be'),
     Locale('ru'),
     Locale('pl'),
   ];

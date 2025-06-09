@@ -107,24 +107,6 @@ class AboutUsScreen extends StatelessWidget {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 4),
-                  Text(
-                    l10n.aboutUsSecondDesigner,
-                    style:
-                        MentalHealthTextStyles.text.signikaPrimaryFontF22Black,
-                  ),
-                  const SizedBox(width: 4),
-                  SocialsButton(
-                    onTap: () {
-                      launchUrl(
-                        Uri.parse(
-                          'https://www.instagram.com/dsgnvera?igsh=MWlkM3E2dWloYW0zNQ==',
-                        ),
-                        mode: LaunchMode.platformDefault,
-                      );
-                    },
-                    picturePath: 'assets/socials/instagram.svg',
-                  ),
                   const Divider(),
                 ],
               ),

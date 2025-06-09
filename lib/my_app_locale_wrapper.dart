@@ -32,7 +32,7 @@ class MyAppWrapper extends StatelessWidget {
       builder: (context, state) {
         return MaterialApp.router(
           localizationsDelegates: const [
-            AppLocalizations.delegate,
+            AppLocalizations.delegate, // Add this line
             GlobalMaterialLocalizations.delegate,
             GlobalWidgetsLocalizations.delegate,
             GlobalCupertinoLocalizations.delegate,

@@ -69,8 +69,9 @@ class _CustomFormFieldWidgetState extends State<CustomFormFieldWidget> {
         ),
         suffixIcon: widget.usepObscureText
             ? IconButton(
-                icon: Icon(
-                    _obscurePassword ? Icons.visibility : Icons.visibility_off),
+                icon: Icon(_obscurePassword
+                    ? Icons.visibility
+                    : Icons.visibility_off_outlined),
                 onPressed: () {
                   setState(() {
                     _obscurePassword = !_obscurePassword;

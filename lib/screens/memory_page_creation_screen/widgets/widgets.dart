@@ -5,3 +5,5 @@ export 'biography_tab/biography_tab_widget.dart';
 export 'media_tab/media_tab_widget.dart';
 export 'biography_tab/circle_avatar_widget.dart';
 export 'media_tab/mp_media_title.dart';
+export 'memory_creation_screen_body.dart';
+export 'media_tab/new_media_tab.dart';

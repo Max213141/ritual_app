@@ -12,13 +12,39 @@ import 'package:ritual_app/utils/svg_preloader.dart';
 
 void main() async {
   // debugPaintSizeEnabled = true;
+  WidgetsFlutterBinding.ensureInitialized();
 
   await preloadSvgs(
     [
-      // 'assets/icons/home.svg',
+      'assets/icons/add_photo.svg',
+      'assets/icons/add_video.svg',
+      'assets/icons/apple_logo.svg',
+      'assets/icons/close.svg',
+      'assets/icons/drawer_icon.svg',
+      'assets/icons/empty_photo.svg',
+      'assets/icons/google_logo.svg',
+      'assets/icons/logo_icon.svg',
+      'assets/icons/memento-logo.svg',
+      'assets/icons/qr_scan_icon.svg',
+      'assets/icons/torch_off_icon.svg',
+      'assets/icons/wall.svg',
+      'assets/images/password_reset_sent.svg',
+      'assets/intro/first_slide.svg',
+      'assets/intro/second_slide.svg',
+      'assets/intro/third_slide.svg',
+      'assets/menu_icons/about_us.svg',
+      'assets/menu_icons/log_out.svg',
+      'assets/menu_icons/notifications.svg',
+      'assets/menu_icons/profile.svg',
+      'assets/menu_icons/settings.svg',
+      'assets/menu_icons/support.svg',
+      'assets/socials/behance.svg',
+      'assets/socials/dribbble.svg',
+      'assets/socials/gmail.svg',
+      'assets/socials/linkedin.svg',
+      'assets/socials/telegram.svg',
     ],
   );
-  WidgetsFlutterBinding.ensureInitialized();
 
   FirebaseApp app = await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
@@ -43,7 +69,7 @@ void main() async {
     RitualApp(
       auth: auth,
       hiveStore: hiveStore,
-      media: storageRef,
+      storageRef: storageRef,
       googleSignIn: googleSignIn,
     ),
   );

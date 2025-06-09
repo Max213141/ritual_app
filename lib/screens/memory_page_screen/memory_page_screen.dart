@@ -28,20 +28,9 @@ class MemoryDesksListScreen extends StatelessWidget {
               ),
             );
           }
-          return Stack(
-            children: [
-              body,
-              if (state is Loading)
-                Center(
-                  child: SizedBox(
-                    height: 85,
-                    width: 85,
-                    child: RepaintBoundary(
-                      child: Loader(),
-                    ),
-                  ),
-                ),
-            ],
+          return LoadingOverlay(
+            isLoading: state is Loading,
+            child: body,
           );
         },
       ),

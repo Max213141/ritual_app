@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:ritual_app/utils/utils.dart';
 
 class MemoryPageWebBodyWidget extends StatefulWidget {
-  const MemoryPageWebBodyWidget({super.key});
+  final AppLocalizations l10n;
+
+  const MemoryPageWebBodyWidget({
+    super.key,
+    required this.l10n,
+  });
 
   @override
   State<MemoryPageWebBodyWidget> createState() =>
@@ -51,15 +57,23 @@ class _MemoryPageWebBodyWidgetState extends State<MemoryPageWebBodyWidget> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text('Биография',
-                        style: TextStyle(
-                            fontSize: 24, fontWeight: FontWeight.bold)),
+                    Text(
+                      widget.l10n.mdScreenBiography,
+                      style: TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                     const SizedBox(height: 10),
                     const Text('Биографический текст...'),
                     const SizedBox(height: 20),
-                    const Text('Фото',
-                        style: TextStyle(
-                            fontSize: 24, fontWeight: FontWeight.bold)),
+                    Text(
+                      widget.l10n.mdScreenPhoto,
+                      style: TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                     const SizedBox(height: 10),
                     GridView.builder(
                       shrinkWrap: true,
@@ -78,8 +92,8 @@ class _MemoryPageWebBodyWidgetState extends State<MemoryPageWebBodyWidget> {
                       },
                     ),
                     const SizedBox(height: 20),
-                    const Text(
-                      'Видео',
+                    Text(
+                      widget.l10n.mdScreenVideo,
                       style: TextStyle(
                         fontSize: 24,
                         fontWeight: FontWeight.bold,

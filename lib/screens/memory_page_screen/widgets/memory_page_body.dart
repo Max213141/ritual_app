@@ -24,7 +24,7 @@ class MemoryDesksListScreenBody extends StatelessWidget {
         // Calculate total height needed for all items
         final listHeight = memoryDesks.length * itemHeight;
         // Get the available screen height
-        final maxScreenHeight = MediaQuery.of(context).size.height * 0.5;
+        final maxScreenHeight = MediaQuery.of(context).size.height * 0.55;
         // Use the minimum of calculated list height and max screen height
         final constrainedHeight =
             listHeight < maxScreenHeight ? listHeight : maxScreenHeight;
@@ -36,7 +36,7 @@ class MemoryDesksListScreenBody extends StatelessWidget {
             Text(
               l10n.memoryPageScreenTitle,
               style: const TextStyle(
-                fontSize: 16,
+                fontSize: 22,
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -45,6 +45,10 @@ class MemoryDesksListScreenBody extends StatelessWidget {
                 ? Text(
                     l10n.memoryPageScreenEmpty,
                     textAlign: TextAlign.center,
+                    style: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
                   )
                 : ConstrainedBox(
                     constraints: BoxConstraints(
@@ -69,7 +73,13 @@ class MemoryDesksListScreenBody extends StatelessWidget {
                   await GoRouter.of(context)
                       .push<bool>('/home/mp_plan_selection');
                 },
-                child: Text(l10n.memoryPageScreenNew),
+                child: Text(
+                  l10n.memoryPageScreenNew,
+                  style: const TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               ),
             ),
           ],

@@ -27,6 +27,8 @@ setupServiceLocator({
     () => FirebaseFirestore.instance,
   );
 
+  getIt.registerSingleton<FirebaseStorage>(FirebaseStorage.instance);
+
   getIt.registerSingleton<FirebaseAuth>(auth);
   getIt.registerSingleton<Reference>(storageRef);
   getIt.registerSingleton<GoogleSignIn>(googleSignIn);

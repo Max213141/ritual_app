@@ -58,20 +58,9 @@ class _AuthForgotPasswordScreenState extends State<AuthForgotPasswordScreen> {
           },
         );
       },
-      child: Stack(
-        children: [
-          AuthForgotPasswordBody(),
-          if (_showLoader)
-            const Center(
-              child: SizedBox(
-                height: 85,
-                width: 85,
-                child: RepaintBoundary(
-                  child: Loader(),
-                ),
-              ),
-            ),
-        ],
+      child: LoadingOverlay(
+        isLoading: _showLoader,
+        child: AuthForgotPasswordBody(),
       ),
     );
   }

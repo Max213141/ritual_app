@@ -36,7 +36,7 @@ class MediaPickerFrameWidget extends StatelessWidget {
               height: 145,
               child: DecoratedBox(
                 decoration: BoxDecoration(
-                  border: Border.all(color: color),
+                  border: Border.all(color: color, width: 2),
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: imagePath != null || videoThumbnail != null
@@ -66,7 +66,11 @@ class MediaPickerFrameWidget extends StatelessWidget {
                     : Padding(
                         padding: const EdgeInsets.all(40.0),
                         child: Center(
-                          child: RitualAppSvgPicture(picture: icon!),
+                          child: SizedBox(
+                            width: 35,
+                            height: 35,
+                            child: RitualAppSvgPicture(picture: icon!),
+                          ),
                         ),
                       ),
               ),

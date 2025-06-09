@@ -43,8 +43,8 @@ abstract class StringMatchers {
     switch (locale) {
       case 'ru':
         return l10n.russianLanguage;
-      case 'be':
-        return l10n.belarusianLanguage;
+      // case 'be':
+      //   return l10n.belarusianLanguage;
       case 'pl':
         return l10n.polishLanguage;
       case 'en':

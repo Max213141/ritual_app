@@ -28,8 +28,14 @@ class _QrPreviewScreenState extends State<QrPreviewScreen> {
   void initState() {
     super.initState();
 
+    // In your QR‐generation code, e.g. in QrPreviewScreen:
+    //TODO figure out how fix this for proper work with camera and web
+    final origin = 'http://localhost:8080';
+    // e.g. “https://your‐app‐domain.com” in prod, “http://localhost:8080” in dev
+
+    final fullUrl = '$origin/home/md_view_screen//${widget.memoryDeskId}';
     final code = QrCode.fromData(
-      data: widget.memoryDeskId,
+      data: fullUrl,
       errorCorrectLevel: QrErrorCorrectLevel.H,
     );
 
@@ -83,35 +89,37 @@ class _QrPreviewScreenState extends State<QrPreviewScreen> {
         leading: const BackButton(),
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+        padding: const EdgeInsets.symmetric(vertical: 16),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const Text(
+            Text(
               'Here is your QR code that can be\nused to access the memory page:',
-              textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 16),
+              style: theme.textTheme.bodyLarge!.copyWith(fontSize: 18),
             ),
-            const SizedBox(height: 24),
-            DecoratedBox(
-              decoration: BoxDecoration(
-                color: Colors.white,
-                border: Border.all(
-                  color: theme.primaryColor,
-                  width: 2,
-                ),
-                borderRadius: BorderRadius.circular(16),
-              ),
+            SizedBox(height: 80),
+            Center(
               child: Padding(
-                padding: const EdgeInsets.all(16),
-                child: PrettyQrView(
-                  qrImage: _qrImage,
-                  decoration: _decoration,
+                padding: const EdgeInsets.symmetric(horizontal: 38),
+                child: DecoratedBox(
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    border: Border.all(
+                      color: theme.primaryColor,
+                      width: 2,
+                    ),
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: PrettyQrView(
+                      qrImage: _qrImage,
+                      decoration: _decoration,
+                    ),
+                  ),
                 ),
               ),
             ),
-            const SizedBox(height: 32),
-            const SizedBox(height: 32),
+            Spacer(),
             ActionButton(
               title: 'Download',
               onPressed: _downloadQrCode,

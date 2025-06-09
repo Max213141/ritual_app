@@ -5,7 +5,7 @@ class MemoryDeskEvent with _$MemoryDeskEvent {
   // Upload MemoryPage information
   const factory MemoryDeskEvent.uploadMemoryDesk({
     required MemoryDesk memoryPage,
-    required LocalMemoryPageMedia mediaData,
+    required EditableMedia mediaData,
   }) = UploadMemoryDesk;
 
   // Retrieve MemoryPage from Firestore
@@ -16,4 +16,18 @@ class MemoryDeskEvent with _$MemoryDeskEvent {
     required String userId,
     required String memoryDeskId,
   }) = AddMemoryDeskToUser;
+
+  const factory MemoryDeskEvent.updateMemoryDesk({
+    required String deskId,
+    required MemoryDesk
+        memoryPage, // the form’s “final” MemoryPage (with new photoUrls/videoUrls)
+    required EditableMedia newMedia,
+  }) = UpdateMemoryDesk;
+
+  const factory MemoryDeskEvent.deleteMemoryDesk({
+    required String deskId,
+    required List<String> photoUrls,
+    required List<String> videoUrls,
+    String? avatarUrl,
+  }) = DeleteMemoryDesk;
 }

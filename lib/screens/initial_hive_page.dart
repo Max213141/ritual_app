@@ -24,7 +24,7 @@ class _InitialHivePageState extends State<InitialHivePage> {
 
   @override
   void initState() {
-    WidgetsFlutterBinding.ensureInitialized;
+    // WidgetsFlutterBinding.ensureInitialized;
 
     super.initState();
   }

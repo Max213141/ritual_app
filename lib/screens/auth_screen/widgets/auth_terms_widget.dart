@@ -32,10 +32,12 @@ class AuthTermsWidget extends StatelessWidget {
                     width: state.hasError ? 2 : 1,
                   ),
                 ),
+                SizedBox(width: 10),
                 Expanded(
                   child: Text(
                     l10n.authUserTerms,
                     style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                          fontSize: 12,
                           color: state.hasError ? Colors.red : null,
                         ),
                   ),
@@ -43,12 +45,9 @@ class AuthTermsWidget extends StatelessWidget {
               ],
             ),
             if (state.hasError)
-              Padding(
-                padding: const EdgeInsets.only(top: 8, left: 8),
-                child: Text(
-                  state.errorText!,
-                  style: const TextStyle(color: Colors.red, fontSize: 12),
-                ),
+              Text(
+                state.errorText!,
+                style: const TextStyle(color: Colors.red, fontSize: 12),
               ),
           ],
         );

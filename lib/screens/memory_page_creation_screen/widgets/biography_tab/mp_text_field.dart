@@ -29,8 +29,11 @@ class MPTextField extends StatelessWidget {
         decoration: InputDecoration(
           labelText: label,
           hintText: hintText ?? (isDateInput ? 'dd.mm.yyyy' : null),
+          hintStyle: Theme.of(context).textTheme.bodyLarge!.copyWith(
+              color: Colors.grey[400]!.withValues(alpha: 0.3),
+              fontWeight: FontWeight.bold),
           filled: true,
-          fillColor: const Color(0xFF303030).withOpacity(0.8),
+          fillColor: const Color(0xFF303030).withValues(alpha: 0.8),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(12),
             borderSide: BorderSide.none,
@@ -45,9 +48,13 @@ class MPTextField extends StatelessWidget {
         maxLines: maxLines,
         style: const TextStyle(color: Colors.white),
         keyboardType: isDateInput ? TextInputType.number : TextInputType.text,
-        maxLength: isDateInput ? 10 : null,
+        // maxLength: isDateInput ? 10 : null,
         inputFormatters: isDateInput
-            ? [FilteringTextInputFormatter.digitsOnly, DateInputFormatter()]
+            ? [
+                FilteringTextInputFormatter.digitsOnly,
+                DateInputFormatter(),
+                LengthLimitingTextInputFormatter(10),
+              ]
             : [],
       ),
     );

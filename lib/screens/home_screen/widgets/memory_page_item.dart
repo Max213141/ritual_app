@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ritual_app/entities/entities.dart';
-import 'package:ritual_app/screens/home_screen/widgets/widgets.dart';
+import 'package:ritual_app/utils/utils.dart';
 
 class MemoryPageItem extends StatefulWidget {
   final MemoryDesk memoryDesk;
@@ -24,23 +24,35 @@ class _MemoryPageItemState extends State<MemoryPageItem>
   @override
   Widget build(BuildContext context) {
     final name =
-        '${widget.memoryDesk.firstName} ${widget.memoryDesk.middleName} ${widget.memoryDesk.lastName}';
-
-    return AnimatedContainer(
-      duration: const Duration(milliseconds: 150),
-      curve: Curves.easeInOut,
-      height: 100,
-      width: double.infinity,
-      child: RepaintBoundary(
+        '${widget.memoryDesk.firstName} ${widget.memoryDesk.middleName}\n${widget.memoryDesk.lastName}';
+    final displayImage = (widget.memoryDesk.photoUrl != null &&
+            widget.memoryDesk.photoUrl!.isNotEmpty
+        ? NetworkImage(widget.memoryDesk.photoUrl!)
+        : null);
+    return GestureDetector(
+      onTap: () => _handleAction(() => openPreview(context)),
+      child: SizedBox(
+        height: 100,
         child: Card(
-          margin: const EdgeInsets.symmetric(vertical: 8),
+          margin: const EdgeInsets.symmetric(vertical: 12),
           child: Row(
             children: [
               const SizedBox(width: 12),
-              CircleAvatar(
-                backgroundColor: Colors.grey[300],
-                child: Icon(Icons.person, color: Colors.grey[600]),
-              ),
+              displayImage != null
+                  ? SizedBox(
+                      height: 55,
+                      width: 55,
+                      child: CircleAvatar(
+                        backgroundImage: displayImage,
+                      ),
+                    )
+                  : SizedBox(
+                      height: 55,
+                      width: 55,
+                      child: RitualAppSvgPicture(
+                        picture: 'assets/icons/empty_photo.svg',
+                      ),
+                    ),
               const SizedBox(width: 12),
               Expanded(
                 child: Text(
@@ -49,17 +61,12 @@ class _MemoryPageItemState extends State<MemoryPageItem>
                   overflow: TextOverflow.ellipsis,
                 ),
               ),
-              AnimatedSwitcher(
-                duration: const Duration(milliseconds: 150),
-                transitionBuilder: (child, animation) =>
-                    FadeTransition(opacity: animation, child: child),
-                child: isExpanded
-                    ? _buildActions(context)
-                    : IconButton(
-                        key: const ValueKey('more'),
-                        icon: const Icon(Icons.more_horiz, size: 24),
-                        onPressed: () => setState(() => isExpanded = true),
-                      ),
+              IconButton(
+                key: const ValueKey('QR-код'),
+                icon: const Icon(Icons.qr_code, size: 24),
+                onPressed: () => _handleAction(
+                  () => openQrPreview(context),
+                ),
               ),
               const SizedBox(width: 12),
             ],
@@ -69,30 +76,30 @@ class _MemoryPageItemState extends State<MemoryPageItem>
     );
   }
 
-  Widget _buildActions(BuildContext context) {
-    return Row(
-      key: const ValueKey('actions'),
-      children: [
-        ActionIcon(
-          icon: Icons.visibility,
-          tooltip: 'Просмотр',
-          onTap: () => _handleAction(() => openPreview(context)),
-        ),
-        const SizedBox(width: 8),
-        ActionIcon(
-          icon: Icons.qr_code,
-          tooltip: 'QR-код',
-          onTap: () => _handleAction(() => openQrPreview(context)),
-        ),
-        const SizedBox(width: 8),
-        ActionIcon(
-          icon: Icons.close,
-          tooltip: 'Закрыть',
-          onTap: () => setState(() => isExpanded = false),
-        ),
-      ],
-    );
-  }
+  // Widget _buildActions(BuildContext context) {
+  //   return Row(
+  //     key: const ValueKey('actions'),
+  //     children: [
+  //       ActionIcon(
+  //         icon: Icons.visibility,
+  //         tooltip: 'Просмотр',
+  //         onTap: () => _handleAction(() => openPreview(context)),
+  //       ),
+  //       const SizedBox(width: 8),
+  //       ActionIcon(
+  //         icon: Icons.qr_code,
+  //         tooltip: 'QR-код',
+  //         onTap: () => _handleAction(() => openQrPreview(context)),
+  //       ),
+  //       const SizedBox(width: 8),
+  //       ActionIcon(
+  //         icon: Icons.close,
+  //         tooltip: 'Закрыть',
+  //         onTap: () => setState(() => isExpanded = false),
+  //       ),
+  //     ],
+  //   );
+  // }
 
   void _handleAction(VoidCallback action) {
     setState(() => isExpanded = false);
@@ -101,7 +108,7 @@ class _MemoryPageItemState extends State<MemoryPageItem>
 
   void openPreview(BuildContext context) async {
     GoRouter.of(context).go(
-      '/home/mp_view_screen/${widget.memoryDeskId}',
+      '/home/md_view_screen/${widget.memoryDeskId}',
       extra: widget.memoryDesk,
     );
   }

@@ -21,7 +21,7 @@ class ActionButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: width ?? MediaQuery.of(context).size.width - 90,
-      height: 50,
+      height: 60,
       child: ElevatedButton(
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
@@ -29,18 +29,18 @@ class ActionButton extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),
           ),
-          backgroundColor: Theme.of(context).primaryColorLight,
+          backgroundColor: Colors.white,
         ),
-        child: FittedBox(
-          child: Text(
-            title,
-            maxLines: 1,
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              color: Theme.of(context).primaryColor,
-            ),
-            // style: MentalHealthTextStyles.text.signikaPrimaryFontF22Black,
+        child: Text(
+          title,
+          maxLines: 1,
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            color: Theme.of(context).primaryColor,
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
           ),
+          // style: MentalHealthTextStyles.text.signikaPrimaryFontF22Black,
         ),
       ),
     );
