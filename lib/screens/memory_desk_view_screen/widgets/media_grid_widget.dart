@@ -1,11 +1,14 @@
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:ritual_app/utils/utils.dart';
 
 /// A grid of exactly one “frame” per URL in [mediaList], showing a loader until
 /// [getMedia] finishes and then stuffing the bytes into your MediaPickerFrameWidget.
 class MediaGridWidget extends StatelessWidget {
+  final bool isVideo;
+
   final List<String> mediaList;
 
   /// Given a URL, must return the raw bytes (image or thumbnail).
@@ -15,11 +18,13 @@ class MediaGridWidget extends StatelessWidget {
     super.key,
     required this.mediaList,
     required this.getMedia,
+    required this.isVideo,
   });
 
   @override
   Widget build(BuildContext context) {
     final borderColor = Theme.of(context).primaryColorLight;
+    final deskId = GoRouterState.of(context).pathParameters['id']!;
 
     return GridView.builder(
       padding: const EdgeInsets.all(16),
@@ -69,6 +74,13 @@ class MediaGridWidget extends StatelessWidget {
             // success: feed bytes into your frame widget
             return MediaPickerFrameWidget(
               videoThumbnail: snap.data,
+              onTap: () {
+                final subpath = isVideo ? 'video' : 'image';
+                context.push(
+                  '/home/md_view_screen/$deskId/$subpath',
+                  extra: mediaList[i], // the URL
+                );
+              },
             );
           },
         );

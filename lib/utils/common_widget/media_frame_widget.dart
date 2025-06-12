@@ -10,15 +10,18 @@ class MediaPickerFrameWidget extends StatelessWidget {
   final Uint8List? videoThumbnail;
   final String? imagePath;
   final String? icon;
+  final VoidCallback? onTap;
   final Future<void> Function()? onPressed;
   final VoidCallback? onClosedPressed;
+
   const MediaPickerFrameWidget({
     super.key,
-    this.icon,
-    this.onPressed,
-    this.imagePath,
-    this.onClosedPressed,
     this.videoThumbnail,
+    this.imagePath,
+    this.icon,
+    this.onTap,
+    this.onPressed,
+    this.onClosedPressed,
   });
 
   @override
@@ -26,57 +29,34 @@ class MediaPickerFrameWidget extends StatelessWidget {
     final color = Theme.of(context).primaryColorLight;
     return Stack(
       children: [
-        Positioned(
+        // Tapping the frame now prefers onTap; fallback to onPressed
+        Positioned.fill(
           child: GestureDetector(
-            onTap: () async {
-              onPressed != null ? await onPressed!() : null;
-            },
-            child: SizedBox(
-              width: 115,
-              height: 145,
-              child: DecoratedBox(
-                decoration: BoxDecoration(
-                  border: Border.all(color: color, width: 2),
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: imagePath != null || videoThumbnail != null
-                    ? videoThumbnail != null
-                        ? ClipRRect(
-                            borderRadius: BorderRadius.circular(8),
-                            child: Image.memory(
-                              // Display local image using file path
-                              videoThumbnail!,
-                              // Ensures the image fits nicely
-                              fit: BoxFit.cover,
-                              width: double.infinity,
-                              height: double.infinity,
-                            ),
-                          )
-                        : ClipRRect(
-                            borderRadius: BorderRadius.circular(8),
-                            child: Image.file(
-                              // Display local image using file path
-                              File(imagePath!),
-                              // Ensures the image fits nicely
-                              fit: BoxFit.cover,
-                              width: double.infinity,
-                              height: double.infinity,
-                            ),
-                          )
-                    : Padding(
-                        padding: const EdgeInsets.all(40.0),
-                        child: Center(
-                          child: SizedBox(
-                            width: 35,
-                            height: 35,
-                            child: RitualAppSvgPicture(picture: icon!),
-                          ),
-                        ),
-                      ),
+            onTap: onTap ??
+                () async {
+                  if (onPressed != null) await onPressed!();
+                },
+            child: DecoratedBox(
+              decoration: BoxDecoration(
+                border: Border.all(color: color, width: 2),
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(8),
+                child: videoThumbnail != null
+                    ? Image.memory(videoThumbnail!, fit: BoxFit.cover)
+                    : (imagePath != null
+                        ? Image.file(File(imagePath!), fit: BoxFit.cover)
+                        : Center(
+                            child: icon == null
+                                ? const SizedBox()
+                                : RitualAppSvgPicture(picture: icon!),
+                          )),
               ),
             ),
           ),
         ),
+
         if (onClosedPressed != null)
           Positioned(
             top: -5,
@@ -84,16 +64,10 @@ class MediaPickerFrameWidget extends StatelessWidget {
             child: IconButton(
               icon: DecoratedBox(
                 decoration: BoxDecoration(
-                    color: Colors.black.withValues(alpha: .5),
-                    borderRadius: BorderRadius.circular(100)),
-                child: const Padding(
-                  padding: EdgeInsets.all(2.0),
-                  child: Icon(
-                    Icons.close,
-                    color: Colors.white,
-                    size: 14,
-                  ),
+                  color: Colors.black.withOpacity(.5),
+                  shape: BoxShape.circle,
                 ),
+                child: const Icon(Icons.close, size: 14, color: Colors.white),
               ),
               onPressed: onClosedPressed,
             ),

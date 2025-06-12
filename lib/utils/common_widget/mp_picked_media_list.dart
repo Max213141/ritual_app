@@ -11,6 +11,7 @@ import 'package:ritual_app/utils/common_widget/widgets.dart';
 class PickedMediaList extends StatelessWidget {
   final List<XFile> mediaList;
   final List<Uint8List?>? thumbnailList;
+
   final String? pickerIcon;
   final Future<void> Function()? onPressPickMedia;
   final bool watchOnlyMode;

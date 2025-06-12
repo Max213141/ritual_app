@@ -8,6 +8,7 @@ import 'package:ritual_app/utils/utils.dart';
 
 class PhotoTabWidget extends StatelessWidget {
   final List<String> photoUrls;
+
   const PhotoTabWidget({
     super.key,
     required this.photoUrls,
@@ -33,6 +34,7 @@ class PhotoTabWidget extends StatelessWidget {
       );
     }
     return MediaGridWidget(
+      isVideo: false,
       mediaList: photoUrls,
       getMedia: _fetchImageBytes,
     );

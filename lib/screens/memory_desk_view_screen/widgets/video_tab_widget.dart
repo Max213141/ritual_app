@@ -8,6 +8,7 @@ import 'package:ritual_app/screens/memory_desk_view_screen/widgets/media_grid_wi
 
 class VideoTabWidget extends StatelessWidget {
   final List<String> videoUrls;
+
   const VideoTabWidget({
     super.key,
     required this.videoUrls,
@@ -34,6 +35,7 @@ class VideoTabWidget extends StatelessWidget {
       );
     }
     return MediaGridWidget(
+      isVideo: true,
       mediaList: videoUrls,
       getMedia: _getThumbnail,
     );

@@ -23,3 +23,5 @@ export 'package:ritual_app/screens/memory_desk_loader_screen/memory_desk_view_lo
 export 'package:ritual_app/screens/plan_selection_screen/plan_selection_screen.dart';
 export 'package:ritual_app/screens/memory_page_screen/memory_page_screen.dart';
 export 'package:ritual_app/screens/qr_preview_screen/qr_preview_screen.dart';
+export 'package:ritual_app/screens/image_view_screen/full_screen_image.dart';
+export 'package:ritual_app/screens/video_player_screen/video_player_screen.dart';

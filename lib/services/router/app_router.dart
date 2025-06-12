@@ -92,6 +92,26 @@ GoRouter createAppRouter(FirebaseAuth auth) {
                 id: id,
               );
             },
+            routes: [
+              // ─ Full-screen image from view ─
+              GoRoute(
+                name: 'view_image',
+                path: 'image',
+                builder: (context, state) {
+                  final url = state.extra as String;
+                  return FullScreenImage.network(url);
+                },
+              ),
+              // ─ In-app video player from view ─
+              GoRoute(
+                name: 'view_video',
+                path: 'video',
+                builder: (context, state) {
+                  final url = state.extra as String;
+                  return VideoPlayerScreen(videoUrl: url);
+                },
+              ),
+            ],
           ),
           GoRoute(
             name: 'qr_preview',
