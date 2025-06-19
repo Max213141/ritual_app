@@ -94,7 +94,7 @@
   "yes": "Yes",
   "no": "No",
   "or": "or",
-  "ready": "ready",
+  "ready": "Done",
   "permissionTitle": "Permission to access media",
   "permissionSubtitle": "Permission to access media must be granted to use this feature. Would you like to go to the app settings to grant permission?"
 }

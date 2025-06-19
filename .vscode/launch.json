@@ -20,6 +20,17 @@
             "request": "launch",
             "type": "dart",
             "flutterMode": "release"
+        },
+        {
+            "name": "ritual_app (web debug)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "debug",
+            "deviceId": "chrome", // or "edge" or "web-server"
+            "args": [
+              "-d",
+              "chrome"
+            ]
         }
     ]
 }

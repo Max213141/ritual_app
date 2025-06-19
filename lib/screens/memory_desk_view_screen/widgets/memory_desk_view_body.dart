@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:ritual_app/entities/entities.dart';
 import 'package:ritual_app/screens/memory_desk_view_screen/widgets/widgets.dart';
 import 'package:ritual_app/screens/memory_page_preview_screen/widgets/circle_border.dart';
@@ -64,16 +65,26 @@ class _MemoryDeskViewBodyState extends State<MemoryDeskViewBody> {
                 // CircleAvatar for the image
                 Positioned(
                   child: Center(
-                    child: CircleAvatar(
-                      radius: 60,
-                      backgroundColor: Colors.grey[300],
-                      backgroundImage: memoryDesk.photoUrl != null
-                          ? NetworkImage(memoryDesk.photoUrl!)
-                          : null, //TODO it doesn't saving and loading on proper path
-                      child: memoryDesk.photoUrl == null
-                          ? Icon(Icons.person,
-                              size: 60, color: Colors.grey[600])
-                          : null,
+                    child: GestureDetector(
+                      onTap: () {
+                        if (memoryDesk.photoUrl != null) {
+                          context.push(
+                            '/home/md_view_screen/${widget.id}/image',
+                            extra: memoryDesk.photoUrl, // the URL
+                          );
+                        }
+                      },
+                      child: CircleAvatar(
+                        radius: 60,
+                        backgroundColor: Colors.grey[300],
+                        backgroundImage: memoryDesk.photoUrl != null
+                            ? NetworkImage(memoryDesk.photoUrl!)
+                            : null, //TODO it doesn't saving and loading on proper path
+                        child: memoryDesk.photoUrl == null
+                            ? Icon(Icons.person,
+                                size: 60, color: Colors.grey[600])
+                            : null,
+                      ),
                     ),
                   ),
                 ),

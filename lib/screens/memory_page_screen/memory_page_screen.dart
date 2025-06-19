@@ -18,12 +18,12 @@ class MemoryDesksListScreen extends StatelessWidget {
         builder: (context, state) {
           Widget body = SizedBox.shrink();
 
-          if (state is MemoryPagesLoaded) {
+          if (state is MemoryDesksLoaded) {
             body = Padding(
               padding: const EdgeInsets.all(16.0),
               child: MemoryDesksListScreenBody(
                 l10n: l10n,
-                memoryDesks: state.memoryPages,
+                memoryDesks: state.memoryDesks,
                 memoryDeskIds: state.memoryDeskIds,
               ),
             );

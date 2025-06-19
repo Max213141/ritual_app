@@ -9,14 +9,14 @@ import 'package:ritual_app/entities/entities.dart';
 import 'package:ritual_app/services/extentions/memory_page_media_convertor.dart';
 import 'package:ritual_app/services/media/media_service_interface.dart';
 import 'package:ritual_app/services/service_locator.dart';
-import 'package:ritual_app/utils/utils.dart';
+// import 'package:ritual_app/utils/utils.dart';
 
 part 'memory_desk_event.dart';
 part 'memory_desk_state.dart';
 part 'memory_desk_bloc.freezed.dart';
 
-void _log(dynamic message) =>
-    Logger.projectLog(message, name: 'memory_desk_bloc_bloc');
+// void _log(dynamic message) =>
+//     Logger.projectLog(message, name: 'memory_desk_bloc_bloc');
 
 class MemoryDeskBloc extends Bloc<MemoryDeskEvent, MemoryDeskState> {
   final FirebaseFirestore firestore;
@@ -28,14 +28,15 @@ class MemoryDeskBloc extends Bloc<MemoryDeskEvent, MemoryDeskState> {
     required this.auth,
     required this.mediaService,
   }) : super(const Initial()) {
-    on<UploadMemoryDesk>(_uploadMemoryPage);
-    on<GetMemoryDesks>(_getMemoryPage);
+    on<UploadMemoryDesk>(_uploadMemoryDesk);
+    on<GetMemoryDesks>(_getMemoryDesks);
     on<AddMemoryDeskToUser>(_addMemoryDeskToUser);
-    on<UpdateMemoryDesk>(_updateMemoryPage);
-    on<DeleteMemoryDesk>(_deleteMemoryPage);
+    on<UpdateMemoryDesk>(_updateMemoryDesk);
+    on<DeleteMemoryDesk>(_deleteMemoryDesk);
+    on<LoadMemoryDesk>(_loadMemoryDesk);
   }
 
-  Future<void> _uploadMemoryPage(
+  Future<void> _uploadMemoryDesk(
     UploadMemoryDesk event,
     Emitter<MemoryDeskState> emit,
   ) async {
@@ -85,7 +86,7 @@ class MemoryDeskBloc extends Bloc<MemoryDeskEvent, MemoryDeskState> {
     }
   }
 
-  Future<void> _getMemoryPage(
+  Future<void> _getMemoryDesks(
     GetMemoryDesks event,
     Emitter<MemoryDeskState> emit,
   ) async {
@@ -104,8 +105,8 @@ class MemoryDeskBloc extends Bloc<MemoryDeskEvent, MemoryDeskState> {
 
       if (userData == null || !userData.containsKey('memoryDesks')) {
         emit(
-          const MemoryDeskState.memoryPagesLoaded(
-            memoryPages: [],
+          const MemoryDeskState.memoryDesksLoaded(
+            memoryDesks: [],
             memoryDeskIds: [],
           ),
         );
@@ -117,8 +118,8 @@ class MemoryDeskBloc extends Bloc<MemoryDeskEvent, MemoryDeskState> {
           deskIdsRaw.whereType<String>().toList();
 
       if (memoryDeskIds.isEmpty) {
-        emit(MemoryDeskState.memoryPagesLoaded(
-          memoryPages: [],
+        emit(MemoryDeskState.memoryDesksLoaded(
+          memoryDesks: [],
           memoryDeskIds: memoryDeskIds,
         ));
         return;
@@ -136,14 +137,48 @@ class MemoryDeskBloc extends Bloc<MemoryDeskEvent, MemoryDeskState> {
           .map((doc) => MemoryDesk.fromJson(doc.data()!))
           .toList();
 
-      emit(MemoryDeskState.memoryPagesLoaded(
-          memoryPages: memoryPages, memoryDeskIds: memoryDeskIds));
+      emit(MemoryDeskState.memoryDesksLoaded(
+          memoryDesks: memoryPages, memoryDeskIds: memoryDeskIds));
     } catch (e) {
       emit(MemoryDeskState.failure(error: e.toString()));
     }
   }
 
-  Future<void> _updateMemoryPage(
+  Future<void> _loadMemoryDesk(
+    LoadMemoryDesk event,
+    Emitter<MemoryDeskState> emit,
+  ) async {
+    emit(const MemoryDeskState.loading());
+
+    try {
+      final doc = await firestore
+          .collection('memory_desks')
+          .doc(event.memoryDeskId)
+          .get();
+
+      if (!doc.exists || doc.data() == null) {
+        emit(const MemoryDeskState.failure(
+          error: 'No memory desk found for that QR code.',
+        ));
+        return;
+      }
+
+      // Parse the Firestore JSON into your MemoryPage model
+      final memoryDesk = MemoryDesk.fromJson(doc.data()!);
+      emit(
+        MemoryDeskState.memoryDeskLoaded(
+          memoryDesk: memoryDesk,
+          memoryDeskIds: event.memoryDeskId,
+        ),
+      );
+    } catch (e) {
+      emit(MemoryDeskState.failure(
+        error: e.toString(),
+      ));
+    }
+  }
+
+  Future<void> _updateMemoryDesk(
     UpdateMemoryDesk event,
     Emitter<MemoryDeskState> emit,
   ) async {
@@ -239,7 +274,7 @@ class MemoryDeskBloc extends Bloc<MemoryDeskEvent, MemoryDeskState> {
     }
   }
 
-  Future<void> _deleteMemoryPage(
+  Future<void> _deleteMemoryDesk(
     DeleteMemoryDesk event,
     Emitter<MemoryDeskState> emit,
   ) async {

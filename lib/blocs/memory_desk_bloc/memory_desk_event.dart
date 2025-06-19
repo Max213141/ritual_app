@@ -9,13 +9,17 @@ class MemoryDeskEvent with _$MemoryDeskEvent {
   }) = UploadMemoryDesk;
 
   // Retrieve MemoryPage from Firestore
-  const factory MemoryDeskEvent.getMemoryDesk() = GetMemoryDesks;
+  const factory MemoryDeskEvent.getMemoryDesks() = GetMemoryDesks;
 
   // Store Memory Desk ID in UserData
   const factory MemoryDeskEvent.addMemoryDeskToUser({
     required String userId,
     required String memoryDeskId,
   }) = AddMemoryDeskToUser;
+
+  const factory MemoryDeskEvent.loadMemoryDesk({
+    required String memoryDeskId,
+  }) = LoadMemoryDesk;
 
   const factory MemoryDeskEvent.updateMemoryDesk({
     required String deskId,

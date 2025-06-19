@@ -17,3 +17,4 @@ export 'navigation_observer.dart';
 export './styles/theme/theme_creation.dart';
 export './styles/theme/theme.dart';
 export 'gallery_saver/local_gallery_saver.dart';
+export 'splash_web_disabler.dart';
