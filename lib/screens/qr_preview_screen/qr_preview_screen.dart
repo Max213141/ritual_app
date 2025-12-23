@@ -30,12 +30,12 @@ class _QrPreviewScreenState extends State<QrPreviewScreen> {
 
     // In your QR‐generation code, e.g. in QrPreviewScreen:
     //TODO figure out how fix this for proper work with camera and web
-    final origin = 'http://localhost:8080';
+    // final origin = 'http://localhost:8080';
     // e.g. “https://your‐app‐domain.com” in prod, “http://localhost:8080” in dev
 
-    final fullUrl = '$origin/home/md_view_screen//${widget.memoryDeskId}';
+    // final fullUrl = '$origin/home/md_view_screen//${widget.memoryDeskId}';
     final code = QrCode.fromData(
-      data: fullUrl,
+      data: widget.memoryDeskId,
       errorCorrectLevel: QrErrorCorrectLevel.H,
     );
 

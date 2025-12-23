@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ritual_app/entities/db_entities/db_entities.dart';
 import 'package:ritual_app/screens/home_screen/widgets/widgets.dart';
-import 'package:ritual_app/utils/utils.dart';
+import 'package:ritual_app/utils/localization/app_localizations.dart';
 
 class MemoryDesksListScreenBody extends StatelessWidget {
   final AppLocalizations l10n;
@@ -70,8 +70,7 @@ class MemoryDesksListScreenBody extends StatelessWidget {
               alignment: Alignment.bottomRight,
               child: TextButton(
                 onPressed: () async {
-                  await GoRouter.of(context)
-                      .push<bool>('/home/mp_plan_selection');
+                  GoRouter.of(context).go('/home/mp_creation');
                 },
                 child: Text(
                   l10n.memoryPageScreenNew,

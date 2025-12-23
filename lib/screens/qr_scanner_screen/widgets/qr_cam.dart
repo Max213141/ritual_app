@@ -17,7 +17,7 @@ class QrCamWidget extends StatefulWidget {
   });
 
   @override
-  _QrCamWidgetState createState() => _QrCamWidgetState();
+  State<QrCamWidget> createState() => _QrCamWidgetState();
 }
 
 class _QrCamWidgetState extends State<QrCamWidget> {

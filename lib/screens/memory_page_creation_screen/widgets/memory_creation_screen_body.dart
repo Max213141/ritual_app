@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:ritual_app/blocs/blocs.dart';
 import 'package:ritual_app/entities/entities.dart';
 import 'package:ritual_app/screens/memory_page_creation_screen/widgets/widgets.dart';
+import 'package:ritual_app/utils/localization/app_localizations.dart';
 import 'package:ritual_app/utils/utils.dart';
 
 class MemoryCreationScreenBody extends StatelessWidget {

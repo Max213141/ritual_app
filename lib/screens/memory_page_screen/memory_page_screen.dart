@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ritual_app/blocs/blocs.dart';
 import 'package:ritual_app/screens/memory_page_screen/widgets/widgets.dart';
+import 'package:ritual_app/utils/localization/app_localizations.dart';
 import 'package:ritual_app/utils/utils.dart';
 
 class MemoryDesksListScreen extends StatelessWidget {

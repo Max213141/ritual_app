@@ -85,9 +85,15 @@ class _MemoryDeskCreationScreenState extends State<MemoryDeskCreationScreen>
   }
 
   void _updateMediaData(EditableMedia updatedData) {
-    setState(() {
-      _mediaData = updatedData;
-    });
+    WidgetsBinding.instance.addPostFrameCallback(
+      (_) {
+        setState(
+          () {
+            _mediaData = updatedData;
+          },
+        );
+      },
+    );
   }
 
   @override

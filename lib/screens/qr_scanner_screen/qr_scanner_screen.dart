@@ -5,7 +5,6 @@ import 'package:go_router/go_router.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:ritual_app/blocs/blocs.dart';
 import 'package:ritual_app/screens/qr_scanner_screen/widgets/widgets.dart';
-import 'package:ritual_app/services/permission/permission_service.dart';
 import 'package:ritual_app/utils/utils.dart';
 
 void _log(dynamic message) =>
@@ -22,7 +21,7 @@ class QrScanScreen extends StatefulWidget {
 
 class _QrScanScreenState extends State<QrScanScreen> {
   late MobileScannerController _cameraController;
-  late PermissionService permissionService;
+
   bool showAgreements = false;
 
   @override
@@ -73,13 +72,14 @@ class _QrScanScreenState extends State<QrScanScreen> {
           Widget body = Padding(
             padding: const EdgeInsets.only(left: 16.0, right: 16, top: 60),
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Text(
                   l10n.qrScannerScreenQuote,
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: 18),
-                Container(
+                DecoratedBox(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20.0),
                     border: Border.all(color: Colors.white, width: 2),
@@ -128,21 +128,6 @@ class _QrScanScreenState extends State<QrScanScreen> {
     );
   }
 
-  // void _qrParse(String qrString, BuildContext context) async {
-  //   // stop the camera to avoid duplicate scans while loading
-  //   await _cameraController.stop();
-
-  //   // fire the event to load from Firestore
-  //   BlocProvider.of<QrCamBloc>(context).add(
-  //     QrCamLoadMemoryDesk(memoryDeskId: qrString),
-  //   );
-
-  //   // note: you don’t need to restart the camera here,
-  //   // the BlocListener’s navigation will take the user away.
-  //   // If you want to resume scanning on error, do that in your
-  //   // BlocConsumer listener or in the error state’s build.
-  // }
-
   void _qrParse(String qrString, BuildContext context) async {
     await _cameraController.stop();
 
@@ -164,35 +149,39 @@ class _QrScanScreenState extends State<QrScanScreen> {
   ///  • a raw ID string
   ///  • null on failure
   String? _extractDeskId(String raw) {
-    raw = raw.trim();
+    final regex = RegExp(r'displayValue:\s*([^,\}]+)');
+    final match = regex.firstMatch(raw);
+    return match?.group(1)?.trim();
 
-    _log('Raw value: $raw');
-    // 1) If it’s a full HTTP(S) URL, take the last non-empty path segment:
-    try {
-      final uri = Uri.parse(raw);
-      if (uri.hasScheme && (uri.scheme == 'http' || uri.scheme == 'https')) {
-        final segments = uri.pathSegments.where((s) => s.isNotEmpty).toList();
-        if (segments.isNotEmpty) {
-          _log('Last segment value: ${segments.last}');
+    // raw = raw.trim();
 
-          return segments.last;
-        }
-      }
-    } catch (_) {
-      // not a valid URI, fall through
-    }
+    // _log('Raw value: $raw');
+    // // 1) If it’s a full HTTP(S) URL, take the last non-empty path segment:
+    // try {
+    //   final uri = Uri.parse(raw);
+    //   if (uri.hasScheme && (uri.scheme == 'http' || uri.scheme == 'https')) {
+    //     final segments = uri.pathSegments.where((s) => s.isNotEmpty).toList();
+    //     if (segments.isNotEmpty) {
+    //       _log('Last segment value: ${segments.last}');
 
-    // 2) Otherwise, if it *looks like* an ID (e.g. alphanumeric, length > 5),
-    //    return it directly.
-    final idCandidate = raw;
-    _log('IdCandidate: ${idCandidate}');
+    //       return segments.last;
+    //     }
+    //   }
+    // } catch (_) {
+    //   // not a valid URI, fall through
+    // }
 
-    final idRegex = RegExp(r'^[A-Za-z0-9_-]+$');
-    if (idRegex.hasMatch(idCandidate)) {
-      return idCandidate;
-    }
+    // // 2) Otherwise, if it *looks like* an ID (e.g. alphanumeric, length > 5),
+    // //    return it directly.
+    // final idCandidate = raw;
+    // _log('IdCandidate: ${idCandidate}');
 
-    // 3) Nothing matched
-    return null;
+    // final idRegex = RegExp(r'^[A-Za-z0-9_-]+$');
+    // if (idRegex.hasMatch(idCandidate)) {
+    //   return idCandidate;
+    // }
+
+    // // 3) Nothing matched
+    // return null;
   }
 }

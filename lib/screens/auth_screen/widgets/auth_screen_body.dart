@@ -163,20 +163,20 @@ class _AuthScreenBodyState extends State<AuthScreenBody> {
                           const SizedBox(height: 16),
                           const AuthDivider(),
                           const SizedBox(height: 16),
-                          AuthButtonByDifferentMeans(
-                            image: 'assets/icons/google_logo.svg',
-                            authMean: l10n.authViaGoogle,
-                            onPressed: () {
-                              BlocProvider.of<AuthBloc>(context).add(
-                                const SignInWithGoogle(),
-                              );
-                            },
-                          ),
-                          const SizedBox(height: 16),
+                          // AuthButtonByDifferentMeans(
+                          //   image: 'assets/icons/google_logo.svg',
+                          //   authMean: l10n.authViaGoogle,
+                          //   onPressed: () {
+                          //     BlocProvider.of<AuthBloc>(context).add(
+                          //       const SignInWithGoogle(),
+                          //     );
+                          //   },
+                          // ),
+                          // const SizedBox(height: 16),
                           // AuthButtonByDifferentMeans(
                           //   image: 'assets/icons/apple_logo.svg',
                           //   authMean: l10n.authViaApple,
-                          //   onPressed: () {
+                          //   onPressed: () {'
                           //     BlocProvider.of<AuthBloc>(context).add(
                           //       const SignInWithGoogle(),
                           //     );

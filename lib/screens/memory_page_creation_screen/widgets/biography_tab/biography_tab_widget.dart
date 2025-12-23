@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:ritual_app/entities/entities.dart';
 
 import 'package:ritual_app/screens/memory_page_creation_screen/widgets/widgets.dart';
-import 'package:ritual_app/utils/utils.dart';
+import 'package:ritual_app/utils/localization/app_localizations.dart';
 // import 'package:ritual_app/utils/utils.dart';
 
 // void _log(dynamic message) =>
@@ -109,11 +109,11 @@ class _BiographyTabWidgetState extends State<BiographyTabWidget>
               const SizedBox(height: 16),
               MPTextField(
                 controller: _controllers['lastName']!,
-                label: widget.l10n.mdScreenFirstName,
+                label: widget.l10n.mdScreenSecondName,
               ),
               MPTextField(
                 controller: _controllers['firstName']!,
-                label: widget.l10n.mdScreenSecondName,
+                label: widget.l10n.mdScreenFirstName,
               ),
               MPTextField(
                 controller: _controllers['middleName']!,
@@ -165,14 +165,15 @@ class _BiographyTabWidgetState extends State<BiographyTabWidget>
                   ),
                 ],
               ),
-              if (_isPrivate)
-                PasswordFieldWidget(
-                  l10n: widget.l10n,
-                  onPasswordChanged: (value) {
-                    _passwordCode = value;
-                    _updateProfileData();
-                  },
-                ),
+              SizedBox(height: 12),
+              // if (_isPrivate)
+              //   PasswordFieldWidget(
+              //     l10n: widget.l10n,
+              //     onPasswordChanged: (value) {
+              //       _passwordCode = value;
+              //       _updateProfileData();
+              //     },
+              //   ),
             ],
           ),
         ),

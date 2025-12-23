@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ritual_app/utils/utils.dart';
+import 'package:ritual_app/utils/localization/app_localizations.dart';
 
 class PasswordFieldWidget extends StatefulWidget {
   final ValueChanged<String> onPasswordChanged;

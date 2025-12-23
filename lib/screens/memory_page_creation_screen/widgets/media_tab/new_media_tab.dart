@@ -53,9 +53,9 @@ class _NewMediaTabWidgetState extends State<NewMediaTabWidget>
 
   // Video pick handler
   Future<void> _pickVideos() async {
-    final picks = await _picker.pickMultiImage(
+    final picks = await _picker.pickMultipleMedia(
       // if pickMultipleMedia exists, use that
-      limit: 1,
+      limit: 2,
     );
     if (picks.isNotEmpty) {
       setState(() {
@@ -108,13 +108,19 @@ class _NewMediaTabWidgetState extends State<NewMediaTabWidget>
           VideoGridWidget(
             media: _media,
             onVideoPick: (VideoItem item) {
-              setState(() {
-                if (item.isExisting) {
-                  _media.existingVideoUrls.remove(item.url!);
-                } else {
-                  _media.newVideoFiles.remove(item.file!);
-                }
-              });
+              WidgetsBinding.instance.addPostFrameCallback(
+                (_) {
+                  setState(
+                    () {
+                      if (item.isExisting) {
+                        _media.existingVideoUrls.remove(item.url!);
+                      } else {
+                        _media.newVideoFiles.remove(item.file!);
+                      }
+                    },
+                  );
+                },
+              );
               _notify();
             },
           ),

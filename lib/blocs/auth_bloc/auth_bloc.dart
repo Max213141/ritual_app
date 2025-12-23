@@ -43,9 +43,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
     try {
       //  Check if a user with this email already exists
-      final signInMethods = await auth.fetchSignInMethodsForEmail(event.email);
+      final signInMethods = await auth.isSignInWithEmailLink(event.email);
 
-      if (signInMethods.contains('google.com')) {
+      if (signInMethods) {
         //  User already registered with Google, prompt them to log in via Google
         emit(AuthState.authError(
             errorText:
@@ -119,7 +119,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
     try {
       // Trigger Google Sign-In
-      final GoogleSignInAccount? googleUser = await googleSignIn.signIn();
+      final GoogleSignInAccount? googleUser = await googleSignIn.authenticate();
 
       if (googleUser == null) {
         emit(const AuthState.authError(errorText: 'User canceled the sign-in'));
@@ -130,7 +130,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       final GoogleSignInAuthentication googleAuth =
           await googleUser.authentication;
       final AuthCredential credential = GoogleAuthProvider.credential(
-        accessToken: googleAuth.accessToken,
+        accessToken: googleAuth.idToken,
         idToken: googleAuth.idToken,
       );
 
@@ -273,33 +273,34 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     }
   }
 
-  Future<void> linkGoogleAccount() async {
-    //TODO implement it
-    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
-    final GoogleSignInAuthentication googleAuth =
-        await googleUser!.authentication;
+//TODO implement linking
+  // Future<void> linkGoogleAccount() async {
+  //   //TODO implement it
+  //   final GoogleSignInAccount? googleUser = GoogleSignIn.instance;
+  //   final GoogleSignInAuthentication googleAuth =
+  //       await googleUser!.authentication;
 
-    final googleCredential = GoogleAuthProvider.credential(
-      accessToken: googleAuth.accessToken,
-      idToken: googleAuth.idToken,
-    );
+  //   final googleCredential = GoogleAuthProvider.credential(
+  //     accessToken: googleAuth.idToken,
+  //     idToken: googleAuth.idToken,
+  //   );
 
-    try {
-      await FirebaseAuth.instance.currentUser!
-          .linkWithCredential(googleCredential);
+  //   try {
+  //     await FirebaseAuth.instance.currentUser!
+  //         .linkWithCredential(googleCredential);
 
-      await firestore
-          .collection('users')
-          .doc(FirebaseAuth.instance.currentUser!.uid)
-          .update({
-        "authProvider": "google",
-        "googleId": googleUser.id,
-        "linkedAccounts": FieldValue.arrayUnion(["google"])
-      });
-    } catch (e) {
-      _log("Failed to link Google account: $e");
-    }
-  }
+  //     await firestore
+  //         .collection('users')
+  //         .doc(FirebaseAuth.instance.currentUser!.uid)
+  //         .update({
+  //       "authProvider": "google",
+  //       "googleId": googleUser.id,
+  //       "linkedAccounts": FieldValue.arrayUnion(["google"])
+  //     });
+  //   } catch (e) {
+  //     _log("Failed to link Google account: $e");
+  //   }
+  // }
 
   _deleteUser(DeleteUserEvent event, Emitter<AuthState> emit) async {
     emit(const AuthState.loading());

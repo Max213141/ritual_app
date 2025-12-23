@@ -25,13 +25,13 @@ class _MemoryPageViewScreenState extends State<MemoryPageViewScreen> {
 
   @override
   void initState() {
-    if (kIsWeb) {
-      BlocProvider.of<MemoryDeskBloc>(context).add(
-        LoadMemoryDesk(
-          memoryDeskId: widget.id,
-        ),
-      );
-    }
+    // if (kIsWeb) {
+    //   BlocProvider.of<MemoryDeskBloc>(context).add(
+    //     LoadMemoryDesk(
+    //       memoryDeskId: widget.id,
+    //     ),
+    //   );
+    // }
 
     super.initState();
   }
@@ -41,41 +41,41 @@ class _MemoryPageViewScreenState extends State<MemoryPageViewScreen> {
   Widget build(BuildContext context) {
     final l10n = l10nOf(context);
     return Scaffold(
-      appBar: kIsWeb
-          ? AppBar(
-              leading: IconButton(
-                icon: Icon(Icons.arrow_back, color: Colors.grey[600]),
-                onPressed: () => GoRouter.of(context).pop(),
+      appBar:
+          // kIsWeb ?
+          AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Colors.grey[600]),
+          onPressed: () => GoRouter.of(context).pop(),
+        ),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.edit, color: Colors.grey),
+            onPressed: () {
+              // Navigate to the  creation screen, passing our MemoryDesk:
+              GoRouter.of(context).go(
+                '/home/mp_creation',
+                extra: {
+                  'memoryPageData': widget.memoryDesk,
+                  'id': widget.id,
+                  'isEditing': true,
+                },
+              );
+            },
+          ),
+          IconButton(
+            icon: const Icon(Icons.delete_forever, color: Colors.redAccent),
+            onPressed: () => showDialog(
+              context: context,
+              builder: (context) => DeletionConfirmDialog(
+                memoryDesk: widget.memoryDesk!,
+                deskId: widget.id,
               ),
-              actions: [
-                IconButton(
-                  icon: const Icon(Icons.edit, color: Colors.grey),
-                  onPressed: () {
-                    // Navigate to the  creation screen, passing our MemoryDesk:
-                    GoRouter.of(context).go(
-                      '/home/mp_creation',
-                      extra: {
-                        'memoryPageData': widget.memoryDesk,
-                        'id': widget.id,
-                        'isEditing': true,
-                      },
-                    );
-                  },
-                ),
-                IconButton(
-                  icon:
-                      const Icon(Icons.delete_forever, color: Colors.redAccent),
-                  onPressed: () => showDialog(
-                    context: context,
-                    builder: (context) => DeletionConfirmDialog(
-                      memoryDesk: widget.memoryDesk!,
-                      deskId: widget.id,
-                    ),
-                  ),
-                ),
-              ],
-            )
-          : null,
+            ),
+          ),
+        ],
+      ),
+      // : null,
       body: BlocConsumer<MemoryDeskBloc, MemoryDeskState>(
         listener: (context, state) {
           if (state is DeletionSuccess) {

@@ -7,7 +7,7 @@ class PlanSelectionScreen extends StatefulWidget {
   const PlanSelectionScreen({super.key});
 
   @override
-  _PlanSelectionScreenState createState() => _PlanSelectionScreenState();
+  State<PlanSelectionScreen> createState() => _PlanSelectionScreenState();
 }
 
 class _PlanSelectionScreenState extends State<PlanSelectionScreen> {

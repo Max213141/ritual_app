@@ -2,7 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:ritual_app/entities/entities.dart';
-import 'package:ritual_app/utils/utils.dart';
+import 'package:ritual_app/utils/localization/app_localizations.dart';
 
 class CircleAvatarWidget extends StatefulWidget {
   final AppLocalizations l10n;

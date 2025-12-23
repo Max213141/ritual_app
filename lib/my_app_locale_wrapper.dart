@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:ritual_app/blocs/blocs.dart';
+import 'package:ritual_app/utils/localization/app_localizations.dart';
 
 import 'utils/utils.dart';
 
@@ -37,6 +38,7 @@ class MyAppWrapper extends StatelessWidget {
             GlobalWidgetsLocalizations.delegate,
             GlobalCupertinoLocalizations.delegate,
           ],
+          debugShowCheckedModeBanner: false,
 
           supportedLocales: AppConfig.supportedLocales,
           locale: locale,

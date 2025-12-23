@@ -12,18 +12,6 @@ abstract class AppConfig {
     Locale('pl'),
   ];
 
-  // static const allowedStatuses = [
-  //   '😁',
-  //   '🙂',
-  //   '💩',
-  //   '😐',
-  //   '🫤',
-  //   '😵',
-  //   '🥺',
-  //   '😭',
-  //   '😴',
-  // ];
-
   // /// each half of an hour
   // static const int intervalsPerDay = (60 * 24) ~/ minutesPerInterval;
   // static const int minutesPerInterval = 30;

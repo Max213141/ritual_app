@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:ritual_app/entities/entities.dart';
 import 'package:ritual_app/screens/memory_desk_view_screen/widgets/widgets.dart';
 import 'package:ritual_app/screens/memory_page_preview_screen/widgets/circle_border.dart';
+import 'package:ritual_app/utils/localization/app_localizations.dart';
 import 'package:ritual_app/utils/utils.dart';
 
 class MemoryDeskViewBody extends StatefulWidget {

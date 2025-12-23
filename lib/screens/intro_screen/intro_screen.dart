@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intro_slider/intro_slider.dart';
 import 'package:ritual_app/screens/intro_screen/widgets/widgets.dart';
+import 'package:ritual_app/utils/localization/app_localizations.dart';
 import 'package:ritual_app/utils/utils.dart';
 
 class IntroScreen extends StatefulWidget {
