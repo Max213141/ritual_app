@@ -43,7 +43,7 @@ class _IntroScreenState extends State<IntroScreen> {
               width: 13,
               height: 13,
               decoration: BoxDecoration(
-                color: Theme.of(context).primaryColorDark,
+                color: Theme.of(context).secondaryHeaderColor,
                 shape: BoxShape.circle,
               ),
             ),

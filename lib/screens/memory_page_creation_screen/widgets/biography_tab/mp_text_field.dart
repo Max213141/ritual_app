@@ -8,6 +8,7 @@ class MPTextField extends StatelessWidget {
   final bool isDateInput;
   final TextEditingController controller;
   final bool obscureText;
+  final int? maxSignAmount;
 
   const MPTextField({
     super.key,
@@ -17,6 +18,7 @@ class MPTextField extends StatelessWidget {
     this.hintText,
     this.isDateInput = false,
     this.obscureText = false,
+    this.maxSignAmount
   });
 
   @override
@@ -48,7 +50,7 @@ class MPTextField extends StatelessWidget {
         maxLines: maxLines,
         style: const TextStyle(color: Colors.white),
         keyboardType: isDateInput ? TextInputType.number : TextInputType.text,
-        // maxLength: isDateInput ? 10 : null,
+        maxLength: maxSignAmount,
         inputFormatters: isDateInput
             ? [
                 FilteringTextInputFormatter.digitsOnly,

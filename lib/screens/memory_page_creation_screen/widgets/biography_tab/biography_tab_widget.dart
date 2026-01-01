@@ -143,11 +143,13 @@ class _BiographyTabWidgetState extends State<BiographyTabWidget>
                 controller: _controllers['epitaphy']!,
                 label: widget.l10n.mdScreenEpitaphy,
                 hintText: widget.l10n.mdScreenEpitaphyHint,
+                maxSignAmount: 50
               ),
               MPTextField(
                 controller: _controllers['biography']!,
                 label: widget.l10n.mdScreenBiography,
                 maxLines: 4,
+                maxSignAmount: 350,
               ),
               const SizedBox(height: 16),
               Row(
