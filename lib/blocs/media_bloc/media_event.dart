@@ -5,8 +5,8 @@ class MediaEvent with _$MediaEvent {
   const factory MediaEvent.uploadMedia({
     required String filePath,
     required File file,
-    StreamController<double>?
-        progressController, //TODO make sure that its works
+    //TODO make sure that its works
+    StreamController<double>? progressController,
   }) = UploadMedia;
 
   const factory MediaEvent.getMedia({

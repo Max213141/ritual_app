@@ -107,15 +107,19 @@ class _MemoryDeskCreationScreenState extends State<MemoryDeskCreationScreen>
   Widget build(BuildContext context) {
     final l10n = l10nOf(context);
 
-    final double screenHeight = MediaQuery.of(context).size.height;
+    final double screenHeight = MediaQuery.sizeOf(context).height;
     final Color backgroundColor = Theme.of(context).scaffoldBackgroundColor;
+    final textTheme = Theme.of(context).textTheme;
 
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
         title: Text(
           widget.isEditing ? l10n.mdScreenEditing : l10n.mdScreenCreation,
-          style: const TextStyle(color: Colors.black),
+          style: TextStyle(
+            fontSize: textTheme.headlineSmall!.fontSize,
+            color: Colors.black,
+          ),
         ),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
