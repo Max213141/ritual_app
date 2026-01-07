@@ -226,7 +226,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get mdScreenCreation => 'Создание страницы';
 
   @override
-  String get mdScreenEditing => 'Редактирование страницы';
+  String get mdScreenEditing => 'Редактирование';
 
   @override
   String get mdScreenDeskCreated => 'Доска памяти создана.';

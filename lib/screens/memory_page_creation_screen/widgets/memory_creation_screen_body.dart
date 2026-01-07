@@ -88,18 +88,24 @@ class MemoryCreationScreenBody extends StatelessWidget {
         ),
         const SizedBox(height: 8),
         if (!isEditing)
-          Center(
-            child: TextButton(
-              onPressed: () {
-                GoRouter.of(context).go(
-                  '/home/mp_creation/mp_preview_screen',
-                  extra: {
-                    'memoryPageData': memoryPageData,
-                    'mediaData': mediaData,
-                  },
-                );
-              },
-              child: Text(l10n.mdScreenPreview),
+          Padding(
+            padding: const EdgeInsets.only(bottom: 10.0),
+            child: Center(
+              child: TextButton(
+                onPressed: () {
+                  GoRouter.of(context).go(
+                    '/home/mp_creation/mp_preview_screen',
+                    extra: {
+                      'memoryPageData': memoryPageData,
+                      'mediaData': mediaData,
+                    },
+                  );
+                },
+                child: Text(
+                  l10n.mdScreenPreview,
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                ),
+              ),
             ),
           ),
       ],

@@ -31,7 +31,7 @@ class _BiographyTabWidgetState extends State<BiographyTabWidget>
   final Map<String, TextEditingController> _controllers = {};
   String _passwordCode = '';
 
-  bool _isPrivate = false;
+  bool _isPrivate = true;
 
   @override
   void initState() {
@@ -94,89 +94,89 @@ class _BiographyTabWidgetState extends State<BiographyTabWidget>
   @override
   Widget build(BuildContext context) {
     super.build(context);
+    var children = [
+      CircleAvatarWidget(
+        l10n: widget.l10n,
+        profileData: widget.profileData,
+        onProfileDataChanged: widget.onProfileDataChanged,
+      ),
+      const SizedBox(height: 16),
+      MPTextField(
+        controller: _controllers['lastName']!,
+        label: widget.l10n.mdScreenSecondName,
+      ),
+      MPTextField(
+        controller: _controllers['firstName']!,
+        label: widget.l10n.mdScreenFirstName,
+      ),
+      MPTextField(
+        controller: _controllers['middleName']!,
+        label: widget.l10n.mdScreenThirdName,
+      ),
+      Row(
+        children: [
+          Flexible(
+            child: MPTextField(
+              controller: _controllers['dateOfBirth']!,
+              label: widget.l10n.mdScreenBirthDate,
+              isDateInput: true,
+            ),
+          ),
+          const SizedBox(width: 8),
+          Flexible(
+            child: MPTextField(
+              controller: _controllers['dateOfDeath']!,
+              label: widget.l10n.mdScreenDeathDate,
+              isDateInput: true,
+            ),
+          ),
+        ],
+      ),
+      const SizedBox(height: 16),
+      MPTextField(
+          controller: _controllers['epitaphy']!,
+          label: widget.l10n.mdScreenEpitaphy,
+          hintText: widget.l10n.mdScreenEpitaphyHint,
+          maxSignAmount: 50),
+      MPTextField(
+        controller: _controllers['biography']!,
+        label: widget.l10n.mdScreenBiography,
+        maxLines: 4,
+        maxSignAmount: 350,
+      ),
+      const SizedBox(height: 8),
+      Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(widget.l10n.mdScreenPrivatePage, style: TextStyle(fontSize: 18)),
+          Switch(
+            value: _isPrivate,
+            onChanged: (value) {
+              setState(() {
+                _isPrivate = value;
+                _updateProfileData();
+              });
+            },
+          ),
+        ],
+      ),
+      SizedBox(height: 12),
+      if (_isPrivate)
+        PasswordFieldWidget(
+          l10n: widget.l10n,
+          onPasswordChanged: (value) {
+            _passwordCode = value;
+            _updateProfileData();
+          },
+        ),
+    ];
     return Form(
       key: widget.formKey,
       child: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 8),
           child: Column(
-            children: [
-              CircleAvatarWidget(
-                l10n: widget.l10n,
-                profileData: widget.profileData,
-                onProfileDataChanged: widget.onProfileDataChanged,
-              ),
-              const SizedBox(height: 16),
-              MPTextField(
-                controller: _controllers['lastName']!,
-                label: widget.l10n.mdScreenSecondName,
-              ),
-              MPTextField(
-                controller: _controllers['firstName']!,
-                label: widget.l10n.mdScreenFirstName,
-              ),
-              MPTextField(
-                controller: _controllers['middleName']!,
-                label: widget.l10n.mdScreenThirdName,
-              ),
-              Row(
-                children: [
-                  Flexible(
-                    child: MPTextField(
-                      controller: _controllers['dateOfBirth']!,
-                      label: widget.l10n.mdScreenBirthDate,
-                      isDateInput: true,
-                    ),
-                  ),
-                  const SizedBox(width: 8),
-                  Flexible(
-                    child: MPTextField(
-                      controller: _controllers['dateOfDeath']!,
-                      label: widget.l10n.mdScreenDeathDate,
-                      isDateInput: true,
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 16),
-              MPTextField(
-                controller: _controllers['epitaphy']!,
-                label: widget.l10n.mdScreenEpitaphy,
-                hintText: widget.l10n.mdScreenEpitaphyHint,
-                maxSignAmount: 50
-              ),
-              MPTextField(
-                controller: _controllers['biography']!,
-                label: widget.l10n.mdScreenBiography,
-                maxLines: 4,
-                maxSignAmount: 350,
-              ),
-              const SizedBox(height: 16),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(widget.l10n.mdScreenPrivatePage),
-                  Switch(
-                    value: _isPrivate,
-                    onChanged: (value) {
-                      setState(() {
-                        _isPrivate = value;
-                        _updateProfileData();
-                      });
-                    },
-                  ),
-                ],
-              ),
-              SizedBox(height: 12),
-              // if (_isPrivate)
-              //   PasswordFieldWidget(
-              //     l10n: widget.l10n,
-              //     onPasswordChanged: (value) {
-              //       _passwordCode = value;
-              //       _updateProfileData();
-              //     },
-              //   ),
-            ],
+            children: children,
           ),
         ),
       ),

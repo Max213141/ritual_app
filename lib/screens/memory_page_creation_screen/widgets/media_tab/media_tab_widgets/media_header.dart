@@ -19,7 +19,7 @@ class MediaHeader extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
-          '$title (${existingCount + newCount})',
+          '$title (${existingCount + newCount}/5)',
           style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
         ),
         IconButton(

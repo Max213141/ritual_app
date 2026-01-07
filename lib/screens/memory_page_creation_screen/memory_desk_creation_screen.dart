@@ -60,7 +60,7 @@ class _MemoryDeskCreationScreenState extends State<MemoryDeskCreationScreen>
         photoUrl: '',
         photoUrls: [],
         videoUrls: [],
-        isPrivate: false,
+        isPrivate: true,
         password: '',
         ownerId: '',
       );
@@ -114,22 +114,28 @@ class _MemoryDeskCreationScreenState extends State<MemoryDeskCreationScreen>
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text(
-          widget.isEditing ? l10n.mdScreenEditing : l10n.mdScreenCreation,
-          style: TextStyle(
-            fontSize: textTheme.headlineSmall!.fontSize,
-            color: Colors.black,
-          ),
-        ),
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          color: Colors.black,
-          onPressed: () {
-            GoRouter.of(context).pop();
-            if (widget.isEditing) {
-              context.read<MemoryDeskBloc>().add(const GetMemoryDesks());
-            }
-          },
+        automaticallyImplyLeading: false,
+        titleSpacing: 0,
+        title: Row(
+          children: [
+            IconButton(
+              icon: const Icon(Icons.arrow_back),
+              color: Colors.black,
+              onPressed: () {
+                GoRouter.of(context).pop();
+                if (widget.isEditing) {
+                  context.read<MemoryDeskBloc>().add(const GetMemoryDesks());
+                }
+              },
+            ),
+            Text(
+              widget.isEditing ? l10n.mdScreenEditing : l10n.mdScreenCreation,
+              style: TextStyle(
+                fontSize: textTheme.headlineSmall!.fontSize,
+                color: Colors.black,
+              ),
+            )
+          ],
         ),
         backgroundColor: Colors.transparent,
         elevation: 0,

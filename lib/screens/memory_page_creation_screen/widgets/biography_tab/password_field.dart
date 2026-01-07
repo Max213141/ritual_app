@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:ritual_app/utils/localization/app_localizations.dart';
 
@@ -48,62 +50,62 @@ class _PasswordFieldWidgetState extends State<PasswordFieldWidget> {
   Widget build(BuildContext context) {
     final color = Theme.of(context).primaryColor;
 
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 25.0),
-      child: ConstrainedBox(
-        constraints: BoxConstraints(
-          maxHeight: 120,
-          minHeight: 90,
-        ),
-        child: Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: EdgeInsets.symmetric(vertical: 15),
-                child: Text(widget.l10n.mdScreenPrivatePageInfo),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: List.generate(4, (index) {
-                  return SizedBox(
-                    width: 55,
-                    height: 65,
-                    child: TextFormField(
-                      controller: _controllers[index],
-                      focusNode: _focusNodes[index],
-                      keyboardType: TextInputType.number,
-                      obscureText: true,
-                      maxLength: 1,
-                      textAlign: TextAlign.center,
-                      decoration: InputDecoration(
-                        filled: false,
-                        contentPadding:
-                            const EdgeInsets.symmetric(vertical: 10),
-                        counterText: '',
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                          borderSide: BorderSide(
-                            color: color,
-                            width: 4,
-                          ),
-                        ),
-                        // focusedBorder: OutlineInputBorder(
-                        //   borderRadius: BorderRadius.circular(12),
-                        //   borderSide: BorderSide(
-                        //     color: Theme.of(context).primaryColor,
-                        //     width: 1.5,
-                        //   ),
-                        // ),
-                      ),
-                      onChanged: (value) => _nextField(value, index),
-                    ),
-                  );
-                }),
-              ),
-            ],
+    return ConstrainedBox(
+      constraints: BoxConstraints(
+        maxHeight: 150,
+        // minHeight: 90,
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            widget.l10n.mdScreenPrivatePageInfo,
+            textAlign: TextAlign.start,
+            style: TextStyle(fontSize: 18),
           ),
-        ),
+          Padding(
+            padding: const EdgeInsets.only(top: 20),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: List.generate(4, (index) {
+                return SizedBox(
+                  width: 70,
+                  height: 90,
+                  child: TextFormField(
+                    controller: _controllers[index],
+                    focusNode: _focusNodes[index],
+                    keyboardType: TextInputType.number,
+                    obscureText: true,
+                    maxLength: 1,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 25),
+                    decoration: InputDecoration(
+                      filled: false,
+                      isDense: true,
+                      contentPadding: const EdgeInsets.symmetric(vertical: 25),
+                      counterText: '',
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                        borderSide: BorderSide(
+                          color: color,
+                          width: 10,
+                        ),
+                      ),
+                      // focusedBorder: OutlineInputBorder(
+                      //   borderRadius: BorderRadius.circular(12),
+                      //   borderSide: BorderSide(
+                      //     color: Theme.of(context).primaryColor,
+                      //     width: 1.5,
+                      //   ),
+                      // ),
+                    ),
+                    onChanged: (value) => _nextField(value, index),
+                  ),
+                );
+              }),
+            ),
+          ),
+        ],
       ),
     );
   }

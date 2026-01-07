@@ -50,39 +50,42 @@ class _CircleAvatarWidgetState extends State<CircleAvatarWidget> {
 
     return GestureDetector(
       onTap: pickImage,
-      child: Column(
-        children: [
-          CircleAvatar(
-            radius: 54,
-            backgroundColor: Colors.grey[300],
-            backgroundImage:
-                displayImage is ImageProvider ? displayImage : null,
-            child: displayImage == null
-                ? Icon(
-                    Icons.file_upload_outlined,
-                    size: 50,
-                    color: iconColor,
-                  )
-                : null,
-          ),
-          const SizedBox(height: 8),
-          Text(
-            widget.l10n.mdScreenAddPhoto,
-            style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 22,
-                ),
-          )
-          // SizedBox(
-          //   height: 45,
-          //   width: size / 2.5,
-          //   child: ActionButton(
-          //     buttonColor: const Color(0xFF303030).withValues(alpha: .8),
-          //     onPressed: pickImage,
-          //     title: 'Загрузить фото',
-          //   ),
-          // ),
-        ],
+      child: Padding(
+        padding: const EdgeInsets.all(5.0),
+        child: Column(
+          children: [
+            CircleAvatar(
+              radius: 54,
+              backgroundColor: Colors.grey[300],
+              backgroundImage:
+                  displayImage is ImageProvider ? displayImage : null,
+              child: displayImage == null
+                  ? Icon(
+                      Icons.file_upload_outlined,
+                      size: 50,
+                      color: iconColor,
+                    )
+                  : null,
+            ),
+            const SizedBox(height: 8),
+            Text(
+              widget.l10n.mdScreenAddPhoto,
+              style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 22,
+                  ),
+            )
+            // SizedBox(
+            //   height: 45,
+            //   width: size / 2.5,
+            //   child: ActionButton(
+            //     buttonColor: const Color(0xFF303030).withValues(alpha: .8),
+            //     onPressed: pickImage,
+            //     title: 'Загрузить фото',
+            //   ),
+            // ),
+          ],
+        ),
       ),
     );
   }
