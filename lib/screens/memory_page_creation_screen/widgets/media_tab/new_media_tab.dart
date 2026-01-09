@@ -86,6 +86,7 @@ class _NewMediaTabWidgetState extends State<NewMediaTabWidget>
           const SizedBox(height: 8),
           PhotoGridWidget(
             media: _media,
+            addPhotos: _pickPhotos,
             onPhotoPick: (PhotoItem item) {
               setState(() {
                 if (item.isExisting) {

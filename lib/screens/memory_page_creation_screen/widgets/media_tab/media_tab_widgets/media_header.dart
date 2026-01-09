@@ -15,20 +15,9 @@ class MediaHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Text(
-          '$title (${existingCount + newCount}/5)',
-          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
-        ),
-        IconButton(
-          icon: Icon(
-            title == 'Photos' ? Icons.add_photo_alternate : Icons.videocam,
-          ),
-          onPressed: onAdd,
-        ),
-      ],
+    return Text(
+      '$title (${existingCount + newCount}/5)',
+      style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
     );
   }
 }
