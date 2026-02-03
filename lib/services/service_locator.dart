@@ -10,7 +10,7 @@ import 'package:get_it/get_it.dart';
 
 final getIt = GetIt.instance;
 
-setupServiceLocator({
+void setupServiceLocator({
   required FirebaseAuth auth,
   required Reference storageRef,
   required GoogleSignIn googleSignIn,
@@ -19,9 +19,7 @@ setupServiceLocator({
     PermissionHandlerPermissionService(),
   );
 
-  getIt.registerSingleton<MediaServiceInterface>(
-    MediaService(),
-  );
+  getIt.registerSingleton<MediaServiceInterface>(MediaService());
 
   getIt.registerLazySingleton<FirebaseFirestore>(
     () => FirebaseFirestore.instance,

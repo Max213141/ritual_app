@@ -2,17 +2,22 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:hive/hive.dart';
 import 'package:ritual_app/entities/entities.dart';
+import 'package:ritual_app/entities/hive_entities/hive_entities.dart';
 import 'package:ritual_app/firebase_options.dart';
 import 'package:ritual_app/ritual_app.dart';
 import 'package:ritual_app/services/service_locator.dart';
 import 'package:ritual_app/utils/svg_preloader.dart';
-// import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 void main() async {
   // debugPaintSizeEnabled = true;
-  WidgetsFlutterBinding.ensureInitialized();
+  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+
+  // Keep native splash visible during initialization
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
 
   await preloadSvgs(
     [
@@ -60,7 +65,28 @@ void main() async {
     googleSignIn: googleSignIn,
   );
 
-  HiveStore hiveStore = HiveStore();
+  final hiveStore = HiveStore();
+  await hiveStore.init();
+  final appPreferencesBox =
+      await Hive.openBox<AppPreferences>('app_preferences');
+  final userDataBox = await Hive.openBox<UserData>('user_data');
+
+  if (appPreferencesBox.isEmpty) {
+    await appPreferencesBox.add(AppPreferences.initial());
+  }
+  if (userDataBox.isEmpty) {
+    await userDataBox.add(UserData.initial());
+  }
+
+  final appPreferences = appPreferencesBox.getAt(0);
+  final bool isFirstLaunch = appPreferences?.isFirstLaunch ?? true;
+  if (isFirstLaunch && appPreferences != null) {
+    appPreferences.isFirstLaunch = false;
+    await appPreferences.save();
+  }
+
+  final String initialLocation =
+      isFirstLaunch ? '/intro' : '/initial_page';
 
   ///TODO splash_icon package need to be configured for iOS
   // WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
@@ -76,10 +102,13 @@ void main() async {
   runApp(
     RitualApp(
       auth: auth,
-      hiveStore: hiveStore,
       storageRef: storageRef,
       googleSignIn: googleSignIn,
+      initialLocation: initialLocation,
     ),
   );
   // }
+
+  // Remove native splash AFTER initialization completes
+  FlutterNativeSplash.remove();
 }

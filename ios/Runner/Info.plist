@@ -33,7 +33,7 @@
 		<key>UIMainStoryboardFile</key>
 		<string>Main</string>
 		<key>UIStatusBarHidden</key>
-		<false/>
+		<true/>
 		<key>UISupportedInterfaceOrientations</key>
 		<array>
 			<string>UIInterfaceOrientationPortrait</string>
@@ -51,5 +51,7 @@
 		<string>Please give access to your photo library</string>
 		<key>NSCameraUsageDescription</key>
 		<string>This app needs camera access to scan QR codes</string>
+		<key>UIViewControllerBasedStatusBarAppearance</key>
+		<false/>
 	</dict>
 </plist>

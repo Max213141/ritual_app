@@ -7,13 +7,12 @@ import 'package:ritual_app/blocs/blocs.dart';
 import 'package:ritual_app/screens/qr_scanner_screen/widgets/widgets.dart';
 import 'package:ritual_app/utils/utils.dart';
 
+// ignore: unused_element
 void _log(dynamic message) =>
     Logger.projectLog(message, name: 'qr_scanner_screen');
 
 class QrScanScreen extends StatefulWidget {
-  const QrScanScreen({
-    super.key,
-  });
+  const QrScanScreen({super.key});
 
   @override
   State<QrScanScreen> createState() => _QrScanScreenState();
@@ -63,9 +62,9 @@ class _QrScanScreenState extends State<QrScanScreen> {
       body: BlocConsumer<QrCamBloc, QrCamState>(
         listener: (context, state) {
           if (state is QrCamMemoryDeskLoaded) {
-            GoRouter.of(context).go(
-              '/home/md_view_screen/${state.memoryDeskId}',
-            );
+            GoRouter.of(
+              context,
+            ).go('/home/md_view_screen/${state.memoryDeskId}');
           }
         },
         builder: (context, state) {
@@ -74,10 +73,7 @@ class _QrScanScreenState extends State<QrScanScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Text(
-                  l10n.qrScannerScreenQuote,
-                  textAlign: TextAlign.center,
-                ),
+                Text(l10n.qrScannerScreenQuote, textAlign: TextAlign.center),
                 const SizedBox(height: 18),
                 DecoratedBox(
                   decoration: BoxDecoration(
@@ -96,9 +92,7 @@ class _QrScanScreenState extends State<QrScanScreen> {
                   ),
                 ),
                 const SizedBox(height: 50),
-                FlashButton(
-                  cameraController: _cameraController,
-                ),
+                FlashButton(cameraController: _cameraController),
               ],
             ),
           );
@@ -109,7 +103,8 @@ class _QrScanScreenState extends State<QrScanScreen> {
               child: Padding(
                 padding: const EdgeInsets.all(30.0),
                 child: Text(
-                    'Please grant your pemisson in your settings to use QR scanner'),
+                  'Please grant your pemisson in your settings to use QR scanner',
+                ),
               ),
             );
           }
@@ -140,8 +135,9 @@ class _QrScanScreenState extends State<QrScanScreen> {
       return;
     }
 
-    BlocProvider.of<QrCamBloc>(context)
-        .add(QrCamLoadMemoryDesk(memoryDeskId: id));
+    BlocProvider.of<QrCamBloc>(
+      context,
+    ).add(QrCamLoadMemoryDesk(memoryDeskId: id));
   }
 
   /// Returns the memoryDeskId from either:

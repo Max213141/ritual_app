@@ -1,14 +1,16 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:ritual_app/entities/entities.dart';
-import 'package:ritual_app/entities/project_entities/video_item.dart';
 import 'package:video_thumbnail/video_thumbnail.dart';
 
 class VideoGridWidget extends StatelessWidget {
   final Function(VideoItem) onVideoPick;
   final EditableMedia media;
-  const VideoGridWidget(
-      {super.key, required this.media, required this.onVideoPick});
+  const VideoGridWidget({
+    super.key,
+    required this.media,
+    required this.onVideoPick,
+  });
 
   @override
   Widget build(BuildContext context) {

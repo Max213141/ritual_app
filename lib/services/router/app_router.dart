@@ -6,16 +6,24 @@ import 'package:ritual_app/screens/memory_desk_view_screen/widgets/widgets.dart'
 import 'package:ritual_app/screens/screens.dart';
 import 'package:ritual_app/utils/utils.dart';
 
-GoRouter createAppRouter(FirebaseAuth auth) {
+GoRouter createAppRouter({
+  required FirebaseAuth auth,
+  required String initialLocation,
+}) {
   return GoRouter(
     debugLogDiagnostics: true,
     observers: [MyNavigatorObserver()],
     errorBuilder: (context, state) => const ErrorScreen(),
+    initialLocation: initialLocation,
     routes: [
       GoRoute(
-        name: 'initial_settings',
         path: '/',
-        builder: (context, state) => InitialHivePage(auth: auth),
+        redirect: (context, state) => initialLocation,
+      ),
+      GoRoute(
+        name: 'intro',
+        path: '/intro',
+        builder: (context, state) => const IntroScreen(),
       ),
       GoRoute(
         name: 'initial_page',

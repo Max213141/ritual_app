@@ -201,7 +201,9 @@ class MemoryDeskBloc extends Bloc<MemoryDeskEvent, MemoryDeskState> {
           file: File(event.memoryPage.localPhotoPath!),
         );
         if (newUrl != null) {
-          await storage.refFromURL(avatarUrl!).delete(); // delete old
+          if (avatarUrl != null && avatarUrl.isNotEmpty) {
+            await storage.refFromURL(avatarUrl).delete(); // delete old
+          }
           avatarUrl = newUrl;
         }
       }

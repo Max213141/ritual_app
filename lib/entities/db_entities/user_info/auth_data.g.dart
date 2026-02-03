@@ -7,35 +7,35 @@ part of 'auth_data.dart';
 // **************************************************************************
 
 AuthData _$AuthDataFromJson(Map<String, dynamic> json) => AuthData(
-      userId: json['userId'] as String,
-      email: json['email'] as String,
-      displayName: json['displayName'] as String,
-      profilePicUrl: json['profilePicUrl'] as String,
-      createdAt: DateTime.parse(json['createdAt'] as String),
-      authProvider: json['authProvider'] as String,
-      googleId: json['googleId'] as String?,
-      linkedAccounts: (json['linkedAccounts'] as List<dynamic>)
-          .map((e) => e as String)
-          .toList(),
-      memoryDesks: (json['memoryDesks'] as List<dynamic>)
-          .map((e) => e as String)
-          .toList(),
-      subscriptionLevel: json['subscriptionLevel'] as String,
-      photoLimit: (json['photoLimit'] as num).toInt(),
-      videoLimit: (json['videoLimit'] as num).toInt(),
-    );
+  userId: json['userId'] as String,
+  email: json['email'] as String,
+  displayName: json['displayName'] as String,
+  profilePicUrl: json['profilePicUrl'] as String,
+  createdAt: DateTime.parse(json['createdAt'] as String),
+  authProvider: json['authProvider'] as String,
+  googleId: json['googleId'] as String?,
+  linkedAccounts: (json['linkedAccounts'] as List<dynamic>)
+      .map((e) => e as String)
+      .toList(),
+  memoryDesks: (json['memoryDesks'] as List<dynamic>)
+      .map((e) => e as String)
+      .toList(),
+  subscriptionLevel: json['subscriptionLevel'] as String,
+  photoLimit: (json['photoLimit'] as num).toInt(),
+  videoLimit: (json['videoLimit'] as num).toInt(),
+);
 
 Map<String, dynamic> _$AuthDataToJson(AuthData instance) => <String, dynamic>{
-      'userId': instance.userId,
-      'email': instance.email,
-      'displayName': instance.displayName,
-      'profilePicUrl': instance.profilePicUrl,
-      'createdAt': instance.createdAt.toIso8601String(),
-      'authProvider': instance.authProvider,
-      'googleId': instance.googleId,
-      'linkedAccounts': instance.linkedAccounts,
-      'memoryDesks': instance.memoryDesks,
-      'subscriptionLevel': instance.subscriptionLevel,
-      'photoLimit': instance.photoLimit,
-      'videoLimit': instance.videoLimit,
-    };
+  'userId': instance.userId,
+  'email': instance.email,
+  'displayName': instance.displayName,
+  'profilePicUrl': instance.profilePicUrl,
+  'createdAt': instance.createdAt.toIso8601String(),
+  'authProvider': instance.authProvider,
+  'googleId': instance.googleId,
+  'linkedAccounts': instance.linkedAccounts,
+  'memoryDesks': instance.memoryDesks,
+  'subscriptionLevel': instance.subscriptionLevel,
+  'photoLimit': instance.photoLimit,
+  'videoLimit': instance.videoLimit,
+};

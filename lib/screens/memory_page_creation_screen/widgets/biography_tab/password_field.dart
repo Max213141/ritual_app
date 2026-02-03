@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:ritual_app/utils/localization/app_localizations.dart';
 
@@ -19,8 +17,10 @@ class PasswordFieldWidget extends StatefulWidget {
 
 class _PasswordFieldWidgetState extends State<PasswordFieldWidget> {
   final List<FocusNode> _focusNodes = List.generate(4, (_) => FocusNode());
-  final List<TextEditingController> _controllers =
-      List.generate(4, (_) => TextEditingController());
+  final List<TextEditingController> _controllers = List.generate(
+    4,
+    (_) => TextEditingController(),
+  );
 
   @override
   void dispose() {
@@ -86,10 +86,7 @@ class _PasswordFieldWidgetState extends State<PasswordFieldWidget> {
                       counterText: '',
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(12),
-                        borderSide: BorderSide(
-                          color: color,
-                          width: 10,
-                        ),
+                        borderSide: BorderSide(color: color, width: 10),
                       ),
                       // focusedBorder: OutlineInputBorder(
                       //   borderRadius: BorderRadius.circular(12),

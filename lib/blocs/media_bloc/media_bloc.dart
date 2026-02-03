@@ -17,19 +17,19 @@ class MediaBloc extends Bloc<MediaEvent, MediaState> {
   final Reference media;
 
   MediaBloc({required this.media}) : super(const _Initial()) {
-    on<MediaEvent>(
-      (events, emit) async {
-        await events.map(
-          getMedia: (event) async => await _getMedia(event, emit),
-          uploadMedia: (event) async => await _uploadMedia(event, emit),
-          deleteMedia: (event) async => await _deleteMedia(event, emit),
-        );
-      },
-    );
+    on<MediaEvent>((events, emit) async {
+      await events.map(
+        getMedia: (event) async => await _getMedia(event, emit),
+        uploadMedia: (event) async => await _uploadMedia(event, emit),
+        deleteMedia: (event) async => await _deleteMedia(event, emit),
+      );
+    });
   }
 
   Future<String> _uploadMedia(
-      UploadMedia event, Emitter<MediaState> emit) async {
+    UploadMedia event,
+    Emitter<MediaState> emit,
+  ) async {
     firebase_storage.Reference ref = media.child(event.filePath);
     firebase_storage.UploadTask uploadTask = ref.putFile(event.file);
 
@@ -51,6 +51,9 @@ class MediaBloc extends Bloc<MediaEvent, MediaState> {
     }
   }
 
-  _getMedia(GetMedia event, Emitter<MediaState> emit) async {}
-  _deleteMedia(DeleteMedia event, Emitter<MediaState> emit) async {}
+  Future<void> _getMedia(GetMedia event, Emitter<MediaState> emit) async {}
+  Future<void> _deleteMedia(
+    DeleteMedia event,
+    Emitter<MediaState> emit,
+  ) async {}
 }

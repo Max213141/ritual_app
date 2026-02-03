@@ -1,0 +1,12 @@
+flutter_native_splash:
+  # Basic configuration (all platforms except Android 12+).
+  color: "#FFFFFF"
+  image: assets/splash/memento_splash.png
+  fullscreen: true
+  web: false
+
+  # Android 12+ configuration.
+  android_12:
+    color: "#FFFFFF"
+    image: assets/splash/memento_splash.png
+    icon_background_color: "#FFFFFF"

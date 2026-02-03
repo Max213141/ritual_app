@@ -32,10 +32,7 @@ class RitualWebApp extends StatelessWidget {
       errorBuilder: (context, state) => const ErrorScreen(),
       routes: [
         /// 1) Catch “/” and send it to “/1q82W5…”:
-        GoRoute(
-          path: '/',
-          redirect: (_, __) => '/$initialDeskId',
-        ),
+        GoRoute(path: '/', redirect: (_, _) => '/$initialDeskId'),
         GoRoute(
           path: '/:id',
           name: 'md_view',
@@ -47,16 +44,14 @@ class RitualWebApp extends StatelessWidget {
             GoRoute(
               path: 'image',
               name: 'view_image',
-              builder: (context, state) => FullScreenImage.network(
-                state.extra as String,
-              ),
+              builder: (context, state) =>
+                  FullScreenImage.network(state.extra as String),
             ),
             GoRoute(
               path: 'video',
               name: 'view_video',
-              builder: (context, state) => VideoPlayerScreen(
-                videoUrl: state.extra as String,
-              ),
+              builder: (context, state) =>
+                  VideoPlayerScreen(videoUrl: state.extra as String),
             ),
           ],
         ),
@@ -72,9 +67,7 @@ class RitualWebApp extends StatelessWidget {
             mediaService: getIt<MediaServiceInterface>(),
           ),
         ),
-        BlocProvider<MediaBloc>(
-          create: (_) => MediaBloc(media: storageRef),
-        ),
+        BlocProvider<MediaBloc>(create: (_) => MediaBloc(media: storageRef)),
       ],
       child: MaterialApp.router(
         routerConfig: router,

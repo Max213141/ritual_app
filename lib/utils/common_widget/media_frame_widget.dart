@@ -32,7 +32,8 @@ class MediaPickerFrameWidget extends StatelessWidget {
         // Tapping the frame now prefers onTap; fallback to onPressed
         Positioned.fill(
           child: GestureDetector(
-            onTap: onTap ??
+            onTap:
+                onTap ??
                 () async {
                   if (onPressed != null) await onPressed!();
                 },
@@ -46,12 +47,12 @@ class MediaPickerFrameWidget extends StatelessWidget {
                 child: videoThumbnail != null
                     ? Image.memory(videoThumbnail!, fit: BoxFit.cover)
                     : (imagePath != null
-                        ? Image.file(File(imagePath!), fit: BoxFit.cover)
-                        : Center(
-                            child: icon == null
-                                ? const SizedBox()
-                                : RitualAppSvgPicture(picture: icon!),
-                          )),
+                          ? Image.file(File(imagePath!), fit: BoxFit.cover)
+                          : Center(
+                              child: icon == null
+                                  ? const SizedBox()
+                                  : RitualAppSvgPicture(picture: icon!),
+                            )),
               ),
             ),
           ),
@@ -64,7 +65,7 @@ class MediaPickerFrameWidget extends StatelessWidget {
             child: IconButton(
               icon: DecoratedBox(
                 decoration: BoxDecoration(
-                  color: Colors.black.withOpacity(.5),
+                  color: Colors.black.withValues(alpha: .5),
                   shape: BoxShape.circle,
                 ),
                 child: const Icon(Icons.close, size: 14, color: Colors.white),

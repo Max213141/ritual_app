@@ -22,24 +22,19 @@ class _MPDatePickerState extends State<MPDatePicker> {
             ? DateFormat('MM/dd/yyyy').format(selectedDate!)
             : 'mm/dd/yyyy',
         filled: true,
-        fillColor: const Color(0xFF303030).withOpacity(.8),
+        fillColor: const Color(0xFF303030).withValues(alpha: .8),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
           borderSide: BorderSide.none,
         ),
         hintStyle: const TextStyle(fontSize: 12),
-        labelStyle: TextStyle(
-          color: Colors.grey[400],
-        ),
+        labelStyle: TextStyle(color: Colors.grey[400]),
         floatingLabelBehavior: FloatingLabelBehavior.always,
         contentPadding: const EdgeInsets.symmetric(
           horizontal: 16,
           vertical: 20,
         ),
-        prefixIcon: const Icon(
-          Icons.calendar_today,
-          color: Colors.white,
-        ),
+        prefixIcon: const Icon(Icons.calendar_today, color: Colors.white),
       ),
       readOnly: true,
       onTap: () async {

@@ -23,7 +23,6 @@ class _AuthForgotPasswordScreenState extends State<AuthForgotPasswordScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return BlocListener<AuthBloc, AuthState>(
       listener: (context, state) {
         state.whenOrNull(
@@ -37,9 +36,7 @@ class _AuthForgotPasswordScreenState extends State<AuthForgotPasswordScreen> {
             showDialog(
               context: context,
               builder: (BuildContext context) {
-                return ResetSuccessDialogWidget(
-                  email: email,
-                );
+                return ResetSuccessDialogWidget(email: email);
               },
             );
           },
@@ -50,9 +47,7 @@ class _AuthForgotPasswordScreenState extends State<AuthForgotPasswordScreen> {
             showDialog(
               context: context,
               builder: (BuildContext context) {
-                return ErrorDialogWidget(
-                  message: errorText,
-                );
+                return ErrorDialogWidget(message: errorText);
               },
             );
           },

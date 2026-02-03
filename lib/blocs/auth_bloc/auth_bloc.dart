@@ -38,18 +38,24 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     });
   }
 
-  _createUser(CreateUserEvent event, Emitter<AuthState> emit) async {
+  Future<void> _createUser(
+    CreateUserEvent event,
+    Emitter<AuthState> emit,
+  ) async {
     emit(const AuthState.loading());
 
     try {
       //  Check if a user with this email already exists
-      final signInMethods = await auth.isSignInWithEmailLink(event.email);
+      final signInMethods = auth.isSignInWithEmailLink(event.email);
 
       if (signInMethods) {
         //  User already registered with Google, prompt them to log in via Google
-        emit(AuthState.authError(
+        emit(
+          AuthState.authError(
             errorText:
-                'This email is already linked to a Google account. Please sign in with Google.'));
+                'This email is already linked to a Google account. Please sign in with Google.',
+          ),
+        );
         return;
       }
 
@@ -64,9 +70,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       final uid = userCredential.user?.uid;
       if (uid == null) {
         emit(
-          const AuthState.authError(
-            errorText: 'Ошибка создания пользователя',
-          ),
+          const AuthState.authError(errorText: 'Ошибка создания пользователя'),
         );
         return;
       }
@@ -77,7 +81,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       final newUser = AuthData(
         userId: uid,
         email: event.email,
-        displayName: event.username ??
+        displayName:
+            event.username ??
             'User', //TODO create input field for user_name Default name if not provided
         profilePicUrl: '', // Default empty profile picture
         createdAt: DateTime.now(),
@@ -101,12 +106,14 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       if (e.code == 'weak-password') {
         emit(const AuthState.authError(errorText: 'Пароль слишком слабый.'));
       } else if (e.code == 'email-already-in-use') {
-        emit(const AuthState.authError(
-            errorText: 'Этот email уже используется.'));
+        emit(
+          const AuthState.authError(errorText: 'Этот email уже используется.'),
+        );
       } else {
         _log('USER CREATION AUTH EXCEPTION: $e');
-        emit(AuthState.authError(
-            errorText: 'Ошибка при создании пользователя.'));
+        emit(
+          AuthState.authError(errorText: 'Ошибка при создании пользователя.'),
+        );
       }
     } catch (e) {
       emit(AuthState.authError(errorText: 'Ошибка: $e'));
@@ -114,29 +121,32 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     }
   }
 
-  _signInWithGoogle(SignInWithGoogle event, Emitter<AuthState> emit) async {
+  Future<void> _signInWithGoogle(
+    SignInWithGoogle event,
+    Emitter<AuthState> emit,
+  ) async {
     emit(const AuthState.loading());
 
     try {
       // Trigger Google Sign-In
-      final GoogleSignInAccount? googleUser = await googleSignIn.authenticate();
+      final GoogleSignInAccount googleUser = await googleSignIn.authenticate();
 
-      if (googleUser == null) {
-        emit(const AuthState.authError(errorText: 'User canceled the sign-in'));
-        return;
-      }
+      // if (googleUser == null) {
+      //   emit(const AuthState.authError(errorText: 'User canceled the sign-in'));
+      //   return;
+      // }
 
       // Get authentication credentials
-      final GoogleSignInAuthentication googleAuth =
-          await googleUser.authentication;
+      final GoogleSignInAuthentication googleAuth = googleUser.authentication;
       final AuthCredential credential = GoogleAuthProvider.credential(
         accessToken: googleAuth.idToken,
         idToken: googleAuth.idToken,
       );
 
       // Sign in with Firebase
-      final UserCredential userCredential =
-          await auth.signInWithCredential(credential);
+      final UserCredential userCredential = await auth.signInWithCredential(
+        credential,
+      );
       final String uid = userCredential.user!.uid;
       final String email = googleUser.email;
       final String displayName = googleUser.displayName ?? '';
@@ -152,8 +162,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       if (userDoc.exists) {
         // 🔹 User exists, update `linkedAccounts` if needed
         final existingData = userDoc.data()!;
-        final List<String> linkedAccounts =
-            List<String>.from(existingData['linkedAccounts'] ?? []);
+        final List<String> linkedAccounts = List<String>.from(
+          existingData['linkedAccounts'] ?? [],
+        );
         if (!linkedAccounts.contains('google')) {
           linkedAccounts.add('google');
         }
@@ -208,7 +219,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     }
   }
 
-  _logIn(LogInEvent event, Emitter<AuthState> emit) async {
+  Future<void> _logIn(LogInEvent event, Emitter<AuthState> emit) async {
     emit(const AuthState.loading());
 
     try {
@@ -222,23 +233,30 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
       final uid = userCredential.user?.uid;
       if (uid == null) {
-        emit(const AuthState.authError(
-            errorText: 'Ошибка входа: UID не найден.'));
+        emit(
+          const AuthState.authError(errorText: 'Ошибка входа: UID не найден.'),
+        );
         return;
       }
 
       // Fetch user data from Firestore
       final docSnapshot = await firestore.collection('users').doc(uid).get();
       if (!docSnapshot.exists) {
-        emit(const AuthState.authError(
-            errorText: 'Ошибка: Данные пользователя не найдены.'));
+        emit(
+          const AuthState.authError(
+            errorText: 'Ошибка: Данные пользователя не найдены.',
+          ),
+        );
         return;
       }
 
       final dbData = docSnapshot.data();
       if (dbData == null) {
-        emit(const AuthState.authError(
-            errorText: 'Ошибка: Неверные данные пользователя.'));
+        emit(
+          const AuthState.authError(
+            errorText: 'Ошибка: Неверные данные пользователя.',
+          ),
+        );
         return;
       }
 
@@ -273,7 +291,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     }
   }
 
-//TODO implement linking
+  //TODO implement linking
   // Future<void> linkGoogleAccount() async {
   //   //TODO implement it
   //   final GoogleSignInAccount? googleUser = GoogleSignIn.instance;
@@ -302,7 +320,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   //   }
   // }
 
-  _deleteUser(DeleteUserEvent event, Emitter<AuthState> emit) async {
+  Future<void> _deleteUser(
+    DeleteUserEvent event,
+    Emitter<AuthState> emit,
+  ) async {
     emit(const AuthState.loading());
 
     final userData = HiveStore().getUserData();
@@ -313,9 +334,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       await firestore.collection('users').doc(userUID).delete();
       emit(const AuthState.logOutSuccess());
     } on FirebaseAuthException catch (e) {
-      emit(AuthState.authError(
-          errorText:
-              'Ошибка: ${e.message}')); //TODO implement error and state handling
+      emit(
+        AuthState.authError(errorText: 'Ошибка: ${e.message}'),
+      ); //TODO implement error and state handling
       _log('DELETION EXCEPTION: $e');
     } catch (e) {
       emit(AuthState.authError(errorText: 'Ошибка: $e'));
@@ -325,7 +346,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     // await auth.signOut();
   }
 
-  _logOut(LogOutEvent event, Emitter<AuthState> emit) async {
+  Future<void> _logOut(LogOutEvent event, Emitter<AuthState> emit) async {
     emit(const AuthState.loading());
 
     try {
@@ -339,7 +360,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     }
   }
 
-  _resetPassword(ResetPasswordEvent event, Emitter<AuthState> emit) async {
+  Future<void> _resetPassword(
+    ResetPasswordEvent event,
+    Emitter<AuthState> emit,
+  ) async {
     emit(const AuthState.sendingCode());
 
     try {

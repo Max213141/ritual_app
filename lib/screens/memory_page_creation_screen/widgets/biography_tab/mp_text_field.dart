@@ -10,15 +10,16 @@ class MPTextField extends StatelessWidget {
   final bool obscureText;
   final int? maxSignAmount;
 
-  const MPTextField(
-      {super.key,
-      required this.controller,
-      required this.label,
-      this.maxLines = 1,
-      this.hintText,
-      this.isDateInput = false,
-      this.obscureText = false,
-      this.maxSignAmount});
+  const MPTextField({
+    super.key,
+    required this.controller,
+    required this.label,
+    this.maxLines = 1,
+    this.hintText,
+    this.isDateInput = false,
+    this.obscureText = false,
+    this.maxSignAmount,
+  });
 
   @override
   Widget build(BuildContext context) {

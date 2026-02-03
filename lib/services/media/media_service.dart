@@ -186,7 +186,17 @@ class MediaService implements MediaServiceInterface {
     required int size,
   }) async {
     try {
-      final hasPermission = await Permission.storage.request();
+      PermissionStatus hasPermission;
+      if (Platform.isIOS) {
+        hasPermission = await Permission.photos.request();
+      } else {
+        // Android 13+ uses media permissions; fall back to legacy storage.
+        hasPermission = await Permission.photos.request();
+        if (!hasPermission.isGranted) {
+          hasPermission = await Permission.storage.request();
+        }
+      }
+
       if (!hasPermission.isGranted) return false;
 
       final ByteData? byteData = await qrImage.toImageAsBytes(

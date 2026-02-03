@@ -51,7 +51,7 @@ class _IntroScreenState extends State<IntroScreen> {
               width: 26,
               height: 13,
               decoration: BoxDecoration(
-                color: Theme.of(context).indicatorColor,
+                color: TabBarThemeData().indicatorColor,
 
                 borderRadius: BorderRadius.circular(10),
                 //color: AppColor.primaryBackgroundColor,
@@ -64,18 +64,18 @@ class _IntroScreenState extends State<IntroScreen> {
           listCustomTabs: slides,
           onDonePress: onDonePress,
           onSkipPress: onSkipPress,
-          doneButtonStyle:
-              const ButtonStyle(splashFactory: NoSplash.splashFactory),
-          nextButtonStyle:
-              const ButtonStyle(splashFactory: NoSplash.splashFactory),
+          doneButtonStyle: const ButtonStyle(
+            splashFactory: NoSplash.splashFactory,
+          ),
+          nextButtonStyle: const ButtonStyle(
+            splashFactory: NoSplash.splashFactory,
+          ),
           skipButtonStyle: ButtonStyle(
             splashFactory: NoSplash.splashFactory,
             // minimumSize: WidgetStateProperty.all<Size?>(
             //   const Size(70, 50),
             // ),
-            maximumSize: WidgetStateProperty.all<Size?>(
-              const Size(200, 70),
-            ),
+            maximumSize: WidgetStateProperty.all<Size?>(const Size(200, 70)),
           ),
           renderNextBtn: const NextButton(),
           renderDoneBtn: const DoneButton(),
@@ -89,45 +89,44 @@ class _IntroScreenState extends State<IntroScreen> {
     );
   }
 
+  // ignore: strict_top_level_inference
   createSlides(AppLocalizations l10n) {
-    slides.addAll(
-      [
-        IntroScreenPart(
-          text: l10n.firstIntroSlide,
-          image: 'assets/intro/first_slide.svg',
-          // providedChild: RichText(
-          //     text: TextSpan(children: [
-          //   TextSpan(
-          //     text: '${l10n.welcome}, \n',
-          //     style: MentalHealthTextStyles.text.signikaFontF24,
-          //   ),
-          //   TextSpan(
-          //     text: '${l10n.appTitle} \n',
-          //     style: MentalHealthTextStyles.text.signikaFontF24Green,
-          //   ),
-          //   TextSpan(
-          //     text: '${l10n.firstIntroSlidePart1} \n',
-          //     style: MentalHealthTextStyles.text.signikaFontF24,
-          //   ),
-          //   TextSpan(
-          //     text: '${l10n.firstIntroSlidePart2}',
-          //     style: MentalHealthTextStyles.text.signikaFontF24,
-          //   ),
-          // ])),
-        ),
-        IntroScreenPart(
-          text: l10n.secondIntroSlide,
-          image: 'assets/intro/second_slide.svg',
-        ),
-        IntroScreenPart(
-          text: l10n.thirdIntroSlide,
-          image: 'assets/intro/third_slide.svg',
-        ),
-        // IntroScreenPart(
-        //   text: l10n.forthIntroSlide,
-        //   image: 'assets/intro/forth_slide.svg',
-        // ),
-      ],
-    );
+    slides.addAll([
+      IntroScreenPart(
+        text: l10n.firstIntroSlide,
+        image: 'assets/intro/first_slide.svg',
+        // providedChild: RichText(
+        //     text: TextSpan(children: [
+        //   TextSpan(
+        //     text: '${l10n.welcome}, \n',
+        //     style: MentalHealthTextStyles.text.signikaFontF24,
+        //   ),
+        //   TextSpan(
+        //     text: '${l10n.appTitle} \n',
+        //     style: MentalHealthTextStyles.text.signikaFontF24Green,
+        //   ),
+        //   TextSpan(
+        //     text: '${l10n.firstIntroSlidePart1} \n',
+        //     style: MentalHealthTextStyles.text.signikaFontF24,
+        //   ),
+        //   TextSpan(
+        //     text: '${l10n.firstIntroSlidePart2}',
+        //     style: MentalHealthTextStyles.text.signikaFontF24,
+        //   ),
+        // ])),
+      ),
+      IntroScreenPart(
+        text: l10n.secondIntroSlide,
+        image: 'assets/intro/second_slide.svg',
+      ),
+      IntroScreenPart(
+        text: l10n.thirdIntroSlide,
+        image: 'assets/intro/third_slide.svg',
+      ),
+      // IntroScreenPart(
+      //   text: l10n.forthIntroSlide,
+      //   image: 'assets/intro/forth_slide.svg',
+      // ),
+    ]);
   }
 }
